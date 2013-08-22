@@ -6,6 +6,24 @@
  */
 
 /**
+ * Implements hook_permission().
+ */
+function menufun_permission() {
+  return array(
+    /*
+     *'administer my module' =>  array(
+     *  'title' => t('Administer my module'),
+     *  'description' => t('Perform administration tasks for my module.'),
+     *),
+     */
+    'receive greeting' =>  array(
+      'title' => t('Receive a greeting'),
+      'description' => t('Allow users receive a greeting message'),
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function menufun_menu() {
@@ -17,18 +35,69 @@ function menufun_menu() {
    *  'type' => MENU_SUGGESTED_ITEM,
    *);
    */
-  $items['menufun'] = array(
-    'title' => 'Greeting',
+
+  // example woking with basic wildcards
+  $items['menufun/%'] =array(
+    'title' => 'Working with Basic Wildcards',
     'page callback' => 'menufun_hello',
-    'page arguments' =>array('Nhan', 'Ngoc'),
+    'page arguments' => array(1, 'hi', '123', 'bla/bla'),
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
   );
 
+  // creat item menu, add link and access permisson for menu items
+  $items['menufun'] = array(
+    'title' => 'Menu Fun',
+    'page callback' => 'menufun_greeting',
+    'file' =>'menufun_greeting.inc',
+    'page arguments' =>array('Nhan', 'Ngoc', '3', '4'),
+    'access callback' => 'user_access',
+    'access arguments' => array('receive greeting'),
+    'type' => MENU_NORMAL_ITEM,
+    'weight'=> -1,
+  );
+
+  // creat item menu nesting
+  $items['menufun/farewell'] = array(
+    'title' => 'Farewell',
+    'title callback' => 'title_dynamic',
+    'page callback' =>'menufun_farewell',
+    'file' => 'menufun_greeting.inc',
+    'access callback' =>'user_access',
+    'access arguments' => array('receive greeting'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  // Using the Value of a wildcards
+  $items['menufun/%/bla/bla'] = array(
+    'title' => 'Using the value of a wildcards',
+    'page callback' => 'menufun_wildcards',
+    'page arguments' => array(1),
+    'type' => TRUE
+  );
+
+  // Wildcards and parameter replacement
+  // $items['user/%user_uid_only_optional'] = array(
+  //   'title' => 'Wildcards in my account',
+  //   'title callback' => 'user_page_title',
+  //   'title arguments' => array(1),
+  //   'page callback' => 'user_view_page',
+  //   'page arguments' => array(1),
+  //   'access callback' => 'user_view_access',
+  //   'access arguments' => array(1),
+  //   'weight' => -10,
+  //   'menu_name' => 'navigation',
+  // );
   return $items;
 }
 
-function menufun_hello($first_name='', $last_name = '')
+function menufun_hello()
 {
-  return t('Hello @first_name @last_name', array('@first_name'=>$first_name, '@last_name'=>$last_name));
+  return t('Hello !');
 }
+
+function menufun_wildcards($name = NULL) {
+
+  return t('Hello. $name is @name ', array('@name' => $name));
+}
+
+
