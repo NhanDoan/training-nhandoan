@@ -1,0 +1,9 @@
+name = Example
+description = For example module created first time
+
+package = example
+core = 7.x
+files[] = example.module
+files[] = example.admin.inc
+files[] = example.install
+configure = admin/config/content/example/settings

@@ -1,0 +1,140 @@
+<?php
+/**
+ * @file
+ *
+ * Add Hook event and trigger on pratice chapter 3 of book Pro Drupal sevent Development
+ *
+ */
+
+function beep_beep()
+{
+  watchdog('beep', 'Beep!');
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function beep_action_info() {
+  return array(
+
+    'beep_beep_action' => array(
+      'type' => 'system',
+      'label' => t('Beep Annoyingly'),
+      'configurable' => FALSE,
+      'triggers' => array('node_view', 'node_insert', 'node_update', 'node_delete'),
+      // 'triggers' => array('any'),
+    ),
+
+    'beep_multiple_beep_action' => array(
+      'type' => 'system',
+      'label' => t('Beep multipe times'),
+      'configurable' => TRUE,
+      'triggers' => array('node_view', 'node_insert', 'node_update', 'node_delete'),
+    ),
+
+  );
+}
+
+/**
+ * beep_beep_action called event beep
+ *
+ */
+function beep_beep_action()
+{
+  beep_beep();
+}
+
+/**
+ * Implement hook_form()
+ * @param  [type] $context
+ * @return [type]          form beeps
+ */
+function beep_multiple_beep_action_form($context)
+{
+  $forms['beeps'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Number of beeps',
+    '#description' => t('Enter the number of times to beep when this action executes'),
+    '#default_value' => isset($context['beeps']) ? $context['beeps'] : 1,
+    '#required' => TRUE,
+  );
+
+  return $forms;
+
+}
+
+/**
+ * Implements hook_validate().
+ */
+
+function beep_multiple_beep_action_validate($form, $form_state) {
+
+  $beeps = $form_state['values']['beeps'];
+  if (is_int($beeps)) {
+
+    form_set_error('beeps', t('Please enter a whole number between 0 and 10'));
+
+  } else if ((int)$beeps > 10) {
+
+    form_set_error('beeps', t('That would be to annoying. Please choose fewer than 10 beeps'));
+  } else if ((int)$beeps < 0) {
+
+    form_set_error('beeps', t('That would be likely create a black hole. Beeps must be a positive integer'));
+  }
+}
+
+/**
+ * Implements hook_node_submit().
+ */
+function beep_multiple_beep_action_submit($form, $form_state) {
+  // Decompose the selected menu parent option into 'menu_name' and 'plid', if
+  // the form used the default parent selection widget.
+
+  return array(
+    'beeps' => (int)$form_state['values']['beeps'],
+  );
+}
+
+/**
+ *  Configurable action. Beeps a specified number of times
+ */
+function beep_muptiple_beep_action($object, $context)
+{
+  for ($i= 0; $i < $context['values']['beeps']; $i++) {
+
+    beep_beep();
+  }
+}
+
+
+/**
+ * Implements hook_action_info_alter().
+ * Changing exit action with action_info_alter
+ */
+function beep_action_info_alter(&$info) {
+
+  // Make the "Block current user" action available to the comment insert trigger
+  // check in on info block user action must be event comment_insert
+  if(in_array('comment_insert', $info['user_block_user_action']))
+    $info['user_block_user_action']['triggers'] = 'comment_insert';
+}
+
+
+/**
+ * Implements hook_trigger_info().
+ */
+function beep_trigger_info() {
+  return array(
+    // 'note' => array(
+
+    //    *'node_presave' => array(
+    //    *  'label' => t('When either saving new content or updating existing content'),
+    //    *),
+
+    //   '' => array(
+    //     'label' => t('Article old nodes'),
+    //   ),
+    // ),
+  );
+}
+

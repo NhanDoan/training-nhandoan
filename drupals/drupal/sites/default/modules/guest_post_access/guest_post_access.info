@@ -1,0 +1,9 @@
+name = NerdWallet Guest Post Module
+description = Custom permission functions for guest posts and writers
+core = 7.x
+package = NerdWallet
+files[] = guest_post_access.module
+files[] = guest_post_access.views.inc
+dependencies[] = views
+
+

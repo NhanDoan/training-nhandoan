@@ -1,0 +1,70 @@
+<?php
+/**
+ * @file
+ *
+ */
+
+/**
+ * Implements hook_install().
+ */
+function example_install() {
+  // Populate the default {node_access} record.
+  /*
+   *db_insert('node_access')
+   *  ->fields(array(
+   *    'nid' => 0,
+   *    'gid' => 0,
+   *    'realm' => 'all',
+   *    'grant_view' => 1,
+   *    'grant_update' => 0,
+   *    'grant_delete' => 0,
+   *  ))
+   *  ->execute();
+   */
+  /* Your code here */
+
+  // check to see it annotation filed exits
+  $field = field_info_field('example');
+
+  // if the example fields does not exits then create it
+  if(empty($field)) {
+    $field = array(
+      'field_name' => 'example',
+      'type' => 'text_with_summary',
+      'entity_types' => array('node'),
+      'translatable' =>TRUE,
+    );
+
+    $field = field_create_field($field);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function example_uninstall() {
+  /*
+   *variable_del('upload_file_types');
+   */
+  watchdog('example module', 'Uninstalling module and deleting fields');
+
+  $types = node_type_get_types();
+
+  foreach ($types as $node_type) {
+    example_delete_annotation($type);
+  }
+
+  $field = field_info_field('example');
+
+  if ($field) {
+
+    field_delete_field($field);
+  }
+}
+
+function example_delete_annotation($type) {
+  $intance = field_info_instance('node', 'example', $type->type);
+  if ($intance) {
+    field_delete_instance($intance);
+  }
+}

@@ -1,0 +1,146 @@
+<?php
+/**
+ * @file
+ *
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ */
+
+function example_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['admin/config/example'] = array(
+    'title' => 'Node annotation',
+    'description' => 'Adjust node annotation options',
+    'position' => 'right',
+    'weight' => -5,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  $items['admin/config/example/setting'] = array(
+    'title' => 'Annotation settings',
+    'description' => 'Change how annotation behave.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('example_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'example.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function example_node_load($nodes, $types) {
+  /*
+   *$result = db_query('SELECT nid, foo FROM {mytable} WHERE nid IN(:nids)', array(':nids' => array_keys($nodes)));
+   *foreach ($result as $record) {
+   *  $nodes[$record->nid]->foo = $record->foo;
+   *}
+   */
+
+  global $user;
+
+  foreach ($nodes as $node) {
+
+    if ($user->uid != $node->uid) {
+      unset($node->example);
+    }
+  }
+
+}
+
+
+/**
+ * Implements hook_trigger_info().
+ *
+ * Example define your own triggers with hook_trigger_info()
+ *
+ */
+function example_trigger_info() {
+  return array(
+
+    'example' => array(
+      /*
+       *'node_presave' => array(
+       *  'label' => t('When either saving new content or updating existing content'),
+       *),
+       */
+      'example_insert' => array(
+        'label' => t('After saving new annotations'),
+      ),
+      'example_update' => array(
+        'label' => t('After saving update annotations'),
+      ),
+      'example_delete' => array(
+        'label' => t('After deleting annotations'),
+      ),
+      'example_view' => array(
+        'label' => t('When annotation is viewed by an authenticated user'),
+      ),
+    ),
+  );
+}
+
+// /**
+//  * Implements hook_delete().
+//  */
+// function example_delete($node) {
+//   db_delete('')
+//     ->condition('nid', $nid->nid)
+//     ->execute();
+// }
+
+// /**
+//  * Implements hook_insert().
+//  */
+// function example_insert($node) {
+
+// }
+
+// /**
+//  * Implements hook_update().
+//  */
+// function example_update($node) {
+//   db_update('')
+//     ->fields(array('extra' => $node->extra))
+//     ->condition('nid', $node->nid)
+//     ->execute();
+// }
+
+// /**
+//  * Implements hook_view().
+//  */
+// function example_view($node, $view_mode) {
+//   /*
+//    *if ($view_mode == 'full' && node_is_page($node)) {
+//    *  $breadcrumb = array();
+//    *  $breadcrumb[] = l(t('Home'), NULL);
+//    *  $breadcrumb[] = l(t('Example'), 'example');
+//    *  $breadcrumb[] = l($node->field1, 'example/' . $node->field1);
+//    *  drupal_set_breadcrumb($breadcrumb);
+//    *}
+//    *
+//    *$node->content['myfield'] = array(
+//    *  '#value' => theme('mymodule_myfield', $node->myfield),
+//    *  '#weight' => 1,
+//    *);
+//    */
+//   /* Your code here */
+
+//   return $node;
+// }

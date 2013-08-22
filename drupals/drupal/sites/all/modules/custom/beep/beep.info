@@ -1,0 +1,6 @@
+name = Beep
+description = The practice for example trigger
+package = example
+core = 7.x
+
+files[] = beep.module

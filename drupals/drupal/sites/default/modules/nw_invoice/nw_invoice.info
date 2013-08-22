@@ -1,0 +1,11 @@
+name = NerdWallet Invoice Module
+description = Generates Invoices
+core = 7.x
+package = NerdWallet
+dependencies[] = views
+dependencies[] = guest_post_access
+dependencies[] = date
+dependencies[] = entityreference
+files[] = include/invoice_generation.inc
+files[] = include/nw_invoice_wrapper.inc
+files[] = include/nw_invoice_db_access.inc

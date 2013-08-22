@@ -1,0 +1,452 @@
+<?php
+
+define('NW_ELASTICSEARCH_SERVER_VARIABLE', 'nw_elasticsearch_es_server');
+define('NW_ELASTICSEARCH_PORT_VARIABLE', 'nw_elasticsearch_es_port');
+
+function nw_elasticsearch_search_info()
+{
+    return array(
+        'title' => t('Article Requests'),
+        'path' => 'articles',
+        'conditions_callback' => 'nw_elasticsearch_condition_cb'
+    );
+}
+
+function nw_elasticsearch_form_search_form_alter(&$form, $form_state)
+{
+
+    static $options = array(
+        'Unassigned' => 'Unassigned',
+        'In Progress' => 'In Progress',
+        'Ready for Review' => 'Ready for Review',
+        'Accepted by Editor' => 'Accepted by Editor'
+    );
+
+    $conditions = nw_elasticsearch_condition_cb(array());
+    if (empty($conditions['status_filters'])) {
+        $filter_values = array_keys($options);
+    } else {
+        $filter_values = array_values($conditions['status_filters']);
+    }
+
+    if (isset($form['module']) && $form['module']['#value'] == 'nw_elasticsearch') {
+        $form['filter_by_status'] = array(
+            '#type' => 'checkboxes',
+            '#title' => t('Include Status'),
+            '#options' => $options,
+            '#default_value' => $filter_values
+        );
+
+        $form['#submit'][] = 'nw_elasticsearch_form_submit';
+    }
+}
+
+function nw_elasticsearch_form_submit($form, &$form_state)
+{
+    $filters = array_filter($form_state['values']['filter_by_status']);
+    $filter_values = implode('|', array_keys($filters));
+
+    $form_state['redirect'] = array(
+        $form_state['redirect'],
+        array(
+            'query' => array(
+                'f' => $filter_values
+            )
+        )
+    );
+}
+
+function _nw_elasticsearch_get_es_client()
+{
+    static $client = NULL;
+
+    if ($client === NULL) {
+        _nw_elasticsearch_register_autoloader();
+
+        $ec_host = variable_get(NW_ELASTICSEARCH_SERVER_VARIABLE);
+        $ec_port = variable_get(NW_ELASTICSEARCH_PORT_VARIABLE);
+
+        $client = new Elastica\Client(array(
+            'host' => $ec_host,
+            'port' => $ec_port
+        ));
+    }
+
+    return $client;
+}
+
+function nw_elasticsearch_search_execute($keys, $conditions)
+{
+    $client = _nw_elasticsearch_get_es_client();
+    $q = _nw_elasticsearch_generate_query($keys, $conditions);
+    $index = $client->getIndex('writerportal');
+
+    $rs = $index->search($q);
+
+    return _nw_elasticsearch_resultset_to_view($rs);
+}
+
+function nw_elasticsearch_condition_cb($keys)
+{
+    $ret = array();
+
+    if (!empty($_REQUEST['f'])) {
+        $ret['status_filters'] = explode('|', $_REQUEST['f']);
+
+    }
+
+    return $ret;
+}
+
+function _nw_elasticsearch_register_autoloader()
+{
+    static $auto_loaded = FALSE;
+    if (!$auto_loaded) {
+        $my_dir = dirname(__FILE__) . '/';
+
+        //Or using anonymous function PHP 5.3.0>=
+        spl_autoload_register(function($class) use ($my_dir) {
+            $class = str_replace('\\', '/', $class);
+
+            if (file_exists($my_dir . $class . '.php')) {
+                require_once($my_dir . $class . '.php');
+            }
+        });
+    }
+}
+
+function _nw_elasticsearch_generate_query($keys, $conditions)
+{
+    $queryParams = new Elastica\Query\QueryString();
+    $queryParams->setQuery($keys);
+    $queryParams->setFields(array('title^1.05', 'body', 'author_fullname^2'));
+
+    $elasticaQuery        = new \Elastica\Query();
+    $elasticaQuery->setQuery($queryParams);
+
+
+    if (!empty($conditions['status_filters'])) {
+        $statusFilter = new Elastica\Filter\BoolOr();
+        foreach($conditions['status_filters'] as $status) {
+            $f = new Elastica\Filter\Term();
+            $f->setTerm('status', $status);
+            $statusFilter->addFilter($f);
+        }
+
+        $elasticaQuery->setFilter($statusFilter);
+    }
+
+    $elasticaQuery->setHighlight(
+        array(
+            'pre_tags' => array('<em class="search-highlight">'),
+            'post_tags' => array('</em>'),
+            'fields' => array(
+                'title' => array('number_of_fragments' => 1),
+                'body' => array('number_of_fragments' => 5, 'fragment_size' => 125)
+            )
+        )
+    );
+
+    return $elasticaQuery;
+}
+
+function _nw_elasticsearch_resultset_to_view($rs)
+{
+    $ret = array();
+
+    static $defaults = array(
+        'author_username' => NULL,
+        'author_fullname'=> NULL,
+        'duedate' => NULL,
+        'submitted' => NULL
+    );
+
+    foreach($rs as $row) {
+        $data = array_merge($defaults, $row->getData());
+        $highlights = $row->getHighlights();
+
+        // merge optional defaults
+        $post = array(
+            'link' => url('node/' . $data['id']),
+            'type' => '',
+            'writer_fullname' => $data['author_fullname'],
+            'date' => $data['submitted'],
+            'language' => 'en',
+            'status' => $data['status'],
+            'submitted' => $data['submitted'],
+            'duedate' => $data['duedate']
+        );
+
+        $post['title'] = _nw_elasticsearch_process_highlight($data, $highlights, 'title');
+        $post['body'] = _nw_elasticsearch_process_highlight($data, $highlights, 'body');
+
+        $ret[] = $post;
+    }
+
+    return $ret;
+}
+
+function _nw_elasticsearch_process_highlight($data, $highlights, $row_key)
+{
+    if (!empty($highlights[$row_key])) {
+        $first_snippet = array_shift($highlights[$row_key]);
+
+        $ret = array_reduce($highlights[$row_key], function (&$result, $item) { $result .= "... $item"; }, $first_snippet);
+    } else {
+        $ret = $data[$row_key];
+    }
+
+    return $ret;
+}
+
+/** THEME **/
+function nw_elasticsearch_search_page($results)
+{
+    if (count($results) == 0) {
+        return array(
+            '#markup' => '<h1>No results found.</h1>'
+        );
+    }
+
+    $output = array(
+        '#theme' => 'item_list',
+        '#items' => array(),
+    );
+
+    foreach($results as $result) {
+        $output['#items'][] = theme('nw-search-result', _nw_elasticsearch_result_to_render_array($result));
+    }
+
+    return $output;
+}
+
+function nw_elasticsearch_theme($existing, $type, $theme, $path)
+{
+    $ret = array();
+
+    $ret['nw-search-result'] = array(
+        'variables' => array(
+            'link' => NULL,
+            'writer_fullname' => 'None',
+            'status' => NULL,
+            'submitted' => NULL,
+            'duedate' => 'Not Set',
+            'title' => NULL,
+            'body' => NULL
+        ),
+
+        'template' => 'nw-search-result'
+    );
+
+    return $ret;
+}
+
+function _nw_elasticsearch_result_to_render_array($result)
+{
+    $ret = array('#theme' => 'nw-search-result');
+
+    $date_fields = array('submitted', 'duedate');
+    $strip_html_fields = array('body');
+
+    foreach($date_fields as $date_field) {
+        if (!empty($result[$date_field])) {
+            $split_date = explode(" ", $result[$date_field]);
+            $result[$date_field] = $split_date[0];
+        }
+    }
+
+    foreach ($strip_html_fields as $strip_html_field) {
+        if (!empty($result[$strip_html_field])) {
+            $result[$strip_html_field] = strip_tags($result[$strip_html_field], '<em>');
+        }
+    }
+
+    foreach ($result as $key => $val) {
+        $ret['#' . $key] = $val;
+    }
+
+    return $ret;
+}
+
+/** ADMIN STUFF **/
+function nw_elasticsearch_menu()
+{
+    $ret = array();
+
+    $ret['admin/config/nw_elasticsearch'] = array(
+        'title' => 'ElasticSearch Configuration',
+        'description' => 'Allows administrators to configure the location of the ES Server',
+        'position' => 'left',
+        'weight' => -100,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('nw_elasticsearch_settings_form'),
+        'access arguments' => array('administer site configuration'),
+    );
+
+    $ret['admin/config/nw_elasticsearch/manage'] = array(
+        'title' => 'ElasticSearch Configuration',
+        'description' => 'Allows administrators to configure the location of the ES Server',
+        'position' => 'left',
+        'weight' => -100,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('nw_elasticsearch_settings_form'),
+        'access arguments' => array('administer site configuration'),
+    );
+
+
+    return $ret;
+}
+
+function nw_elasticsearch_settings_form()
+{
+    $form = array();
+
+    $form['es_server'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Server IP or Hostname'),
+        '#default_value' => variable_get(NW_ELASTICSEARCH_SERVER_VARIABLE),
+        '#size' => 60,
+        '#required' => TRUE,
+        '#weight' => 10
+    );
+
+    $form['es_port'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Server Port'),
+        '#default_value' => variable_get(NW_ELASTICSEARCH_PORT_VARIABLE, 9200),
+        '#size' => 5,
+        '#required' => TRUE,
+        '#weight' => 20,
+        '#element_validate' => array('element_validate_integer_positive')
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Save Changes',
+        '#weight' => 30
+    );
+
+    return $form;
+}
+
+function nw_elasticsearch_settings_form_validate($form, &$form_state)
+{
+    $es_port = (int)$form_state['values']['es_port'];
+    if ($es_port <= 0 || $es_port > 65535) {
+        form_set_error('es_port', "Port must be between 1 and 65535");
+    }
+
+    $es_server = $form_state['values']['es_server'];
+
+    if (ip2long($es_server) === FALSE && gethostbyname($es_server) == $es_server) {
+        form_set_error('es_server', 'Could not resolve server host to a valid IP address');
+    }
+}
+
+function nw_elasticsearch_settings_form_submit($form, &$form_state)
+{
+    variable_set(NW_ELASTICSEARCH_SERVER_VARIABLE, $form_state['values']['es_server']);
+    variable_set(NW_ELASTICSEARCH_PORT_VARIABLE, (int)$form_state['values']['es_port']);
+}
+
+/** INDEXING */
+
+function nw_elasticsearch_node_insert($node)
+{
+    _nw_elasticsearch_index_node($node);
+}
+
+function nw_elasticsearch_node_update($node)
+{
+    _nw_elasticsearch_index_node($node);
+}
+
+function _nw_elasticsearch_index_node($node)
+{
+    if ($node->type !== "guest_post") {
+        return;
+    }
+
+    $client = _nw_elasticsearch_get_es_client();
+    $index = $client->getIndex('writerportal');
+
+    /*
+    ret = dict(id=row[0], status=status_to_string(row[1]), title=row[2], body=row[4])
+
+    print row
+
+    optional_fields = {
+    'author_username': row[5],
+        'author_fullname': row[6],
+        'submitted': format_time(row[7]),
+        'duedate': format_time(row[8])
+    }
+    */
+    $document = array(
+        'id' => $node->nid,
+        'title' => $node->title,
+        'body' => $node->body['und'][0]['value'],
+        'submitted' => _nw_es_timestamp_to_str($node->created)
+    );
+
+    _nw_es_document_add_status_if_present($node, $document);
+    _nw_es_add_author_info_if_present($node, $document);
+    _nw_es_add_due_date_if_present($node, $document);
+
+    $type = $index->getType('article_request');
+    $doc = new Elastica\Document($document['id'], $document);
+
+    $type->addDocument($doc);
+    $index->refresh();
+}
+
+function _nw_es_timestamp_to_str($timestamp)
+{
+    return strftime("%Y-%m-%d %H:%M:%S", $timestamp);
+}
+
+function _nw_es_document_add_status_if_present($node, &$document)
+{
+    $status_str = NULL;
+    if (!empty($node->field_status['und'][0]['tid'])) {
+        switch ($node->field_status['und'][0]['tid']) {
+            case 68: $status_str = 'Unassigned'; break;
+            case 62: $status_str = 'In Progress'; break;
+            case 63: $status_str = 'Ready for Review'; break;
+            case 64: $status_str = 'Accepted by Editor'; break;
+        }
+    }
+
+    if ($status_str !== NULL) {
+        $document['status'] = $status_str;
+    }
+}
+
+function _nw_es_add_author_info_if_present($node, &$document)
+{
+    if (!empty($node->field_assigned_to['und'][0]['target_id'])) {
+        $author = user_load($node->field_assigned_to['und'][0]['target_id']);
+
+        $document['author_fullname'] = _nw_es_get_user_full_name($author);
+        $document['author_username'] = $author->name;
+    }
+}
+
+function _nw_es_add_due_date_if_present($node, &$document)
+{
+    if (!empty($node->field_due_date['und'][0]['value'])) {
+        $document['duedate'] = _nw_es_timestamp_to_str($node->field_due_date['und'][0]['value']);
+    }
+}
+
+function _nw_es_get_user_full_name($user)
+{
+    if (empty($user->field_full_name['und'])) {
+        $full_name = $user->name;
+    } else {
+        $full_name = $user->field_full_name['und'][0]['safe_value'];
+    }
+
+    return $full_name;
+}
+

@@ -1,0 +1,7 @@
+name = Menufun
+
+description = Example creating with menu system
+package = example
+
+core = 7.x
+files[] =  menufun.module

@@ -1,0 +1,28 @@
+{
+    "settings" : {
+        "analysis" : {
+            "analyzer" : {
+                "body_analyzer": {
+                    "type": "custom",
+                    "tokenizer" : "standard",
+                    "filter": [ "standard", "lowercase", "stop", "porterStem" ],
+                    "char_filter": [ "html_strip" ]
+                }
+            }
+        }
+    },
+    "mappings" : {
+        "article_request" : {
+            "properties" : {
+                "title" : { "type" : "string", "index" : "analyzed", "store": "yes", "_boost" : "1.5" },
+                "author_username" : { "type" : "string", "index" : "analyzed", "analyzer" : "simple" },
+                "author_fullname" : { "type" : "string", "index" : "analyzed", "analyzer" : "simple", "store" : "yes" },
+                "body" : { "type" : "string", "index" : "analyzed", "analyzer" : "body_analyzer", "term_vector" : "with_positions_offsets"},
+                "status" : { "type" : "string", "index" : "not_analyzed" },
+                "submitted" : { "type" : "date", "format" : "YYYY-mm-dd HH:mm:ss" },
+                "duedate" : { "type" : "date", "format" : "YYYY-mm-dd HH:mm:ss" }
+            }
+        }
+    }
+}
+

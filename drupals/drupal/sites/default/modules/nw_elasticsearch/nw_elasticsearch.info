@@ -1,0 +1,11 @@
+name = NerdWallet ElasticSearch Module
+description = Generates Search for Invoices
+core = 7.x
+package = NerdWallet
+configure = admin/config/nw_elasticsearch
+
+dependencies[] = guest_post_access
+dependencies[] = search
+
+stylesheets[all][] = nw_elasticsearch.css
+

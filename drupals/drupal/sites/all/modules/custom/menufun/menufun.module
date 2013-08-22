@@ -1,0 +1,34 @@
+<?php
+/**
+ * @file
+ *
+ * Creating module menufun example
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function menufun_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['menufun'] = array(
+    'title' => 'Greeting',
+    'page callback' => 'menufun_hello',
+    'page arguments' =>array('Nhan', 'Ngoc'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function menufun_hello($first_name='', $last_name = '')
+{
+  return t('Hello @first_name @last_name', array('@first_name'=>$first_name, '@last_name'=>$last_name));
+}
