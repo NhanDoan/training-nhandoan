@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ *
+ *  This is module example to load time when user login success
+ *
+ */
+
+/**
+ * Implements hook_user_login().
+ */
+
+function login_history_user_login(&$edit, $account) {
+  // If the user has a NULL time zone, notify them to set a time zone.
+  /*
+   *if (!$user->timezone && variable_get('configurable_timezones', 1) && variable_get('empty_timezone_message', 0)) {
+   *  drupal_set_message(t('Configure your <a href="@user-edit">account time zone setting</a>.', array('@user-edit' => url("user/$user->uid/edit", array('query' => drupal_get_destination(), 'fragment' => 'edit-timezone')))));
+   *}
+   */
+  // insert new record each time the user logs in
+  $nid = db_insert('login_history', array(
+
+      'uid' => $account->uid,
+      'login' => $account->login
+    ))->execute();
+}
+
+
+/**
+ * Implements hook_user_view_alter().
+ */
+
+function login_history_user_view_alter(&$build) {
+  // Check for the existence of a field added by another module.
+  /*
+   *if (isset($build['an_additional_field'])) {
+   *  // Change its weight.
+   *  $build['an_additional_field']['#weight'] = -10;
+   *}
+   */
+  // Add a #post_render callback to act on the rendered HTML of the user.
+  /*
+   *$build['#post_render'][] = 'my_module_user_post_render';
+   */
+  global $user;
+  $login_count = db_query("SELECT count(*) FROM {login_history} where uid = :uid", array(':uid' => $user->uid))->fetchField();
+
+  // update the user page bu adding the number of logins to the page
+  $build['summary']['login_history'] = array(
+      '#type' => 'user_profile_item',
+      '#title' => t('Number of login'),
+      '#markup' => $login_count,
+      '#weight' => 10,
+    );
+}
+
+
+

@@ -74,7 +74,16 @@ function menufun_menu() {
     'page arguments' => array(1),
     'type' => TRUE
   );
-
+  //Special cases for wildcards and to_arg function
+  $items['menufun/%a_zoo_animal'] = array(
+    'title' =>'Examle using wildcards with to_arg()',
+    'page callback' => 'menufun_arg',
+    'page arguments' => array(1),
+    'access callback' =>TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -10,
+  );
+  //
   // Wildcards and parameter replacement
   // $items['user/%user_uid_only_optional'] = array(
   //   'title' => 'Wildcards in my account',
@@ -100,4 +109,64 @@ function menufun_wildcards($name = NULL) {
   return t('Hello. $name is @name ', array('@name' => $name));
 }
 
+function menufun_arg($animal) {
 
+  return t("Hello $animal");
+}
+
+function a_zoo_animal_to_arg($arg) {
+
+  return 'tiger';
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * Altering menu items from other modules
+ * @param  array $items
+ *
+ * @return [type]        [description]
+ */
+function menufun_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  /*
+   *$items['node/add']['access callback'] = FALSE;
+   */
+  $items['logout']['page callback'] = 'menufun_user_logout';
+  $items['logout']['access callback'] = 'user_is_logged_in';
+
+  unset($items['logout']['file']);
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function menufun_user_logout() {
+
+  global $user;
+  watchdog('menufun', 'Session close for %name', array('%name' => $user->name));
+
+  // Destroy the current session
+  session_destroy();
+
+  // Run 'Logout' operation of the user hook so modules can respond to the logout if they want to
+  module_invoke_all('user','logout', NULL, $user);
+
+  // Load the anonymous user so the global $user object will be correct on any hook_exit() implemention
+  $user = drupal_anonymous_user();
+
+  drupal_goto('http://localhost/training-nhandoan/drupals/drupal/');
+}
+
+/**
+ * Implements hook_menu_link_alter().
+ *
+ * Altering menu links from other modules
+ */
+function menufun_menu_link_alter(&$item) {
+
+  if($item['link_path'] = 'user/logout') {
+    $items['link_title'] = 'Singe off!';
+  }
+
+}

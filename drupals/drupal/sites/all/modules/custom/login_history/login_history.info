@@ -1,0 +1,7 @@
+name = Login History Example
+description = Adding data to the user object at load time
+
+package = example
+core = 7.x
+files[] = login_history.install
+files[] = login_history.module

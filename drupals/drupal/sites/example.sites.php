@@ -53,3 +53,47 @@
  * @see conf_path()
  * @see http://drupal.org/documentation/install/multi-site
  */
+
+define('DRUPAL_ROOT', $_SERVER['DOCUMENT_ROOT']."/training-nhandoan/drupals/drupal");
+
+require_once(DRUPAL_ROOT."/includes/bootstrap.inc");
+
+drupal_bootstrap(DRUPAL_BOOTSTRAP_SESSION);
+
+
+// $result = db_query('SELECT title FROM {node}');
+
+// $num_updated = db_update('joke')
+// ->fields(array(
+// 'punchline' => 'Take my wife please!',
+// ))
+// ->condition('nid', 3, '>=')
+// ->execute();
+
+// $result = db_query("SELECT name FROM {role} WHERE rid > :rid AND rid < :max_rid", array(':rid' => 0,':max_rid' => 3));
+// var_dump($result); exit;
+// foreach ($result as $name) {
+
+//   // echo " Example get name form table role $name </br>";
+// }
+$type = 'page';
+$status = 1;
+$result = db_query("SELECT nid, title FROM {node} WHERE type = :type AND status = :status",
+array(
+':type' => $type, ':status' => 1,
+));
+foreach ($result as $row) {
+echo $row->title."<br/>";
+}
+
+
+$query = db_select('node', 'n')->extend('PagerDefault');
+$query->condition('type', 'page')
+      ->fields('n', array('title'))
+      ->limit(2);
+$result = $query->execute();
+$output = '';
+foreach ($result as $row) {
+ echo $output .= $row->title."<br/>";
+}
+

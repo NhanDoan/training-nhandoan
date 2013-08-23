@@ -1,0 +1,7 @@
+name = Create menu tabs
+
+description = This is example creating tags menu
+package = example
+core =  7.x
+
+files[] = menu_task.module

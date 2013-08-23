@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ *
+ * example create module menu tabs
+ *
+ */
+/**
+ * Implements hook_menu().
+ */
+function menu_task_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['menu_task'] = array(
+    'title' => 'Menu tabs',
+    'page callback' => 'menu_task_overview',
+    'access arguments' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+   $items['menu_task/list'] = array(
+     'title' => 'List flavors',
+     // 'page callback' => 'blog_page',
+     'access arguments' => TRUE,
+     'type' => MENU_DEFAULT_LOCAL_TASK,
+     'weight' => 0,
+   );
+
+   $items['menu_task/add'] = array(
+      'title' => 'Add flavors',
+      'page callback' => 'menu_task_add',
+      'access arguments'=>TRUE,
+      'type' => MENU_LOCAL_TASK,
+      'weight' => 1,
+
+    );
+
+   $items['menu_task/list/fruity'] = array(
+      'title' => 'Fruity flavors',
+      'access arguments' => TRUE,
+      'page callback' => 'menu_task_list',
+      'page arguments' => array(2),
+      'type' => MENU_LOCAL_TASK,
+    );
+   $items['menu_task/list/candy'] =array(
+      'title' => 'Candy flavors',
+      'access arguments' => TRUE,
+      'page callback' => 'menu_task_list',
+      'page arguments' => array(2),
+      'type' => MENU_LOCAL_TASK,
+    );
+
+  return $items;
+}
+
+function menu_task_overview()
+{
+  $output = t('The following flavors are avairable');
+
+  return $output;
+}
+
+function menu_task_add() {
+
+  return t('A handy form to add flavors might go here');
+}
+function menu_task_list($type) {
+
+  return t('List @type flavors', array('@type' => $type));
+}
