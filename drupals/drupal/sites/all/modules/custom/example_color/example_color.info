@@ -1,0 +1,6 @@
+name = Custom Field API
+
+description = Creates a custom files for inputting and displaying text in a colorful fashion
+package = example
+core = 7.x
+files[] = example_color.module

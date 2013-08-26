@@ -1,0 +1,9 @@
+name = Example Creating Node Module
+
+description = Practice example for chapter 7: creating a node
+package = example
+
+core = 7.x
+
+files[] = job_post.install
+files[] = job_post.module
