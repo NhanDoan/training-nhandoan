@@ -1,0 +1,6 @@
+name = Approval
+description = Blocks for facititaling pending content workflow
+package = example
+core = 7.x
+version = VERSION
+files[] = approval.module

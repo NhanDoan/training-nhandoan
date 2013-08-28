@@ -1,0 +1,77 @@
+<?php
+/**
+ * @file
+ *
+ * A file create module example and allowing dynamic form behavior with very setup
+ */
+/**
+ * Implements hook_menu().
+ *
+ * Function creating menu for module form dynamic
+ */
+function form_dynamic_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['form_dynamic'] = array(
+    'title' => 'Example Form Dynamic',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_dynamic_form'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form().
+ */
+function form_dynamic_form($form, &$form_state) {
+  $form['room_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('What type of room do you require?'),
+    '#options' => drupal_map_assoc(array(t('Study Room'), t('Small Conference Room'), t('Board Room'))),
+  );
+
+  $form['study_room'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Study Room Detail'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name = "room_type"]' => array('value' => t('Study Room')),
+        ),
+      ),
+    );
+  $form['study_room']['equipment'] = array(
+    '#type' => 'checkboxes',
+    '#options' => drupal_map_assoc(array(t('Chair'), t('PC'))),
+    '#title' => t('What equipment do you need'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name = "room_type"]' =>array('value' => t('Study Room')),
+        ),
+      ),
+  );
+
+  $form['study_room']['chairs'] = array(
+    '#type' => 'textfield',
+    '#title' => t('How many chairs do you need?'),
+    '#size' => 4,
+    '#states' => array(
+
+      ),
+    ),
+
+  return $form;
+}
+
+
+
+
+

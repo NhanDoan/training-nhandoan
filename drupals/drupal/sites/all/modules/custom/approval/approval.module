@@ -1,0 +1,148 @@
+<?php
+/**
+ * @file
+ *
+ * Implement various block to improve pending content workflow
+ *
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function approval_block_info() {
+  // This example comes from node.module.
+  /*
+   *$blocks['syndicate'] = array(
+   *  'info' => t('Syndicate'),
+   *  'cache' => DRUPAL_NO_CACHE
+   *);
+   */
+  $blocks['pendding_comment'] = array(
+    'info' => t('Pendding Comment'),
+    'status' =>TRUE,
+    'region' => 'sidebar_first',
+    'weight' => 0,
+    'visibility' => 1,
+  );
+
+  $blocks['unpublished_node'] = array(
+    'info' => t('Unpublished nodes'),
+    'status' =>TRUE,
+    'region' => 'sidebar_first',
+    'weight' => 0,
+    'visibility' => 1,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function approval_block_configure($delta = '') {
+  // This example comes from node.module.
+
+  $form = array();
+  if ($delta == 'pendding_comment') {
+    $form['pendding_comment_count'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Configure Number of Comment to Display'),
+      '#size' => 6,
+      '#description' => t('Enter the number of pendding comment the will appear in the block.'),
+      '#default_value' => variable_get('pendding_comment_count', 5 ),
+    );
+  }
+
+  if ($delta == 'unpublished_node') {
+    $form['unpublished_node_count'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Configure Number of Nodes to Display'),
+      '#size' => 6,
+      '#description' => t('Enter the number of unpublished node the will appear in the block.'),
+      '#default_value' => variable_get('unpublished_node_count', 5 ),
+    );
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save($delta = '', $edit = array().
+ */
+function approval_block_save($delta = '', $edit = array()) {
+  // This example comes from node.module.
+
+  if ($delta == 'pendding_comment') {
+    variable_set('pendding_comment_count', $edit['pendding_comment_count']);
+  }
+
+  if ($delta == 'unpublished_nodes') {
+       variable_set('unpublished_nodes_count', (int)$edit['unpublished_node_count']);
+  }
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function approval_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+  /*
+   *case 'syndicate':
+   *  $block['subject'] = t('Syndicate');
+   *  $block['content'] = theme('feed_icon', array('url' => url('rss.xml'), 'title' => t('Syndicate')));
+   *  break;
+   *
+   *case 'recent':
+   *  if (user_access('access content')) {
+   *    $block['subject'] = t('Recent content');
+   *    if ($nodes = node_get_recent(variable_get('node_recent_block_count', 10))) {
+   *      $block['content'] = theme('node_recent_block', array(
+   *        'nodes' => $nodes,
+   *      ));
+   *    } else {
+   *      $block['content'] = t('No content available.');
+   *    }
+   *  }
+   *  break;
+   */
+    case 'pendding_comment':
+      $block['subject'] = t('Pendding Comment');
+      $block['content'] = approval_block_contents($delta);
+      break;
+    case 'unpublished_nodes':
+      $block['subject'] = t('Unpublished Nodes');
+      $block['content'] = approval_block_contents($delta);
+     break;
+  }
+  return $block;
+}
+
+function approval_block_contents($delta) {
+  switch ($delta) {
+    case 'pendding_comment':
+      if(user_access('administer comments')) {
+        $nbr_comments = variable_get('pendding_comment_count');
+        $result = db_query_range("SELECT cid, subject FROM {comment} WHERE status = 0 ",0, $nbr_comments);
+        $items = array();
+        foreach ($result as $row) {
+          $items[] = l($row->subject, 'comment/' . $row->cid . '/edit');
+        }
+
+        return array('#markup' => theme('item_list', array('items' => $items)));
+      }
+      break;
+    case 'unpublished_nodes':
+      if (user_access('administer nodes')) {
+         $nbr_nodes = variable_get('unpublished_node_count', 5);
+         $result = db_query_range('SELECT nid, title FROM {node} WHERE status = 0', 0, $nbr_nodes);
+         $items = array();
+         foreach ($result as $row) {
+           $items[] = l($row->title, 'node/'.$row->nid.'/edit');
+         }
+
+         return array('#markup' => theme('item_list', array('items' => $items)));
+      }
+      break;
+  }
+}

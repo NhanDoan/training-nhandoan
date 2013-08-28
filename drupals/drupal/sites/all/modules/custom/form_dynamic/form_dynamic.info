@@ -1,0 +1,7 @@
+name = Form Dynamic
+description = Creating form dynamic using Form API
+core = 7.x
+version = VERSION
+package = example
+
+files[] = form_dynamic.module

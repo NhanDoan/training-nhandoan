@@ -1,0 +1,7 @@
+name = Form Example
+description =  Creat basic form
+core = 7.x
+version = VERSION
+
+package = example
+files[] = formexample.module

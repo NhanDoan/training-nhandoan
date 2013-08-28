@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ *
+ * Using theme function to
+ */
+function formexample_theme($existing, $type, $theme, $path) {
+  return array(
+    /*
+     *'forum_icon' => array(
+     *  'variables' => array('new_posts' => NULL, 'num_posts' => 0, 'comment_mode' => 0, 'sticky' => 0),
+     *),
+     *'status_report' => array(
+     *  'render element' => 'requirements',
+     *  'file' => 'system.admin.inc',
+     *),
+     */
+    'formexample_nameform' => array(
+      'render element' => 'form',
+      'template' => 'formexample_nameform',
+    ),
+  );
+}
+/**
+ * Implements hook_menu().
+ */
+function formexample_menu() {
+
+  $items['formexample'] = array(
+    'title' => 'View the sample form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('formexample_nameform'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form().
+ */
+function formexample_nameform() {
+  $form['#id'] = 'form_submit';
+
+  $form['name'] = array(
+    '#title' => t('Your Name'),
+    '#type' => 'fieldset',
+    '#description' => t('What pepole call you?')
+  );
+
+  $form['name']['user_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your Name'),
+    '#description' => t('Please enter your name'),
+  );
+
+  $form['color'] = array(
+    '#prefix' => '<hr/>',
+    '#title' => t('Color'),
+    '#type' => 'fieldset',
+    '#description' => t('This fieldset contains the Color field'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#suffix' => '<div class = "privacy-warning">'.t('This information will be displayed publicly!').'</div>'
+    );
+
+  $form['color_options'] = array(
+    '#type' => 'value',
+    '#value' => array(
+        t('Red'),
+        t('Green'),
+        t('Blue'),
+      ),
+  );
+
+  $form['color']['favorite_color'] = array(
+    '#title' => t('Favorite Color'),
+    '#type' => 'select',
+    '#description' => t('Please select your favorite color'),
+    '#options' => $form['color_options']['#value'],
+    );
+  $form['country'] = array(
+    '#title' => t('Country'),
+    '#type' => 'textfield',
+    '#description' => t('Please enter your country'),
+    );
+  $form['country_code'] = array(
+    '#type' => 'value',
+    '#value' => ''
+  );
+
+  // store the allowed choices in the form definition
+  $allowed_flavor = array(t('spicy'), t('sweet'));
+  $form['flavors'] = array(
+    '#title' => 'Flavors',
+    '#type' => 'textfield',
+    '#allowed_flavor' => $allowed_flavor,
+    '#element_validate' => array('formexample_flavor_validate')
+    );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  $form['#prefix'] = '<div class= "form-submit">';
+  $form['#suffix'] = '</div>';
+
+  return $form;
+}
+
+/**
+ * Function creating validate for an formexample special
+ */
+function formexample_special_validate($node, $form, &$form_state) {
+
+}
+/**
+ * Implements hook_validate().
+ *
+ * Function create validation for form formexample_nameform
+ */
+
+
+function formexample_nameform_validate($form, &$form_state) {
+
+  if ($form_state['values']['user_name'] == 'King Kong') {
+    form_set_error('user_name', t('King Dong is not allow to user this form'));
+  }
+
+  $country_code = ($form_state['values']['country']);
+  if ($country_code) {
+
+    form_set_value($form['country_code'], $country_code, $form_state);
+  } else {
+
+    form_set_error('country', t('Your country was not recognized'));
+  }
+}
+
+/**
+ * Implements hook_node_submit().
+ *
+ * Handle post validation form submission
+ */
+function formexample_nameform_submit($form, &$form_state) {
+  // Decompose the selected menu parent option into 'menu_name' and 'plid', if
+  // the form used the default parent selection widget.
+
+  $name = $form_state['values']['user_name'];
+  // drupal_set_message(t('Thanks for filling out form , %name', array('%name' => $name)));
+  $color_key = $form_state['values']['favorite_color'];
+  $color = $form_state['values']['color_options'][$color_key];
+  drupal_set_message(t('%name love the color %color!', array('%name' => $name, '%color' => $color)));
+
+}
+/**
+ * Implements hook_forms().
+ *
+ * Function using called when cannot find function formexample_special and function  hook_forms()has called
+ */
+function formexample_forms($form_id, $args) {
+
+  $forms['formexample_special'] = array(
+    'callback' => 'formexample_nameform',
+    // 'callback arguments' => array(''),
+  );
+
+  return $forms;
+}
+
+

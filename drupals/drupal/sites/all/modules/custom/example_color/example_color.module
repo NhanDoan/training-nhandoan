@@ -125,7 +125,6 @@ function example_color_field_formatter_view($entity_type, $entity, $field, $inst
  */
 function example_color_field_widget_info() {
     return array(
-
     'example_color_text' => array(
       'label' => t('RGB value as #ffffff'),
       'field types' => array('example_color_rgb'),
@@ -137,8 +136,7 @@ function example_color_field_widget_info() {
     'example_color_colorpicker' => array(
       'label' => t('Color Picker'),
       'field types' => array('example_color_rgb'),
-      )
-    ),
+      ),
   );
 }
 
@@ -181,7 +179,7 @@ function example_color_field_widget_form(&$form, &$form_state, $field, $instance
 
     case 'example_color_3text':
       if (isset($items[$delta]['rgb'])) {
-        preg_match('@..@', substr($items[$delta]['rgb'], 1), $match)
+        preg_match('@..@', substr($items[$delta]['rgb'], 1), $match);
       } else {
         $match = array(array());
       }
