@@ -1,0 +1,16 @@
+name = Grayscale
+core = 7.x
+engine = phptemplate
+;//adding style for layout themes
+
+;// applied to all mediums used to display the site
+stylesheets[all][] = css/color.css
+;// for style creen
+stylesheets[screen][] = css/style.css
+
+;//Add setting to define
+
+settings[font_family] = 'ff-sss'
+
+settings[font_size] ='fs-12'
+

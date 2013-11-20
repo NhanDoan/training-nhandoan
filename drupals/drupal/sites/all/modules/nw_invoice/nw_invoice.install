@@ -1,0 +1,143 @@
+<?php
+
+function nw_invoice_install()
+{
+    // Add invoiced field to guest posts
+    foreach (_nw_invoice_guest_post_fields() as $field) {
+        field_create_field($field);
+    }
+
+    // Create all the _nw_invoice_guest_post_field_instances for our fields.
+    foreach (_nw_invoice_guest_post_field_instances() as $instance) {
+        $instance['entity_type'] = 'node';
+        $instance['bundle'] = 'guest_post';
+        field_create_instance($instance);
+    }
+
+    _nw_invoice_assign_dummy_base_rate();
+
+    // Disable "submitted by" for invoices - otherwise every time you view one
+    // the default node code displays some line like "Submitted by eric at 1/2/2013"
+    variable_set('node_submitted_nw_invoice', FALSE);
+}
+
+function nw_invoice_uninstall()
+{
+    foreach (_nw_invoice_guest_post_field_instances() as $instance) {
+        $instance['entity_type'] = 'node';
+        $instance['bundle'] = 'guest_post';
+        field_delete_instance($instance);
+    }
+
+    foreach (_nw_invoice_guest_post_fields() as $field) {
+        field_delete_field($field);
+    }
+
+}
+
+function _nw_invoice_guest_post_fields()
+{
+    return array(
+        'nw_guest_post_invoice_link' => array(
+            'field_name' => 'nw_guest_post_invoice_link',
+            'type'       => 'entityreference',
+            'cardinality' => 1
+        ),
+
+        'nw_guest_post_base_rate' => array(
+            'field_name' => 'nw_guest_post_base_rate',
+            'type' => 'number_integer',
+            'cardinality' => 1
+        ),
+
+        'field_full_name' => array(
+            'field_name' =>'field_full_name',
+            'type' => 'text',
+            'settings' => array(
+                'target_type' => 'user',
+                ),
+            'cardinality' => 1,
+        ),
+
+        'field_status' => array(
+            'field_name' => 'field_status',
+            'type' => 'number_integer',
+
+            'columns' => array(
+                'field_status_tid' => array(
+                    'type' => 'number_integer',
+                    ),
+                ),
+            'cardinality' => 1,
+        ),
+
+        'field_assigned_to' => array(
+            'field_name' => 'field_assigned_to',
+            'type' => 'entityreference',
+            'settings' => array(
+                'target_type' => 'user',
+                ),
+            'cardinality' => 1,
+        ),
+
+        'nw_gege' => array(
+            'field_name' =>'nw_gege',
+
+            'type' => 'number_integer',
+            'cardinality' => 1,
+            ),
+    );
+}
+
+function _nw_invoice_guest_post_field_instances()
+{
+    return array(
+        'nw_guest_post_invoice_link' => array(
+            'field_name' => 'nw_guest_post_invoice_link',
+            'label' => t('Associated Invoice'),
+            ''
+        ),
+
+        'nw_guest_post_base_rate' => array(
+            'field_name' => 'nw_guest_post_base_rate',
+            'label' => t('Base Rate'),
+            'description' => t('Enter the base rate for this article.'),
+            'required' => TRUE,
+            'settings' => array(
+                'prefix' => '$',
+            ),
+            'widget' => array(
+                'weight' => 10.5,
+            )
+        )
+    );
+}
+
+function _nw_invoice_assign_dummy_base_rate()
+{
+    $query = db_select('node');
+    $query->where('type = :gp', array(':gp' => 'guest_post'));
+    $query->fields('node', array('nid'));
+
+    $res = $query->execute();
+
+    $nids = array();
+
+    foreach($res as $row) {
+        watchdog('nw_invoice', print_r($row, TRUE));
+        $nids[] = $row->nid;
+    }
+
+    $nodes = entity_load('node', $nids);
+
+    foreach ($nodes as $node) {
+        $node->nw_guest_post_base_rate = array(
+            'und' => array(
+                array(
+                    'value' => -1
+                ),
+            ),
+        );
+        entity_save('node', $node);
+    }
+}

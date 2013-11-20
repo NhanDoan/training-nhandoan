@@ -1,0 +1,988 @@
+<?php
+
+function nw_invoice_views_api() {
+    return array(
+        'api' => 3
+    );
+}
+
+function nw_invoice_ctools_plugin_directory($module, $plugin) {
+    if ($module == 'ctools') {
+        return 'plugins/' . $plugin;
+    }
+}
+
+function nw_invoice_node_info()
+{
+    return array(
+        'nw_invoice' => array(
+            'name' => t('Writer Invoice'),
+            'base' => 'nw_invoice',
+            'description' => t('Invoice for NerdWallet Writers')
+        )
+    );
+}
+
+function nw_invoice_permission()
+{
+    return array(
+        'mark invoices paid' => array(
+            'title' => t('Mark Invoices as Paid')
+        ),
+
+        'view others invoices' => array(
+            'title' => t('View Other People\'s Invoices')
+        ),
+    );
+}
+
+function nw_invoice_node_type_insert($content_type)
+{
+    if ($content_type->type == 'nw_invoice') {
+        foreach (_nw_invoice_field_types() as $field) {
+            field_create_field($field);
+        }
+
+        // Create all the instances for our fields.
+        foreach (_nw_invoice_installed_instances() as $instance) {
+            $instance['entity_type'] = 'node';
+            $instance['bundle'] = 'nw_invoice';
+            field_create_instance($instance);
+        }
+    }
+}
+
+function nw_invoice_menu()
+{
+    $items = array();
+
+    $items['invoice/unprocessed'] = array(
+        'title' => 'Unprocessed',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('nw_invoice_unprocessed_form'),
+
+        'access callback' => 'user_access',
+        'access arguments' => array('view others invoices')
+    );
+
+    $items['invoice/create_dummy'] = array(
+        'title' => 'Create Dummy',
+        'page callback' => 'nw_invoice_create_dummy_view',
+
+        'access callback' => '_nw_invoice_create_dummy_access'
+    );
+
+    $items['invoice/generate'] = array(
+        'title' => 'Generate',
+        'page callback' => 'nw_invoice_manually_generate_view',
+
+        'access callback' => '_nw_invoice_create_dummy_access'
+    );
+
+    $items['invoice/%nw_invoice_view/mark_paid'] = array(
+        'page callback' => 'nw_invoice_mark_invoice_paid_view',
+        'page arguments' => array(1),
+
+        'access callback' => 'user_access',
+        'access arguments' => array('mark invoices paid')
+    );
+
+    $items['invoice/%nw_invoice_view'] = array(
+        'page callback' => 'nw_invoice_menu_view',
+        'page arguments' => array(1),
+
+        'access callback' => 'nw_invoice_view_access',
+        'access arguments' => array(1)
+    );
+
+
+    $items['invoices/all'] = array(
+        'title' => 'Invoice Test',
+        'page callback' => 'nw_invoice_test_page',
+        'access callback' => TRUE,
+    );
+
+    return $items;
+}
+
+function nw_invoice_mail($key, &$message, $params)
+{
+    /** Required params for the invoice processed message:
+     *    full_name: Full Name
+     *    invoice_link: URL for the invoice that's been processed
+     *
+     */
+    if ($key === 'invoice_processed') {
+        $body = <<<EOS
+Hello %full_name,
+
+An invoice (%invoice_link) has just been processed by our accounting team. The payment should be landing in your account in the next few days.
+
+Thank you for your work!
+EOS;
+
+
+        $variables = array(
+            '%full_name' => $params['full_name'],
+            '%invoice_link' => $params['invoice_link']
+        );
+
+        $message['subject'] = 'Invoice has just been processed';
+        $message['body'] = explode('\n', strtr($body, $variables));
+    }
+}
+
+function nw_invoice_form($node, $form_state)
+{
+    return node_content_form($node, $form_state);
+}
+
+function nw_invoice_field_formatter_info()
+{
+    return array(
+        'nw_invoice_paid_formatter' => array(
+            'label' => 'Invoice Paid Formatter',
+            'field types' => array('list_boolean')
+        ),
+
+        'nw_invoice_usd_formatter' => array(
+            'label' => 'Currency Formatter (US Dollars)',
+            'field types' => array('number_integer')
+        ),
+
+        'nw_invoice_user_name_formatter' => array(
+            'label'  => 'Full Name',
+            'field types' => array('entityreference'),
+            'settings' => array(
+                'emit_link' => TRUE
+            )
+        )
+    );
+}
+
+function nw_invoice_field_formatter_settings_summary($field, $instance, $view_mode)
+{
+    $ret = '';
+    $display = $instance['display'][$view_mode];
+    $settings = $display['settings'];
+
+    if ($display['type'] == 'nw_invoice_user_name_formatter') {
+        $ret = 'Include link: ';
+        $ret .= $settings['use_link'] ? 'YES' : 'NO';
+    }
+
+    return $ret;
+}
+
+function nw_invoice_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state)
+{
+    $elements = array();
+    $display = $instance['display'][$view_mode];
+    $settings = $display['settings'];
+
+    if ($display['type'] == 'nw_invoice_user_name_formatter') {
+        $elements['use_link'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Include link to the user'),
+            '#default_value'  => $settings['use_link'],
+        );
+    }
+
+    return $elements;
+}
+
+function _nw_invoice_field_types()
+{
+    return array(
+        'nw_invoice_paid' => array(
+            'field_name' => 'nw_invoice_paid',
+            'type'       => 'list_boolean',
+            'cardinality' => 1
+        ),
+
+        'nw_total_owed' => array(
+            'field_name' => 'nw_total_owed',
+            'type' => 'number_integer',
+            'cardinality' => 1
+        ),
+
+        'nw_approved_by' => array(
+            'field_name' => 'nw_approved_by',
+            'type' => 'entityreference',
+            'settings' => array(
+                'target_type' => 'user',
+            ),
+            'cardinality' => 1
+        ),
+
+        'nw_writer' => array(
+            'field_name' => 'nw_writer',
+            'type' => 'entityreference',
+            'settings' => array(
+                'target_type' => 'user',
+            ),
+            'cardinality' => 1
+        ),
+
+        'nw_date_issued' => array(
+            'field_name' => 'nw_date_issued',
+            'type' => 'date',
+            'cardinality' => 1,
+        ),
+
+        'nw_date_paid' => array(
+            'field_name' => 'nw_date_paid',
+            'type' => 'date',
+            'cardinality' => 1,
+        ),
+        'nw_gege' => array(
+            'field_name' =>'nw_gege',
+
+            'type' => 'number_integer',
+            'cardinality' => 1,
+            'columns' => 'tid',
+            ),
+    );
+}
+
+function _nw_invoice_installed_instances()
+{
+    return array(
+        'nw_writer' => array(
+            'field_name' => 'nw_writer',
+            'label' => t('For Writer'),
+            'settings' => array(
+                'display' => array(
+                    'default' => array(
+                        'type' => 'entityreference_label'
+                    )
+                )
+            )
+        ),
+
+        'nw_date_issued' => array(
+            'field_name' => 'nw_date_issued',
+            'label' => t('Date Issued')
+        ),
+
+        'nw_invoice_paid' => array(
+            'field_name' => 'nw_invoice_paid',
+            'label' => t('Invoice Paid'),
+            'widget' => array(
+                'type' => 'options_onoff',
+            )
+        ),
+
+        'nw_date_paid' => array(
+            'field_name' => 'nw_date_paid',
+            'label' => t('Date Processed')
+        ),
+
+        'nw_approved_by' => array(
+            'field_name' => 'nw_approved_by',
+            'label' => t('Processed By'),
+            'settings' => array(
+                'display' => array(
+                    'default' => array(
+                        'type' => 'entityreference_label'
+                    )
+                )
+            )
+        ),
+
+        'nw_total_owed' => array(
+            'field_name' => 'nw_total_owed',
+            'label' => t('Amount Owed')
+        ),
+    );
+}
+
+/*** VIEW CODE ***/
+function nw_invoice_view_load($invoice_id)
+{
+    $arr = entity_load('node', array($invoice_id));
+    return empty($arr[$invoice_id]) ? NULL : $arr[$invoice_id];
+}
+
+function nw_invoice_view_access($invoice)
+{
+    return node_access('view', $invoice);
+}
+
+function nw_invoice_menu_view($invoice)
+{
+    return node_view($invoice);
+}
+
+function nw_invoice_node_access($node, $op, $account)
+{
+    if ($node === NULL || !is_object($node) || $node->type !== 'nw_invoice') {
+        return NODE_ACCESS_IGNORE;
+    }
+
+    // Only admins can create/delete invoices
+    if ($op === 'create' || $op == 'delete') {
+        $allowed =  ($account->uid == 1 || in_array('administrator', array_values($account->roles)));
+        return $allowed ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+    }
+
+    if ($op === 'update') {
+        return user_access('mark invoices paid', $account) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+    }
+    // If the invoice is for this user, they can always view it
+    if ($node->nw_writer['und']['0']['target_id'] == $account->uid) {
+        return NODE_ACCESS_ALLOW;
+    }
+
+    return user_access('view others invoices', $account) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+}
+
+function nw_invoice_field_display_node_alter(&$display, $context)
+{
+    if ($context['field']['field_name'] == 'nw_writer') {
+        $display['module'] = 'nw_invoice';
+        $display['type'] = 'nw_invoice_user_name_formatter';
+    }
+
+    if ($context['field']['field_name'] == 'nw_invoice_paid') {
+        $display['module'] = 'nw_invoice';
+        $display['type'] = 'nw_invoice_paid_formatter';
+    }
+
+    if ($context['field']['field_name'] == 'nw_total_owed') {
+        $display['module'] = 'nw_invoice';
+        $display['type'] = 'nw_invoice_currency_formatter';
+    }
+}
+
+
+function nw_invoice_node_view_alter(&$build)
+{
+    global $user;
+
+    $node = $build['#node'];
+    if ($node->type == 'guest_post') {
+        _nw_invoice_alter_guest_post_view($build);
+        return;
+    }
+
+    if ($node->type != 'nw_invoice') {
+        return;
+    }
+
+    $build['nw_invoice_paid']['#weight'] = 0;
+    $build['nw_invoice_paid']['#label_display'] = 'hidden';
+
+    $build['nw_date_paid']['#label_display'] = 'inline';
+    $build['nw_approved_by']['#label_display'] = 'inline';
+
+    $build['nw_date_issued']['#weight'] = 10;
+    $build['nw_date_issued']['#label_display'] = 'inline';
+
+    $build['nw_writer']['#weight'] = 20;
+    $build['nw_writer']['#label_display'] = 'inline';
+
+    $build['nw_total_owed']['#weight'] = 30;
+    $build['nw_total_owed']['#label_display'] = 'inline';
+
+    $guest_post_names = NwInvoiceDBAccess::get_guest_post_names_for_id($node->nid);
+
+    $build['nw_guest_posts'] = array(
+        '#weight' => 50,
+        '#label_display' => 'above',
+        '#theme' => 'item_list',
+        '#items' => $guest_post_names,
+        '#prefix' => '<section class="field"><h2 class="field-label">For Articles</h2>',
+        '#suffix' => '</section>'
+    );
+
+    if (!empty($node->nw_invoice_paid) &&
+        $node->nw_invoice_paid['und'][0]['value'] == 0 &&
+        user_access('mark invoices paid', $user)) {
+        $build['links']['markpaid'] = array(
+            '#type' => 'link',
+            '#title' => t('Mark Invoice Paid'),
+            '#href' => 'invoice/' . $node->nid . '/mark_paid/',
+            '#attributes' => array(
+                'class' => 'btn mark_paid'
+            )
+        );
+    }
+}
+
+function _nw_invoice_alter_guest_post_view(&$build)
+{
+    $node = $build['#node'];
+
+    // Don't know why the weight for view is different?
+    $build['nw_guest_post_base_rate']['#weight'] = 7.5;
+
+    if (!empty($node->nw_guest_post_base_rate['und'][0]['value']) &&
+        $node->nw_guest_post_base_rate['und'][0]['value'] == -1) {
+
+        $build['nw_guest_post_base_rate']['#access'] = FALSE;
+    }
+}
+
+
+function nw_invoice_field_formatter_prepare_view($entity_type, $entity, $field, $instance, $langcode, &$items, $displays)
+{
+    foreach($displays as $key => $display) {
+        if ($display['type'] == 'nw_invoice_user_name_formatter') {
+            if (!empty($items[$key][0]['target_id'])) {
+                $user_to_display = user_load($items[$key][0]['target_id']);
+
+                $full_name = _nw_invoice_get_user_full_name($user_to_display);
+
+                $user_link = '';
+
+                global $user;
+                if (user_access('access user profiles', $user)) {
+                    $user_link = 'user/' . $user_to_display->uid;
+                }
+
+                $items[$key][0]['full_name'] = $full_name;
+                $items[$key][0]['link'] = $user_link;
+            }
+        }
+    }
+}
+
+function nw_invoice_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display)
+{
+    $ret = array();
+
+    $settings = $display['settings'];
+
+    if ($display['type'] == 'nw_invoice_user_name_formatter') {
+        $use_link = empty($settings['use_link']) ? false : $settings['use_link'];
+
+        if ($use_link && $items[0]['link'] !== '') {
+            $ret[0] = array('#markup' => l($items[0]['full_name'], $items[0]['link']));
+        } else {
+            $ret[0] = array('#markup' => $items[0]['full_name']);
+        }
+
+    } else if ($display['type'] == 'nw_invoice_currency_formatter' || $display['type'] == 'nw_invoice_usd_formatter') {
+        $ret[0] = array('#markup' => sprintf('$%d', (int)$items[0]['value']));
+    } else if ($display['type'] == 'nw_invoice_paid_formatter') {
+        $paid = ((int)$items[0]['value'] != 0);
+
+        $label = $paid ? 'Paid' : 'UNPAID';
+        $class = "invoice_status ";
+        $class .= $paid ? 'invoice_paid' : 'invoice_unpaid';
+        $ret[0] = array(
+            '#markup' => $label,
+            '#prefix' => "<span class='$class'>",
+            '#suffix' => "</span>"
+        );
+    }
+
+    return $ret;
+}
+
+function nw_invoice_unprocessed_form($form, &$form_state)
+{
+    $rows = NwInvoiceDBAccess::get_unprocessed_invoices();
+
+    $headers = array(
+        'title' => t('Title'),
+        'writer_full_name' => t('Writer Name'),
+        'total_owed' => t('Owed Amount'),
+        'date_issued' => t('Invoice Date')
+    );
+
+    $table_rows = array();
+
+    foreach($rows as $row) {
+        $table_rows[$row->nid] = array(
+            'title' => array(
+                'data' => array(
+                    '#type' => 'link',
+                    '#title' => check_plain($row->title),
+                    '#href' => 'invoice/' . $row->nid
+                ),
+            ),
+            'writer_full_name' => check_plain($row->writer_full_name),
+            'total_owed' => '$' . number_format($row->total_owed, 2),
+            'date_issued' => format_date(strtotime($row->date_issued), 'short')
+        );
+    }
+
+
+    $form['header'] = array(
+        '#markup' => '<h1>Unprocessed Invoices</h1>',
+        '#weight' => '10'
+    );
+
+    $form['submit_top'] = array(
+        '#type' => 'submit',
+        '#value' => t('Mark Checked As Paid'),
+        '#weight' => '20'
+    );
+
+    $form['invoices'] = array(
+        '#type' => 'tableselect',
+        '#weight' => '30',
+        '#header' => $headers,
+        '#options' => $table_rows,
+        '#empty' => t('No unpaid invoices'),
+        '#multiple' => TRUE,
+        '#js_select' => TRUE
+    );
+
+
+    $form['submit_bottom'] = array(
+        '#type' => 'submit',
+        '#value' => t('Mark Checked As Paid'),
+        '#weight' => '40'
+    );
+
+    return $form;
+}
+
+function nw_invoice_unprocessed_form_submit($form, &$form_state)
+{
+    $clicked_invoices = array_filter($form_state['values']['invoices']);
+    $invoices = entity_load('node', $clicked_invoices);
+
+    foreach ($invoices as $invoice) {
+        _nw_invoice_mark_invoice_paid($invoice);
+    }
+
+    drupal_set_message(t('Invoices Marked as Paid'));
+}
+
+/*** INVOICE GENERATION ***/
+function _nw_invoice_generate_all_invoices($cron_item)
+{
+    $guest_post_ids = NwInvoiceDBAccess::get_uninvoiced_guest_post_ids();
+    if (count($guest_post_ids) == 0) {
+        return;
+    }
+
+    $entities = entity_load('node', $guest_post_ids);
+
+    while (count($entities) > 0) {
+        $guest_posts_for_invoice = array(array_shift($entities));
+        $writer_id = _nw_invoice_get_writer_id($guest_posts_for_invoice[0]);
+
+        while (count($entities) > 0 && _nw_invoice_get_writer_id($entities[0]) == $writer_id) {
+            $guest_posts_for_invoice[] = array_shift($entities);
+        }
+
+        _nw_invoice_generate_invoices($guest_posts_for_invoice, $writer_id);
+    }
+
+    watchdog('nw_invoice', "Created invoices for " . count($guest_post_ids) . " guest posts.");
+}
+
+/* We need this tag here because isNull() is not a part of EntityFieldQuery by default. Once we have the
+ * tag it seems like the fieldQuery things don't work anymore either
+ */
+function nw_invoice_query_nw_invoice_not_invoiced_alter($query)
+{
+    /* Search for posts that are completed */
+    $query->innerJoin('field_data_field_status', 'q', 'node.nid=q.entity_id AND q.entity_type = :entity_type');
+    $query->where('q.field_status_target_id = 64');
+
+    /* ... exclude posts that don't have a base rate since they are old */
+    $query->innerJoin('field_data_nw_guest_post_base_rate', 'br', 'node.nid=br.entity_id AND br.entity_type = :entity_type' );
+    $query->where('br.nw_guest_post_base_rate_value <> -1');
+
+    /* ..and for guest posts that do not have an associated invoice link */
+    $query->leftJoin('field_data_nw_guest_post_invoice_link', 'o', 'node.nid=o.entity_id AND o.entity_type = :entity_type');
+    $query->isNull('o.nw_guest_post_invoice_link_target_id');
+
+
+    /* And order by writer id */
+    $query->innerJoin('field_data_field_assigned_to', 'p', 'node.nid=p.entity_id AND p.entity_type = :entity_type');
+    $query->orderBy('p.field_assigned_to_target_id');
+}
+
+function _nw_invoice_generate_invoices($guest_posts_for_invoice, $writer_id)
+{
+    $chunked_invoices = array_chunk($guest_posts_for_invoice, 50);
+    foreach($chunked_invoices as $invoice_list) {
+        watchdog('nw_invoice', "GENERATING INVOICE FOR WRITER $writer_id<br/>");
+
+        $invoice = new NwInvoiceWrapper($writer_id);
+        $invoice->save();
+
+        foreach ($invoice_list as $guest_post) {
+            $invoice->add_guest_post($guest_post);
+        }
+
+        $invoice->save();
+        echo "<br/>";
+    }
+}
+
+/* Retrieve the writer id from a guest post node */
+function _nw_invoice_get_writer_id($guest_post)
+{
+    return empty($guest_post->field_assigned_to) ? -1 : $guest_post->field_assigned_to['und'][0]['target_id'];
+}
+
+function _nw_invoice_get_user_full_name($user)
+{
+    if (empty($user->field_full_name['und'])) {
+        $full_name = $user->name;
+    } else {
+        $full_name = $user->field_full_name['und'][0]['safe_value'];
+    }
+
+    return $full_name;
+}
+
+/*** INVOICE PROCESSING ***/
+
+function nw_invoice_mark_invoice_paid_view($invoice)
+{
+    _nw_invoice_mark_invoice_paid($invoice);
+
+    drupal_set_message(t('@title marked as paid.', array('@title' => $invoice->title)));
+    drupal_goto('invoice/' . $invoice->nid);
+}
+
+function _nw_invoice_mark_invoice_paid($invoice)
+{
+    global $user;
+
+    $wrapper = entity_metadata_wrapper('node', $invoice);
+    if (empty($wrapper->nw_invoice_paid) || $wrapper->nw_invoice_paid->value() == 0) {
+        $wrapper->nw_invoice_paid->set(1);
+        $wrapper->nw_approved_by->set($user);
+        $wrapper->nw_date_paid->set(time());
+
+        $wrapper->save();
+
+        _nw_invoice_send_processed_email($wrapper);
+    }
+}
+
+function _nw_invoice_send_processed_email($wrapper)
+{
+    $dest_user = $wrapper->nw_writer->value();
+    $full_name = _nw_invoice_get_user_full_name($dest_user);
+
+    $mail_params = array(
+        'full_name' => $full_name,
+        'invoice_link' => 'invoice/' . $wrapper->nid
+    );
+
+    $to = sprintf("%s <%s>", $full_name, $dest_user->mail);
+
+    drupal_mail('nw_invoice', 'invoice_processed', $to, user_preferred_language($dest_user), $mail_params );
+}
+
+
+/*** VIEWS ***/
+
+function nw_invoice_views_default_views()
+{
+    $views = array();
+    $views['nw_invoice_unprocessed_invoices'] = _nw_invoice_get_writer_invoice_view();
+
+    return $views;
+}
+
+function _nw_invoice_get_writer_invoice_view()
+{
+    $view = new view;
+    $view->name = 'nw_invoice_unprocessed_invoices';
+    $view->description = 'Invoice Summary';
+    $view->tag = 'default';
+    $view->base_table = 'node';
+    $view->human_name = 'Invoice Summary';
+    $view->core = 7;
+    $view->api_version = '3.0';
+    $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+    /* Display: Master */
+    $handler = $view->new_display('default', 'Master', 'default');
+    $handler->display->display_options['title'] = 'Your Invoices';
+    $handler->display->display_options['access']['type'] = 'perm';
+    $handler->display->display_options['cache']['type'] = 'none';
+    $handler->display->display_options['query']['type'] = 'views_query';
+    $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+    $handler->display->display_options['exposed_form']['type'] = 'basic';
+    $handler->display->display_options['pager']['type'] = 'full';
+    $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+    $handler->display->display_options['style_plugin'] = 'table';
+    $handler->display->display_options['style_options']['grouping'] = array(
+        0 => array(
+            'field' => 'nw_invoice_paid',
+            'rendered' => 1,
+            'rendered_strip' => 0,
+        ),
+    );
+    $handler->display->display_options['style_options']['columns'] = array(
+        'title' => 'title',
+        'nw_date_issued' => 'nw_date_issued',
+        'nw_total_owed' => 'nw_total_owed',
+        'nw_invoice_paid' => 'nw_invoice_paid',
+    );
+    $handler->display->display_options['style_options']['default'] = 'nw_invoice_paid';
+    $handler->display->display_options['style_options']['info'] = array(
+        'title' => array(
+            'sortable' => 0,
+            'default_sort_order' => 'asc',
+            'align' => '',
+            'separator' => '',
+            'empty_column' => 0,
+        ),
+        'nw_date_issued' => array(
+            'sortable' => 1,
+            'default_sort_order' => 'asc',
+            'align' => '',
+            'separator' => '',
+            'empty_column' => 0,
+        ),
+        'nw_total_owed' => array(
+            'sortable' => 1,
+            'default_sort_order' => 'asc',
+            'align' => '',
+            'separator' => '',
+            'empty_column' => 0,
+        ),
+        'nw_invoice_paid' => array(
+            'sortable' => 1,
+            'default_sort_order' => 'asc',
+            'align' => '',
+            'separator' => '',
+            'empty_column' => 0,
+        ),
+    );
+    $handler->display->display_options['style_options']['override'] = 1;
+    $handler->display->display_options['style_options']['sticky'] = 0;
+    $handler->display->display_options['style_options']['summary'] = 'Unprocessed Invoices';
+    $handler->display->display_options['style_options']['empty_table'] = 0;
+    /* Relationship: Entity Reference: Referenced Entity */
+    $handler->display->display_options['relationships']['nw_writer_target_id']['id'] = 'nw_writer_target_id';
+    $handler->display->display_options['relationships']['nw_writer_target_id']['table'] = 'field_data_nw_writer';
+    $handler->display->display_options['relationships']['nw_writer_target_id']['field'] = 'nw_writer_target_id';
+    $handler->display->display_options['relationships']['nw_writer_target_id']['label'] = 'Writer';
+    $handler->display->display_options['relationships']['nw_writer_target_id']['required'] = 1;
+    /* Field: Content: Title */
+    $handler->display->display_options['fields']['title']['id'] = 'title';
+    $handler->display->display_options['fields']['title']['table'] = 'node';
+    $handler->display->display_options['fields']['title']['field'] = 'title';
+    $handler->display->display_options['fields']['title']['label'] = '';
+    $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+    $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+    $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+    $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+    $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+    $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+    $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+    $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+    /* Field: Content: Date Issued */
+    $handler->display->display_options['fields']['nw_date_issued']['id'] = 'nw_date_issued';
+    $handler->display->display_options['fields']['nw_date_issued']['table'] = 'field_data_nw_date_issued';
+    $handler->display->display_options['fields']['nw_date_issued']['field'] = 'nw_date_issued';
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['alter_text'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['make_link'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['absolute'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['external'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['replace_spaces'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['trim_whitespace'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['nl2br'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['word_boundary'] = 1;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['ellipsis'] = 1;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['more_link'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['strip_tags'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['trim'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['alter']['html'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['element_label_colon'] = 1;
+    $handler->display->display_options['fields']['nw_date_issued']['element_default_classes'] = 1;
+    $handler->display->display_options['fields']['nw_date_issued']['hide_empty'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['empty_zero'] = 0;
+    $handler->display->display_options['fields']['nw_date_issued']['hide_alter_empty'] = 1;
+    $handler->display->display_options['fields']['nw_date_issued']['settings'] = array(
+        'format_type' => 'short',
+        'fromto' => 'both',
+        'multiple_number' => '',
+        'multiple_from' => '',
+        'multiple_to' => '',
+    );
+    $handler->display->display_options['fields']['nw_date_issued']['field_api_classes'] = 0;
+    /* Field: Content: Amount Owed */
+    $handler->display->display_options['fields']['nw_total_owed']['id'] = 'nw_total_owed';
+    $handler->display->display_options['fields']['nw_total_owed']['table'] = 'field_data_nw_total_owed';
+    $handler->display->display_options['fields']['nw_total_owed']['field'] = 'nw_total_owed';
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['alter_text'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['make_link'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['absolute'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['external'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['replace_spaces'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['trim_whitespace'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['nl2br'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['word_boundary'] = 1;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['ellipsis'] = 1;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['more_link'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['strip_tags'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['trim'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['alter']['html'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['element_label_colon'] = 1;
+    $handler->display->display_options['fields']['nw_total_owed']['element_default_classes'] = 1;
+    $handler->display->display_options['fields']['nw_total_owed']['hide_empty'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['empty_zero'] = 0;
+    $handler->display->display_options['fields']['nw_total_owed']['hide_alter_empty'] = 1;
+    $handler->display->display_options['fields']['nw_total_owed']['type'] = 'nw_invoice_usd_formatter';
+    $handler->display->display_options['fields']['nw_total_owed']['settings'] = array(
+        'thousand_separator' => ' ',
+        'prefix_suffix' => 1,
+    );
+    $handler->display->display_options['fields']['nw_total_owed']['field_api_classes'] = 0;
+    /* Field: Content: Invoice Paid */
+    $handler->display->display_options['fields']['nw_invoice_paid']['id'] = 'nw_invoice_paid';
+    $handler->display->display_options['fields']['nw_invoice_paid']['table'] = 'field_data_nw_invoice_paid';
+    $handler->display->display_options['fields']['nw_invoice_paid']['field'] = 'nw_invoice_paid';
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['alter_text'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['make_link'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['absolute'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['external'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['replace_spaces'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['trim_whitespace'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['nl2br'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['word_boundary'] = 1;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['ellipsis'] = 1;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['more_link'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['strip_tags'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['trim'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['alter']['html'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['element_label_colon'] = 1;
+    $handler->display->display_options['fields']['nw_invoice_paid']['element_default_classes'] = 1;
+    $handler->display->display_options['fields']['nw_invoice_paid']['hide_empty'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['empty_zero'] = 0;
+    $handler->display->display_options['fields']['nw_invoice_paid']['hide_alter_empty'] = 1;
+    $handler->display->display_options['fields']['nw_invoice_paid']['type'] = 'nw_invoice_paid_formatter';
+    $handler->display->display_options['fields']['nw_invoice_paid']['field_api_classes'] = 0;
+    /* Sort criterion: Content: Invoice Paid (nw_invoice_paid) */
+    $handler->display->display_options['sorts']['nw_invoice_paid_value']['id'] = 'nw_invoice_paid_value';
+    $handler->display->display_options['sorts']['nw_invoice_paid_value']['table'] = 'field_data_nw_invoice_paid';
+    $handler->display->display_options['sorts']['nw_invoice_paid_value']['field'] = 'nw_invoice_paid_value';
+    /* Sort criterion: Content: Post date */
+    $handler->display->display_options['sorts']['created']['id'] = 'created';
+    $handler->display->display_options['sorts']['created']['table'] = 'node';
+    $handler->display->display_options['sorts']['created']['field'] = 'created';
+    /* Sort criterion: User: Full Name (field_full_name) */
+    $handler->display->display_options['sorts']['field_full_name_value']['id'] = 'field_full_name_value';
+    $handler->display->display_options['sorts']['field_full_name_value']['table'] = 'field_data_field_full_name';
+    $handler->display->display_options['sorts']['field_full_name_value']['field'] = 'field_full_name_value';
+    $handler->display->display_options['sorts']['field_full_name_value']['relationship'] = 'nw_writer_target_id';
+    /* Contextual filter: Content: For Writer (nw_writer) */
+    $handler->display->display_options['arguments']['nw_writer_target_id']['id'] = 'nw_writer_target_id';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['table'] = 'field_data_nw_writer';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['field'] = 'nw_writer_target_id';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['default_action'] = 'default';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['default_argument_type'] = 'current_user';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['default_argument_skip_url'] = 0;
+    $handler->display->display_options['arguments']['nw_writer_target_id']['summary']['number_of_records'] = '0';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['summary']['format'] = 'default_summary';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['summary_options']['items_per_page'] = '25';
+    $handler->display->display_options['arguments']['nw_writer_target_id']['break_phrase'] = 0;
+    $handler->display->display_options['arguments']['nw_writer_target_id']['not'] = 0;
+    /* Filter criterion: Content: Published */
+    $handler->display->display_options['filters']['status']['id'] = 'status';
+    $handler->display->display_options['filters']['status']['table'] = 'node';
+    $handler->display->display_options['filters']['status']['field'] = 'status';
+    $handler->display->display_options['filters']['status']['value'] = 1;
+    $handler->display->display_options['filters']['status']['group'] = 1;
+    $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+    /* Filter criterion: Content: Type */
+    $handler->display->display_options['filters']['type']['id'] = 'type';
+    $handler->display->display_options['filters']['type']['table'] = 'node';
+    $handler->display->display_options['filters']['type']['field'] = 'type';
+    $handler->display->display_options['filters']['type']['value'] = array(
+        'nw_invoice' => 'nw_invoice',
+    );
+
+    /* Display: Page */
+    $handler = $view->new_display('page', 'Page', 'page');
+    $handler->display->display_options['path'] = 'invoice/me';
+
+    return $view;
+}
+
+/*** DUMMY INVOICES ***/
+/* Generate dummy invoices for all old guest posts, just assign the invoices to user 1 */
+function _nw_invoice_create_dummy_invoices()
+{
+    $guest_post_ids = NwInvoiceDBAccess::get_uninvoiced_guest_post_ids();
+    _nw_invoice_generate_invoices($guest_post_ids, 1);
+}
+
+/* Only the admin can create dummy pages */
+function _nw_invoice_create_dummy_access()
+{
+    global $user;
+
+    return $user->uid == 1;
+}
+
+function nw_invoice_create_dummy_view()
+{
+    _nw_invoice_create_dummy_invoices();
+    drupal_set_message("Dummy Invoices Created");
+    drupal_goto("invoice/unprocessed");
+}
+
+/*** CRON SCHEDULING ***/
+function nw_invoice_cron()
+{
+    $last_cron_run = variable_get('nw_invoice_last_cron', 0);
+
+    if (!_nw_invoice_should_run_cron($last_cron_run)) {
+        return;
+    }
+
+    watchdog('nw_invoice', 'Generating invoices');
+    DrupalQueue::get('nw_invoice_generation_queue')->createItem("");
+    variable_set('last_cron_run', REQUEST_TIME);
+}
+
+function _nw_invoice_should_run_cron($last_cron_run)
+{
+    $current_day_info = getdate(REQUEST_TIME);
+    $last_run_info = getdate($last_cron_run);
+
+    /* If it's the 15th or the last day of the month, AND we haven't run cron on this day yet,
+     * generate invoices.
+     */
+    return (($current_day_info['mday'] == 16 ||
+            $current_day_info['mday'] == 1
+           ) &&
+            $current_day_info['mday'] != $last_run_info['mday']
+    );
+
+}
+
+function nw_invoice_cron_queue_info()
+{
+    $queues['nw_invoice_generation_queue'] = array(
+        'worker callback' => '_nw_invoice_generate_all_invoices',
+        'time' => 60
+    );
+
+    return $queues;
+}
+
+function nw_invoice_manually_generate_view()
+{
+    _nw_invoice_generate_all_invoices(NULL);
+    drupal_set_message('Generated.');
+    drupal_goto('<front>');
+}

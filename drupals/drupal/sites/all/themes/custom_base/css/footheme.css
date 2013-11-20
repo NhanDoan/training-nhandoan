@@ -1,0 +1,89 @@
+/**
+ * Footheme footheme.css
+ *
+ * Use this file to add your custom styles.
+ *
+ * You can change the name of this file, just
+ * remember to update the name in the info file
+ * as well.
+ */
+/* line 15, ../sass/footheme.scss */
+h2 {
+  font-size: 1.385em;
+}
+
+/* line 19, ../sass/footheme.scss */
+.inline {
+  display: inline;
+}
+
+/* line 23, ../sass/footheme.scss */
+span.rules-link-wrapper {
+  display: block;
+}
+
+/* line 32, ../sass/footheme.scss */
+div.mod-buttons {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* Comments sidebar */
+/* line 38, ../sass/footheme.scss */
+div.pane-node-comments,
+div.pane-node-comment-form {
+  padding: 30px;
+  background: #eef2f2;
+  border: 1px solid #dfdfdf;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* div.pane-content article.article-guest-post, */
+/* line 47, ../sass/footheme.scss */
+body.edit-guest-post * div.panel-col-first {
+  padding-right: 10px;
+  width: 66%;
+}
+/* line 52, ../sass/footheme.scss */
+body.edit-guest-post * div.panel-col-first * div.article-content {
+  padding-top: 15px;
+}
+
+/* line 57, ../sass/footheme.scss */
+body.edit-guest-post * div.panel-col-last {
+  width: 30%;
+  padding-left: 10px;
+}
+
+/* line 62, ../sass/footheme.scss */
+div.pane-node-form-buttons h2 {
+  font-size: 1.2em;
+}
+
+/* line 67, ../sass/footheme.scss */
+div#writer-landing * header {
+  display: none;
+}
+/* line 71, ../sass/footheme.scss */
+div#writer-landing * div.pane-block {
+  border: 1px solid #dfdfdf;
+  padding: 5px 15px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+/* line 78, ../sass/footheme.scss */
+div#writer-landing * div.panel-separator {
+  margin: 15px;
+}
+
+/* line 83, ../sass/footheme.scss */
+.filter-wrapper, .wysiwyg-toggle-wrapper {
+  display: none;
+}

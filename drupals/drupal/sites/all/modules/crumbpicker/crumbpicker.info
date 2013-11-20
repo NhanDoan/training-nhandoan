@@ -1,0 +1,6 @@
+name = Breadcrumb Picker
+description = Provide a character for the breadcrumb trail delimiter.
+package = example
+core = 7.x
+
+files[] = crumbpicker.module

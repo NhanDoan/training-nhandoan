@@ -64,14 +64,150 @@ function form_dynamic_form($form, &$form_state) {
     '#title' => t('How many chairs do you need?'),
     '#size' => 4,
     '#states' => array(
-
+        'visible' => array(
+          ':input[name="equipment[Chairs]"]' => array('checked' => TRUE),
+          ),
       ),
-    ),
+    );
+  $form['study_room']['pc'] = array(
+    '#type' => 'textfield',
+    '#title' => t('What type of PC you need?'),
+    '#size' => 15,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="equipment[PC]"]' => array('checked' => TRUE),
+        ),
+      ),
+  );
 
+  $form['small_conference_room'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('small_conference_room Information'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name= "room_type"]' => array('value' => t('Small Conference Room')),
+        ),
+      ),
+    );
+
+  $form['small_conference_room']['how_many_pcs'] = array(
+    '#type' => 'select',
+    '#title' => t('How many PCs do you need set up in the small conference room?'),
+    '#options' => array(
+      1=> t('One'),
+      2=> t('Two'),
+      3=> t('Three'),
+      4=> t('Four'),
+      5=> t('Lots'),
+      ),
+    );
+
+  $form['small_conference_room']['comment'] = array(
+    '#type' => 'item',
+    '#description' => t('Wow, that\'s a long time'),
+    '#states' => array(
+      ':input[name = "how_many_pcs"]' => array('value' => 5),
+      ),
+    );
+
+  $form['small_conference_room']['room_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Which room do you want to use?'),
+
+    );
+  $form['small_conference_room']['hours'] = array(
+    '#type' => 'select',
+    '#options' => drupal_map_assoc(array(t('Free'), t('Paid'))),
+    '#title' => t('Do you want to reserve room when it is free (no fees) or paid(prime time) ?'),
+    );
+
+  $form['small_conference_room']['hours_writein'] = array(
+    '#type' => 'textfield',
+    '#size' => 50,
+    '#title' => t('Please enter the date and time you would like to reserve the room and the duration.'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name = "hours"]' => array('value' => t('Free')),
+        ':input[name = "hours"]' => array('value' => t('Paid')),
+        ),
+      ),
+    );
+
+  $form['small_conference_room']['reminder'] = array(
+    '#type' => 'item',
+    '#description' => t('Remember to enter the date, start time, and end time'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name = "hours"]' => array('value' => t('Free')),
+        ':input[name = "hours"]' => array('value' => t('Paid')),
+        ':input[name = "hours_writein"]' => array('filled' => TRUE),
+        ),
+      ),
+    );
+
+  $form['board_room'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Board Room Information'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name = "room_type"]' => array('value' => t('Board Room')),
+        ),
+      ),
+    );
+
+  $form['board_room']['more_info'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Please enter the date and time of when you would you like to reserve the board room'),
+
+    );
+
+  $form['board_room']['info_provide'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check here if you have provide information above'),
+    '#disabled' => TRUE,
+    '#states' => array(
+      'checked' => array(
+        ':input[name = "more_info"]' => array('filled' => TRUE),
+        ),
+      ),
+    );
+
+  $form['expand_more_info'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check here if you want special instructions'),
+
+    );
+
+  $form['more_info'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Special Intrustiona'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#states' => array(
+      'expanded' => array(
+        ':input[name= "expand_more_info"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+  $form['more_info']['feedback'] = array(
+    '#type' => 'textarea',
+    '#description' => t('Please provide and additional details that will help us better serve you.')
+    );
+
+  $form['submit'] =array(
+    '#type' => 'submit',
+    '#value' => t('Submit Info'),
+    );
   return $form;
 }
 
+/**
+ * Implements hook_views_form_submit().
+ */
+function form_dynamic_form_submit($form, &$form_state) {
 
-
+  drupal_set_message(t('Submitting values: @values', array('@value' => var_export($form_state['values'], TRUE))));
+}
 
 

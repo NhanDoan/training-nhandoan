@@ -1,0 +1,85 @@
+/**
+ * Footheme footheme.css
+ *
+ * Use this file to add your custom styles.
+ *
+ * You can change the name of this file, just
+ * remember to update the name in the info file
+ * as well.
+ */
+@import "compass/css3";
+
+$border-color: #DFDFDF; 
+$off-white-color: #EEF2F2;
+
+h2 {
+  font-size: 1.385em;
+}
+
+.inline {
+    display: inline;
+}
+
+span.rules-link-wrapper {
+    display: block;
+
+    a {
+    }
+}
+
+
+
+div.mod-buttons {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/* Comments sidebar */
+div.pane-node-comments,
+div.pane-node-comment-form {
+    padding: 30px;
+    background: $off-white-color;
+    border: 1px solid $border-color;
+    @include border-radius(6px);
+}
+
+/* div.pane-content article.article-guest-post, */
+body.edit-guest-post * div.panel-col-first
+ {
+    padding-right: 10px;
+    
+    width: 66%;
+
+    * div.article-content {
+        padding-top: 15px;
+    }
+}
+
+body.edit-guest-post * div.panel-col-last {
+    width: 30%;
+    padding-left: 10px;
+}
+
+div.pane-node-form-buttons h2 {
+    font-size: 1.2em;
+}
+
+div#writer-landing {
+    * header {
+        display: none;
+    }
+
+    * div.pane-block {
+        border: 1px solid $border-color;
+        padding: 5px 15px;
+        @include border-radius(6px);
+        
+    }
+
+    * div.panel-separator {
+       margin: 15px;
+    }
+}
+
+.filter-wrapper, .wysiwyg-toggle-wrapper {
+    display: none;
+} 
