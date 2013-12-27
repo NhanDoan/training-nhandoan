@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>This is example using JavaScripts API</title>
+		<script type="text/javascript" src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N" >
+			enabledProviders:'twitter'
+		</script>
+		<script type="text/javascript">
+			function Connect() 
+			{
+				var  params= {
+					callBack: onConnectionAdded,
+					provider: "twitter"
+				};
+
+				gigya.socialize.addConnection(params);
+
+			}	
+
+			 // Step 5 - Define callback function:
+		    function onConnectionAdded(response)
+		    {
+		        if (response.errorCode == 0)
+		        {
+		            // Update the page with the data received in the response:
+
+		            // inject the user's nickname to the "divUserName" div 
+		            document.getElementById('divUserName').innerHTML = response.user.nickname;
+		            // inject the user's photo to the image "src" attribute.
+		            document.getElementById('imgUserPhoto').src=response.user.photoURL;
+		            console.log(document.getElementById('imgUserPhoto').src=response.user.photoURL);
+		        }
+		        else
+		        {
+		            //handle errors
+		            alert("An error has occurred!" + '\n' + 
+		                "Error details: " + response.errorMessage + '\n' +
+		                "In method: " + response.operation);
+		        }
+		    }   
+		</script>
+	</head>
+	<body>
+		<center>
+			<input type="button" onClick="Connect()" value = "Connect into twitter">
+
+			<div id= "user_Info">
+				<div id="divUserName"></div>
+				<div id="divUserPhoto"><img id="imgUserPhoto" src="http://www.gigya.com/wildfire/i/transparent.GIF" onerror="this.src='http://www.gigya.com/wildfire/i/transparent.GIF'" /></div>
+			</div>
+		</center>
+		
+		
+	</body>
+</html>

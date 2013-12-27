@@ -1,0 +1,42 @@
+<html>
+<head>
+	<script src='http://cdn.gigya.com/JS/socialize.js?apiKey=3_9GKemTYWudrzA6KbCkGSROgpGvAhoMQWrKRLf98crGCVx8QXVvK39VxBx6GjionC' type='text/javascript'>
+		{
+			enabledProviders: 'facebook',
+		}
+
+	</script>
+</head>
+<body>
+<h3>Comments Plugin Demo</h3>
+<div id="commentsDiv"></div>
+<script type="text/javascript">
+
+	// Optional - define templates to change graphic layout in the Comments Plugin 
+	var templates= {
+    //     comment: 'Hello!<br>username: $username<br>Photo Div: $photoDiv<br>Date String:$dateString<br>Body:$body<br>' +
+				// 'Replies Count: $repliesCountPlaceholder<br>Reply Button:$replyButton',
+    //     commentBox: 'Login Canvas: $loginCanvas<br>Close Icon:$closeIcon<br>Add Comment:$addComment',
+    //     loginCanvas_loggedIn: '$photoDiv<br>$username<br>$logoutLink',
+    //     loginCanvas_loggedIn_guest: 'guest! <br>$photoDiv<br>$username<br>$logoutLink',
+    //     loginCanvas_loggedOut: 'out!<br>$photoDiv<br>$loginDropdown<br>$guestDropdown'
+    }
+	
+    var params =
+    {
+		// Required parameters:
+	  categoryID: 'comment-follow',
+        streamID: '',
+        containerID: 'commentsDiv',
+        cid:'',
+        version: 2,
+        streamID: 'foo6',
+        deviceType: 'auto',
+        // templates: templates,
+        enabledShareProviders: 'facebook'
+    }
+	// Load the Comments Plugin
+    gigya.comments.showCommentsUI(params);
+</script>
+</body>
+</html>

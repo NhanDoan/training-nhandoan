@@ -1,0 +1,47 @@
+<html>
+<head>
+    <script src='http://cdn.gigya.com/JS/socialize.js?apiKey=3_9GKemTYWudrzA6KbCkGSROgpGvAhoMQWrKRLf98crGCVx8QXVvK39VxBx6GjionC' type='text/javascript'></script>
+</head>
+<body>
+    <div id="commentsDiv"></div>
+    <div id='ratingDiv'></div>
+    
+    <script type='text/javascript'>
+        var ratingsParams ={
+            categoryID: 'testing rate',  // Comments category ID (from Comments Setup page)
+            streamID: '',
+            containerID: 'ratingDiv', // <div> ID  in which to present the plugin
+            linkedCommentsUI: 'commentsDiv' // link the Ratings plugin to the Comments plugin. 
+        }
+        gigya.comments.showRatingUI(ratingsParams);
+    </script>
+    <script type='text/javascript'>
+    var templates = {
+        commentBox: '<span style="color:blue;">This is the Login Canvas: </span><br>$loginCanvas<br><br>' +
+                    '<span style="color:blue;">This is the Close Icon: </span>$closeIcon<br>' +
+                    '<span style="color:blue;">This is the Add Comment text box: </span>$addComment',
+        comment:'Hello!<br>' +
+                '<span style="color:blue;">This is the username: </span>$username<br>' +
+                '<span style="color:blue;">This is the Photo Div: </span>$photoDiv<br><br><br>' +
+                '<span style="color:blue;">This is the Date String: </span>$dateString<br>' +
+                '<span style="color:blue;">This is the Comment Body: </span>$body<br>' +
+                '<span style="color:blue;">This is the Replies Count: </span>$repliesCountPlaceholder<br>' +
+                '<span style="color:blue;">This is the Reply Button: </span>$replyButton<br><br>' +
+                '<span style="color:blue;">This is the Flagging option: </span>$flag<br>' +
+                '<span style="color:blue;">This is the Voting option: </span>$vote<br><br>',
+        loginCanvas_loggedIn: '<span style="color:blue;">Login Canvas - Logged in state! </span><br>$photoDiv<br>$username<br>$logoutLink',
+        loginCanvas_loggedIn_guest: '<span style="color:blue;">Login Canvas - Guest user state! </span><br>$photoDiv<br>$username<br>$logoutLink',
+        loginCanvas_loggedOut: '<span style="color:blue;">Login Canvas - Logged Out state!<br></span>$photoDiv<br>$loginDropdown<br>$guestDropdown' 
+    }
+    var params ={
+        categoryID: 'testing rate',
+        streamID: '',
+        containerID: 'commentsDiv',
+        cid:'',
+        // templates: templates,
+        enabledShareProviders: 'facebook,twitter,yahoo,linkedin'
+    }
+    gigya.comments.showCommentsUI(params);
+</script>
+</body>
+</html>

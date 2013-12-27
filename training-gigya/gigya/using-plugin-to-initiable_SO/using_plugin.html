@@ -1,0 +1,101 @@
+<html>
+<head>
+	<SCRIPT type="text/javascript" lang="javascript" 
+	   src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+	   {
+		connectWithoutLoginBehavior: 'alwaysLogin'     // change the connect without login behavior    
+	   }
+	</SCRIPT>
+	<script>
+       
+        // This method is activated when page is loaded
+        function onLoad() {
+            // register for login event
+            gigya.socialize.addEventHandlers({
+					onLogin: onLoginHandler 
+					,onLogout: onLogoutHandler
+					});
+
+        }
+
+        // onLogin Event handler
+        function onLoginHandler(eventObj) {	
+		   // in this example, we postpone the SignOn flow only in-case of the Share Plugin
+		   // in all other cases we do the SignOn flow right away
+		   if (eventObj.context != "SharePlugin")
+		   {
+		       doSignOnFlow(eventObj.user)
+		   }
+		}
+		
+		function doSignOnFlow(userObject) {	
+		    alert("logged in");
+			document.getElementById('status').style.color = "green";
+			document.getElementById('status').innerHTML = "Status: You are now signed in";
+        }
+
+        function showShareUI() {
+			// Constructing a UserAction Object
+			var act = new gigya.socialize.UserAction();
+		    act.setUserMessage("Your comment here...");
+			act.setTitle("This is my title");
+			// ...
+			
+			var shareParams = 
+			{
+			    userAction:act
+			    ,context: "SharePlugin" // string to identify the Share Plugin
+			    ,onSendDone: onSendDoneHandler // register to the onSendDone event of the Share Plugin
+				,cid:''
+			};
+			// Show the Share Plugin
+			gigya.socialize.showShareUI(shareParams);
+		}
+       
+		// onSendDone Event handler  
+		function onSendDoneHandler(eventObj) {
+		    // call getUserInfo
+		    gigya.socialize.getUserInfo({
+		       callback: userInfoCallback,
+		       signIDs: true  // sign the user object in the response
+		    }); 
+		}
+
+		function userInfoCallback(response) {    
+			doSignOnFlow(response.user);  
+		} 
+		        
+        // Logout from Gigya platform. This method is activated when "Logout" button is clicked 
+		function logoutFromGS() {
+            gigya.socialize.logout(); // logout from Gigya platform
+        }
+		
+		// onLogout Event handler
+        function onLogoutHandler(eventObj) {
+		    alert("logged out");
+			document.getElementById('status').style.color = "red";
+			document.getElementById('status').innerHTML = "Status: You are now signed out";
+		}
+		
+    </script>
+    
+
+
+</head>
+<body onload="onLoad()">
+	<h3>Sign in using Plugins Demo</h3>
+    <br />
+	<h4>Please click the button below to open the "Share" dialog:</h4>
+    <input type=button id="btnShare" onclick="javascript:showShareUI()" value="Share" />
+	<br /><br /><br />
+    <br /><br /><br />
+	<h4>Click the button below to sign out from Gigya platform:</h4>
+	<br />
+    <input id="btnLogout" type="button" value="Sign Out" 
+            onclick="logoutFromGS()"/>
+    <br />
+    <br />
+    <div id="status"></div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 12, 2011 at 04:03 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.2.13
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `dailyrecipe`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(150) NOT NULL,
+  `First_Name` varchar(255) DEFAULT NULL,
+  `Last_Name` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Birth` year(4) DEFAULT NULL,
+  `Gender` varchar(150) DEFAULT NULL,
+  `Avatar` varchar(255) DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `Email`, `First_Name`, `Last_Name`, `Password`, `Birth`, `Gender`, `Avatar`, `Status`) VALUES
+(1, 'test@test.com', 'testuser', 'user', 'df399dfd9e689a2d6f4815b07d0450f3db400075d6a9f4e900ef6d9b9760f7840', NULL, NULL, 'http://demo.gigya.com/images/avatar_48x48.gif', 0);

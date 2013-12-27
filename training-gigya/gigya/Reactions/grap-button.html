@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+    <head>
+        <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1255">
+        <script type="text/javascript" src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">></script>
+    </head>
+
+    <body>
+        <div id="reactionsDiv"></div> <!-- Reactions Plugin DIV Container -->
+        <script language="javascript">
+             
+            // Step 1: Define an array of reaction objects
+            var reactionButtons=[
+                {text: 'Love it', ID: 'loveit', iconImgUp:'http://cdn.gigya.com/gs/i/reactions/icons/LoveIt_Icon_Up.png', iconImgOver:'http://cdn.gigya.com/gs/i/reactions/icons/LoveIt_Icon_Down.png', tooltip:'Love this item', feedMessage: 'I love this!', headerText:'You love this post,'},
+                {text: 'Amazing',ID: 'amazing',iconImgUp:'http://cdn.gigya.com/gs/i/reactions/icons/Amazing_Icon_Up.png',iconImgOver:'http://cdn.gigya.com/gs/i/reactions/icons/Amazing_Icon_Down.png',tooltip:'This item is amazing',feedMessage: 'This is amazing!',headerText:'You think this post is amazing,' }
+            ];
+
+            // Step 2: Define UserAction object and fill it with data
+            var defaultUserAction = new gigya.socialize.UserAction();
+            defaultUserAction.setTitle("This is the post title");
+            defaultUserAction.setLinkBack("http://www.gigya.com");
+            
+            // Step 3: Define the Reactions Plugin's params object      
+            var reactionParams ={ 
+                 barID: 'today-story', //  Identifier of the content to which this reaction refers          
+                 containerID: 'reactionsDiv',  // Reactions Plugin DIV Container   
+                 reactions: reactionButtons,  // The reaction array from Step 1  
+                 userAction: defaultUserAction,  // The UserAction object from Step 2  
+                 bodyText: 'Share it with your friends:', // optional - text that appears in the Share popup  
+                 showCounts: 'top', // optional - displays the counters on top of the buttons
+                 cid:''
+            };
+            
+            // Step 4: Load the Reactions Plugin: 
+            gigya.socialize.showReactionsBarUI(reactionParams);
+        </script>
+    </body>
+
+</html>

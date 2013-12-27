@@ -1,0 +1,1094 @@
+/* @font-face */
+@font-face {
+    font-family: 'robotoregular';
+    src: url('fonts/Roboto-Regular-webfont.eot');
+    src: url('fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/Roboto-Regular-webfont.woff') format('woff'), url('fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('fonts/Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotomedium';
+    src: url('fonts/Roboto-Medium-webfont.eot');
+    src: url('fonts/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Roboto-Medium-webfont.woff') format('woff'),
+    url('fonts/Roboto-Medium-webfont.ttf') format('truetype'),
+    url('fonts/Roboto-Medium-webfont.svg#robotomedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotolight';
+    src: url('fonts/Roboto-Light-webfont.eot');
+    src: url('fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Roboto-Light-webfont.woff') format('woff'),
+    url('fonts/Roboto-Light-webfont.ttf') format('truetype'),
+    url('fonts/Roboto-Light-webfont.svg#robotolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.ui-helper-clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.ui-helper-clearfix {
+    display: inline-block;
+}
+
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix {
+    height: 1%;
+}
+
+.ui-helper-clearfix {
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 20px 0 0 0;
+    padding: 0;
+    font: 13px 'robotoregular', Arial, Helvetica, sans-serif;
+    color: #7d7d7d;
+
+
+}
+
+p {
+    margin: 20px 0 20px 0;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+.recipe ul {
+    margin: 30px;
+}
+
+a {
+    color: #b1dc3b;
+/*    color: #2181ca;*/
+}
+
+h1 {
+    font-size: 22px;
+    color: #8a8a8a;
+    line-height: 18px;
+    margin: 5px 0;
+}
+
+h2.comments {
+    color: #666666;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 7px 0 7px 0;
+    border-bottom: 2px solid #efe9da;
+    margin: 10px 0 10px 0;
+}
+
+div.gig-commentList-header-text {
+    color: #6b6c6c;
+}
+
+.caption {
+    font-size: 14px;
+    color: #8a8a8a;
+    line-height: 18px;
+    position: relative;
+}
+
+.caption .head {
+    position: absolute;
+    top: 11%;
+}
+
+
+.wrap {
+    width: 960px;
+    min-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.header {
+    float: left;
+    position: relative;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+.logo {
+    margin: 10px 0 12px 8px;
+    text-decoration: none;
+    text-indent: -999em;
+    float: left;
+    background: transparent url("../images/logo.png") no-repeat 0 0;
+    height: 56px;
+    width: 138px;
+    background-size: 100% auto;
+}
+.logo .link {
+    color: transparent;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.menu {
+    float: left;
+}
+
+.menu-item {
+    display: inline-block;
+    margin: 32px 30px 32px 0;
+    float: left;
+}
+ .menu-item-first {
+     margin-left: 32px;
+ }
+
+.menu-item-last {
+    margin-right: 0;
+}
+
+.menu-item a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #6b6b6c;
+}
+
+.menu-item-last a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #6b6b6c;
+}
+
+.menu-item a.selected {
+    color: #9ecc02;
+    font-weight: bold;
+}
+
+.menu-item-last a.selected {
+    color: #a4d325;
+    font-weight: bold;
+}
+
+.menu-item a:hover {
+    color: #a4d325;
+}
+
+.menu-item-last a:hover {
+    color: #a4d325;
+}
+
+.body {
+    float: left;
+    margin-top: 20px;
+}
+
+.body-wrap {
+}
+
+/* home page */
+.recipe-list {
+    float: left;
+}
+
+.recipe-list ul {
+    list-style: none;
+}
+
+.recipe-list ul li {
+    float: left;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.page-summery {
+    float: left;
+}
+
+.summery-title {
+    font-size: 18px;
+    color: #434a54;
+    display: inline-block;
+    margin-bottom: 17px;
+    font-family: robotomedium, Ariel, Helvtica, "sans serif";
+}
+
+.recipe-list .Arrow-Left {
+    margin-left: 0;
+}
+
+
+.recipe-list .summery {
+    margin-left: 20px;
+    margin-top: 28px;
+    margin-right: 18px;
+    width: 44%;
+    float: left;
+    max-height: 200px;
+}
+
+.recipe-list .summery-desc {
+}
+
+.recipe-list .image {
+    max-width: 100%;
+    height: auto;
+    float: left;
+}
+.recipe-list .even .image {
+    float: right;
+}
+
+.recipe-list .recipe-link {
+    margin-top: 20px;
+    color: #b1dc3b;
+    display: inline-block;
+}
+
+.recipe-list .cooking-time {
+    position: absolute;
+    right: 35px;
+    color: #aab2bd;
+}
+.recipe-list .even .cooking-time {
+    left: 40%;
+}
+
+.recipe {
+    background-color: #F5F5F5;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.recipecontent, .sidebar {
+    float: left;
+}
+
+.recipecontent {
+    width: 66.7%;
+    margin-right: 1.3%;
+}
+
+.recipe-caption {
+    background-color: #ffffff;
+}
+
+.recipe-title {
+    margin-bottom: 15px;
+}
+
+.recipe-title h1 {
+    font-size: 22px;
+    color: #434a54;
+    display: inline-block;
+    font-family: robotomedium, Arial, Helvetica, "sans serif";
+    margin-left: 30px;
+}
+
+.recipe-date {
+    font-size: 14px;
+    color: #8a8a8a;
+    display: inline-block;
+    margin-left: 10px;
+}
+.recipe-image {
+    position: relative;
+    float: left;
+}
+
+.author-details {
+    position: absolute;
+    bottom: 15px;
+    left: 25px;
+    width: 40%;
+}
+
+.recipe-by {
+    position: absolute;
+    bottom: 10px;
+    margin-left: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    display: inline-block;
+}
+
+body.recipe3 .recipe-by {
+    color: #434a54;
+}
+
+.cooking-time {
+    position: absolute;
+    bottom: 15px;
+    right: 60px;
+    text-indent: 30px;
+    color: #FFFFFF;
+    background: transparent url("Clock_icon.png") no-repeat;
+    height: 28px;
+    line-height: 25px;
+}
+.comments,
+.share-wrap {
+    margin: 5px 30px;
+    display: inline-block;
+}
+.recipe-text {
+    margin: 30px 20px 32px 25px;
+    float: left;
+}
+
+.recipe-text p {
+    margin: 0;
+}
+
+.Arrow-Left {
+    display: inline-block;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+
+.makes {
+   font-size: 13px;
+   color: #7d7d7d;
+}
+.recipecontentAbout {
+    width: 960px;
+    margin-right: 20px;
+}
+
+.sidebar {
+    width: 31.3%;
+}
+
+.gigya-plugin {
+    border-radius: 5px;
+    background-color: #d1d7df;
+    height: 100%;
+    margin-bottom: 18px;
+}
+
+.gigya-plugin-head {
+    font-size: 18px;
+    color: #FFFFFF;
+    height: 39px;
+    position: relative;
+    font-family: robotomedium, Ariel, Helvtica, "sans serif";
+}
+
+.gigya-plugin-head .head-text {
+    position: absolute;
+    top: 25%;
+    margin-left: 10px;
+}
+.gig-tab-active {
+    background-color: #FFFFFF;
+}
+
+/* ratings and reviews */
+#reviews {
+    width: auto !important;
+}
+body.about .rating-reviews {
+    float: none;
+}
+.rating-reviews {
+    float: left;
+    background-color: #F5F5F5;
+}
+.recipecontent .rating-reviews {
+    width: 100%;
+}
+
+.rating-reviews .inner {
+    margin: 0 10px 10px 10px;
+}
+
+.rating-reviews h2 {
+    font-family: robotomedium, Arial, Helvetica "sans serif";
+    font-size: 18px;
+    color: #434a54;
+    margin: 8px 0 8px 16px;
+}
+
+.rating-reviews .gig-comments-reviews,
+.rating-reviews .ratings {
+    background-color: #FFFFFF;
+    padding: 0 20px;
+}
+
+.rating-reviews .gig-comments-header {
+    border-bottom: none;
+}
+
+/* follow bar */
+.sidebar .follow-bar {
+    margin: 0;
+}
+
+.sidebar .gig-followbar a.gig-followbar-providerButton {
+    margin: 0 18px 0 0;
+}
+/* Game Mechanics */
+div.gig-userStatus-settingsDialog-setting input {
+    float: none;
+}
+.gm-plugins {
+}
+
+.gm-plugin {
+    margin: 4px;
+    background-color: #ffffff;
+    border-radius: 5px 5px 0 0;
+}
+
+.gig-leaderboard div.gig-leaderboard-topUser-top3Icon {
+    background: url('./sprites.png') no-repeat;
+    background-position: -250px -107px ;
+    width: 14px;
+    height: 22px;
+}
+.ad {
+    margin: 15px 0;
+}
+
+.box table {
+    width: 100%;
+}
+
+.box table td {
+    margin: 0;
+    padding: 0;
+    /*white-space: nowrap;*/
+}
+
+.box table tr:nth-child(1) td {
+    border-radius: 5px 5px 0 0;
+    height: 27px;
+}
+.box-m {
+    height: 32px;
+    background: url(../images/box_topmid.gif) repeat-x top left;
+    width: 100%;
+    color: #000000;
+    font-size: 16px;
+}
+
+.box-l {
+    width: 10px;
+    height: 32px;
+    background: url(../images/box_topleft.gif) no-repeat top left;
+}
+
+.box-r {
+    width: 10px;
+    height: 32px;
+    background: url(../images/box_topright.gif) no-repeat top left;
+}
+
+.box-content {
+    margin: 0 4px 4px 4px;
+}
+
+#ActivityFeed table tr:nth-child(2) {
+    background-color: #ffffff;
+
+}
+
+
+.box-content p {
+    margin-top: 0;
+}
+
+.photoby {
+    bottom: 25px;
+    position: absolute;
+    left: 25px;
+}
+
+.photoby span {
+    color: #666666;
+}
+
+#ActivityFeed table {
+    border: none !important;
+}
+
+.sub-box-wrap {
+    float: left;
+    width: 225px;
+    position: relative;
+}
+
+.sub-box {
+    padding-top: 8px;
+    padding-right: 15px;
+}
+
+.sub-box .box-content {
+    padding: 10px;
+}
+
+.sub-box-wrap-last .sub-box {
+    padding-right: 0;
+}
+
+.sub-box-wrap-last {
+    width: 210px !important;
+}
+
+.message {
+    padding: 5px;
+}
+
+.form-wrap {
+    margin: 15px 0 30px 0;
+}
+
+.form-wrap td {
+    padding: 5px 0;
+}
+
+.share-wrap {
+}
+
+.shareText {
+    color: #434a54;
+}
+
+.reaction-wrap {
+    height: 30px;
+    margin-left: 30px;
+}
+
+.reaction-wrap td div,
+.reaction-wrap td {
+    background-image: none !important;
+}
+
+.share-wrap div {
+    overflow: hidden;
+}
+
+.comments {
+    background-color: #FFFFFF;
+    overflow: hidden;
+    width: 85%;
+    padding: 25px 20px;
+    border-radius: 5px;
+}
+/* footer ----------------------*/
+
+div.grayWhiteSep {
+    background-color: White;
+    height: 1px;
+    line-height: 1px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+div.endFoooter {
+    color: #8A8A8A;
+    font-size: 14px;
+    display: block;
+    margin: 10px auto 5px auto;
+    width: 960px;
+    border-top: 1px solid #DFDFDF;
+    overflow: hidden;
+    padding-top: 10px;
+
+}
+
+div.bottomLinks {
+
+    float: right;
+
+    margin-top: 0;
+    /*
+        margin: 0;
+
+        padding: 0;*/
+}
+
+/* about ----------------------*/
+div.about {
+    padding-right: 40px;
+    width: 900px;
+    line-height: 1.8;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+div.about ul {
+    margin: 30px;
+}
+
+div.about td {
+    width: 153px;
+}
+
+/* rotator in-page placement */
+div#rotator {
+    position: relative;
+    height: 355px;
+}
+
+/* rotator css */
+div#rotator ul li {
+    position: absolute;
+    list-style: none;
+}
+
+/* login bar --------------*/
+.loginBar {
+    width: auto;
+    float: right;
+    margin-right: 10px;
+}
+
+.loginBar-item {
+    display: block;
+    float: left;
+}
+
+.login-text {
+    font-family: robotolight, Ariel, Helvtica, "sans serif";
+    margin-top: 15%;
+}
+
+.user-name {
+    font-family: robotomedium, Ariel, Helvtica, "sans serif";
+}
+.logout {
+    font-family: robotolight, Ariel, Helvtica, "sans serif";
+}
+
+.logged-out {
+    float: left;
+    margin-left: 45px;
+    margin-top: 25px;
+}
+
+.logged-out .loginBar-item a,
+.logged-out .loginBar-item {
+    font-size: 12px;
+    color: #666666;
+}
+
+.logged-out .hello {
+    clear: both;
+    float: left;
+}
+
+.logged-out .actions {
+    float: left;
+    clear: both;
+}
+ .logged-out .login {
+     clear: left;
+     margin-right: 20px;
+ }
+
+.loginBar-image {
+    margin-top: 7%;
+    margin-left: 10px;
+    margin-right: 5px;
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.userimage {
+    border-radius: 35px;
+    border: 3px solid #868686;
+}
+/* "Cooked it" button --------------*/
+.cooked {
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    color: transparent;
+    right: 18px;
+    top: 20px;
+}
+
+.cooked-wrap {
+    position: relative;
+}
+
+.fb-popup:before {
+    content:".";
+    width: 0;
+    border-width: 0 15px 15px;
+    border-style:solid;
+    border-color:#FFFFFF transparent;
+    position: relative;
+    top: -33px;
+    right: -75%;
+}
+
+.fb-popup {
+    display: none;
+    position: absolute;
+    right: 3%;
+    top: 74px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    z-index: 100;
+    max-width: 100%;
+    min-height: 50px;
+}
+
+.res-text {
+    margin-top: 4%;
+}
+
+.fb-header {
+    height: 71px;
+    margin: 10px;
+}
+.fb-header .photo {
+    display: block;
+    float: left;
+    margin-right: 10px;
+    min-height: 63px;
+    min-width: 83px;
+}
+
+.fb-head-info {
+    float: left;
+}
+
+.fb-head-info .name {
+    color: #333333;
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: bold;
+    font-family: robotoregular;
+}
+
+.fb-head-info .fb-site-name{
+    font-family: robotoregular;
+    font-size: 14px;
+}
+
+.fb-head-info .fb-page-url{
+    color: #7d7d7d;
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: bold;
+    font-family: robotoregular;
+
+}
+
+.fb-info {
+    clear: both;
+    margin: 0 10px 10px 10px;
+}
+
+.fb-info textarea {
+    width: 338px;
+    border: 1px solid #7D7D7D;
+    resize: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-indent: 5px;
+}
+
+.fb-info textarea[placeholder] {
+    padding-top: 5px;
+    font-style: italic;
+}
+.ui-dialog-titlebar {
+    display: none;
+}
+.close {
+    background: url('../user_dialogs/images/fbdemo/Close.png') no-repeat 100%;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 13px;
+    top: 15px;
+}
+.close .cls {
+    display: block;
+    text-indent: -99999px;
+}
+
+.fb-tags {
+    height: 20px;
+}
+.friends {
+    float: left;
+    width: auto;
+    margin-right: 10px;
+}
+
+.friends-select {
+    margin: 3px;
+    float: left;
+}
+
+.friends-list {
+    float: left;
+    max-width: 200px;
+}
+
+.friends-list .fname {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #7d7d7d;
+    font-family: robotoregular;
+    font-style: italic;
+}
+
+.friends-list .and {
+    font: normal 12px/20px Arial;
+    color: #767575;
+}
+
+.friends-list .friends-num {
+    font: normal 12px/20px Arial;
+    color: #718fcd;
+}
+
+.locations {
+    float: right;
+}
+
+.loc {
+    margin: 4px 5px 3px 3px;
+    float: left;
+}
+.location-select {
+    display: inline-block;
+    float: left;
+    width: 70px;
+    margin-right: 5px;
+    background: url("/user_dialogs/images/fbdemo/Location-Arrow.png") no-repeat right #FFFFFF;
+
+}
+
+.location-select select {
+    width: 69px;
+    height: 19px;
+    padding: 0;
+    font: bold 12px/20px Arial;
+    color: #000000;
+    background: transparent;
+    -webkit-appearance: none;
+    border: none;
+}
+
+.post-to-fb{
+    float: left;
+    clear: both;
+    width: 100%;
+
+}
+.post-to-fb .post {
+    float: right;
+    margin: 18px 10px 10px 0;
+}
+
+.post-to-fb .post a {
+    display: block;
+    text-indent: -9999px;
+    height: 100%;
+}
+
+.post-to-fb .post span {
+    margin-right: 5px;
+    float: left;
+}
+.post-to-fb .post img {
+    padding-top: 2px;
+}
+.mobile-menu {
+    display: none;
+}
+.sprite-fbAction-button_post_fb,
+.sprite-fbAction-button_prepared{
+    background: transparent url('../images/fbAction.png') no-repeat;
+}
+.sprite-fbAction-button_post_fb:hover{background-position:0px 0px;width:158px;height:36px;}
+.sprite-fbAction-button_post_fb{background-position:0px -36px;width:158px;height:36px;}
+.sprite-fbAction-button_prepared:hover{background-position:0px -72px;width:131px;height:36px;}
+.sprite-fbAction-button_prepared{background-position:0px -108px;width:131px;height:36px;}
+
+/* Mobile */
+@media (max-device-width: 480px) {
+    .recipe-list .image,
+    .recipe-list .even .image,
+    .recipe-list .summery {
+        float: none;
+    }
+
+    .head-text,
+    .recipe-list .cooking-time,
+    .sidebar {
+        display: none;
+    }
+    .header {
+        width: 98%;
+    }
+    .body-wrap,
+    .head h1 {
+        margin: 0 5px;
+    }
+    .about,
+    .recipecontentAbout,
+    div.endFoooter,
+    .wrap,
+    .recipecontent,
+    .body {
+        width: 100%;
+    }
+    .mobile-menu {
+        display: block;
+        background: transparent url("/images/menu_button.png") no-repeat 0 0;
+        width: 64px;
+        height: 82px;
+        max-width: 100%;
+        background-size: 100% auto;
+        float: left;
+        margin-left: 5px;
+    }
+    .logo {
+        height: 62px;
+        width: 90px;
+        margin: 18px 0 0 18px;
+    }
+    .menu {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 100;
+        background-color: #456573;
+        border-radius: 0 0 5px 5px;
+        display: none;
+    }
+    .menu-item {
+        float: none;
+        display: block;
+        margin: 0 0 0 30px;
+    }
+    .menu-item-last {
+        margin-bottom: 40px;
+    }
+    .menu-item a {
+        font-family: robotomedium, arial, "sans serif";
+        font-size: 24px;
+        color: #FFFFFF;
+        line-height: 55px;
+        text-transform: capitalize;
+    }
+    .menu-item a:hover {
+        color: #b5db36;
+    }
+    .user-name {
+        font-size: 90%;
+    }
+    .logged-out {
+        margin-left: 0;
+        margin-top: 18px;
+    }
+    .login-text {
+        margin-top: 20%;
+    }
+    .userimage {
+        width: 40px;
+    }
+    .loginBar {
+        margin-right: 0;
+    }
+    .loginBar-image {
+        margin-top: 15%;
+    }
+    .Arrow-Left {
+        display: none;
+    }
+    .recipe-list ul li {
+        margin-bottom: 0;
+    }
+    .recipe-list .summery {
+        width: auto;
+    }
+    .gig-comments-container {
+        max-width: 100%;
+        width: auto !important;
+    }
+    a.site,
+    div.bottomLinks {
+        float: none;
+        margin-left: 20px;
+    }
+    .about table img {
+        display: none;
+    }
+    .gig-bar-container {
+        max-width: 100%;
+    }
+    .recipe-title h1 {
+        margin-left: 5px;
+    }
+    .recipe-list .summery {
+        margin-top: 0;
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+
+    .summery-title {
+        margin-bottom: 0;
+    }
+    .reaction-wrap {
+        margin-left: 0;
+        margin-bottom: 7px;
+        height: auto;
+    }
+    #reactionsDiv .span.gig-counter-text-right {
+        line-height: 0;
+    }
+    #reactionsDiv .gig-reaction-counter {
+        height: auto !important;
+        width: auto !important;
+    }
+    #reactionsDiv td {
+        display: inline-block;
+    }
+    .author-details {
+        width: 100%;
+    }
+    div.about td {
+        width: auto;
+    }
+
+}
+@media (max-device-width: 320px) {
+    .comments {
+        width: auto;
+    }
+}

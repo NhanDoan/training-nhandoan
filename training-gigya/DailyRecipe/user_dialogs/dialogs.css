@@ -1,0 +1,356 @@
+	
+.contentRegister {
+	font: 12px Arial;
+	background-color: #ffffff;
+	width: 710px;
+	height:590px;
+	display:none;
+	z-index:1;
+	position:absolute;
+	top: 70px;
+	margin-left: 101px;
+	border: 5px solid #e0e0e0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 10px;
+	padding:0 47px 0;
+	text-align: left;
+}
+
+.contentRegister p {
+	font: 12px Arial;
+	margin: 0;	
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	line-height: 1.9em;
+	padding-bottom:15px;
+	line-height:1.5em;
+	padding-bottom:12px;
+	width:285px;
+}
+
+.dialogClose {
+	line-height: 33px;
+	height: 33px;
+	width: 20px;
+	position: absolute;
+	right: 15px;
+	top:10px;
+	background-image: url('http://cdn.gigya.com/gs/i/accounts/close_dialog.png');
+	cursor: pointer;
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+
+#inheader {
+	height:50px;
+}
+
+#side-a {
+	float: left;
+	width: 342px;
+}
+
+#side-b {
+	float: left;
+	width: 280px;
+	margin-left:40px;
+}
+
+#orseperator {
+	float: left;
+	width: 31px;
+	margin-top:35px;
+}
+
+#footer{
+	clear: both;
+	position: absolute;
+	right: 15px;
+	width: 100%;
+	bottom: 15px;
+}
+
+#loginTitle{
+	font-size:16px;
+	font-weight: bold;
+	color: #333333;
+	margin-bottom:20px;
+}
+
+label{
+	font-size:12px;
+	font-weight: bold;
+	color: #333333;	
+}
+
+input{
+	height:25px;
+    width: 281px;
+	padding: 0 0 0 4px;
+	font: 12px Arial;
+}
+
+#firstnameReg, #lastnameReg{
+	height:25px;
+	width:116px;
+	padding: 0 0 0 4px;
+	font: 12px Arial;
+	margin-bottom: 12px;
+}
+
+
+
+.formContainer{
+	padding:40px 0;
+}
+
+div.cssSpriteSubmit {
+	background-image: url(images/submit_button.jpg);
+	width: 64px;
+	height: 28px;
+	background-repeat: no-repeat;
+	float: right;
+    padding-right: 57px;
+}
+
+div.cssSpriteSubmit:hover {
+	background: url(images/submit_button.jpg) 0 -28px;
+	background-repeat: no-repeat;
+	float: right;
+    padding-right: 57px;
+    cursor:pointer;
+}
+
+div.cssSpriteRegister {
+	background-image: url(images/register_button.jpg);
+	width: 74px;
+	height: 28px;
+	background-repeat: no-repeat;
+	float: right;
+}
+
+div.cssSpriteRegister:hover {
+	background: url(images/register_button.jpg) 0 -28px;
+	background-repeat: no-repeat;
+	float: right;
+    cursor:pointer;
+}
+
+div.cssSpriteLogin {
+	background-image: url(images/login_button.jpg);
+	width: 64px;
+	height: 28px;
+	background-repeat: no-repeat;
+	float: right;
+}
+
+div.cssSpriteLogin:hover {
+	background: url(images/login_button.jpg) 0 -28px;
+	background-repeat: no-repeat;
+	float: right;
+    cursor:pointer;
+}
+
+div.cssSpriteLink{
+	background-image: url(images/link_accounts_button.jpg);
+	width: 111px;
+	height: 28px;
+	background-repeat: no-repeat;
+	float: right;
+	bottom:0;
+	margin-top: 15px;
+	padding-right: 75px;
+}
+
+div.cssSpriteLink:hover {
+	background: url(images/link_accounts_button.jpg) 0 -28px;
+	background-repeat: no-repeat;
+	float: right;
+    cursor:pointer;
+}
+
+.linkback{
+	font-size:12px;
+	color: #333333;
+	float: right;
+	bottom:0;
+}
+
+.error {
+	background-color: #FEE9EA;
+    border: 1px solid #E49D9F;
+    color: #D67172;
+    display: block;
+    float: left;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 4px 10px 2px;
+    margin-top:7px;
+    display:none;
+}
+
+#loginPluginDiv{
+	margin-top: 50px;
+}
+#loginPluginRegisterDiv{
+	margin-top: 50px;
+}
+
+#userMainDetails{
+	padding-left:7px;
+	/*padding-top:10px;*/
+	/*float: left;*/
+	overflow:hidden;
+	vertical-align:top;
+}
+
+#userName{
+	font-size:20px;
+	font-weight: bold;
+	color: #333333;
+	
+}
+
+.userImage{
+	float: left;
+}
+
+#inheaderlinkAccount{
+	padding-top:50px;
+	height:70px;
+}
+
+.linkNewText{
+	padding-top:10px;
+	font-size:12px;
+	color: #666666;
+}
+
+input[type=checkbox] ,input[type=radio] {
+	width:15px;
+	vertical-align:bottom;
+}
+
+select {
+	width:285px;
+	height:25px;
+	padding: 4px;
+	font: 12px Arial;
+	
+}
+
+.checkbox{
+	width:255px;
+	float:left;
+}
+
+.redmand{
+	color:red;
+}
+
+.hint {
+    display: none;
+  	margin-top: -4px;
+	border: 1px solid #ccc;
+    padding: 10px 12px;
+  	width: 290px;
+    background: white url(images/pointer.png) no-repeat -10px 5px;
+    font-size:12px;
+}
+
+.hint .hint-pointer {
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 10px;
+    height: 19px;
+    background: url(images/pointer.png) left top no-repeat;
+}
+
+.hint-strength{
+	text-align:center;
+	color:red;
+	margin: auto;
+	font-size:12px;
+	text-align: -webkit-match-parent;
+    font-weight: bold;
+}
+
+.passwordInidcator{
+	background-color:red;
+	height:2px;
+	top:5px;
+	width:250px;
+}
+@media (max-device-width: 480px) {
+    .contentRegister {
+        max-width: 100%;
+        margin-left: 0;
+        padding: 0;
+        top: 0;
+        width: auto;
+        height: auto;
+    }
+    #orseperator,
+    #side-a,
+    #side-b {
+        float: none;
+        max-width: 100%;
+        width: auto;
+        margin: 0;
+    }
+    #loginDialog #side-a:after {
+        content: "Or Login Here";
+        font-size: 16px;
+        margin-left: 5%;
+        color: #000000;
+    }
+    #registerDialog #side-a:after {
+        content: "Or, Create a New Account";
+        font-size: 16px;
+        margin-left: 5%;
+        color: #000000;
+    }
+
+    #side-b {
+        margin-top: 5%;
+    }
+    #side-b #loginTitle,
+    #orseperator {
+        display: none;
+    }
+    #inheader {
+        height: auto;
+    }
+    .formContainer {
+        padding: 0;
+        margin-left: 2%;
+    }
+    .contentRegister p {
+        width: auto;
+    }
+    #footer {
+        width: auto;
+        left: 10px;
+        position: relative;
+        float: left;
+    }
+    #loginPluginDiv {
+        margin-top: 0;
+    }
+    label[for=lastnameReg] {
+        padding-left: 0 !important;
+    }
+    label[for=firstnameReg] {
+        float: left;
+    }
+    #firstnameReg,
+    #lastnameReg {
+        width: 281px;
+        float: none !important;
+    }
+
+
+}

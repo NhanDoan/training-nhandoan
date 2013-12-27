@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title>Gigya Socialize Demo  - sendNotification</title>
+    
+    <style>
+	 body {font-family:Arial;font-size: 12px; background-color:#fff; line-height:20px;margin:1px;}
+	 h5 { font-size: 12px; color: #6e6e6e; padding: 0px; margin: 0px; }
+     h6 { font-size: 14px; color: #6e6e6e; padding: 0px; margin: 0px; font-weight:bold; }
+	</style>
+	<SCRIPT type="text/javascript" lang="javascript" 
+	  src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+	  {
+		enabledProviders: "facebook, twitter, linkedin, messenger, yahoo" // we would like to include only providers that support notifications
+		,cid: "Notification Example page"
+	  }
+	</SCRIPT>
+	
+	<script>
+                
+        function onLoad()
+        {
+            // get user info
+            gigya.socialize.getUserInfo({callback:renderUI});	    
+            
+            // register for connect status changes
+            gigya.socialize.addEventHandlers({ onConnectionAdded: renderUI, onConnectionRemoved: renderUI });
+            
+        }
+    </script>
+    
+
+	<script type="text/javascript">
+
+        var user = null;
+		function renderUI(res)
+		{		    
+            if(res.user!=null && res.user.isConnected)
+            {   
+                user = res.user ;    
+                // Show friend-selector component
+                document.getElementById("friends").style.display = "block";
+		        var params =
+		        {
+		            containerID:"friends",
+		            onSelectionDone:onSelectionDone
+		        }
+			    gigya.socialize.showFriendSelectorUI(params);
+                
+            } else {
+                document.getElementById("friends").style.display = "none";
+            }			
+		}
+
+		// If the user clicked "OK" in the friend-selector component
+		// Send a notification to the selected friends.
+		function onSelectionDone(response)
+		{
+			var subject = "A message from " + user.nickname;
+			var body = "I think 'Home' movie is amazing. Check it out: http://bit.ly/aCVmg";
+			if (response.friends.getSize() > 0)
+			{
+			    var params = 
+			    {
+			        callback:sendNotification_callback,
+			        subject:subject,
+			        body:body,
+			        recipients:response.friends
+			    };
+				gigya.socialize.sendNotification(params)
+		    }
+		}
+
+		// Display a status message according to the response from sendNotification
+		function sendNotification_callback(response)
+		{
+			switch (response.errorCode)
+			{
+				case 0:
+					document.getElementById('status').style.color = "green";
+					document.getElementById('status').innerHTML = "Notification sent.";
+					break;
+				default:
+					document.getElementById('status').style.color = "red";
+					document.getElementById('status').innerHTML = 
+					    "Unable to send notification. status=" 
+						+ response.errorCode + "; " + response.errorMessage;
+			}
+		}
+    </script>
+</head>
+<body onload="onLoad()">
+	<h5>Step 1: Connect</h5>
+	<div id="divConnect"></div>
+    <script type="text/javascript">
+	        // show 'Add Connections' Plugin in "divConnect"
+	        gigya.socialize.showAddConnectionsUI({ 
+				height:65
+				,width:175
+				,showTermsLink:false // remove 'Terms' link
+				,hideGigyaLink:true // remove 'Gigya' link
+				//requiredCapabilities: "notifications", // we would like to include only providers that support notifications
+				,containerID: "divConnect" // The component will embed itself inside the divConnect Div 
+			});
+    </script>
+
+    <br />
+    <h5>Step 2: Select your Friends</h5>
+    Select the friends to whom you would like to send a notification, and click "ok"<br />
+    <div id="friends" style="display:none"></div>
+    <div id="status"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Gigya User Management Test</title>
+ 	<SCRIPT type="text/javascript" lang="javascript" 
+	   src="http://cdn.gigya.com/JS/socialize.js?apikey=3_KXuUHI4qFVcD1RoiQZwoFHrNyoDogHoWusVDpuP95RudWiELEmNq0Yi7CI0U3AY_"></SCRIPT>
+</head>
+<body>
+    <span style="font-size: 16px;font-weight: bold;letter-spacing: 1px;float: left;font-family: Arial;">
+
+		<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Login-web', mobileScreenSet:'Login-mobile'});">Login</a>&nbsp;&nbsp;|&nbsp;&nbsp; 
+		<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Login-web', mobileScreenSet:'Login-mobile', startScreen:'gigya-register-screen'});">Register</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		</br></br></br>
+		<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Profile-web', mobileScreenSet:'Profile-mobile'});">Edit Your Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		</br></br></br>
+		<a href="#" onclick="gigya.accounts.logout({callback:onLogout});">Logout</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+	</span>
+
+<script>
+	function onLogout(response) {   
+		if ( response.errorCode == 0 ) {                
+			alert('You are now logged out'); 
+		} 
+		else { 
+			alert('Error :' + response.errorMessage); 
+		} 
+	}
+</script>
+</body></html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+    <script type="text/javascript" lang="javascript" 
+       src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+    </script>  
+    <script type="text/javascript">
+        // var param = 
+        // {
+        //     showTermsLink: false, // 'terms' link is hidden
+        //     headerText: "Please login using one of the following providers",
+        //     height: 175,
+        //     width: 400,
+        //     cid: '',
+        //     containerID: "loginDiv",
+        //     UIConfig: '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="40"></snbuttons></controls><background background-color="#51286D"></background></body></config>',
+        //     buttonsStyle: 'fullLogo',
+        //     redirectURL: 'http://google.com.vn'
+        // }
+    </script> 
+</head>
+<body >
+<br />
+    <!-- <p>Please sign in using one of the following providers:</p> -->
+    <!-- <div id="loginDiv"></div> -->
+    <script type="text/javascript">
+        // gigya.socialize.showLoginUI(param);
+    </script>
+
+    <div id= "divButtons" ></div> <!-- Share Bar Plugin DIV Container -->
+    <script language="javascript">
+        
+        // Step 1: Construct a UserAction object and fill it with data
+        var ua = new gigya.socialize.UserAction(); 
+        ua.setLinkBack("http://www.youtube.com/watch?v=H7jtC8vjXw8"); 
+        ua.setTitle("This is my example share bar!");
+        ua.setDescription("This is the text content for my post");
+        ua.addMediaItem( { type: 'image', src: 'http://www.infozoom.ru/wp-content/uploads/2009/08/d06_19748631.jpg', href: 'http://www.gigya.com' });
+
+        // Step 2: Define the Share Bar plugin's params object      
+        var params ={ 
+            userAction:ua,
+            shareButtons:[
+                // { // General Share Button
+                //     provider:'share',
+                //     // tooltip:'General Share Button',
+                //     // userMessage:'default user message'
+                // },
+                // { // Google +1 button
+                //     provider:'google-plusone',
+                //     // tooltip:'Recommend this on Google',
+                //     // userMessage:'default user message'
+                // },
+                // { // Facebook Like button
+                //     provider:'facebook-like',
+                //     // tooltip:'Recommend this on Facebook',
+                //     // action:'recommend',
+                //     // font:'arial'
+                // },
+                { // Twitter Tweet button
+                    provider:'twitter-tweet',
+                    related: 'betabeat,youtube',
+                    via:'etayg'
+                    // tooltip:'Share on Twitter',
+                    // defaultText:'Twitter message'
+                }
+                // { // Email button
+                //     provider:'email',
+                //     // tooltip:'Email this',
+                //     // iconImgUp:'http://mySite.com/images/myEmailIcon.gif',
+                //     // iconImgOver:'http://mySite.com/images/myEmailIconOver.gif'
+                // }
+            ], // list of providers
+            containerID: 'divButtons',
+            cid:'',
+            // buttonTemplate: '<button style= "background-color: reb;"></button>'
+            // operationMode:'multiSelect'
+        };
+        
+        // Step 3: Load the Share Bar plugin: 
+        gigya.socialize.showShareBarUI(params);
+    </script>
+</body>
+</html>
+ 

@@ -1,0 +1,30 @@
+<html>
+<head>
+    <script type="text/javascript" lang="javascript" 
+       src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+    </script>  
+    <script type="text/javascript">
+        var param = 
+        {
+            showTermsLink: false, // 'terms' link is hidden
+            headerText: "Please login using one of the following providers",
+            height: 175,
+            width: 400,
+            cid: '',
+            containerID: "loginDiv",
+            UIConfig: '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="40"></snbuttons></controls><background background-color="#51286D"></background></body></config>',
+            buttonsStyle: 'fullLogo',
+            redirectURL: 'http://google.com.vn'
+        }
+    </script> 
+</head>
+<body >
+<br />
+    <p>Please sign in using one of the following providers:</p>
+    <div id="loginDiv"></div>
+    <script type="text/javascript">
+        gigya.socialize.showLoginUI(param);
+    </script>
+</body>
+</html>
+ 

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1255">
+<script src='http://cdn.gigya.com/JS/socialize.js?apiKey=3_9GKemTYWudrzA6KbCkGSROgpGvAhoMQWrKRLf98crGCVx8QXVvK39VxBx6GjionC' type='text/javascript'></script>
+</head>
+<body>
+<h2>Rating & Reviews Demo</h3>
+<h3>The Rating Plugin:</h3>
+<div id="ratingDiv" ></div>
+<br/><br/><br/>
+<h3>The Review (Comments) Plugin:</h3>
+<div id="commentsDiv" ></div>
+<script type="text/javascript">
+	// Present the Rating plugin
+	var ratingsParams =
+    {
+		categoryID: 'Rating and reviewing', // Comments category ID (from Comments Setup page)
+		streamID: 'ReviewsTest',
+        containerID: 'ratingDiv', // <div> ID  in which to present the plugin
+		linkedCommentsUI: 'commentsDiv' // link the Ratings plugin to the Comments plugin. 
+									//The '# reviews' link becomes an anchor to the Comments plugin on the page. 
+    }	
+	gigya.comments.showRatingUI(ratingsParams);	
+	
+	// Present the Comments plugin	
+	var commentsParams =
+    {
+		categoryID: 'Rating and reviewing',  // Comments category ID (from Comments Setup page)
+		streamID: 'ReviewsTest',
+        containerID: 'commentsDiv'	
+    }
+    gigya.comments.showCommentsUI(commentsParams);
+	
+</script>
+</body>
+</html>
