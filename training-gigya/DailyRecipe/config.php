@@ -63,7 +63,7 @@ $gigyaSecret = "W2NGv9a2eGhwUUwhJLMuiSYWqPptqiN6pfA50zFJgG8=";  // Enter here yo
 
 $sealKey = "";	// Enter here your seal key (optional)
 
-$commentsCategoryID = "";  // Enter here your Comments plugin Category ID (optional)
-$ratingsCategoryID = ""; // Enter here your Reviews plugin Category ID (optional)
+$commentsCategoryID = "Comment-daily-demo";  // Enter here your Comments plugin Category ID (optional)
+$ratingsCategoryID = "rating-daily"; // Enter here your Reviews plugin Category ID (optional)
 	
 ?>

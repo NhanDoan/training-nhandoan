@@ -11,17 +11,20 @@
 <h3>Comments Plugin Demo</h3>
 <div id="commentsDiv"></div>
 <script type="text/javascript">
+    var act = new gigya.socialize.UserAction();
+    act.setTitle("This is my example share link with media Item");
+    act.setSubtitle("Share video");
+    act.setDescription("Gigya's service includes a wide range of tools to enable your users to share content and site activities to social networks");
 
-	// Optional - define templates to change graphic layout in the Comments Plugin 
-	var templates= {
-    //     comment: 'Hello!<br>username: $username<br>Photo Div: $photoDiv<br>Date String:$dateString<br>Body:$body<br>' +
-				// 'Replies Count: $repliesCountPlaceholder<br>Reply Button:$replyButton',
-    //     commentBox: 'Login Canvas: $loginCanvas<br>Close Icon:$closeIcon<br>Add Comment:$addComment',
-    //     loginCanvas_loggedIn: '$photoDiv<br>$username<br>$logoutLink',
-    //     loginCanvas_loggedIn_guest: 'guest! <br>$photoDiv<br>$username<br>$logoutLink',
-    //     loginCanvas_loggedOut: 'out!<br>$photoDiv<br>$loginDropdown<br>$guestDropdown'
-    }
-	
+    var video = {
+                type: 'flash',
+                src: 'http://www.youtube.com/v/fzzjgBAaWZw&hl=en&fs=1',
+                previewImageURL: 'http://graphics8.nytimes.com/images/2006/01/02/science/03cute.large2.jpg',
+            }
+    act.addMediaItem(video);
+
+    gigya.socialize.showShareUI({  userAction:act });
+
     var params =
     {
 		// Required parameters:
@@ -32,11 +35,11 @@
         version: 2,
         streamID: 'foo6',
         deviceType: 'auto',
-        // templates: templates,
         enabledShareProviders: 'facebook'
     }
 	// Load the Comments Plugin
     gigya.comments.showCommentsUI(params);
+
 </script>
 </body>
 </html>

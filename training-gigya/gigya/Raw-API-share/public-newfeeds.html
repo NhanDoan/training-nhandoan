@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Gigya Socialize Demo  - Publish User Action</title>
+	<style>
+	 	body {font-family:Arial;font-size: 12px; background-color:#fff; line-height:20px}
+	</style>
+	<script type="text/javascript" lang="javascript" 
+	  src="http://cdn.gigya.com/JS/socialize.js?apikey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N"></script>
+	<script>
+        function onLoad()
+        {
+            // get user info
+            gigya.socialize.getUserInfo({callback:renderUI});	    
+            
+            // register for connect status changes
+            gigya.socialize.addEventHandlers({ onConnectionAdded: renderUI, onConnectionRemoved: renderUI }); 
+            
+        }
+    </script>
+    
+
+	<script type="text/javascript">
+
+		function renderUI(res)
+		{
+		    document.getElementById('btnPublishAction').disabled = 
+					(res.user == null || !res.user.isConnected);		    
+		}
+
+		// Create and Publish User's Action
+		// This method is associated with the "btnPublishAction" click
+		function publishAction() {
+
+		    // Constructing a UserAction Object
+		    var act = new gigya.socialize.UserAction();
+		    
+		    // Adding Action Link
+		    act.addActionLink("Watch the movie", 
+					"http://www.youtube.com/watch?v=jqxENMKaeCU&feature=channel_page");
+		    
+		    // Parameters for the publishUserAction method, 
+			// including the UserAction object
+			var params = 
+			{
+			    userAction:act,
+			    callback:publishAction_callback
+			};
+			
+            // Publish the User Action
+			gigya.socialize.publishUserAction(params);
+
+		}
+
+		// Display a status message according to the response from publishUserAction.
+		function publishAction_callback(response)
+		{
+			switch (response.errorCode )
+			{
+				case 0:
+					document.getElementById('status').style.color = "green";
+					document.getElementById('status').innerHTML = "Newsfeed item sent.";
+					break;
+				default:
+					document.getElementById('status').style.color = "red";
+					document.getElementById('status').innerHTML = 
+							"Unable to send newsfeed item. Error Code:" 
+					        + response.errorCode + "; " + response.errorMessage;
+			}
+		}
+    </script>
+
+</head>
+<body onload="onLoad()">
+	<b>Step 1: Connect</b>
+	<div id="divConnect"></div>
+        <script type="text/javascript">
+	        // show 'Add Connections' Plugin in "divConnect"
+	        gigya.socialize.showAddConnectionsUI({ 
+				height:65
+				,width:175
+				,showTermsLink:false // remove 'Terms' link
+				,hideGigyaLink:true // remove 'Gigya' link
+				,containerID: "divConnect" // The component will embed itself inside the divConnect Div 
+			});
+
+        </script>    
+    <br />
+    <br />
+    <b>Step 2: Post Newsfeed item</b><br />
+    Click the button below to post a Newsfeed item<br />
+    <input type=button id="btnPublishAction" onclick="javascript:publishAction()" value="Post" />
+    <div id="status"></div>
+</body>
+</html>
