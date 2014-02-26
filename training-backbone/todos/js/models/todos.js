@@ -1,8 +1,7 @@
 
-
-$(document).ready(function () {
-
-	var app = Backbone.Model.extend({
+// $(document).ready(function () {
+	var app = app || {};
+	app.Todo = Backbone.Model.extend({
 		
 		// attribute default for each todo has title and completed
 		defaults: {
@@ -14,9 +13,8 @@ $(document).ready(function () {
 			this.save({
 				completed: !this.get('completed')
 			});
-
 		}
 
 	});
 
-});
+// });
