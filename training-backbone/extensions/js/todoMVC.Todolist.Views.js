@@ -46,7 +46,7 @@ TodoMVC.module('TodoList.Views',function (Views, App, Backbone, Marionette, $, _
 		
 			if (event.which === ENTER_KEY && todoText ) {
 				this.model.set('title', todoText).save();
-				this.$el.remoteClass('editing');
+				this.$el.removeClass('editing');
 			}
 		}
 
