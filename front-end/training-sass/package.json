@@ -1,0 +1,26 @@
+{
+  "name": "vagrant-training-sass",
+  "description": "training sass",
+  "version": "0.0.0",
+  "author": "vagrant",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "docpad": "~6.59.6",
+    "docpad-plugin-eco": "~2.0.2",
+    "docpad-plugin-grunt": "~2.0.5",
+    "docpad-plugin-sass": "~2.7.0"
+  },
+  "devDependencies": {
+    "docpad": "~6.56.0",
+    "docpad-plugin-livereload": "~2.5.3",
+    "bower": "~1.2.7",
+    "grunt": "~0.4.2"
+  },
+  "main": "node_modules/docpad/bin/docpad-server",
+  "scripts": {
+    "start": "node ./node_modules/docpad/bin/docpad run",
+    "postinstall": "node_modules/bower/bin/bower install"
+  }
+}
