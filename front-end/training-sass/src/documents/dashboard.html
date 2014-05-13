@@ -3,40 +3,40 @@ layout: "default"
 title: "training sass"
 ---
 
-
-<header class="l-container l-clearfix">
-  <h4>Author(<cite>10</cite>)</h4>
-  <a href="">Add author</a>
-</header>
-
 <!-- Author infomation content -->
-<div class="row">
+<div class="row" id="dashboard">
   <div class="col-md-8 row">
+    <header class="l-container l-clearfix">
+      <h4>Author(10)
+        <a class="pull-right" href="">Add author</a>
+      </h4>
+    </header>
     <div class="col-md-3 l-author-info">
       <img src="images/avatar/avatar-1.png" alt="avatar-1">
       <a href="">James Patterson</a>
       <ul>
-        <li><a href=""><i class="glyphicon glyphicon-thumbs-up"></i>Likes</a><span>2502</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-book"></i>Books</a><span>5</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-eye-open"></i>Reads</a><span>51.390</span></li>
+        <li><i class="glyphicon glyphicon-thumbs-up"></i>Likes<span>2502</span></li>
+        <li><i class="glyphicon glyphicon-book"></i>Books<span>5</span></li>
+        <li><i class="glyphicon glyphicon-eye-open"></i>Reads<span>51.390</span></li>
       </ul>
     </div>
     <div class="col-md-3 l-author-info">
       <img src="images/avatar/avatar-2.png" alt="avatar-2">
       <a href="">Mitch Albom</a>
       <ul>
-        <li><a href=""><i class="glyphicon glyphicon-thumbs-up"></i>Likes</a><span>2502</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-book"></i>Books</a><span>5</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-eye-open"></i>Reads</a><span>51.390</span></li>
+        <li><i class="glyphicon glyphicon-thumbs-up"></i>Likes<span>2502</span></li>
+        <li><i class="glyphicon glyphicon-book"></i>Books<span>5</span></li>
+        <li><i class="glyphicon glyphicon-eye-open"></i>Reads<span>51.390</span></li>
       </ul>
     </div>
     <div class="col-md-3 l-author-info">
       <img src="images/avatar/avatar-3.png" alt="avatar-3">
       <a href="">Nick Spark</a>
       <ul>
-        <li><a href=""><i class="glyphicon glyphicon-thumbs-up"></i>Likes</a><span>2502</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-book"></i></a>Books<span>5</span></li>
-        <li><a href=""><i class="glyphicon glyphicon-eye-open"></i></a>Reads<span>51.390</span></li></ul>
+        <li><i class="glyphicon glyphicon-thumbs-up"></i>Likes<span>2502</span></li>
+        <li><i class="glyphicon glyphicon-book"></i>Books<span>5</span></li>
+        <li><i class="glyphicon glyphicon-eye-open"></i>Reads<span>51.390</span></li>
+      </ul>
     </div>
   </div>
 
@@ -45,114 +45,203 @@ title: "training sass"
   <!-- LIst activity content -->
   <div class="col-md-4 l-activity-content">
     <section>
-      <h3>Facebook Activity</h3>
-      <ul>
-        <li>
-          <img src="images/book/book-1.png" alt="book">
-          <a href="">Lisa C</a>
-          <span>read</span>
-          <a href="">Guilty Wives</a>
-          <span>by</span>
-          <a href="">Sam Henderson</a>
-          <cite>2 hours ago</cite>
+      <h4>Facebook Activity</h4>
+      <ul class="media-list">
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/book/book-1.png" alt="book">
+          </a>
+          <div class="media-body">
+            <a href="">Lisa C</a>
+            <span>read</span>
+            <a href="">Guilty Wives</a>
+            <span>by</span>
+            <a href="">Sam Henderson</a>
+            <cite>2 hours ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
-          <img src="images/avatar/avatar-small-1.png" alt="avatar-small">
-          <a href="">John H.</a>
-          <span>joined</span>
-          <a href="">Jamse Patterson's</a>
-          <span>mailing list</span>
-          <cite>5 hours ago</cite>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/avatar/avatar-small-1.png" alt="book">
+          </a>
+          <div class="media-body">
+            <a href="">John H.</a>
+            <span>joined</span>
+            <a href="">Jamse Patterson's</a>
+            <span>mailing list</span>
+            <cite>5 hours ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
 
-          <img src="images/book/book-2.png" alt="book">
-          <a href="">Loren M.</a>
-          <span>shared </span>
-          <a href="">Private Games</a>.
-          <cite>10 hours ago</cite>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/book/book-2.png" alt="book">
+          </a>
+          <div class="media-body">
+            <a href="">Loren M.</a>
+            <span>shared </span>
+            <a href="">Private Games</a>.
+            <cite>10 hours ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
 
-          <img src="images/book/book3.png" alt="">
-          <a href="">Mike K.</a>
-          <span>rated </span>
-          <a href="">11th Hour book</a>.
-          <cite>Yesterday</cite>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/book/book-1.png" alt="book">
+          </a>
+          <div class="media-body">
+            <a href="">Mike K.</a>
+            <span>rated </span>
+            <a href="">11th Hour book</a>.
+            <cite>Yesterday</cite>
+          </div>
+          <hr>
         </li>
-        <li>
 
-          <img src="images/avatar/avatar-small-1.png" alt="">
-          <a href="">Jared N.</a>
-          <span>liked</span>
-          <a href="">James Patterson</a>.
-          <cite>2 days ago</cite>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/avatar/avatar-small-1.png" alt="book">
+          </a>
+          <div class="media-body">
+              <a href="">Jared N.</a>
+              <span>liked</span>
+              <a href="">James Patterson</a>.
+              <cite>2 days ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
 
-          <img src="images/avatar/avatar-small-1.png" alt="">
-          <a href="">Mike K.</a>
-          <span>is going to</span>
-          <a href=""> James Patterson’s event</a>.
-          <cite>2 days ago</cite>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/avatar/avatar-small-1.png" alt="book">
+          </a>
+          <div class="media-body">
+            <a href="">Mike K.</a>
+            <span>is going to</span>
+            <a href=""> James Patterson’s event</a>.
+            <cite>2 days ago</cite>
+          </div>
         </li>
-      </ul>
     </section>
+
     <section>
-      <h3>DiscoverMyBooks Activity</h3>
-      <ul>
-        <li>
+      <h4>DiscoverMyBooks Activity</h4>
+      <ul class="media-list">
+        <!-- Begin content list acitve discoverbook -->
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/facebook.png" alt="...">
+          </a>
+          <div class="media-body">
+            You published
+            <a href="">Terry Brook</a>‘s
+            <span></span>
+            <a href="">Facebook Application.</a>
+            <cite>Yesterday</cite>
+          </div>
+          <hr>
+        </li>
+        <!-- end li list -->
 
-          <img src="images/facebook.png" alt="">
-          You published
-          <a href="">Terry Brook</a>‘s
-          <span></span>
-          <a href="">Facebook Application.</a>
-          <cite>Yesterday</cite>
+        <!-- Begin content list acitve discoverbook -->
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/facebook.png" alt="...">
+          </a>
+          <div class="media-body">
+            You published
+            <a href="">Terry Brook</a>‘s
+            <span></span>
+            <a href="">Facebook Application.</a>
+            <cite>Yesterday</cite>
+          </div>
+          <hr>
         </li>
-        <li>
-          <img src="images/pencal.png" alt="">
-          You edited
-          <a href="">Terry Brook</a>
-          <span>‘s</span>
-          <a href="">Facebook Application.</a>
-          <cite>2 days ago</cite>
-        </li>
-        <li>
-          <img src="images/upload.png" alt="">
-          You uploaded a book
-          <a href="">The right path</a>
-          <span>for</span>
-          <a href="">Ryan Anderson</a>
-          <cite>1 week ago</cite>
-        </li>
-        <li>
+        <!-- end li list -->
 
-          <img src="images/facebook.png" alt="">
-          You published
-          <a href="">Terry Brook</a>
-          <span>‘s </span>
-          <a href=""> Facebook Application</a>.
-          <cite>Yesterday</cite>
+        <!-- Begin content list acitve discoverbook -->
+         <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/pencal.png" alt="...">
+          </a>
+          <div class="media-body">
+            You uploaded a book
+            <a href="">The right path</a>
+            <span>for</span>
+            <a href="">Ryan Anderson</a>
+            <cite>1 week ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
+        <!-- end li list -->
 
-          <img src="images/pencal.png" alt="">
-          You edited
-          <a href="">Terry Brook</a>
-          <span>'s</span>
-          <a href="">Facebook Application</a>.
-          <cite>2 days ago</cite>
+        <!-- Begin content list acitve discoverbook -->
+         <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/upload.png" alt="...">
+          </a>
+          <div class="media-body">
+            You uploaded a book
+            <a href="">The right path</a>
+            <span>for</span>
+            <a href="">Ryan Anderson</a>
+            <cite>1 week ago</cite>
+          </div>
+          <hr>
         </li>
-        <li>
+        <!-- end li list -->
 
-          <img src="images/upload.png" alt="">
-          You uploaded a book
-          <a href="">The Right Path</a>
-          <span>for</span>
-          <a href="">Ryan Anderson</a>.
-          <cite>1 week ago</cite>
+        <!-- Begin content list acitve discoverbook -->
+         <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/facebook.png" alt="...">
+          </a>
+          <div class="media-body">
+            You published
+            <a href="">Terry Brook</a>
+            <span>‘s </span>
+            <a href=""> Facebook Application</a>.
+            <cite>Yesterday</cite>
+          </div>
+          <hr>
         </li>
+        <!-- end li list -->
+
+        <!-- Begin content list acitve discoverbook -->
+         <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/pencal.png" alt="...">
+          </a>
+          <div class="media-body">
+            You edited
+            <a href="">Terry Brook</a>
+            <span>'s</span>
+            <a href="">Facebook Application</a>.
+            <cite>2 days ago</cite>
+          </div>
+          <hr>
+        </li>
+        <!-- end li list -->
+
+        <!-- Begin content list acitve discoverbook -->
+         <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="images/upload.png" alt="...">
+          </a>
+          <div class="media-body">
+            You uploaded a book
+            <a href="">The Right Path</a>
+            <span>for</span>
+            <a href="">Ryan Anderson</a>.
+            <cite>1 week ago</cite>
+          </div>
+        </li>
+        <!-- end li list -->
+
+
       </ul>
     </section>
   </div>

@@ -1,0 +1,74 @@
+---
+layout: "default"
+title: "App Editor V2"
+---
+
+<div id="appEditor" class="row">
+	<div class="col-md-3 l-avatar-img">
+		<div class="avatar-img">
+			<div >
+        <a href="#">
+          <img src="images/avatar/avatar-4.png" alt="avatar">
+        </a>
+        <div>
+          <span class="caret"></span>
+        </div>
+      </div>
+		</div>
+	</div>
+	<div class="col-md-9 l-content-event">
+    <div class="content-book">
+      <ul class="breadcrumb l-breadcrumd theme-breadcrumb">
+      <li><a href="#">Arrange Books</a></li>
+      <li><a class ="active" href="#">Bio, Video & Events</a></li>
+      <li><a href="#">Marketing Tools</a></li>
+      <li><a href="#">Review & Publish</a></li>
+      </ul>
+      <h4>Share more content with your readers</h4>
+      <p>Fill in the modules below and we’ll help you share your videos, events and bio with your reader. <a href="#">Where is this info shown</a></p>
+      <form role="form" id="event-form">
+  		<div class="well form-group">
+  			<label for="inputAuthor">Author Biography</label>
+  			<textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
+  			<p>1000 character max</p>
+  		</div>
+
+  		<div class="well form-group event-youtube">
+  			<label for="inputYoutube">Youtube Videos</label>
+  			<input type="text" class="form-control" id="inputYoutube" placeholder="URL">
+  			<input type="text" class="form-control" id="inputYoutube" placeholder="URL">
+  			<a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
+  		</div>
+
+  		<div class="well form-group event">
+  			<h4>Event</h4>
+
+  			<label  for="eventTitle">Event title</label>
+  			<input type="text" class="form-control" id="eventTitle">
+
+  			<label for="eventVenue">Venue</label>
+  			<input type="text" class="form-control" id="eventVenue">
+
+  			<label for="eventCity">City</label>
+  			<input  type="text" class="form-control" id="eventCity">
+
+  			<label for="eventInfo">Event info</label>
+  			<textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
+
+  			<label for="eventDate"></label>
+  			<input type="text" class="form-control" id="eventDate">
+  			<label for="eventStartDate">Start at</label>
+  			<input  type="text" class="form-control" id="eventStartDate">
+  			<label for="eventEndDate">End at</label>
+  			<input type="text" class="form-control" id="eventEndDate">
+
+  			<a href=""><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
+
+  		</div>
+  		<button class="btn btn-default" type="submit">Save</button>
+  		<button class="btn btn-" type="submit">Next</button>
+	</form>
+
+    </div>
+	</div>
+</div>
