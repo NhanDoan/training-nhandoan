@@ -4,51 +4,186 @@ title: "App Editor"
 ---
 
 <div id="appEditor" class="row">
-	<div class="col-md-3 l-avatar-img">
-		<div class="avatar-img">
-			<div >
-        <a href="#">
+	<!-- Begin avatar -->
+  <div class="col-md-3 l-avatar-img">
+    <div class="avatar-img">
+      <div>
+        <a href="">
           <img src="images/avatar/avatar-4.png" alt="avatar">
         </a>
         <div>
           <span class="caret"></span>
         </div>
       </div>
-		</div>
-	</div>
-	<div class="col-md-9 l-content-book">
+    </div>
+  </div>
+  <!-- End avatar -->
+
+  <div class="col-md-9 l-content-book">
     <div class="content-book">
       <ul class="breadcrumb l-breadcrumd theme-breadcrumb">
-      <li><a class ="active" href="#">Arrange Books</a></li>
-      <li><a href="#">Bio, Video & Events</a></li>
-      <li><a href="#">Marketing Tools</a></li>
-      <li><a href="#">Review & Publish</a></li>
+        <li><a class ="active" href="#">Arrange Books</a></li>
+        <li><a href="#">Bio, Video & Events</a></li>
+        <li><a href="#">Marketing Tools</a></li>
+        <li><a href="#">Review & Publish</a></li>
       </ul>
       <h5>Tell us how you want your books to be displayed in your Facebook app. We'll display your book sequentially left-to-right <a href="#">See how</a></h5>
-
-      <section class="l-table-info-book">
-        <div class="table-header">
-          <div class="l-cell-table l-order-table"><p>Order</p></div>
-          <div class="l-cell-table l-title-table"><p>Title</p></div>
-          <div class="l-cell-table l-status-table"><p>Status</p></div>
-          <div class="l-cell-table l-actions-table"><p>Actions</p></div>
+      <!-- Begin content table book -->
+      <div class="table-book">
+        <div class="l-row-header-table">
+          <div class="table-cell l-order-table"><p>Order</p></div>
+          <div class="table-cell l-title-table"><p>Title</p></div>
+          <div class="table-cell l-status-table"><p>Status</p></div>
+          <div class="table-cell l-actions-table"><p>Actions</p></div>
         </div>
-        <div class="content-table">
 
-            <div class="content-table-column">
-              <div class="l-cell-table l-order-table"><p>Order sfzsfzsf</p></div>
-              <div class="l-cell-table l-title-table"><p>Title fsafsfa </p></div>
-              <div class="l-cell-table l-status-table"><p>Status sfsfsaf </p></div>
-              <div class="l-cell-table l-actions-table"><p>Actions fafasf</p></div>
+        <!-- Begin row table -->
+        <div class="table-row-group">
+          <div class="table-header-group">
+            <div class="table-cell l-order-table">
+              <span>1</span>
             </div>
+            <div class="table-cell l-title-table">
+              <a href="#">Eat, Pray, Love</a>
+              <img src="images/book/book-4.png" alt="...">
+            </div>
+            <div class="table-cell l-status-table">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                </div>
+              </div>
+              <span>80% Complete</span>
+            </div>
+            <div class="table-cell l-actions-table">
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+          </div>
+          <div style="clear:both;"></div>
+
+          <div class="footer-row-book">
+            <hr>
+            <p>This book will be <strong>feature</strong>. Enter spectical text below to promote it</p>
+            <div class="content-footer-row row">
+              <div class="col-md-4">
+                <span class="label">Header</span>
+              </div>
+              <div class="col-md-8">
+                <input class="form-control" type="text" id="inputHeader" placeholder="e.g.Exclusive Preview">
+                <p>Max N characters</p>
+              </div>
+              <div class="col-md-4">
+                <span class="label">Sub-header</span>
+              </div>
+              <div class="col-md-8">
+
+                <input class="form-control"  type="text" id="inputSub" placeholder="e.g. Available starting Aug 15">
+                <p>Max N characters</p>
+              </div>
+              <div class="col-md-4">
+
+                <span class="label">Synopsis</span>
+              </div>
+              <div class="col-md-8">
+
+                <textarea class="form-control" id="inputSynopsis"></textarea>
+
+                <p>Max N characters</p>
+                <button type="submit" class="btn">Test Driver</button>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-      <button class="btn btn-default" type="submit">Save</button>
-      <button class="btn btn-" type="submit">Next</button>
+        <!-- End row -->
+        <div style="clear:both;"></div>
+
+        <!-- Begin row table -->
+        <div class="table-row-group">
+          <div class="table-header-group">
+            <div class="table-cell l-order-table">
+              <span>1</span>
+            </div>
+            <div class="table-cell l-title-table">
+              <a href="#">Eat, Pray, Love</a>
+              <img src="images/book/book-4.png" alt="...">
+            </div>
+            <div class="table-cell l-status-table">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                </div>
+              </div>
+              <span>80% Complete</span>
+            </div>
+            <div class="table-cell l-actions-table">
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- End row -->
+        <div style="clear:both;"></div>
+
+         <!-- Begin row table -->
+        <div class="table-row-group">
+          <div class="table-header-group">
+            <div class="table-cell l-order-table">
+              <span>1</span>
+            </div>
+            <div class="table-cell l-title-table">
+              <a href="#">Eat, Pray, Love</a>
+              <img src="images/book/book-4.png" alt="...">
+            </div>
+            <div class="table-cell l-status-table">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              </div>
+              </div>
+              <span>80% Complete</span>
+
+            </div>
+            <div class="table-cell l-actions-table">
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- End row -->
+        <div style="clear:both;"></div>
+
+         <!-- Begin row table -->
+        <div class="table-row-group">
+          <div class="table-header-group">
+            <div class="table-cell l-order-table">
+              <span>1</span>
+            </div>
+            <div class="table-cell l-title-table">
+              <a href="#">Eat, Pray, Love</a>
+              <img src="images/book/book-4.png" alt="...">
+            </div>
+            <div class="table-cell l-status-table">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                </div>
+              </div>
+              <span>80% Complete</span>
+            </div>
+            <div class="table-cell l-actions-table">
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="#" class="btn btn-default" role="button"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+
+        <!-- End row -->
+
+      </div>
+
+      <!-- End table book -->
+      <div class="pull-right">
+        <button class="btn btn-default btn-save" type="submit">Save</button>
+        <button class="btn btn-next" type="submit">Next</button>
+      </div>
     </div>
-	</div>
+  </div>
 </div>
-
-
-
-
