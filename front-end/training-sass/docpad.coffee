@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 8091
+  port: 8098
   templateData:
     site:
       # The default title of our website.
@@ -26,7 +26,6 @@ docpadConfig = {
       styles: [
         "scss.css"
         "main.css"
-        "vendor/bootstrap/dist/css/bootstrap.min.css"
       ]
 
       # The JavaScript files for the site.
