@@ -3,36 +3,13 @@
  *
  * Reference "/scss.css" in your "styles" definition to use this.
  */
+$icon-font-path: "../vendor/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+@import "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 @import "stylesheet/bases/bases";
 @import "stylesheet/layouts/layouts";
-@import "stylesheet/modules/module";
+// @import "stylesheet/modules/module";
 @import "stylesheet/status/status";
 @import "stylesheet/themes/theme";
-nav {
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  li {
-    display: inline-block;
-  }
 
-  a {
-    display: block;
-    padding: 6px 12px;
-    text-decoration: none;
-  }
-}
 
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  -o-border-radius: $radius;
-  border-radius: $radius;
-}
 
-.box {
-  @include border-radius(10px);
-}

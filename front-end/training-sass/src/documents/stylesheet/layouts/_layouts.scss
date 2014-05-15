@@ -1,9 +1,13 @@
 
+@import "../modules/module";
+@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
 /* Style header of loyout default*/
 #main-header {
   /* Style for div container header */
   > div.l-container {
-    margin-bottom: 5px;
+    margin: 1% 2%;
+    // margin-bottom: 5px;
   }
 
   /* Style for navigation default */
@@ -17,10 +21,8 @@
       background: #0f60a2;
     }
     ul > li > a {
-      color: #f5f5f5;
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 1px 1px #276496;
+      font-size: 16px; //for base
+      font-weight: $badge-font-weight; //for base
     }
 
     ul > li.l-nav-app {
@@ -38,54 +40,44 @@
 * Style layout for app editor page
 *************************************/
 #appEditor {
-  .btn-save, .btn-next {
-      padding: 8px 30px;
-      font-size: 16px;
-    }
-    .btn-next {
-      background: rgb(37, 37, 37);
-      background: -moz-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -webkit-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -o-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -ms-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: linear-gradient(0deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      color: white;
-      text-shadow: 0px -1px 0px rgba(30, 30, 30, 0.8);
-
-    }
-    .btn-save {
-      background: rgb(234, 234, 234);
-      background: -moz-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -webkit-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -o-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -ms-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: linear-gradient(0deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      text-shadow: 0px -1px 0px rgba(234, 234, 234, 0.5);
-
-}
   height: 1000px;
+
+  .l-avatar-img {
+    @include l-avatar-img;
+  }
+
+  .l-breadcrumd {
+    @include l-breadcrumd;
+  }
+
+  .btn-save, .btn-next {
+    padding: 8px 30px;
+    font-size: 16px;
+  }
+
+  .btn-save {
+    @include btn-save;
+  }
+
+  .btn-next {
+    @include btn-next;
+  }
   .l-content-book {
+    padding-top: 2%;
+
     h5 {
-      font-weight: bold;
+      font-weight: $badge-font-weight; // for base
     }
 
-    padding-top: 2%;
     .l-order-table {
       width: 10%;
       float: left;
       text-align: center;
-      span {
-        border: 1px solid #c5c5c5;
-        border-radius: 4px;
-        font-size: 13px;
-        font-weight: bold;
-      }
     }
 
     .l-title-table {
       width: 45%;
       float: left;
-
     }
 
     .l-status-table {
@@ -108,15 +100,15 @@
     }
     .table-cell {
       span {
-        text-align: center;
         padding: 6px 10px;
-        vertical-align: bottom;
         line-height: 20%;
+        text-align: center;
+        vertical-align: bottom;
       }
 
       a {
-        vertical-align: bottom;
         line-height: 20%;
+        vertical-align: bottom;
       }
 
       img {
@@ -127,8 +119,6 @@
     .table-book {
       display: inline-block;
       width: 100%;
-      border: 1px solid #c5c5c5;
-      border-radius: 5px;
       margin-top: 10px;
       margin-bottom: 10px;
       .l-row-header-table {
@@ -137,156 +127,41 @@
       }
     }
     .table-row-group {
-      border-top:1px solid #c5c5c5;
       padding-top: 1%;
       padding-bottom: 6%;
-      .progress {
-        height: 10px;
-        width: 60%;
+      .progress {     // for module
+        @include progress;
         margin-bottom: 1%;
         margin-top: 2%;
-
       }
 
     }
     .footer-row-book {
       margin-right: 3%;
       margin-left: 3%;
-      hr {
-        border-color: #c5c5c5;
-      }
+
     }
     .content-footer-row {
       >div.col-md-4 {
         text-align: right;
       }
-      .label {
-        color: #000;
-        font-size: 12px;
-      }
-    }
-    textarea#inputSynopsis {
 
+      .btn-test {
+        @include btn-save;
+      }
     }
   }
-
-  .l-avatar-img {
-    height: 100%;
-    border-right: 1px solid rgba(217, 217, 217, 0.82);
-    background: #f9f9f9;
-    padding-right:10px;
-
-    .avatar-img {
-      padding-top:25px;
-      height: 100%;
-      -webkit-box-shadow: inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      -moz-box-shadow:    inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      box-shadow:         inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      a {
-        border-right: 1px solid #000;
-        float: left;
-        margin-left: 0px!important;
-
-      }
-      > div {
-        min-height: 128px;
-        border-radius: 5px;
-        width: 60%;
-        margin: 0 auto;
-        background: #434343;
-        text-align: center;
-        span.caret {
-          border-top: 10px solid white;
-          border-right: 10px solid transparent;
-          border-left: 10px solid transparent;
-        }
-      }
-
-    }
-
-
 }
-
-  /* Layout navigation breadcrum */
-  .l-breadcrumd {
-    margin-bottom: 20px;
-    padding: 0 0!important;
-    overflow: hidden;
-    font: 18px Helvetica, Arial, Sans-Serif;
-
-    li {
-      float: left;
-
-      &:first-child a {
-        padding-left: 10px;
-      }
-      a {
-        color: #45759d;
-        text-decoration: none;
-        padding: 10px 0 10px 65px;
-        background: brown;                   /* fallback color */
-        background: hsla(205,5%,92,1);
-        position: relative;
-        display: block;
-        float: left;
-
-        &:after {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-          border-bottom: 50px solid transparent;
-          border-left: 30px solid hsla(205,5%,92,1);
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          left: 100%;
-          z-index: 2;
-        }
-
-        &:before {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent;
-          border-bottom: 50px solid transparent;
-          border-left: 30px solid white;
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          margin-left: 5px;
-          left: 100%;
-          z-index: 1;
-        }
-
-        &:hover {
-          background: hsla(207,69%,56,1);
-          color: white;
-          &:after { border-left-color: hsla(207,69%,56,1) !important;color: white }
-        }
-        &.active{
-          background: hsla(207,69%,56,1);
-          color: white;
-
-          &:after{
-            border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-            border-bottom: 50px solid transparent;
-            border-left: 30px solid hsla(207,69%,56,1);
-          }}
-
-        }
-      }
-    }
-  }
-
 /*******************************************
  * Style for page bookManage
  *******************************************/
 
- #bookManager {
+#bookManager {
+
   height: 1000px;
+  .l-avatar-img {
+    @include l-avatar-img;
+  }
   .l-content-book {
     padding-left: 5px;
     .content-book{
@@ -296,74 +171,24 @@
         margin-top:25px;
       }
     }
-
   }
   .l-library-book {
-    button.btn-primary {
-      background: #0082cc;
-      text-shadow:  -1px 0px 0px rgba(0, 91, 161, 0.55);
+    .btn-add-book {
+      @include btn-add-book;
     }
     padding-left: 3%;
     h3 {
-      font-size: 22px;
-      font-weight: bold;
-    }
-    h5 {
-      border-bottom: 1px dashed #b8b8b8;
-      padding-bottom: 10px;
-      font-weight: bold;
+      font-size: 22px;  //for basic
+      font-weight: $badge-font-weight; //for basic
     }
   }
-  .l-avatar-img {
-    height: 100%;
-    border-right: 1px solid rgba(217, 217, 217, 0.82);
-    background: #f9f9f9;
-    padding-right:10px;
 
-    .avatar-img {
-      padding-top:25px;
-      height: 100%;
-      -webkit-box-shadow: inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      -moz-box-shadow:    inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      box-shadow:         inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
-      a {
-        border-right: 1px solid #000;
-        float: left;
-        margin-left: 0px!important;
-
-      }
-      > div {
-        min-height: 128px;
-        border-radius: 5px;
-        width: 60%;
-        margin: 0 auto;
-        background: #434343;
-        text-align: center;
-        span.caret {
-          border-top: 10px solid white;
-          border-right: 10px solid transparent;
-          border-left: 10px solid transparent;
-        }
-      }
-
-    }
-  }
   .l-list-book {
     a {background: #f5f3f3; padding: 3px 6px;}
     p {margin-top: 10px;}
-    > div.thumbnail {
-      width: 20%;
-      float: left;
-      border: none!important;
-      text-align: center;
-      .progress {
-        height: 10px;
-        margin: 4% 20% 0 20%;
-      }
-      span {
-        font-size: 11px;
-        color: #666666;
-      }
+    .progress {
+      @include progress;
+      margin: 4% 20% 0 20%;
     }
   }
  }
@@ -374,59 +199,15 @@
  ************************************/
 
  #dashboard {
-
-  ::-webkit-scrollbar {
-          width: 5px;
-      }
-
-  ::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  }
-
-  ::-webkit-scrollbar-thumb {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-  }
-  .l-container {
-      padding-top: 15px;
-      h4 {
-        border-bottom: 1px dashed #b8b8b8;
-        padding-bottom: 10px;
-        font-weight: bold;
-        > a {
-          font-weight: 500;
-          font-size: 13px;
-          line-height: 20px;
-        }
-      }
-    }
+  margin-left: 2%;
 
   .l-activity-content {
 
     // style for tag section
     > section {
-      border: 1px solid #cecece;
       border-radius: 5px;
       margin-top: 15px;
-      > h4 {
-        border-bottom: 2px solid #cecece;
-        background: #f3f3f3;
-        text-shadow: 0px 1px 0px rgba(199, 199, 199, 0.99);
-        padding-bottom: 10px;
-        padding-left:15px;
-        margin-bottom: 0px;
-        font-weight: bold;
-      }
-
     }
-    //end style
-
-    // style for cite
-    cite {
-      display: block;
-      font-size: 11px;
-      line-height: 20px;
-      color: #999999;
-    } //end style for cite
 
     ul {
       margin: 0 0;
@@ -447,7 +228,7 @@
         }
 
         > hr {
-          border-color: #cecece;
+          border-color: #cecece; //for theme
           margin-bottom: 10px;
         }
       }
@@ -456,29 +237,11 @@
 
   .l-author-info {
     text-align: center;
-
-    > a {
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 40px;
-      color: #2b7cbf;
-    }
     > ul {
       padding-left: 12px;
       padding-right: 12px;
       list-style-type: none;
       text-align: left;
-
-      li {
-        > span {
-          font-size: 12px;
-          font-weight: bold;
-          float: right;
-        }
-        > i {
-          margin-right: 8px;
-        }
-      }
     }
   }
  }
@@ -492,66 +255,26 @@
   .l-content-event {
     form {
       h4 {
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 16px; // for basic
+        font-weight: $badge-font-weight; // for basic
       }
       label {
-        font-size: 13px;
-        font-weight: normal;
+        font-size: 13px; // nt
+        font-weight: normal; // nt
       }
     }
     .inputAuthor {
       p {
-        font-size: 11px!important;
+        font-size: 11px!important; // nt
       }
     }
-    .btn-save, .btn-next {
-      padding: 8px 30px;
-      font-size: 16px;
-    }
-    .btn-next {
-      background: rgb(37, 37, 37);
-      background: -moz-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -webkit-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -o-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: -ms-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      background: linear-gradient(0deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
-      color: white;
-      text-shadow: 0px -1px 0px rgba(30, 30, 30, 0.8);
-
-    }
-    .btn-save {
-      background: rgb(234, 234, 234);
-      background: -moz-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -webkit-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -o-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: -ms-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      background: linear-gradient(0deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
-      text-shadow: 0px -1px 0px rgba(234, 234, 234, 0.5);
-
-    }
-    .event, .event-youtube {
-      a > i {
-        color: #000;
-        font-size: 20px;
-        top: 5px;
-      }
-    }
-    padding-top: 25px;
-    textarea#inputAuthor {
-      width: 95%;
-      min-height: 70px;
-      border: 1px solid #cccccc;
-      border-radius: 4px;
-    }
-
-    .event-youtube {
+    padding-top: 25px; // for theme or module all for in theme
+    .event-youtube { // for  theme
       > input {
         width: 90%;
         margin: 10px 0;
       }
     }
-
     .event {
       input {
         &#eventTitle {
@@ -562,31 +285,19 @@
 
         }
       }
-
-      .event-time {
+      .event-time { // for moudle button
         button {
           border: 1px solid #c5c5c5;
           .btn {
             border-radius: 7px!important;
           }
-        }
-        button:first-child {
-          border-right: none!important;
-          background: rgb(202, 202, 202);
-          background: -moz-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
-          background: -webkit-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
-          background: -o-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
-          background: -ms-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
-          background: linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
-        }
 
-        button:last-child {
-          background: rgb(202, 202, 202);
-          background: -moz-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
-          background: -webkit-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
-          background: -o-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
-          background: -ms-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
-          background: linear-gradient(270deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+          &:first-child {
+            @include button-first-child;
+          }
+          &:last-child {
+            @include button-last-child;
+          }
         }
       }
     }

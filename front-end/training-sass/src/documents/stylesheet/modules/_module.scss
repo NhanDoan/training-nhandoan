@@ -1,45 +1,172 @@
-body
-{
-            background-color: LightBlue;
-            font-family: Verdana;
-            font-size: 13px;
-}
-.divHeaderTable
-{
-            width: 100%;
-            padding-bottom:5px;
-            display:block;
-}
-.divHeaderRow
-{
-            width: 100%; /* add extra that you want to for header column */
-            display:block;
-            height:105px;
-}
-.divHeaderColumn
-{
-            float: left;
-            width: 33%;
-            display:block;
-}
-.divTable
-{
-            width: 100%;
-            display:block;
-            padding-top:10px;
-            padding-bottom:10px;
-            padding-right:10px;
-            padding-left:10px;
-}
-.divRow
-{
-         width: 99%;
-         display:block;
-         padding-bottom:5px;
-}
-.divColumn
-{
+/* Style module */
+
+//for module layout content avatar img
+@mixin l-avatar-img { //for module
+   height: 100%;
+   padding-right:10px;
+   border-right: 1px solid rgba(217, 217, 217, 0.82);
+   background: #f9f9f9;
+
+   .avatar-img {
+      padding-top:25px;
+      height: 100%;
+      -webkit-box-shadow: inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
+      -moz-box-shadow:    inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
+      box-shadow:         inset -5px 0px 5px 0px rgba(200, 200, 200, 0.82);
+      a {
+        border-right: 1px solid #000;
+        float: left;
+        margin-left: 0px!important;
+
+      }
+      > div {
+        min-height: 128px;
+        border-radius: 5px;
+        width: 60%;
+        margin: 0 auto;
+        background: #434343;
+        text-align: center;
+        span.caret {
+          border-top: 10px solid white;
+          border-right: 10px solid transparent;
+          border-left: 10px solid transparent;
+        }
+      }
+   }
+} // end module content avartar module img
+
+// module breadcrumd layout
+@mixin l-breadcrumd {
+   margin-bottom: 20px;
+   padding: 0 0!important;
+   overflow: hidden;
+   font: 18px Helvetica, Arial, Sans-Serif;
+
+   li {
+      float: left;
+
+      &:first-child a {
+        padding-left: 10px;
+      }
+      a {
+         color: #45759d;
+         text-decoration: none;
+         padding: 10px 0 10px 65px;
+         background: brown;                   /* fallback color */
+         background: hsla(205,5%,92,1);
+         position: relative;
+         display: block;
          float: left;
-         width: 24%;
-         display:block;
+
+         &:after {
+          content: " ";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+          border-bottom: 50px solid transparent;
+          border-left: 30px solid hsla(205,5%,92,1);
+          position: absolute;
+          top: 50%;
+          margin-top: -50px;
+          left: 100%;
+          z-index: 2;
+         }
+
+         &:before {
+          content: " ";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 50px solid transparent;
+          border-bottom: 50px solid transparent;
+          border-left: 30px solid white;
+          position: absolute;
+          top: 50%;
+          margin-top: -50px;
+          margin-left: 5px;
+          left: 100%;
+          z-index: 1;
+         }
+
+         &:hover {
+          background: hsla(207,69%,56,1);
+          color: white;
+          &:after { border-left-color: hsla(207,69%,56,1) !important;color: white }
+         }
+         &.active{
+          background: hsla(207,69%,56,1);
+          color: white;
+
+          &:after{
+            border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid hsla(207,69%,56,1);
+         }
+        }
+      }
+   }
 }
+
+// end module breadcrumd layout
+
+// layout button for event time
+@mixin button-first-child {
+   border-right: none!important;
+   background: rgb(202, 202, 202);
+   background: -moz-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
+   background: -webkit-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
+   background: -o-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
+   background: -ms-linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
+   background: linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(237, 237, 237) 37%);
+}
+@mixin button-last-child {
+   background: rgb(202, 202, 202);
+   background: -moz-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+   background: -webkit-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+   background: -o-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+   background: -ms-linear-gradient(0deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+   background: linear-gradient(270deg, rgb(202, 202, 202) 10%, rgb(237, 237, 237) 63%);
+}
+// end botton time
+
+// style for div progress
+@mixin progress {     // for module
+   height: 10px!important;
+   width: 60%;
+}
+// end
+
+//======= Button save and next
+
+@mixin btn-next {
+   background: rgb(37, 37, 37);
+   background: -moz-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
+   background: -webkit-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
+   background: -o-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
+   background: -ms-linear-gradient(90deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
+   background: linear-gradient(0deg, rgb(37, 37, 37) 88%, rgb(95, 95, 95) 100%);
+   color: white;
+   text-shadow: 0px -1px 0px rgba(30, 30, 30, 0.8);
+}
+@mixin btn-save {
+   background: rgb(234, 234, 234);
+   background: -moz-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
+   background: -webkit-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
+   background: -o-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
+   background: -ms-linear-gradient(90deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
+   background: linear-gradient(0deg, rgb(234, 234, 234) 0%, rgb(249, 249, 249) 100%);
+   text-shadow: 0px -1px 0px rgba(234, 234, 234, 0.5);
+}
+
+@mixin btn-add-book {
+  background: rgb(0, 87, 204);
+  background: -moz-linear-gradient(270deg, rgb(0, 87, 204) 90%, rgb(52, 159, 214) 100%);
+  background: -webkit-linear-gradient(270deg, rgb(0, 87, 204) 90%, rgb(52, 159, 214) 100%);
+  background: -o-linear-gradient(270deg, rgb(0, 87, 204) 90%, rgb(52, 159, 214) 100%);
+  background: -ms-linear-gradient(270deg, rgb(0, 87, 204) 90%, rgb(52, 159, 214) 100%);
+  background: linear-gradient(0deg, rgb(0, 87, 204) 90%, rgb(52, 159, 214) 100%);
+  text-shadow: 2px -1px 1px rgba(0, 89, 153, 0.88);
+  color: #f8fafd;
+}
+//======end style save and next
