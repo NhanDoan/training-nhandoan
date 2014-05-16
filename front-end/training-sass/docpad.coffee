@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 8099
+  port: 8900
   templateData:
     site:
       # The default title of our website.
@@ -24,7 +24,6 @@ docpadConfig = {
 
       # The cascading stylesheets for the site.
       styles: [
-        "scss.css"
         "main.css"
       ]
 
