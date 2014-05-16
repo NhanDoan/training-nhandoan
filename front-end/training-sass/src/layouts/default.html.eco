@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!-- Rendered with Eco -->
   <meta charset="utf-8" />
 
   <!-- Site Properities -->
   <title><%= @site.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="<%= @site.description %>" />
   <meta name="keywords" content="<%= @site.keywords %>" />
 
