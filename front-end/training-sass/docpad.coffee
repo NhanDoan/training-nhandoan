@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 8900
+  port: 8902
   templateData:
     site:
       # The default title of our website.
@@ -52,6 +52,10 @@ docpadConfig = {
   plugins:
     livereload:
       enabled: true
+    sass:
+      compass: "true"
+      requireLibraries: ['singularitygs']
+      outputStyle: 'expanded'
 
 }
 
