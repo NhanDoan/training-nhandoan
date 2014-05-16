@@ -30,7 +30,10 @@ docpadConfig = {
 
       # The JavaScript files for the site.
       scripts: [
+        "vendor/jquery/dist/jquery.min.js"
+        "vendor/bootstrap/dist/js/bootstrap.min.js"
         "main.js"
+
       ]
 
   # =================================
