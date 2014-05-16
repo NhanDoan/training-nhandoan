@@ -1,5 +1,10 @@
 /* Style module */
 
+$blue-darken        : #3f8ccd;
+$breadscrumb-active : #e2e9ee;
+$color-a-breadscrumb : #45759d;
+$color-active        : #ffffff;
+
 //for module layout content avatar img
 @mixin l-avatar-img { //for module
    height: 100%;
@@ -36,76 +41,86 @@
 } // end module content avartar module img
 
 // module breadcrumd layout
-@mixin l-breadcrumd {
-   margin-bottom: 20px;
-   padding: 0 0!important;
-   overflow: hidden;
-   font: 18px Helvetica, Arial, Sans-Serif;
-
-   li {
-      float: left;
-
-      &:first-child a {
-        padding-left: 10px;
+@mixin l-breadcrumb{
+  list-style:none;
+  display: inline-block;
+  padding-left: 0px!important;
+  li{
+    float:left;
+    a{
+      color:$color-a-breadscrumb;
+      display:block;
+      background: $breadscrumb-active;
+      text-decoration: none;
+      position:relative;
+      height: 40px;
+      line-height:40px;
+      padding: 0 20px 0 20px;
+      text-align: center;
+      margin-right: 26px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    &:first-child{
+      a{
+        padding-left:15px;
+        border-radius: 2px 0 0 2px;
+        &:before{
+          border:none;
+         }
       }
-      a {
-         color: #45759d;
-         text-decoration: none;
-         padding: 10px 0 10px 65px;
-         background: brown;                   /* fallback color */
-         background: hsla(205,5%,92,1);
-         position: relative;
-         display: block;
-         float: left;
+    }
+    &:last-child{
+      a{
+        padding-right:15px;
+      }
+    }
 
-         &:after {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-          border-bottom: 50px solid transparent;
-          border-left: 30px solid hsla(205,5%,92,1);
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          left: 100%;
-          z-index: 2;
-         }
+    a{
+      &:before,
+      &:after{
+        content: "";
+        position:absolute;
+        top: 0;
+        border:0 solid $breadscrumb-active;
+        border-width:20px 10px;
+        width: 0;
+        height: 0;
+      }
+      &:before{
+        left:-20px;
+        border-left-color:transparent;
+      }
+      &:after{
+        left:100%;
+        border-color:transparent;
+        border-left-color:$breadscrumb-active;
+      }
+      &:hover{
+        background-color: $blue-darken;
 
-         &:before {
-          content: " ";
-          display: block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid transparent;
-          border-bottom: 50px solid transparent;
-          border-left: 30px solid white;
-          position: absolute;
-          top: 50%;
-          margin-top: -50px;
-          margin-left: 5px;
-          left: 100%;
-          z-index: 1;
+        &:before{
+          border-color:$blue-darken;
+          border-left-color:transparent;
          }
-
-         &:hover {
-          background: hsla(207,69%,56,1);
-          color: white;
-          &:after { border-left-color: hsla(207,69%,56,1) !important;color: white }
-         }
-         &.active{
-          background: hsla(207,69%,56,1);
-          color: white;
-
-          &:after{
-            border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-            border-bottom: 50px solid transparent;
-            border-left: 30px solid hsla(207,69%,56,1);
-         }
+        &:after{
+          border-left-color:$blue-darken;
         }
       }
-   }
+      &:active, &.active {
+        background-color: $blue-darken;
+        color: $color-active;
+
+        &:before{
+          border-color:$blue-darken;
+          border-left-color:transparent;
+         }
+        &:after{
+          border-left-color:$blue-darken;
+        }
+      }
+    }
+  }
 }
 
 // end module breadcrumd layout
@@ -170,3 +185,4 @@
   color: #f8fafd;
 }
 //======end style save and next
+

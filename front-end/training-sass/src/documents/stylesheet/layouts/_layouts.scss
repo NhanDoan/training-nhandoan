@@ -46,8 +46,14 @@
     @include l-avatar-img;
   }
 
-  .l-breadcrumd {
-    @include l-breadcrumd;
+  .l-breadcrumb {
+    @include l-breadcrumb;
+
+    @media screen and (min-width: 400px) {
+      li a {
+        color: red;
+      }
+    }
   }
 
   .btn-save, .btn-next {
