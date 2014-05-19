@@ -1,0 +1,15 @@
+/**
+ * SCSS for training sass
+ *
+ * Reference "/scss.css" in your "styles" definition to use this.
+ */
+$icon-font-path: "../vendor/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+@import "../../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "../../files/stylesheet/bases/bases";
+@import "../../files/stylesheet/layouts/layouts";
+// @import "stylesheet/modules/module";
+// @import "../../files/stylesheet/states/states";
+@import "../../files/stylesheet/themes/theme";
+
+
+

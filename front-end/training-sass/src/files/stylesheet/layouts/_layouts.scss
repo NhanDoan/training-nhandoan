@@ -1,7 +1,7 @@
 
 @import "../modules/module";
-@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
-@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
+@import  "../../vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+@import  "../../vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
 /* Style header of loyout default*/
 #main-header {
   /* Style for div container header */
@@ -13,19 +13,19 @@
   /* Style for navigation default */
   .l-navigation {
     box-shadow: 2px 2px 5px #9b9b9b;
-    ul > li {
+    li {
       padding: 3px 5px;
     }
 
-    ul > li.active {
+    .active {
       background: #0f60a2;
     }
-    ul > li > a {
+    a {
       font-size: 16px; //for base
       font-weight: $badge-font-weight; //for base
     }
 
-    ul > li.l-nav-app {
+    .l-nav-app {
       padding-left: 15px;
       > a {
         padding-left: 25px;
@@ -38,7 +38,7 @@
 /* ***********************************
 * Style layout for app editor page
 *************************************/
-#appEditor {
+.appEditor {
   height: 1000px;
 
   .btn-save, .btn-next {
@@ -147,7 +147,7 @@
  * Style for page bookManage
  *******************************************/
 
-#bookManager {
+.bookManager {
 
   height: 1000px;
   .l-content-book {
@@ -186,7 +186,7 @@
  *  Style for page dashboard
  ************************************/
 
- #dashboard {
+ .dashboard {
   margin-left: 2%;
 
   .l-activity-content {
@@ -238,7 +238,7 @@
 * Style
 ********************************/
 
-#appEditor {
+.appEditor {
 
   .l-content-event {
     form {

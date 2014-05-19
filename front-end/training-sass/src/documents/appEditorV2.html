@@ -3,8 +3,8 @@ layout: "default"
 title: "App Editor V2"
 ---
 
-<div id="appEditor" class="row">
-  <div class="col-md-3 l-avatar-img">
+<div class="appEditor">
+  <aside class="col-md-3 l-avatar-img">
     <div class="avatar-img">
       <div >
         <a href="#">
@@ -15,114 +15,116 @@ title: "App Editor V2"
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-9 l-content-event">
+  </aside>
+  <section class="col-md-9 l-content-event">
     <div class="content-book">
-      <ul class="l-breadcrumb">
-      <li><a href="#">Arrange Books</a></li>
-      <li><a class ="active" href="#">Bio, Video & Events</a></li>
-      <li><a href="#">Marketing Tools</a></li>
-      <li><a href="#">Review & Publish</a></li>
-      </ul>
+      <nav>
+        <ul class="l-breadcrumb">
+          <li><a href="#">Arrange Books</a></li>
+          <li><a class ="active" href="#">Bio, Video & Events</a></li>
+          <li><a href="#">Marketing Tools</a></li>
+          <li><a href="#">Review & Publish</a></li>
+        </ul>
+      </nav>
+
       <h4>Share more content with your readers</h4>
       <p>Fill in the modules below and we’ll help you share your videos, events and bio with your reader. <a href="#">Where is this info shown</a></p>
       <form role="form" id="event-form">
-      <div class="well form-group inputAuthor">
-        <h4>Author Biography</h4>
-        <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
-        <p>1000 character max</p>
-      </div>
+        <section class="well form-group inputAuthor">
+          <h4>Author Biography</h4>
+          <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
+          <p>1000 character max</p>
+        </section>
 
-      <div class="well form-group event-youtube">
-        <h4>Youtube Videos</h4>
-        <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
-        <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
-        <a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
-      </div>
+        <section class="well form-group event-youtube">
+          <h4>Youtube Videos</h4>
+          <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
+          <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
+          <a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
+        </section>
 
-      <div class="well form-group event">
-        <h4>Event</h4>
+        <article class="well form-group event">
+          <h4>Event</h4>
 
-        <label  for="eventTitle">Event title</label>
-        <input type="text" class="form-control" id="eventTitle">
+          <label  for="eventTitle">Event title</label>
+          <input type="text" class="form-control" id="eventTitle">
 
-        <div class="row">
-          <div class="col-lg-6">
-            <label for="eventVenue">Venue</label>
-            <input type="text" class="form-control" id="eventVenue"><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-          <div class="col-lg-6">
-            <label for="eventCity">City</label>
-            <input  type="text" class="form-control" id="eventCity"><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-        <label for="eventInfo">Event info</label>
-        <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
-        <div class="row">
-          <div class="col-md-3">
-            <label for="eventDate">Date</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="eventDate">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-calendar"></i>
-              </span>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="eventStartDate">Start at</label>
-            <div class="row event-time">
-              <div class="btn-group">
-                <button type="button" class="btn ">03</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-              </div> :
-              <div class="btn-group">
-                <button type="button" class="btn ">03</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-              </div>
-
-              <div class="btn-group">
-                <button type="button" class="btn ">PM</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
+          <section class="row">
+            <div class="col-lg-6">
+              <label for="eventVenue">Venue</label>
+              <input type="text" class="form-control" id="eventVenue"><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+              <label for="eventCity">City</label>
+              <input  type="text" class="form-control" id="eventCity"><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </section><!-- /.row -->
+          <label for="eventInfo">Event info</label>
+          <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
+          <section class="row">
+            <div class="col-md-3">
+              <label for="eventDate">Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="eventDate">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </span>
               </div>
             </div>
-          </div>
-          <div class="col-md-5 ">
-            <label for="eventStartDate">End at</label>
-            <div class="row event-time">
-              <div class="btn-group">
-                <button type="button" class="btn ">03</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-              </div> :
-              <div class="btn-group">
-                <button type="button" class="btn ">03</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-              </div>
+            <div class="col-md-4">
+              <label for="eventStartDate">Start at</label>
+              <div class="row event-time">
+                <div class="btn-group">
+                  <button type="button" class="btn ">03</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div> :
+                <div class="btn-group">
+                  <button type="button" class="btn ">03</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div>
 
-              <div class="btn-group">
-                <button type="button" class="btn ">PM</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
+                <div class="btn-group">
+                  <button type="button" class="btn ">PM</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <a href=""><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
-      </div>
-      <button class="btn btn-default btn-save" type="submit">Save</button>
-      <button class="btn btn-next" type="submit">Next</button>
-  </form>
+            <div class="col-md-5 ">
+              <label for="eventStartDate">End at</label>
+              <div class="row event-time">
+                <div class="btn-group">
+                  <button type="button" class="btn ">03</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div> :
+                <div class="btn-group">
+                  <button type="button" class="btn ">03</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div>
 
+                <div class="btn-group">
+                  <button type="button" class="btn ">PM</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <a href=""><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
+        </article>
+        <button class="btn btn-default btn-save" type="submit">Save</button>
+        <button class="btn btn-next" type="submit">Next</button>
+      </form>
     </div>
-  </div>
+  </section>
 </div>

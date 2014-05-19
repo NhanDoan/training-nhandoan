@@ -43,7 +43,7 @@
       </ul>
     </nav>
   </header> <!-- END HEADER -->
-  <article>
+  <article class="row">
     <%- @content %>
   </article>
   <!-- DocPad Scripts + Our Own -->

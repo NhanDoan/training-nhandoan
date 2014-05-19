@@ -1,6 +1,6 @@
 /* Theme color for nav */
-@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
-@import  "../files/vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
+@import  "../../vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables";
+@import  "../../vendor/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins";
 
 $border-basic: 1px solid #c5c5c5; // for theme
 
@@ -74,7 +74,7 @@ hr {
 }
 
 .l-list-book {
-  > div.thumbnail {
+  > section.thumbnail {
     width: 20%;
     float: left;
     border: none!important;

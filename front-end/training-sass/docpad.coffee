@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 8902
+  port: 8904
   templateData:
     site:
       # The default title of our website.
@@ -24,7 +24,7 @@ docpadConfig = {
 
       # The cascading stylesheets for the site.
       styles: [
-        "main.css"
+        "/styles/main.css"
       ]
 
       # The JavaScript files for the site.
@@ -52,10 +52,10 @@ docpadConfig = {
   plugins:
     livereload:
       enabled: true
-    sass:
-      compass: "true"
-      requireLibraries: ['singularitygs']
-      outputStyle: 'expanded'
+    # sass:
+    #   compass: "true"
+    #   requireLibraries: ['singularitygs']
+    #   outputStyle: 'expanded'
 
 }
 
