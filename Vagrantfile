@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default box IP address
   # This is the IP address that your host will communicate to the guest
   # through. Change if you're already on the `192.168.33.x` subnet.
-  private_ip = "192.168.33.15"
+  private_ip = "192.168.33.10"
 
   
 
@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
   config.ssh.forward_x11   = true
 
-  config.vm.hostname = "localstore.fitmoo.com"
+  config.vm.hostname = "localsass"
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "front-end"
 

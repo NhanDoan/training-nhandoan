@@ -65,7 +65,7 @@ hr {
 
 // style for h5
 .l-library-book {
-  h5 {
+  .title-library {
     border-bottom: 1px dashed #b8b8b8; // for theme
     padding-bottom: 10px;
     font-size: 16px;
@@ -88,7 +88,7 @@ hr {
 // end h5
 
 // dashboard theme scroll
-#dashboard {
+.dashboard {
   // for theme scroll
   ::-webkit-scrollbar {
           width: 5px;
@@ -137,7 +137,7 @@ hr {
   } //end style for cite
 
   .l-author-info {
-    > a {
+    a.name-author {
       font-size: 16px;
       font-weight: $badge-font-weight;
       line-height: 40px;
@@ -159,7 +159,7 @@ hr {
 // end
 
 
-#appEditor {
+.appEditor {
   .l-content-event {
 
     .event, .event-youtube {

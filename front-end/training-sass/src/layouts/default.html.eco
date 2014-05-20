@@ -5,10 +5,12 @@
   <meta charset="utf-8" />
 
   <!-- Site Properities -->
-  <title><%= @site.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="<%= @site.description %>" />
   <meta name="keywords" content="<%= @site.keywords %>" />
+
+  <title><%= @site.title %></title>
+
 
   <!-- DocPad Meta -->
   <%- @getBlock('meta').toHTML() %>
@@ -33,8 +35,13 @@
         </li>
       </ul>
     </div>
-    <nav class="theme-nav nav l-navigation">
-      <ul>
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+      Click here
+      </button>
+    </div>
+    <nav class="theme-nav l-navigation collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav nav-bar">
         <li class="active"><a href="">Dashboard</a></li>
         <li><a href="">Book Manager</a></li>
         <li class="l-nav-app">
@@ -43,7 +50,7 @@
       </ul>
     </nav>
   </header> <!-- END HEADER -->
-  <article class="row">
+  <article class="row content-row">
     <%- @content %>
   </article>
   <!-- DocPad Scripts + Our Own -->

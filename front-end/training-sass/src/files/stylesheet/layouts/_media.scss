@@ -1,0 +1,387 @@
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+  @media (min-width : 320px) {
+    .container {
+      width: 300px;
+    }
+    .l-container h4 {
+      font-size: 16px;
+    }
+    .l-author-info {
+      padding: 0 4px;
+      img {
+        width: 100%;
+      }
+      a.name-author {
+        font-size: 9px!important;
+        line-height: 10px!important;
+      }
+      > ul {
+        padding: 0 6px!important;
+      }
+      ul li, span {
+        font-size: 8px!important;
+      }
+      span {
+        float: left!important;
+      }
+
+    }
+
+    .l-activity-content {
+      padding-right: 0!important;
+      hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      .pull-left {
+        margin-right: 2px;
+      }
+      img {
+        width: 50%;
+      }
+      h4 {
+        font-size: 9px;
+      }
+      h4, ul {
+        padding-left: 2px!important;
+      }
+      section .media-body {
+        font-size: 9px;
+        cite {
+          line-height: 10px;
+          font-size: 7px;
+        }
+      }
+    }
+
+    .bookManager {
+      .l-library-book {
+        .help-text {
+          font-size: 10px!important;
+        }
+
+        .btn-add-book {
+          padding: 4px 10px!important;
+          font-size: 8px!important;
+        }
+        .title-library {
+          padding-top: 20px;
+          padding-bottom: 10px;
+          font-size: 10px;
+        }
+
+        .caption {
+          padding: 0;
+          span, p > a{
+            font-size: 8px;
+
+          }
+        }
+      }
+    }
+  }
+
+  /* Extra Small Devices, Phones */
+  @media (min-width : $screen-xs-min) {
+    .container {
+      width: 450px;
+    }
+    .dashboard {
+
+      .l-author-info {
+        padding: 0 6px;
+        img {
+          width: 100%;
+        }
+        a.name-author {
+          font-size: 11px!important;
+          line-height: 10px!important;
+        }
+        > ul {
+          padding: 0;
+        }
+        ul li, span {
+          font-size: 11px!important;
+        }
+        span {
+          float: left!important;
+        }
+      }
+
+      .l-activity-content {
+        padding-right: 0;
+        hr {
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        .pull-left {
+          margin-right: 2px;
+        }
+        img {
+          width: 50%;
+        }
+        h4 {
+          font-size: 11px;
+        }
+        h4, ul {
+          padding-left: 6px!important;
+        }
+        section .media-body {
+          font-size: 10px;
+          cite {
+            line-height: 10px;
+            font-size: 7px;
+          }
+        }
+      }
+    }
+
+    .bookManager {
+      .l-library-book {
+        .help-text {
+          font-size: 11px!important;
+        }
+
+        .btn-add-book {
+          padding: 5px 10px!important;
+          font-size: 9px!important;
+        }
+        .title-library {
+          padding-top: 20px;
+          padding-bottom: 10px;
+          font-size: 10px;
+        }
+
+        .caption {
+          padding: 0;
+          span, p > a{
+            font-size: 8px;
+          }
+          p > a {
+            padding: 1px 2px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Small Devices, Tablets */
+  @media (min-width : $screen-sm-min) {
+    .container {
+      width: $container-sm;
+    }
+
+    .dashboard {
+      .l-author-info {
+        padding: 4px 8px;
+        img {
+          width: 100%;
+        }
+        a.name-author {
+          font-size: 12px!important;
+          line-height: 30px!important;
+        }
+        > ul {
+          padding: 0;
+        }
+        ul li, span {
+          font-size: 11px!important;
+        }
+        span {
+          float: right!important;
+        }
+      }
+
+      .l-activity-content {
+        padding-right: 0;
+        hr {
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        .pull-left {
+          margin-right: 2px;
+        }
+        img {
+          width: 60%;
+        }
+        h4 {
+          font-size: 14px;
+        }
+        h4, ul {
+          padding-left: 10px!important;
+        }
+        section .media-body {
+          font-size: 11px;
+          cite {
+            line-height: 20px;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+
+    .bookManager {
+      .l-library-book {
+        .help-text {
+          font-size: 18px!important;
+        }
+
+        .btn-add-book {
+          padding: 6px 12px!important;
+          font-size: 14px!important;
+        }
+        .title-library {
+          padding-top: 20px;
+          padding-bottom: 10px;
+          font-size: 14px;
+        }
+        .progress {
+          width: 80%;
+          margin: 4% 20% 0 10%;
+        }
+        .caption {
+          padding: 0;
+          span, p > a{
+            font-size: 11px;
+          }
+          p > a {
+            padding: 4px 6px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Medium Devices, Desktops */
+  @media (min-width : $screen-md-min) {
+    .container {
+      width: $container-md;
+    }
+
+    .dashboard {
+      .l-author-info {
+        padding: 4px 10px;
+        img {
+          width: 100%;
+        }
+        a.name-author {
+          font-size: 16px!important;
+          line-height: 40px!important;
+        }
+        > ul {
+          padding: 0;
+        }
+        ul li, span {
+          font-size: 13px!important;
+        }
+        span {
+          float: right!important;
+        }
+      }
+
+      .l-activity-content {
+        padding-right: 0;
+        hr {
+          margin-bottom: 20px;
+          margin-top: 10px;
+        }
+        .pull-left {
+          margin-right: 2px;
+        }
+        img {
+          width: 80%;
+        }
+        h4 {
+          font-size: 16px;
+        }
+        h4, ul {
+          padding-left: 15px!important;
+        }
+        section .media-body {
+          font-size: 13px;
+          cite {
+            line-height: 20px;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+
+    .bookManager {
+      .l-library-book {
+        .help-text {
+          font-size: 20px!important;
+        }
+
+        .btn-add-book {
+          padding: 6px 12px!important;
+          font-size: 14px!important;
+        }
+        .title-library {
+          padding-top: 20px;
+          padding-bottom: 10px;
+          font-size: 15px;
+        }
+        .progress {
+          width: 80%;
+          margin: 4% 20% 0 10%;
+        }
+        .caption {
+          padding: 0;
+          span, p > a{
+            font-size: 12px;
+          }
+          p > a {
+            font-size: 13px;
+            padding: 6px 8px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Large Devices, Wide Screens */
+  @media (min-width : $screen-lg-min) {
+    .container {
+      width: $container-lg;
+    }
+
+    .bookManager {
+      .l-avatar-img .avatar-img  > div {
+        min-height: 128px;
+      }
+      .l-library-book {
+
+        .help-text {
+          font-size: 22px!important;
+        }
+
+        .btn-add-book {
+          padding: 6px 12px!important;
+          font-size: 14px!important;
+        }
+        .title-library {
+          padding-top: 20px;
+          padding-bottom: 10px;
+          font-size: 18px;
+        }
+        .progress {
+          width: 60%;
+          margin: 4% 20%;
+        }
+        .caption {
+          padding: 0;
+          span, p > a{
+            font-size: 14px;
+          }
+          p > a {
+            padding: 6px 8px;
+          }
+        }
+      }
+    }
+  }
+

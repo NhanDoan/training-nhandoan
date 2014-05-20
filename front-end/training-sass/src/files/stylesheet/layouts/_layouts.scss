@@ -13,23 +13,21 @@
   /* Style for navigation default */
   .l-navigation {
     box-shadow: 2px 2px 5px #9b9b9b;
-    li {
-      padding: 3px 5px;
-    }
-
     .active {
       background: #0f60a2;
     }
     a {
       font-size: 16px; //for base
       font-weight: $badge-font-weight; //for base
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     .l-nav-app {
       padding-left: 15px;
       > a {
         padding-left: 25px;
-        background: url('images/fb-small.png') 0 7px no-repeat;
+        background: url('../images/fb-small.png') 0 10px no-repeat;
       }
     }
   }
@@ -292,4 +290,3 @@
 
   }
 }
-
