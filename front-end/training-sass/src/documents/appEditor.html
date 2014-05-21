@@ -5,11 +5,11 @@ title: "App Editor"
 
 <section class="appEditor">
 	<!-- Begin avatar -->
-  <aside class="col-md-3 l-avatar-img">
+  <aside class="col-md-3 col-xs-3 col-sm-3 col-lg-3 l-avatar-img">
     <div class="avatar-img">
-      <div>
+      <div >
         <a href="">
-          <img src="images/avatar/avatar-4.png" alt="avatar">
+          <img class="image-avatar" src="images/avatar/avatar-4.png" alt="avatar">
         </a>
         <div>
           <span class="caret"></span>
@@ -19,9 +19,14 @@ title: "App Editor"
   </aside>
   <!-- End avatar -->
 
-  <article class="col-md-9 l-content-book">
+  <article class="col-md-9 col-xs-9 col-sm-9 col-lg-9 l-content-book">
     <section class="content-book">
-      <nav>
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          Click here
+        </button>
+      </div>
+      <nav class="nav-app-editor collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="l-breadcrumb">
           <li><a class ="active" href="#">Arrange Books</a></li>
           <li><a href="#">Bio, Video & Events</a></li>
@@ -68,26 +73,26 @@ title: "App Editor"
             <hr>
             <p>This book will be <strong>feature</strong>. Enter spectical text below to promote it</p>
             <div class="content-footer-row row">
-              <div class="col-md-4">
+              <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
                 <span class="label">Header</span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
                 <input class="form-control" type="text" id="inputHeader" placeholder="e.g.Exclusive Preview">
                 <p>Max N characters</p>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
                 <span class="label">Sub-header</span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
 
                 <input class="form-control"  type="text" id="inputSub" placeholder="e.g. Available starting Aug 15">
                 <p>Max N characters</p>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4">
 
                 <span class="label">Synopsis</span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
 
                 <textarea class="form-control" id="inputSynopsis"></textarea>
 

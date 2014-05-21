@@ -4,11 +4,11 @@ title: "App Editor V2"
 ---
 
 <div class="appEditor">
-  <aside class="col-md-3 l-avatar-img">
+  <aside class="col-md-3 col-xs-3 col-sm-3 col-lg-3 l-avatar-img">
     <div class="avatar-img">
-      <div >
+      <div>
         <a href="#">
-          <img src="images/avatar/avatar-4.png" alt="avatar">
+          <img class= "image-avatar" src="images/avatar/avatar-4.png" alt="avatar">
         </a>
         <div>
           <span class="caret"></span>
@@ -16,9 +16,14 @@ title: "App Editor V2"
       </div>
     </div>
   </aside>
-  <section class="col-md-9 l-content-event">
+  <section class="col-md-9 col-xs-9 col-sm-9 col-lg-9 l-content-event">
     <div class="content-book">
-      <nav>
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          Click here
+        </button>
+      </div>
+      <nav class="nav-app-editor collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="l-breadcrumb">
           <li><a href="#">Arrange Books</a></li>
           <li><a class ="active" href="#">Bio, Video & Events</a></li>
@@ -27,34 +32,34 @@ title: "App Editor V2"
         </ul>
       </nav>
 
-      <h4>Share more content with your readers</h4>
+      <h3 class="help-text">Share more content with your readers</h3>
       <p>Fill in the modules below and we’ll help you share your videos, events and bio with your reader. <a href="#">Where is this info shown</a></p>
-      <form role="form" id="event-form">
+      <form role="form" id="event-form" class="event-form">
         <section class="well form-group inputAuthor">
-          <h4>Author Biography</h4>
+          <p class="sub-label">Author Biography</p>
           <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
-          <p>1000 character max</p>
+          <blockquote><cite>1000 character max</cite></blockquote>
         </section>
 
         <section class="well form-group event-youtube">
-          <h4>Youtube Videos</h4>
+          <p class="sub-label">Youtube Videos</p>
           <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
           <input type="text" class="form-control" id="inputYoutube" placeholder="URL">
           <a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add event</a>
         </section>
 
         <article class="well form-group event">
-          <h4>Event</h4>
+          <p class="sub-label">Event</p>
 
           <label  for="eventTitle">Event title</label>
           <input type="text" class="form-control" id="eventTitle">
 
           <section class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6 col-xs-11 col-sm-6 col-lg-6">
               <label for="eventVenue">Venue</label>
               <input type="text" class="form-control" id="eventVenue"><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
-            <div class="col-lg-6">
+            <div class="col-md-6 col-xs-11 col-sm-6 col-lg-6">
               <label for="eventCity">City</label>
               <input  type="text" class="form-control" id="eventCity"><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
@@ -62,7 +67,7 @@ title: "App Editor V2"
           <label for="eventInfo">Event info</label>
           <textarea name="content" id="inputAuthor"form="event-form"> Enter text here...</textarea>
           <section class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12 col-sm-3 col-lg-3">
               <label for="eventDate">Date</label>
               <div class="input-group">
                 <input type="text" class="form-control" id="eventDate">
@@ -71,7 +76,7 @@ title: "App Editor V2"
                 </span>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12 col-sm-4 col-lg-4">
               <label for="eventStartDate">Start at</label>
               <div class="row event-time">
                 <div class="btn-group">
@@ -95,7 +100,7 @@ title: "App Editor V2"
                 </div>
               </div>
             </div>
-            <div class="col-md-5 ">
+            <div class="col-md-5 col-xs-12 col-sm-5 col-lg-5">
               <label for="eventStartDate">End at</label>
               <div class="row event-time">
                 <div class="btn-group">

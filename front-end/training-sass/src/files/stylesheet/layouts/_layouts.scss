@@ -237,7 +237,9 @@
 ********************************/
 
 .appEditor {
-
+  .help-text, .sub-label {
+    font-weight: $badge-font-weight;
+  }
   .l-content-event {
     form {
       h4 {
@@ -247,11 +249,6 @@
       label {
         font-size: 13px; // nt
         font-weight: normal; // nt
-      }
-    }
-    .inputAuthor {
-      p {
-        font-size: 11px!important; // nt
       }
     }
     padding-top: 25px; // for theme or module all for in theme

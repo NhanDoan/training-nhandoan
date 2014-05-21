@@ -3,6 +3,9 @@
 
 /* Custom, iPhone Retina */
   @media (min-width : 320px) {
+    body {
+      font-size: 12px;
+    }
     .container {
       width: 300px;
     }
@@ -56,12 +59,12 @@
         }
       }
     }
-
+    .help-text {
+      font-size: 13px!important;
+    }
     .bookManager {
       .l-library-book {
-        .help-text {
-          font-size: 10px!important;
-        }
+
 
         .btn-add-book {
           padding: 4px 10px!important;
@@ -78,6 +81,37 @@
           span, p > a{
             font-size: 8px;
 
+          }
+        }
+      }
+    }
+
+    .l-breadcrumb li a {
+      line-height: 20px;
+      padding: 10px 10px 0 11px;
+      font-size: 12px;
+      &:before {
+        left: -35px;
+      }
+    }
+
+    .btn-save, .btn-next, .btn-test {
+      font-size: 14px!important;
+      padding: 6px 15px!important;
+    }
+    .appEditor {
+      .event-form {
+        .sub-label {
+          font-size: 12px;
+        }
+        blockquote {
+          font-size: 10px;
+        }
+        .event-time  {
+          margin-left: 0px;
+          button:first-child, button:last-child {
+            font-size: 12px;
+            padding: 3px 5px;
           }
         }
       }
@@ -139,12 +173,12 @@
       }
     }
 
+    .help-text {
+      font-size: 14px!important;
+    }
+
     .bookManager {
       .l-library-book {
-        .help-text {
-          font-size: 11px!important;
-        }
-
         .btn-add-book {
           padding: 5px 10px!important;
           font-size: 9px!important;
@@ -170,6 +204,9 @@
 
   /* Small Devices, Tablets */
   @media (min-width : $screen-sm-min) {
+    body {
+      font-size: 13px;
+    }
     .container {
       width: $container-sm;
     }
@@ -222,13 +259,11 @@
         }
       }
     }
-
+    .help-text {
+      font-size: 18px!important;
+    }
     .bookManager {
       .l-library-book {
-        .help-text {
-          font-size: 18px!important;
-        }
-
         .btn-add-book {
           padding: 6px 12px!important;
           font-size: 14px!important;
@@ -249,6 +284,35 @@
           }
           p > a {
             padding: 4px 6px;
+          }
+        }
+      }
+    }
+
+    .l-breadcrumb li a {
+      padding: 10px 0 0 0;
+      font-size: 12px;
+      margin-right: 22px;
+      &:before {
+        left: -20px;
+      }
+    }
+    .nav-app-editor {
+      padding-left: 0;
+    }
+    .appEditor {
+      .event-form {
+        .sub-label {
+          font-size: 15px;
+        }
+        blockquote {
+          font-size: 11px;
+          padding: 0;
+        }
+        .event-time  {
+          button:first-child, button:last-child {
+            font-size: 12px;
+            padding: 7px 5px;
           }
         }
       }
@@ -309,13 +373,16 @@
         }
       }
     }
+    .btn-save, .btn-next, .btn-test {
+      font-size: 16px!important;
+      padding: 10px 25px!important;
+    }
+    .help-text {
+      font-size: 20px!important;
+    }
 
     .bookManager {
       .l-library-book {
-        .help-text {
-          font-size: 20px!important;
-        }
-
         .btn-add-book {
           padding: 6px 12px!important;
           font-size: 14px!important;
@@ -341,6 +408,30 @@
         }
       }
     }
+    .l-breadcrumb li a {
+      padding: 10px 20px 0 10px;
+      font-size: 14px;
+      margin-right: 26px;
+      &:before {
+        left: -20px;
+      }
+    }
+    .nav-app-editor {
+      padding-left: 0;
+    }
+    .appEditor {
+      .event-form {
+        .sub-label {
+          font-size: 16px;
+        }
+        .event-time  {
+          button:first-child, button:last-child {
+            font-size: 14px;
+            padding: 6px 9px;
+          }
+        }
+      }
+    }
   }
 
   /* Large Devices, Wide Screens */
@@ -348,16 +439,17 @@
     .container {
       width: $container-lg;
     }
+    .l-avatar-img .avatar-img  > div {
+      min-height: 128px;
+    }
+
+    .help-text {
+      font-size: 22px!important;
+    }
 
     .bookManager {
-      .l-avatar-img .avatar-img  > div {
-        min-height: 128px;
-      }
-      .l-library-book {
 
-        .help-text {
-          font-size: 22px!important;
-        }
+      .l-library-book {
 
         .btn-add-book {
           padding: 6px 12px!important;
@@ -379,6 +471,25 @@
           }
           p > a {
             padding: 6px 8px;
+          }
+        }
+      }
+    }
+
+    .l-breadcrumb li a {
+      font-size: 16px;
+    }
+    .nav-app-editor {
+      padding-left: 0;
+    }
+    .appEditor {
+      .event-form {
+        .sub-label {
+          font-size: 16px;
+        }
+        .event-time  {
+          button:first-child, button:last-child {
+            padding: 7px 13px;
           }
         }
       }
