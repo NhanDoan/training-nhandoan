@@ -1,5 +1,7 @@
 {
   "name": "vagrant-demo-jade",
   "version": "0.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.1"
+  }
 }

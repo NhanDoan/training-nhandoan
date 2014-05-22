@@ -1,0 +1,44 @@
+- var scripts = getBlock('scripts')
+- var styles = getBlock('styles')
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    //- Mobile viewport optimized: h5bp.com/viewport
+    meta(name="viewport", content="width=device-width")
+    title= site.title
+    meta(name="description", content= site.description)
+    meta(name="keywords", content= site.keywords)
+
+    //- Output docpad produced
+    != getBlock('meta').toHTML()
+
+    //- Styles
+    != styles.add(site.styles).toHTML()
+  body.container
+    header#main-header.clearfix
+      nav.l-nav-main-header
+        ul.nav.navbar-nav.l-nav-content
+          li.logo-agility
+            a(href="#")
+              img(alt="logo agility", class="image-logo" src="images/logo-agility.png")
+          li
+            a(href="#") work
+          li
+            a(href="#") startups
+          li
+            a(href="#") brands
+          li
+            a(href="#") about
+          li
+            a(href="#") blog
+          li
+            a(href="#") start your agility experience
+              span.caret
+
+    article#content.row
+      != content
+
+    != scripts.add(site.scripts).toHTML()
+
