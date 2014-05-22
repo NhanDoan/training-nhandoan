@@ -9,30 +9,30 @@ header
 //- content all list
 section
   div.list-content.col-md-6
-    img(alt="image-list")
+    img(alt="image-list", src="images/icon-cloud.png")
     h3 Mobile, Web & Cloud Computing
     p.content Mobile, Web, and Cloud Computing - According to IDC, an estimated 1.7 billion smartphones will be sold in 2017 versus nearly 1 billion in 2013.  We can provide a cloud-based solution that takes your message to users across web and mobile platforms.
   div.list-content.col-md-6
-    img(alt="image-list")
+    img(alt="image-list", src="images/icon-design.png")
     h3 Mobile, Web & Cloud Computing
     p.content Mobile, Web, and Cloud Computing - According to IDC, an estimated 1.7 billion smartphones will be sold in 2017 versus nearly 1 billion in 2013.  We can provide a cloud-based solution that takes your message to users across web and mobile platforms.
 section
   div.list-content.col-md-6
-    img(alt="image-list")
+    img(alt="image-list", src="images/icon-agile.png")
     h3 Mobile, Web & Cloud Computing
     p.content Mobile, Web, and Cloud Computing - According to IDC, an estimated 1.7 billion smartphones will be sold in 2017 versus nearly 1 billion in 2013.  We can provide a cloud-based solution that takes your message to users across web and mobile platforms.
 
   div.list-content.col-md-6
-    img(alt="image-list")
+    img(alt="image-list", src="images/icon-technical.png")
     h3 Mobile, Web & Cloud Computing
     p.content Mobile, Web, and Cloud Computing - According to IDC, an estimated 1.7 billion smartphones will be sold in 2017 versus nearly 1 billion in 2013.  We can provide a cloud-based solution that takes your message to users across web and mobile platforms.
 footer
   section.our-service
     button.btn(type="submit") See our service
   section.content-blog-post
-    div.case-study
+    div.col-md-6.case-study
       a(href="#") Take a look at case study
-    div.blog-post
+    div.col-md-6.blog-post
       p This will be the
       p appealing agiliy blog post title
       img(alt="blog-post-agility")
@@ -45,12 +45,14 @@ footer
         strong We’d love to hear about your idea or project. Drop us a note and we’ll get in toch with you.
       section.form-experience
         form#content-experience
-          input(type="text", name="name", placeholder="Name")
-          input(type="text", name="company", placeholder="Company")
-          input(type="text", name="email", placeholder="Email")
-          input(type="text", name="phone", placeholder="Phone")
-          input(type="text", name="message", placeholder="Write your message")
-          button.btn.btn-send(type="submit") SEND
+          div.col-md-5.col-md-offset-1
+            input.form-control(type="text", name="name", placeholder="Name")
+            input.form-control(type="text", name="company", placeholder="Company")
+            input.form-control(type="text", name="email", placeholder="Email")
+            input.form-control(type="text", name="phone", placeholder="Phone")
+          div.col-md-6
+            input.form-control(type="text", name="message", placeholder="Write your message")
+            button.btn.btn-send(type="submit") SEND
   section.footer-content
     span contact@agiliyio.com
     span.copy-right © 2014, Agility, 175 Varick, 8th Floor, New York, NY 10014
