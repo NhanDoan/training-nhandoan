@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 9007
+  port: 9015
   templateData:
     site:
       # The default title of our website.

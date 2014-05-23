@@ -1,9 +1,36 @@
-header {
+
+.main-header {
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(215, 220, 222, 1);
+  -moz-box-shadow:    0px 3px 5px 0px rgba(215, 220, 222, 1);
+  box-shadow:         0px 3px 5px 0px rgba(215, 220, 222, 1);
+  padding: 2em 0;
+  font-weight: 800;
+  .logo-agility {
+      padding-right: 9em;
+    }
   .ceret-header {
     display: inline-block;
     margin-left: 1em;
     border-top: 0.5em solid transparent;
     border-left: 0.8em solid;
     border-bottom: 0.5em solid transparent;
+    vertical-align: -0.15em;
+  }
+  .l-nav-main-header {
+    margin-top: 1.5em;
+    li {
+      &:last-child a, .active{
+        color: #c42e60;
+      }
+      &:last-child {
+        background: #e5e5e5;
+      }
+      a {
+        padding: .2em 1.5em;
+        &.active {
+          font-weight: normal;
+        }
+      }
+    }
   }
 }
