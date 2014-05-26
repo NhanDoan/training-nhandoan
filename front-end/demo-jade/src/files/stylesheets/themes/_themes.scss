@@ -10,8 +10,8 @@
   text-shadow: 0.1em 0 .1em #3295c5;
 }
 .portfolio {
-  margin-right: -30em;
-  margin-left: -30em;
+  margin-right: -40%;
+  margin-left: -40%;
   background: #3295c5;
 }
 .btn-portfolio {
@@ -23,6 +23,7 @@
 }
 
 .btn-send {
+  margin-right: .3em;
   border: .09em solid #557da4;
   -webkit-box-shadow: -2px 1px 5px 0px rgba(208, 208, 208, 1);
   -moz-box-shadow:    -2px 1px 5px 0px rgba(208, 208, 208, 1);
@@ -32,4 +33,10 @@
   text-shadow: 1px 1px 2px rgba(68, 113, 145, 1);
   font-size: 2.2em;
   color: #fff;
+}
+.navbar-toggle {
+  background-color: #cb2a57;
+}
+.icon-bar {
+  border: 1px solid white!important;
 }

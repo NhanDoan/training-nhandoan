@@ -1,0 +1,110 @@
+
+/* Screen 320 mobile */
+
+@media (min-width : 320px) {
+  html {
+    font-size: 50%;
+  }
+  .l-nav-main-header {
+    text-align: left;
+  }
+  .logo-agility {
+    img {
+      float: left;
+    }
+  }
+  .logo-contact {
+    display: inline-flex;
+  }
+
+  /* Style for page work */
+
+  .l-nav-content-work {
+    .navbar-nav {
+      display: inline-flex;
+    }
+    li {
+      padding: .6em!important;
+    }
+    a.nav-work {
+      padding: .2em;
+    }
+  }
+}
+
+
+/* Screen 480px  */
+@media (min-width : $screen-xs-min) {
+  html {
+    font-size: 55%;
+  }
+
+   /* Style for page work */
+
+  .l-nav-content-work {
+    .navbar-nav {
+      display: inline-flex;
+    }
+    li {
+      padding: 2em!important;
+    }
+    a.nav-work {
+      padding: .2em;
+    }
+  }
+
+}
+
+/* Screen 768px */
+
+@media (min-width: $screen-sm-min) {
+  html {
+    font-size: 55.5%;
+  }
+  /* Style for page brand */
+  .navbar-nav {
+    float: none;
+  }
+  .main-header a.logo-agility {
+    padding-right: 0em;
+  }
+  .main-header .l-nav-content a {
+    padding: .2em .5em!important;
+  }
+
+  /* Style for page work */
+  .l-nav-content-work {
+    li {
+      padding: 2em 3em .2em 3em!important;
+    }
+  }
+
+}
+
+/* Screem >= 992px */
+
+@media (min-width: $screen-md-min) {
+  html {
+    font-size: 62.5%;
+  }
+  .main-header a.logo-agility {
+    padding-right: 6em;
+  }
+  .main-header .l-nav-content a {
+    padding: .2em 1em!important;
+  }
+}
+
+/* Screen lager >= 1200px*/
+
+@media (min-width: $screen-lg-min) {
+  html {
+    font-size: 62.5%;
+  }
+   .main-header a.logo-agility {
+    padding-right: 9em;
+  }
+  .main-header .l-nav-content a {
+    padding: .2em 1.5em!important;
+  }
+}

@@ -73,7 +73,10 @@ table {
 }
 
 .blog-post-text {
-  border:.1em solid #959595;
+  -webkit-box-shadow: 1px 1px 8px 0px rgba(206, 206, 206, 0.75);
+  -moz-box-shadow:    1px 1px 8px 0px rgba(206, 206, 206, 0.75);
+  box-shadow:         1px 1px 8px 0px rgba(206, 206, 206, 0.75);
+  border: 1px solid #959595;
   border-radius: .2em;
   padding-bottom: 5em;
   color: #fff;

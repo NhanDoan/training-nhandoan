@@ -34,3 +34,12 @@
     }
   }
 }
+
+.case-study {
+  display: table;
+  min-height: 20em;
+  a {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

@@ -2,7 +2,7 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
-  port: 9015
+  port: 9021
   templateData:
     site:
       # The default title of our website.
@@ -30,7 +30,7 @@ docpadConfig = {
       # The JavaScript files for the site.
       scripts: [
         "vendor/jquery/dist/jquery.min.js"
-        "vendor/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"
+        "vendor/bootstrap/dist/js/bootstrap.min.js"
         "main.js"
       ]
 

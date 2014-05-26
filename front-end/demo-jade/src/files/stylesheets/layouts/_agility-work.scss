@@ -1,0 +1,52 @@
+.l-nav-content-work {
+  margin-bottom: 0.3em;
+  display: inline-block;
+  li {
+    padding: 2em 3em .2em 3em;
+  }
+  a {
+    &.active {
+      background: none;
+      border-bottom: .3em solid #bb3564;
+    }
+    &.nav-work {
+      padding-bottom: .3em;
+      color: #333;
+      font-family: "TitilliumText25L800wt";
+      font-size: 2.1em;
+      text-shadow: 1px -1px 1px rgba(160, 160, 160, 1);
+      &:hover {
+        padding-bottom: 0.3em;
+        background: none;
+        border-bottom: .3em solid #bb3564;
+      }
+    }
+  }
+}
+
+.l-list-content-product {
+  .media {
+    margin-bottom: 1em;
+    &:first-child {
+      margin-top: 1.5em;
+    }
+
+    img {
+      border: 1px solid #dddddd;
+    }
+  }
+  padding-top: 2em;
+  .media-header {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: "Arial";
+    font-weight: bold;
+  }
+  .media-content {
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 1.4em;
+    text-align: left;
+  }
+}
+
