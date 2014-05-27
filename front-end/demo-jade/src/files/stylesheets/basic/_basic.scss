@@ -76,10 +76,13 @@ table {
   -webkit-box-shadow: 1px 1px 8px 0px rgba(206, 206, 206, 0.75);
   -moz-box-shadow:    1px 1px 8px 0px rgba(206, 206, 206, 0.75);
   box-shadow:         1px 1px 8px 0px rgba(206, 206, 206, 0.75);
+  background-color: white;
   border: 1px solid #959595;
   border-radius: .2em;
   padding-bottom: 5em;
   color: #fff;
+  behavior: url(../vendor/pie/PIE.htc);
+
   > div {
     margin: 0.6em;
     padding: 2.5em 1.5em;
@@ -107,7 +110,7 @@ table {
 }
 
 .form-experience {
-  input, textarea {
+  .textarea-post, .input-post {
     -ms-box-shadow: inset 5px 5px 10px #e8e8e8;
     -moz-box-shadow: inset 5px 5px 10px #e8e8e8;
     -o-box-shadow: inset 5px 5px 10px #e8e8e8;
@@ -117,13 +120,13 @@ table {
     font-size: 1.7em;
     color: #999999;
     margin: .45em;
+    behavior: url(../vendor/pie/PIE.htc);
   }
-  input {
+  .input-post {
     height: 2.8em;
     border-radius: .4em;
-
   }
-  textarea {
+  .textarea-post {
     height: 215px;
     resize: none;
   }

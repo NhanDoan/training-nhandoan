@@ -8,6 +8,7 @@
   color: #fff;
   font-size: 2.4em;
   text-shadow: 0.1em 0 .1em #3295c5;
+
 }
 .portfolio {
   margin-right: -40%;
@@ -20,6 +21,7 @@
   padding-right: 2em;
   padding-left: 2em;
   font-size: 2.4em;
+
 }
 
 .btn-send {
@@ -33,6 +35,8 @@
   text-shadow: 1px 1px 2px rgba(68, 113, 145, 1);
   font-size: 2.2em;
   color: #fff;
+  behavior: url(../vendor/pie/PIE.htc);
+
 }
 .navbar-toggle {
   background-color: #cb2a57;
