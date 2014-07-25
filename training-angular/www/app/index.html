@@ -29,12 +29,24 @@
         </ul>
         <h3 class="text-muted">www</h3>
       </div>
+      <div ng-controller="DemoController as demo">
+        Client ID: {{demo.clientId}}
+        <br>
 
-      <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+        Platnet Name: {{demo.planetName}}
+      </div>
+      <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
+      <h2>Spectial purtpost object</h2>
+      <my-planet></my-planet>
+      <hr>
+      <!-- <div ng-include="'views/myroute.html'" ng-controller="MyrouteCtrl"></div> -->
 
+      <div ng-include="'views/simple-form.html'"></div>
+      <div class="clearfix"></div>
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
+
     </div>
 
 

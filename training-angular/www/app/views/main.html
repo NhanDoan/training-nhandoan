@@ -1,33 +1,21 @@
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <div>
-    <!--Sidebar content-->
-
-    Search: <input ng-model="query">
-
+  <h1>'Allo, 'Allo!
+    <p class="lead"><img src="images/yeoman.png" alt="I'm Yeoman"/><br/>Always a pleasure scaffolding your apps.</p>
+    <p><a ng-href="#" class="btn btn-lg btn-success">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+  </h1>
+  <div class="row marketing">
+    <div>
+      <!--Sidebar content
+      -->Search:
+      <input ng-model="query"/>
+    </div>
+    <div ng-model="orderName"></div>
+    <h4 ng-repeat="awesomeThing in awesomeThings | filter:query | orderBy:orderName">{{awesomeThing}}</h4><br/>
+    <h4>{{awesomeThings[0]}}</h4>
+    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+    <h4>{{awesomeThings[1]}}</h4>
+    <p>AngularJS is a toolset for building the framework most suited to your application development.</p>
+    <h4>{{awesomeThings[2]}}</h4>
+    <p>Spectacular Test Runner for JavaScript.</p>
   </div>
-  <div ng-model="orderName">
-  </div>
-  <h4 ng-repeat="awesomeThing in awesomeThings | filter:query | orderBy:orderName">{{awesomeThing}}</h4>
-  <br>
-  <h4>{{awesomeThings[0]}}</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>{{awesomeThings[1]}}</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>{{awesomeThings[2]}}</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
 </div>

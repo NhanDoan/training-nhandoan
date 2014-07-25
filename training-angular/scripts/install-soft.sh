@@ -89,9 +89,4 @@ sudo cp -rf /vagrant/scripts/apache-config/default /etc/apache2/sites-available/
 
 # restart apache
 sudo /etc/init.d/apache2 restart
-
-cd /vagrant/www
-
-composer update
-sudo npm install
  			

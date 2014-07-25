@@ -69,6 +69,17 @@ body {
   }
 }
 
+
+.css-form input.ng-invalid.ng-dirty {
+  border: #FA787E;
+  box-shadow: 1px #FA787E;
+}
+
+.css-form input.ng-valid.ng-dirty {
+  border: #78FA89;
+  box-shadow: 1px #78FA89;
+}
+
 // /* Responsive: Portrait tablets and up */
 // @media screen and (min-width: 768px) {
 //   .container {
