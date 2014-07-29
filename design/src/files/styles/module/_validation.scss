@@ -1,0 +1,16 @@
+// set display poperty in the validation
+
+// for the therapist-summarynote-payment layouts
+form{
+
+  .help-block {
+    display: none;
+  }
+
+  .has-error {
+    .help-block {
+      display: block;
+    }
+  }
+
+}

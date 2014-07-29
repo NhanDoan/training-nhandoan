@@ -1,0 +1,254 @@
+---
+layout: "default"
+---
+/ define the insurance-detail-modal
+#insurance-detail-modal.general-modal.modal.fade{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+        %modal-title Insurance Information
+      .modal-body
+
+        %form.form-horizontal.form-bordered.clearfix{action:"", method:"post", enctype:""}
+          / name
+          .form-group
+            %label.col-md-6.control-label Health insurance name
+            .col-md-6
+              %p.date.form-control-static Anthern Blue Cross
+          / Insurance ID
+          .form-group
+            %label.col-md-6.control-label Insurance ID
+            .col-md-6
+              %p.date.form-control-static 54w5245
+          / Group
+          .form-group
+            %label.col-md-6.control-label Group #
+            .col-md-6
+              %p.date.form-control-static 242342
+          / Plan name
+          .form-group
+            %label.col-md-6.control-label Plan Name
+            .col-md-6
+              %p.date.form-control-static PPO20
+          / Policy or dependent
+          .form-group
+            %label.col-md-6.control-label Primary policyholder or dependent?
+            .col-md-6
+              %p.date.form-control-static Dependent
+          / Relationship
+          .form-group
+            %label.col-md-6.control-label Relationship to the policyhoder
+            .col-md-6
+              %p.date.form-control-static Husband
+          / First Name
+          .form-group
+            %label.col-md-6.control-label Policyholder First Name
+            .col-md-6
+              %p.date.form-control-static Anne
+          / Last Name
+          .form-group
+            %label.col-md-6.control-label Policyholder Last Name
+            .col-md-6
+              %p.date.form-control-static Marie
+          / Birth Date
+          .form-group
+            %label.col-md-6.control-label Policyholder Birth Date
+            .col-md-6
+              %p.date.form-control-static 04/05/1978
+          / Address
+          .form-group
+            %label.col-md-6.control-label Address the same as the primary policyholder's?
+            .col-md-6
+              %p.date.form-control-static NO
+          / Address
+          .form-group
+            %label.col-md-6.control-label Policyholder's address
+            .col-md-6
+              %p.date.form-control-static 123 Blue Street Appartment 123
+          / City
+          .form-group
+            %label.col-md-6.control-label City
+            .col-md-6
+              %p.date.form-control-static Chicago
+          / State
+          .form-group
+            %label.col-md-6.control-label State
+            .col-md-6
+              %p.date.form-control-static IL
+          / Zip Code
+          .form-group
+            %label.col-md-6.control-label Zip Code
+            .col-md-6
+              %p.date.form-control-static 60210
+
+/ define the process-modal for process payment button
+#summary-note-process-modal.general-modal.modal.fade{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+        %modal-title Are you sure?
+      .modal-body
+        %p Are you sure you want to process the payment for this appointment? Once the payment is processed, you will not be able to modify session duration, fee, diagnosis and CPT codes, and you will need to call eTherapi Customer Support for any change.
+        .wrap-send-btn
+          %button.btn.btn-success{type:"submit"}
+            %span
+              Yes, process the payment&#32
+          %a.text-danger{href:""} No, go back
+
+
+.therapis-cancelled-container
+  / define the session summary note pre-payment
+  .summary-container
+
+    / define the content-header of the pre-payment page
+    .content-header
+      .header-section
+        %h1
+          Appointment Summary
+          %i.icon-calendar6
+
+
+    .row
+      .summary-working-session.block.col-md-12
+        / define the working session block
+        .block-title
+          %h3 Session with&#32
+            %a{href: "javascript:void(0)"} John Patient
+
+        / define the component for changing session (previous or next session)
+        .row
+          .fc-header-right.pull-right
+            %span.fc-button.fc-button-prev.fc-state-default.fc-corner-left{unselectable:"on"}
+              %span.previous-arrow
+                %i.icon-arrow-left11
+            %span.fc-button.fc-button-next.fc-state-default.fc-state-active.fc-corner-right{unselectable:"on"}
+              %span.forward-arrow
+                %i.icon-uniEA17
+
+        / define the form for summary content note session
+        %form.form-horizontal.form-bordered.clearfix{action:"", method:"post", enctype:""}
+
+          / date time
+          .date-time-group.form-group
+            %label.col-md-3.control-label Date and time
+            .col-md-9
+              %p.date.form-control-static 3/8/2014, 11am - 12pm
+
+          / status
+          .status-group.form-group
+            %label.col-md-3.control-label Status
+            .col-md-9
+              %p.status.form-control-static Canceled
+
+          / Service provided
+          .service-provide-group.form-group
+            %label.col-md-3.control-label Service provided
+            .service-provide-description.col-md-5.no-gutter
+              %textarea.form-control{placeholder:"Enter a description of the service provided here."}
+              .hidden-container
+
+
+
+          / duration
+          .duration-group.form-group
+            %label.col-md-3.control-label Duration
+            .duration.col-md-3.no-gutter
+              %select.select-chosen.form-control{size:"1"}
+                %option{value:"0"} 30 mins
+                %option{value:"1"} 35 mins
+                %option{value:"2"} 40 mins
+                %option{value:"3"} 45 mins
+                %option{value:"4"} 50 mins
+                %option{value:"5"} 55 mins
+                %option{value:"6", selected:"selected"} 60 mins
+                %option{value:"7"} 65 mins
+                %option{value:"8"} 70 mins
+                %option{value:"9"} 75 mins
+                %option{value:"10"} 80 mins
+                %option{value:"11"} 85 mins
+                %option{value:"12"} 90 mins
+              .hidden-container
+          / fee
+          .fee-group.form-group.has-error
+            %label.col-md-3.control-label Fee
+            .fee.col-md-3.no-gutter
+              .input-group
+                .input-group-addon
+                  %i.fa.fa-usd
+                %input.form-control.valid{type:"text"}
+                .hidden-container
+              .help-block.animation-slideDown Please enter a number!
+
+          / diagnosis code
+          .diagnosis-code-group.form-group
+            %label.col-md-3.control-label Diagnosis codes
+
+            .diagnosis-code.col-md-5.no-gutter
+              .tagsinput.col-md-9
+                .hidden-container
+                %span.tag
+                  %span.tags-label-content ICD10
+                  %a{href:"#", title:"Removing tag"} x
+
+                %span.tag
+                  %span.tags-label-content ICD20
+                  %a{href:"#", title:"Removing tag"} x
+
+                %span.tag
+                  %span.tags-label-content ICD40
+                  %a{href:"#", title:"Removing tag"} x
+                .add-tag
+                  %input{placeholder:"Add code"}
+                .tags_clear
+
+          / CPT codes
+          .cpt-code-group.form-group
+            %label.col-md-3.control-label CPT codes
+
+            .cpt-code.col-md-5.no-gutter
+              .tagsinput.col-md-9
+                .hidden-container
+                %span.tag
+                  %span.tags-label-content ICD10
+                  %a{href:"#", title:"Removing tag"} x
+
+                %span.tag
+                  %span.tags-label-content ICD20
+                  %a{href:"#", title:"Removing tag"} x
+
+                %span.tag
+                  %span.tags-label-content ICD40
+                  %a{href:"#", title:"Removing tag"} x
+                .add-tag
+                  %input{placeholder:"Add code"}
+                .tags_clear
+
+
+          .form-group
+            / verify insurance
+            .insurance.col-md-9.col-md-offset-3
+              .insurance-verified.pull-left
+                %span
+                  %i.hi.hi-ok-sign
+                  %span.insurance-verified-title &#32Insurance Eligibility Verified
+              .insurance-date.col-md-7.pull-left
+                %span Mon, Jan 26th, 2014&#32
+                  %a{data-toggle:"modal", data-target:"#insurance-detail-modal", href:"#"} View insurance plan details
+
+
+            / verify the payment
+            .payment.col-md-9.col-md-offset-3
+              .payment-verified.pull-left
+                %span
+                  %i.fa.fa-credit-card
+                  %span.payment-verified-title &#32Payment Authorized
+              .payment-date.col-md-7.pull-left
+                %span Mon, Jan 26th, 2014 (Mastercard XXXX-XXXX-XXXX-4545) for Amount $20
+
+            .save-detail.col-md-9.col-md-offset-3
+              %button.btn.btn-info{type:"button"} Save Session Details
+
+            .process-payment.col-md-9.col-md-offset-3
+              %button.btn.btn-success{data-toggle:"modal", data-target:"#summary-note-process-modal", type:"button"} Process Payment

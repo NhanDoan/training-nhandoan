@@ -1,0 +1,126 @@
+---
+layout: "patient"
+---
+#view-intake-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+        %modal-title 
+          Practice Rules, Privacy Practices and Consent to Treatment
+      .modal-body
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+.patient-payment
+  .content-header
+    .banner
+      .banner-content
+        %h2 Payment
+
+  .row
+    .pri-content-def.col-md-8
+      .block.block-form
+        .block-title
+          %h2 Payment
+        .block-content
+          %form{action:"", class:"form-horizontal verify-insurance-form"}
+            .form-group.form-group-md.row
+              %label.label-col.control-label.col-md-4 Payment type
+              .input-col.col-md-5
+                %select{data-placeholder:"Select Payment Type", class:"form-control select-chosen input-md"}
+                  %option
+                  %option{value:""} Add new card
+
+            .form-group.form-group-md.row
+              %label.label-col.control-label.col-md-4 Insurance plan
+              .input-col.col-md-5
+                %select{data-placeholder:"Select Insurance Plan", class:"form-control select-chosen input-md"}
+                  %option
+                  %option{value:""} I don't want to use my insurance
+                  %option{value:""} Add Insurance Information
+
+            .form-group.form-action
+              .btn-container.col-md-offset-4.col-md-8
+                %button{type:"button", class:"btn btn-info btn-large", data-toggle:"modal", data-target:"#ins-eligibility-check"} Verify Insurance Coverage
+
+            .row 
+              .verify-result.col-md-offset-4.col-md-6
+                .confirmation.display-none
+                  %p Congratulations! Your session with Arthur Belriver is eligible for coverage by insurance plan.
+                  %a{href:"javascript:void(0)"} View insurance details.
+                .not-verified.display-none
+                  %p Something went wrong! Your insurance coverage could not be verified by our system. Please call 1-800-611-0821 and one of our team members will assist you in completing this booking.                
+
+          .block-section-title
+            %h3 Send Arthur a Message (optional)
+
+          %form{action:"", class:"request-appt-form"}
+            .form-group.form-group-md
+              %textarea.form-control{placeholder:"Enter a message", class:"pgh-input"}
+
+            .checkbox
+              %label
+                %input{type:"checkbox"} 
+                I agree to the 
+                %a{href:"http://etherapi.com/terms", target:"_blank", class:"text-primary"}
+                  Cancellation Policy and Terms and Privacy of eTherapi
+
+            .checkbox
+              %label
+                %input{type:"checkbox"} 
+                I agree to Arthur Belriver's 
+                %a{href:"javascript:void(0)", data-toggle:"modal", data-target:"#view-intake-modal", class:"text-primary"}
+                  Practice Rules, Consent to Treatment and Notice of Privacy Practices
+
+            .form-group.form-action
+              %button{type:"button", class:"btn btn-info btn-large"} Request Appointment
+
+            %p.notice A hold will be placed on your card for the total amount displayed. The provider will have 24 hours to reply to your request.
+            
+    .aside-content.col-md-4
+      .widget.user-info
+        .widget-advanced
+          .widget-header.text-center
+            %h3
+              %p.user-name 
+                %a{href:"javascript:void(0)"}
+                  Arthur Belriver
+              %small.info-brief Marriage and Family Therapist
+          .widget-main
+            .widget-image-container
+              %img{src:"http://placehold.it/65x65", alt:"Patient Avatar", class:"img-circle widget-icon"}/ 
+            .info-detail.text-center
+              %span
+                %i.icon-clock2.integr-icon
+                Tuesday 3/8/2014, 5pm to 5.55pm
+            .info-detail.text-center
+              %span.appt-policy.include-popover.popover-group.text-info 
+                %span Cancellation Policy 
+                %i.gi.gi-circle_info
+                .popover.top.default-popover
+                  .arrow
+                  .pop-over-content
+                    You can cancel your appointment free of charge up to 24 hours before the appointment time. After that, your therapist might apply a cancellation fee.
+
+      .block.fee-info
+        .block-title
+          %h2 Total
+        .block-content
+          .row.data-row
+            .col-md-7.col-xs-7
+              %span.description Session fee
+            .col-md-5.col-xs-5.text-right
+              %span.price \$420
+
+          .row.data-row
+            .col-md-7.col-xs-7
+              %span.description Estimated Insurance Coverage
+            .col-md-5.col-xs-5.text-right
+              %span.price \-$400
+
+        .block-footer 
+          .row
+            .col-md-7.col-xs-7
+              %span.description Total
+            .col-md-5.col-xs-5.text-right
+              %span.price \$20

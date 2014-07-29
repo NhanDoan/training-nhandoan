@@ -1,0 +1,203 @@
+!!!
+%html
+  %head
+  	%meta{charset: "utf-8"}
+  	%meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %title eTherapi
+    %meta{content: "eTherapi", name: "description"}
+    %link{href: "styles/main.css", rel: "stylesheet", type: "text/css"}
+  %body
+    .page-container.l-user
+      %header.main-header.navbar.navbar-default.navbar-fixed-top
+        .navbar-header.logo-wrapper
+          %h1
+            %a{href:"index.html", id:"main-logo"}etherapi
+        %form{action:"", class:"navbar-form navbar-left header-form"}
+          .form-group.search-client
+            %select{data-placeholder:"Search Patients", class:"form-control select-chosen input-search"}
+          %button{class:"btn add-client", type:"submit"}
+              %i.hi.hi-plus
+              Add Patient
+
+        %ul.nav.navbar-nav.pull-right
+          %li
+            %a{href:"#"}
+              %i.icon-house.integr-icon
+              Home
+          %li
+            %a{href:"#"}
+              %i.icon-calendar6.integr-icon
+              Appointments
+          %li
+            %a{href:"#"}
+              %i.icon-envelope4.integr-icon
+              Messages
+          %li.user-menu
+            %a{href:"#"}John Doe
+              %i.fa.fa-bars.fa-fw.integr-rev-icon
+
+      .main-container
+        .content-container.has-sidebar
+          .sub-header-wrap
+            .notice.themed-background-warning
+              %button{type:"button", class:"close", data-dismiss:"alert", aria-hidden:"true"}×
+
+              %span.system-notify
+                Join upcoming session with
+                 %span.user-name John Patient
+
+              %span.action-notify
+                Action Submitted
+
+            .sub-header-section
+
+          .main-content
+            = content
+
+          %footer.sub-footer
+            .pull-right
+              %i.fa.fa-heart.text-danger
+               Lovingly made in NYC & SF
+            .pull-left
+              2014 &copy;
+              %a{href:""} eTherapi
+
+        %aside.main-sidebar-user
+          .sidebar-section.sidebar-user.clearfix
+            .sidebar-user-avatar.themed-background-snow
+              %a{href:"#"}
+                %img{src:"http://placehold.it/65x65", alt:"user avatar"}/
+            .sidebar-username Example
+            .edit-profile.text-primary
+              %a{href:"#", class:""} Edit Profile
+
+          %ul.sidebar-nav
+            %li
+              %a{class:"active", href:"#"}
+                %i.icon-house.integr-icon
+                Home
+            %li
+              %a{href:"javascript:void(0);", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-calendar6.integr-icon
+                Appointments
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Upcoming
+                %li
+                  %a{href:"javascript:void(0);"} Requests
+                %li
+                  %a{href:"javascript:void(0);"} Past or Canceled
+
+            %li
+              %a{href:"#"}
+                %i.icon-envelope4.integr-icon
+                Messages
+            %li
+              %a{href:"#"}
+                %i.icon-users4.integr-icon
+                Patients
+            %li
+              %a{href:"#"}
+                %i.icon-alarm3.integr-icon
+                Your Availability
+            %li
+              %a{href:"#"}
+                %i.icon-creditcard.integr-icon
+                Billing
+            %li
+              %a{href:"#", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-user8.integr-icon
+                Profile
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Profile Picture and Video
+                %li
+                  %a{href:"javascript:void(0);"} About
+                %li
+                  %a{href:"javascript:void(0);"} Finances
+                %li
+                  %a{href:"javascript:void(0);"} Specialties and Expertise
+                %li
+                  %a{href:"javascript:void(0);"} Credentials
+            %li
+              %a{href:"#", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-archive2.integr-icon
+                Account
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Account Information
+                %li
+                  %a{href:"javascript:void(0);"} Practice Details
+                %li
+                  %a{href:"javascript:void(0);"} Intake Forms
+                %li
+                  %a{href:"javascript:void(0);"} Change Password
+
+            %li
+              %a{href:"#"}
+                %i.icon-wand.integr-icon
+                Technical Support
+            %li
+              %a{href:"#"}
+                %i.icon-dashboard2.integr-icon
+                Test your System
+            %li
+              %a{href:"#"}
+                %i.icon-in-alt.integr-icon
+                Log Out
+
+    %script{type: "text/javascript", src: "scripts/vendor/jquery-1.11.0.min.js"}
+    %script{type: "text/javascript", src: "scripts/vendor/bootstrap.min.js"}
+    %script{type: "text/javascript", src: "scripts/plugins.js"}
+    %script{type: "text/javascript", src: "scripts/app.js"}
+    %script{type: "text/javascript", src: "scripts/pages/formsValidation.js"}
+    :javascript
+      $(function(){ FormsValidation.init(); });
+
+    / define the modal for profile upload
+    #profile-upload-modal.general-modal.modal.fade{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+            %modal-title Upload Image
+          .modal-body
+            .row
+              .original-size.col-md-6.no-gutter
+
+                .original-upload-photo
+                  .cropMain
+                    .crop-container
+                      .crop-overlay
+                      %img{src:"/images/user-avatar/Avatar-Male120x120.png", class:"crop-img"}/
+
+                  .cropSlider.noUi-target.col-md-12.no-gutter
+                    .small-illustration
+                      %span
+                        %i.fa.fa-picture-o
+
+                    .noUi-base.noUi-background.noUi-horizontal.slider-wrapper
+                      .noUi-origin.noUi-origin-lower
+                        .noUi-handle.noUi-handle-lower
+
+                    .large-illustration
+                      %span
+                        %i.fa.fa-picture-o.fa-2x
+
+              .crop-size.col-md-6.no-gutter
+                .crop-photo
+                  %p
+                    %span Preview
+                  .photo-wrapper-crop
+                    %img.img-rounded{src:"http://placehold.it/220x220", alt:"user avatar"}/
+          .modal-footer
+            .wrap-send-btn
+              .file-upload.btn.btn-success
+                %span Upload Picture
+                %input.upload{type:"file"}/
+              %button.save-btn.btn.btn-info{type:"button"}
+                %span
+                  Save

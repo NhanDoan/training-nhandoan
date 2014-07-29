@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %title eTherapi
+    %meta{content: "eTherapi", name: "description"}
+    %link{href: "styles/main.css", rel: "stylesheet", type: "text/css"}
+
+   %body 
+    .page-container.l-user
+      %header.main-header.navbar.navbar-default.navbar-fixed-top
+        .navbar-header.logo-wrapper
+          %h1
+            %a{href:"index.html", id:"main-logo"}etherapi
+
+        %ul.nav.navbar-nav.pull-right
+          %li
+            %a{href:"javascript:void(0)"}
+              Contact us
+          %li
+            %a{href:"javascript:void(0)"}
+              For Therapists
+          %li
+            %a{href:"javascript:void(0)"}
+              Log in
+          %li
+            %button{type:"button", class:"btn btn-info navbar-btn"} Sign up
+
+      .main-container
+        .content-container.full-width
+          = content
+
+    %script{type: "text/javascript", src: "scripts/vendor/jquery-1.11.0.min.js"}
+    %script{type: "text/javascript", src: "scripts/vendor/bootstrap.min.js"}
+    %script{type: "text/javascript", src: "scripts/plugins.js"}
+    %script{type: "text/javascript", src: "scripts/app.js"}
+    %script{type: "text/javascript", src: "scripts/pages/formsValidation.js"}
+    :javascript
+      $(function(){ FormsValidation.init(); });

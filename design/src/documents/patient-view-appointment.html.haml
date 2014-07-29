@@ -1,0 +1,105 @@
+---
+layout: "patient"
+---
+.patient-view-appt
+  .content-header
+    .header-section
+      %h1 
+        Appointment Details
+        %i.icon-calendar6
+
+  .row
+    .aside-content.col-md-4
+      .widget.user-info
+        .widget-advanced
+          .widget-header.name-content.text-center
+            %h3
+              %a{href:"javascript:void(0)", class:"user-name"} Arthur Belriver
+          .widget-main
+            .widget-image-container
+              %a{href:"javascript:void(0)"}
+                %img{src:"http://placehold.it/65x65", alt:"Patient Avatar", class:"img-circle widget-icon"}/ 
+            .contact-detail
+              %span
+                %i.icon-calendar6.integr-icon  
+                1/27/2014, 3pm-4pm
+            .contact-detail
+              %span
+                %i.icon-check.integr-icon.text-success
+                Confirmed
+
+            .contact-detail
+              %span
+                %i.hi.hi-remove.integr-icon.text-danger
+                Canceled
+
+            .contact-detail
+              %span
+                %i.icon-clock2.integr-icon
+                Pending
+
+
+    .pri-content-def.col-md-8
+      .block
+        .block-title
+          %h2 Charges
+        .block-data-wrap
+          %header.block-data-header
+            .description-col.col-style
+              .cell-wrapper
+                %span.cell Description
+
+            .price-col.col-style
+              .cell-wrapper
+                %span.cell Price
+
+          .block-data
+            .data-row
+              .description-col.more-data.col-style
+                .cell-wrapper
+                  .cell 
+                    %p
+                      %span [Service Provided] - [Duration] minutes
+                    %p
+                      %span 1/27/2014 Appointment with Arthur Belriver 
+                    %p
+                      %span.notice CPT codes: 
+                      [CPT code 1], [CPT code 2], [CPT code 3]
+                    %p
+                      %span.notice Diagnosis codes 
+                      (ICD10): [ICD10 1], [ICD10 2], [ICD10 3]
+
+              .price-col.col-style
+                .cell-wrapper
+                  %span.cell \$120
+
+          .block-data
+            .data-row
+              .description-col.col-style
+                .cell-wrapper
+                  %span.cell Estimated Insurance Coverage 
+
+              .price-col.col-style
+                .cell-wrapper
+                  %span.cell \-$30
+
+          .block-data-footer
+            .description-col.col-style
+              .cell-wrapper
+                %span.cell Total
+
+            .price-col.col-style
+              .cell-wrapper
+                %span.cell \$90
+        
+        .block-details
+          %p 
+            %i.fa.fa-credit-card.integr-icon 
+            %span.notice Payment amount 
+             of $90 authorized on Mon, Jan 26th, 2014 (Mastercard XXXX-XXXX-XXXX-4545) 
+
+          %p 
+            %i.hi.hi-ok-sign.integr-icon 
+            %span.notice Insurance eligibility verified on 
+             Jan 26th 2014. 
+            %a{href:"javascript:void(0)", class:"text-primary"} View Insurance Details.

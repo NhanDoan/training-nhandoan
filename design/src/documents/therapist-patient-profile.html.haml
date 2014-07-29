@@ -1,0 +1,128 @@
+---
+layout: "default"
+---
+
+.therapist-patient-profile
+
+  .content-header
+    .header-section
+      %h1 
+        Patient Profile
+        %i.icon-users4
+
+  .row 
+    .aside-content.col-md-4
+      .widget.user-info
+        .widget-advanced
+          .widget-header.text-center
+            %h3
+              %p.user-name Rinter Decol
+              %small.info-brief Male, 54
+          .widget-main
+            .widget-image-container
+              %img{src:"http://placehold.it/65x65", alt:"Patient Avatar", class:"img-circle widget-icon"}/ 
+            .contact-detail
+              %span
+                %i.icon-phone7.integr-icon
+                (XXX) XXX-XXXX
+            .contact-detail
+              %span
+                %i.gi.gi-envelope.integr-icon  
+                example@example.com
+
+      .patient-status.cell-wrapper
+        %span.cell Inactive Patient
+        %label{class:"switch switch-primary"} 
+          %input{type:"checkbox", checked:"checked"}/
+          %span  
+        %span.cell.active Active Patient
+
+    .pri-content-def.col-md-8
+      .block.info-detail
+        .block-title
+          %h2 Patient Information
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p First Name
+          .col-md-8.col-sm-8.col-xs-8
+            %p Anthem
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Last Name
+          .col-md-8.col-sm-8.col-xs-8
+            %p Blue Cross
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Gender
+          .col-md-8.col-sm-8.col-xs-8
+            %p Male
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Birth Date
+          .col-md-8.col-sm-8.col-xs-8
+            %p 07/02/1988
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Email Address
+          .col-md-8.col-sm-8.col-xs-8
+            %p email@example.com
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Phone Number
+          .col-md-8.col-sm-8.col-xs-8
+            %p (XXX) XXX-XXXX
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Location
+          .col-md-8.col-sm-8.col-xs-8
+            %p kathmandu
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Timezone
+          .col-md-8.col-sm-8.col-xs-8
+            %p GMT
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Emergency contact full name
+          .col-md-8.col-sm-8.col-xs-8
+            %p Conrad Kozuch
+
+        .row 
+          .col-md-4.col-sm-4.col-xs-4.info-property
+            %p Emergency phone number
+          .col-md-8.col-sm-8.col-xs-8
+            %p (XXX) XXX-XXXX
+
+      .block 
+        .block-title
+          %h2.standout-title Patient Medical History
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut laborea et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+
+      .block
+        .block-title
+          %h2 Presenting Problems and Treatment Planning
+
+        %form{action:""} 
+          .form-group.patient-problem.include-popover
+            %textarea{name:"", cols:"30", rows:"8", class:"form-control", placeholder:"Enter your intake notes here."} 
+
+            .popover.right
+              .arrow
+              .pop-over-content 
+                Use this space to record Intake Diagnosis Codes, Presenting Problems, Treatment Plan Objective, prescribed frequency of treatment, current mental status and recommendations.
+
+            .popover.top
+              .arrow
+              .pop-over-content 
+                Use this space to record Intake Diagnosis Codes, Presenting Problems, Treatment Plan Objective, prescribed frequency of treatment, current mental status and recommendations.
+
+          .form-group.form-actions
+            %button{type:"submit", class:"btn btn-info btn-large"} Save

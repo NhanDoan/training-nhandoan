@@ -1,0 +1,165 @@
+---
+layout: "patient"
+---
+#patient-add-card.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+        %modal-title Add Debit/Credit Card
+      .modal-body.larger-bottom
+        %form.form-horizontal{action:"", method:"post", enctype:"multipart/form-data"} 
+          .form-group.form-group-md
+            %label{for:"", class:"control-label col-md-5"} Card Number
+            .col-md-6
+              .input-group
+                %input{type:"text", class:"form-control input-md"}/ 
+                %span.input-group-addon.group-addon-lg
+                  %i.icon-vcard2
+          .form-group.form-group-md
+            %label{for:"", class:"control-label col-md-5"} Name on Card
+            .col-md-6 
+              .input-group
+                %input{type:"text", class:"form-control input-md"}/ 
+                %span.input-group-addon.group-addon-lg
+                  %i.icon-vcard2
+          .form-group.form-group-md
+            %label{for:"", class:"control-label col-md-5"} Expiration Date
+            .col-md-6.multi-column
+              .row
+                .col-md-6
+                  %select{type:"text", class:"form-control select-chosen input-md"}/ 
+                    %option{value:""} 01
+                    %option{value:""} 02
+                    %option{value:""} 03
+                    %option{value:""} 04
+                    %option{value:""} 05
+                    %option{value:""} 06
+                    %option{value:""} 07
+                    %option{value:""} 08
+                    %option{value:""} 09
+                    %option{value:""} 10
+                    %option{value:""} 11
+                    %option{value:""} 12
+                .col-md-6
+                  %select{type:"text", class:"form-control select-chosen input-md"}/ 
+                    %option{value:""} 2014
+                    %option{value:""} 2060
+          .form-group.form-group-md
+            %label{for:"", class:"control-label col-md-5"} CVC
+            .col-md-3
+              .input-group
+                %input{type:"text", class:"form-control input-md"}/ 
+                %span.input-group-addon.group-addon-lg
+                  %i.icon-vcard2
+          .form-group.form-actions
+            .col-md-6.col-md-offset-5
+              %button{type:"button", class:"btn btn-info btn-large"} Save Card
+
+
+.patient-account
+  
+  .content-header
+    .header-section.subtitle
+      %h1
+        %i.icon-archive2
+        Account
+      %small The information on this page is strictly confidential and will be visible only to you.
+
+  .row.no-gutter
+    .aside-content.affix-menu-nav.col-md-3{data-offset-top:"200", data-spy:"affix"} 
+      .slave-nav
+        %ul.list-group.nav
+          %li.active
+            %a.list-group-item{href:"javascript:void(0)"}
+              %h4.list-group-item-heading Billing
+          %li
+            %a.list-group-item{href:"javascript:void(0)"}
+              %h4.list-group-item-heading Change Password
+
+    .pri-content.col-md-9
+      .block 
+        .block-title
+          %h2 Billing
+        .block-data-wrap
+          %header.block-data-header 
+            .card-number-col.col-style
+              .cell-wrapper
+                %span.cell Card Number
+
+            .name-card-col.col-style
+              .cell-wrapper
+                %span.cell Name on Card
+
+            .expires-card-col.col-style
+              .cell-wrapper
+                %span.cell Expires
+
+          .block-data
+            .data-row
+              .card-number-col.col-style
+                .cell-wrapper
+                  %span.cell xxxx xxxx xxxx 5454
+
+              .name-card-col.col-style
+                .cell-wrapper
+                  %span.cell John Smith
+
+              .expires-card-col.col-style
+                .cell-wrapper
+                  %span.cell 01/15
+
+              .action-col.col-style
+
+              .action-delete-col.col-style
+                .cell-wrapper
+                  .cell
+                    %button{type:"button", class:"close", data-dismiss:"alert", aria-hidden:"true"} ×
+
+            .data-row
+              .card-number-col.col-style
+                .cell-wrapper
+                  %span.cell xxxx xxxx xxxx 5454
+
+              .name-card-col.col-style
+                .cell-wrapper
+                  %span.cell John Smith
+
+              .expires-card-col.col-style
+                .cell-wrapper
+                  %span.cell 01/15
+
+              .action-col.col-style
+                .cell-wrapper
+                  .cell
+                    %button.btn.btn-info.btn-action{type:"button"} Make Default
+
+              .action-delete-col.col-style
+                .cell-wrapper
+                  .cell
+                    %button{type:"button", class:"close", data-dismiss:"alert", aria-hidden:"true"} ×
+        %a{href:"javascript:void(0)", class:"add-more pull-right", data-toggle:"modal", data-target:"#patient-add-card"} + Add Debit/Credit Card 
+
+      .block.block-form 
+        .block-title
+          %h2 Change Password
+        %form{action:"", class:"form-horizontal"} 
+          .form-group.form-group-md
+            %label.control-label.col-md-4{for:""} New Password
+            .col-md-5
+              .input-group
+                %input.form-control.input-md{type:"password"}/ 
+                %span.input-group-addon.group-addon-lg
+                  %i.fa.fa-asterisk
+
+          .form-group.form-group-md
+            %label.control-label.col-md-4{for:""} Confirm New Password
+            .col-md-5
+              .input-group
+                %input.form-control.input-md{type:"password"}/ 
+                %span.input-group-addon.group-addon-lg
+                  %i.fa.fa-asterisk
+
+          .form-group.form-action
+            .col-md-4.col-md-offset-4
+              %button{type:"button", class:"btn btn-info btn-large"} Save Password

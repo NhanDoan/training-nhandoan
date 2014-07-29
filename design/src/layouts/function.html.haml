@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+  	%meta{charset: "utf-8"}
+  	%meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %title eTherapi
+    %meta{content: "eTherapi", name: "description"}
+    %link{href: "styles/main.css", rel: "stylesheet", type: "text/css"}
+
+   %body 
+    .page-container.l-user
+      %header.main-header.navbar.navbar-default.navbar-fixed-top
+        .navbar-header.logo-wrapper
+          %h1
+            %a{href:"index.html", id:"main-logo"}etherapi
+        .navbar-right
+          %button{type:"button", class:"btn btn-warning navbar-btn"} Start Session
+
+      .main-container
+        .content-container.full-width
+          .main-content
+            = content
+
+   	%script{type: "text/javascript", src: "scripts/vendor/jquery-1.11.0.min.js"}
+    %script{type: "text/javascript", src: "scripts/vendor/bootstrap.min.js"}
+    %script{type: "text/javascript", src: "scripts/plugins.js"}
+    %script{type: "text/javascript", src: "scripts/app.js"}

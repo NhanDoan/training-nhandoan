@@ -1,0 +1,26 @@
+.pagination {
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f2f4f8;
+
+    a {
+      color: #0099d8;
+      background-color: #f2f4f8;
+
+      &:hover {
+        background-color: #0099d8;
+      }
+    }
+  }
+
+  .active {
+    a {
+      background-color: #0099d8;
+      color: #fff;
+      &:hover {
+        background-color: #0099d8;
+      }
+    }
+  }
+}

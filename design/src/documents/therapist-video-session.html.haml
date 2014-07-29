@@ -1,0 +1,48 @@
+---
+layout: "function"
+---
+.video-session
+  .row
+    .aside-content.col-md-4
+      .widget.user-info
+        .widget-advanced
+          .widget-header.name-content.text-center
+            %h3
+              %a{href:"javascript:void(0)", class:"user-name"} Normal Patient
+          .widget-main
+            .widget-image-container
+              %a{href:"javascript:void(0)"} 
+                %img{src:"http://placehold.it/65x65", alt:"Patient Avatar", class:"img-circle widget-icon"}/ 
+            .info-detail
+              %span
+                %i.icon-clock2.integr-icon
+                %span.info-title Current Time: 
+                3.24 pm
+            .info-detail
+              %span
+                %i.icon-play-circle.integr-icon  
+                %span.info-title Appointment Start Time: 
+                55 mins
+            .info-detail
+              %span
+                %i.icon-alarm3.integr-icon  
+                %span.info-title Appointment End Time: 
+                55 mins
+      
+      .block.take-session-note
+        .block-title{data-target:"#session-note", data-toggle:"collapse", class:"toggle-link collapsed"}
+          .toggle-title-collapsed
+            %h2 
+              Take Session Notes
+              %i.hi.hi-plus.pull-right
+          .toggle-title
+            %h2 
+              Hide Session Notes
+              %i.hi.hi-minus.pull-right
+
+        .block-content.collapse#session-note
+          %form{action:"", class:"form-horizontal session-note-form"}
+            %textarea{class:"form-control pgh-input"} University of Chicago: PSY.D - 2001
+            .form-actions
+              %button{type:"button", class:"btn btn-info btn-large"} Save in Patient Notes
+

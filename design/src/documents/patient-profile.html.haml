@@ -1,0 +1,275 @@
+---
+layout: "patient"
+---
+
+/ the patient-profile page
+.patient-profile
+  / degine the content-header of the patient-profile page
+  .content-header
+    .header-section.subtitle
+      %h1
+        Profile
+        %i.icon-user8
+      %small The information on this page will be visible only to your therapist of choice.
+
+
+
+  / define the content of patient-profile page
+  .row.no-gutter
+    .edit-profile-nav.slave-nav.no-gutter.aside-content.affix-menu-nav.col-md-3{data-offset-top:"200", data-spy:"affix"}
+      / define the list-group
+      %ul.list-group.nav
+
+        %li.active
+          %a.list-group-item{href:"javascript:void(0)"}
+            %h4.list-group-item-heading Profile Picture and Video
+
+        %li
+          %a.list-group-item{href:"javascript:void(0)"}
+            %h4.list-group-item-heading Contact Information
+
+        %li
+          %a.list-group-item{href:"javascript:void(0)"}
+            %h4.list-group-item-heading Insurance
+
+        %li
+          %a.list-group-item{href:"javascript:void(0)"}
+            %h4.list-group-item-heading Medical History
+
+
+
+    .pri-content.edit-profile-content.listview-content.col-md-9
+
+
+      .profile-button-group
+        %button.btn.btn-info{type:"button"} Save Profile
+
+      .edit-profile-detail
+
+        / define the picture-video block
+        .picture-video.block.col-md-12
+
+          .block-title
+            %h2 Profile Picture and Video
+
+          %form.form-bordered{action:"", method:"post", enctype:""}
+            .avatar-container.row.no-gutter
+              .col-md-6.no-gutter
+                .user-avatar-section.clearfix
+                  .user-avatar
+                    %a.img-rounded{href:"javascript:void(0)"}
+                      %img{src:"http://placehold.it/120x120", alt:"avatar"}/
+                  .avatar-action
+                    .user-avatar-upload
+                      %a.btn.btn-info{data-toggle:"modal", data-target:"#profile-upload-modal", type:"button"} Upload New Picture
+                    .user-avatar-delete
+                      %a.text-danger{href:"javascript:void(0)"} Delete picture
+
+
+
+        .contact-information.block.col-md-12
+          .block-title
+            %h2 Contact Information
+
+          %form.form-horizontal{action:""}
+            .form-group
+              %label.control-label.col-md-4{for:""} First Name
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., Amanda"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-user7
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Last Name
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., Robison"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-user7
+
+            .form-group
+              %label.control-label.col-md-4{for:""} I am
+              .col-md-5
+                %select.select-chosen{data-placeholder: "Male"}
+                  %option{value:"Male"} Male
+                  %option{value:"Female"} Female
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Date of Birth
+              .col-md-5
+                .input-group
+                  %input.form-control.input-datepicker.input-md{type:"text", placeholder:"mm/dd/yyyy", date-date-format:"mm/dd/yyyy"}
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-vcard2
+
+            .form-group.has-error
+              %label.control-label.col-md-4{for:""} Email Address
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., arobinson@mail.com"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-envelope4
+                .help-block.animation-slideDown Please enter a valid email address!
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Phone Number
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"xxx-xxx-xxxx"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-phone7
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Street Address
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., 123 Main St. "}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-pin
+
+            .form-group
+              %label.control-label.col-md-4{for:""} City
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., New York "}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-pin
+
+
+            .form-group
+              %label.control-label.col-md-4{for:""} State
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., NY "}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-pin
+
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Zip Code
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., 10018 "}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-pin
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Country
+              .col-md-5
+                %select.select-chosen{data-placeholder: "USA"}
+                  %option{value:"USA"} USA
+                  %option{value:"Australia"} Australia
+                  %option{value:"Australia"} India
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Timezone
+              .col-md-5
+                %select.select-chosen{data-placeholder: "Choose a Timezone"}
+                  %option{selected:"selected"}
+                  %option{value:"USA"} USA
+                  %option{value:"Australia"} Australia
+                  %option{value:"Australia"} India
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Emergency Contact Full Name
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"e.g., Alan Rotlif"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-user7
+
+            .form-group
+              %label.control-label.col-md-4{for:""} Emergency Contact Phone Number
+              .col-md-5
+                .input-group
+                  %input.form-control.input-md{type:"text", placeholder:"xxx-xxx-xxxx"}/
+                  %span.input-group-addon.group-addon-lg
+                    %i.icon-phone7
+
+
+        .insurance-status.block.col-md-12.clearfix
+          .block-title
+            %h2 Insurance
+
+          %form.form-horizontal{action:""}
+            .total-block-data
+                / define the header columns of table
+                %header.header-striped-row.col-md-12.no-gutter
+                  .general-column.col-md-2.col-xs-2
+                    .cell-wrapper
+                      .cell
+                        %span Status
+                  .general-column.col-md-3.col-xs-3
+                    .cell-wrapper
+                      .cell
+                        %span Insurance Name
+                  .general-column.col-md-2.col-xs-2
+                    .cell-wrapper
+                      .cell
+                        %span Insurance ID
+
+                  .general-column.col-md-2.col-xs-2
+                    .cell-wrapper
+                      .cell
+                        %span Plan Name
+
+                  .general-column
+                    .cell-wrapper
+                      .cell
+
+
+
+                / data content
+                .data-group
+                  / data row
+                  .striped-row.col-md-12.no-gutter
+                    / the data of state header
+                    .general-column.col-md-2.col-xs-2
+                      .cell-wrapper
+                        .cell
+                          %span.text-success Verified
+                    / the data of License Type header
+                    .general-column.col-md-3.col-xs-3
+                      .cell-wrapper
+                        .cell
+                          %span Bluecross
+                    / the data of License header
+                    .general-column.col-md-2.col-xs-2
+                      .cell-wrapper
+                        .cell
+                          %span xxx-xxx-4343
+
+                    / the data of expiration header
+                    .general-column.col-md-2.col-xs-2
+                      .cell-wrapper
+                        .cell
+                          %span PPO 20
+
+                    / the end of row
+                    .general-column
+                      .cell-wrapper
+                        .cell
+                          %a.text-danger{href:"javascript:void(0)"} Delete
+
+                %a.add-more{data-toggle:"modal", data-target:"#profile-insurance-modal", href:"javascript:void(0)"} + Add Insurance Plan Information
+
+
+
+        .medical-history.block.col-md-12
+          .block-title
+            %h2 Relevant Medical History (Optional)
+
+          %form{action:""}
+            .form-group.patient-problem.include-popover
+              %textarea{name:"", cols:"30", rows:"8", class:"form-control", placeholder:"Enter here your medical history."}
+
+              .popover.left
+                .arrow
+                .pop-over-content
+                  Please enter here previous diagnoses, reasons for seeking therapy, current medications and any other historical information that might be useful for your therapist. Also, let your therapist know if you are receiving other forms of mental health care.
+
+
+            .form-group.form-actions
+              %button{type:"button", class:"btn btn-info"} Save Profile
+

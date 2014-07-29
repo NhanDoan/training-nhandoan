@@ -1,0 +1,269 @@
+!!!
+%html
+  %head
+  	%meta{charset: "utf-8"}
+  	%meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %title eTherapi
+    %meta{content: "eTherapi", name: "description"}
+    %link{href: "styles/main.css", rel: "stylesheet", type: "text/css"}
+  %body
+    .page-container.l-user
+      %header.main-header.navbar.navbar-default.navbar-fixed-top
+        .navbar-header.logo-wrapper
+          %h1
+            %a{href:"index.html", id:"main-logo"}etherapi
+
+        %ul.nav.navbar-nav.pull-right
+          %li
+            %a{href:"#"}
+              %i.icon-house.integr-icon
+              Home
+          %li
+            %a{href:"#"}
+              %i.icon-calendar6.integr-icon
+              Appointments
+          %li
+            %a{href:"#"}
+              %i.icon-envelope4.integr-icon
+              Messages
+          %li.user-menu
+            %a{href:"#"}John Doe
+              %i.fa.fa-bars.fa-fw.integr-rev-icon
+
+      .main-container
+        .content-container.has-sidebar
+          .sub-header-wrap
+            .notice.themed-background-warning
+              %button{type:"button", class:"close", data-dismiss:"alert", aria-hidden:"true"}×
+
+              %span.system-notify
+                Join upcoming session with
+                 %span.user-name John Patient
+
+              %span.action-notify
+                Action Submitted
+
+            .sub-header-section
+
+          .main-content
+            = content
+
+          %footer.sub-footer
+            .pull-right
+              %i.fa.fa-heart.text-danger
+               Lovingly made in NYC & SF
+            .pull-left
+              2014 &copy;
+              %a{href:""} eTherapi
+
+        %aside.main-sidebar-user
+          .sidebar-section.sidebar-user.clearfix
+            .sidebar-user-avatar.themed-background-snow
+              %a{href:"#"}
+                %img{src:"http://placehold.it/65x65", alt:"user avatar"}/
+            .sidebar-username Example
+            .edit-profile.text-primary
+              %a{href:"#", class:""} Edit Profile
+
+          %ul.sidebar-nav
+            %li
+              %a{href:"#"}
+                %i.icon-house.integr-icon
+                Home
+            %li
+              %a{href:"javascript:void(0);", class:"sidebar-nav-menu active"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-calendar6.integr-icon
+                Appointments
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Upcoming
+                %li
+                  %a{href:"javascript:void(0);"} Pending Requests
+                %li
+                  %a{href:"javascript:void(0);"} Past or Canceled
+
+            %li
+              %a{href:"#"}
+                %i.icon-envelope4.integr-icon
+                Messages
+            %li
+              %a{href:"#", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-user8.integr-icon
+                Profile
+              %ul
+                %li
+                  %a{href:"javascript:void(0)"} Profile Picture and Video
+                %li
+                  %a{href:"javascript:void(0)"} Contact Information
+                %li
+                  %a{href:"javascript:void(0)"} Insurance
+                %li
+                  %a{href:"javascript:void(0)"} Medical History
+            %li
+              %a{href:"javascript:void(0);", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-archive2.integr-icon
+                Account
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Billing
+                %li
+                  %a{href:"javascript:void(0);"} Change Password
+
+            %li
+              %a{href:"#"}
+                %i.icon-user-md.integr-icon
+                Search Therapists
+
+            %li
+              %a{href:"#"}
+                %i.icon-wand.integr-icon
+                Technical Support
+            %li
+              %a{href:"#"}
+                %i.icon-dashboard2.integr-icon
+                Test your System
+            %li
+              %a{href:"#"}
+                %i.icon-in-alt.integr-icon
+                Log Out
+
+    %script{type: "text/javascript", src: "scripts/vendor/jquery-1.11.0.min.js"}
+    %script{type: "text/javascript", src: "scripts/vendor/bootstrap.min.js"}
+    %script{type: "text/javascript", src: "scripts/plugins.js"}
+    %script{type: "text/javascript", src: "scripts/app.js"}
+
+    / insurance eligibility check
+    #ins-eligibility-check.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %modal-title Please wait
+          .modal-body
+            %p Please wait while we check your insurance plan eligibility for your session with Arthur Belriver.
+            / progress bar
+            .progress.progress-striped
+              .progress-bar.progress-bar-info{role:"progressbar", aria-valuenow:"60", aria-valuemin:"0", aria-valuemax:"100", style:"width: 60%"}
+
+    / define the patient-profile-insurance-modal
+    #profile-insurance-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+            %modal-title Insurance Plan Information
+          .modal-body
+            %form.form-horizontal{action:""}
+              .form-group
+                %label.control-label.col-md-5{for:""} Health Insurance Name
+                .col-md-6.set-width
+                  %select.select-chosen.input-md{data-placeholder:" "}
+                    %option{selected:"selected"}
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Insurance Member ID #
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-vcard2
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Insurance Plan Name
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-vcard2
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} SSN #
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-vcard2
+
+
+              .form-group
+                %label.control-label.col-md-5.align-label{for:""} Relationship to the Primary Policyholder
+                .col-md-6.set-width
+                  %select.select-chosen{data-placeholder:" "}
+                    %option{selected:"selected"} Self
+                    %option Spouse
+                    %option Dependent
+                    %option Other
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder First Name
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-user7
+
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder Last Name
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-user7
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder Birth Date
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md.input-datepicker{type:"text", placeholder:"mm/dd/yy", date-date-format:"mm/dd/yy"}
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-vcard2
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder Street Address
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-pin
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder's City
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-pin
+
+
+              .form-group
+                %label.control-label.col-md-5{for:""} Policyholder's State
+                .col-md-6.set-width
+                  %select.select-chosen{data-placeholder:" "}
+                    %option
+
+
+              .form-group.has-error
+                %label.control-label.col-md-5{for:""} Policyholder's Zip Code
+                .col-md-6.set-width
+                  .input-group
+                    %input.form-control.input-md{type:"text"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-pin
+                  .help-block.animation-slideDown Please enter only digits!
+
+
+              .form-group
+                .col-md-6.col-md-offset-5.set-width
+                  %button.save-btn.btn.btn-info{type:"button"}
+                    %span Save Insurance
+
+

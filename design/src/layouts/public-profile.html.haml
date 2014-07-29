@@ -1,0 +1,392 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %title eTherapi
+    %meta{content: "eTherapi", name: "description"}
+    %link{href: "styles/main.css", rel: "stylesheet", type: "text/css"}
+  %body
+    .page-container.public-layout
+      %header.main-header.navbar.navbar-default.navbar-fixed-top
+        .navbar-header.logo-wrapper
+          %h1
+            %a{href:"index.html", id:"main-logo"}etherapi
+        %form{action:"", class:"navbar-form navbar-left header-form"}
+          .form-group.search-client
+            %select{data-placeholder:"Search Patients", class:"form-control select-chosen input-search"}
+          %button{class:"btn add-client", type:"submit"}
+            %i.hi.hi-plus
+            Add Patient
+
+        %ul.public-nav.nav.navbar-nav.pull-right
+          %li
+            %a{href:"javascript:void(0)"} Contact us
+          %li
+            %a{href:"javascript:void(0)"} For Therapists
+          %li
+            %a{href:"javascript:void(0)"} Search Therapists
+          %li
+            %a{href:"javascript:void(0)", data-toggle:"modal", data-target:"#login-modal"} Log in
+          %li
+            %button.btn.btn-info{type:"button", data-toggle:"modal", data-target:"#signup-modal"} Sign up
+
+        %ul.private-nav.nav.navbar-nav.pull-right
+          %li
+            %a{href:"#"}
+              %i.icon-house.integr-icon
+              Home
+          %li
+            %a{href:"#"}
+              %i.icon-calendar6.integr-icon
+              Appointments
+          %li
+            %a{href:"#"}
+              %span.badge.pull-right.item-notice 4
+              %i.icon-envelope4.integr-icon
+              Messages
+          %li.user-menu
+            %a{href:"#"}John Doe
+              %i.fa.fa-bars.fa-fw.integr-rev-icon
+
+      .main-container
+        .content-container.has-sidebar
+          .main-content
+            .top-banner
+            = content
+
+          %footer.sub-footer
+            .pull-right
+              %i.fa.fa-heart.text-danger
+               Lovingly made in NYC & SF
+            .pull-left
+              2014 &copy;
+              %a{href:""} eTherapi
+
+        %aside.main-sidebar-user
+          .sidebar-section.sidebar-user.clearfix
+            .sidebar-user-avatar.themed-background-snow
+              %a{href:"#"}
+                %img{src:"http://placehold.it/65x65", alt:"user avatar"}/
+            .sidebar-username Example
+            .edit-profile.text-primary
+              %a{href:"#", class:""} Edit Profile
+
+          %ul.sidebar-nav
+            %li
+              %a{class:"active", href:"#"}
+                %i.icon-house.integr-icon
+                Home
+            %li
+              %a{href:"javascript:void(0);", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-calendar6.integr-icon
+                Appointments
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Upcoming
+                %li
+                  %a{href:"javascript:void(0);"} Requests
+                %li
+                  %a{href:"javascript:void(0);"} Past or Canceled
+
+            %li
+              %a{href:"#"}
+                %span.badge.pull-right.item-notice 4
+                %i.icon-envelope4.integr-icon
+                Messages
+            %li
+              %a{href:"#"}
+                %i.icon-users4.integr-icon
+                Patients
+            %li
+              %a{href:"#"}
+                %i.icon-alarm3.integr-icon
+                Your Availability
+            %li
+              %a{href:"#"}
+                %i.icon-creditcard.integr-icon
+                Billing
+            %li
+              %a{href:"#", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-user8.integr-icon
+                Profile
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Profile Picture and Video
+                %li
+                  %a{href:"javascript:void(0);"} About
+                %li
+                  %a{href:"javascript:void(0);"} Finances
+                %li
+                  %a{href:"javascript:void(0);"} Specialties and Expertise
+                %li
+                  %a{href:"javascript:void(0);"} Credentials
+            %li
+              %a{href:"#", class:"sidebar-nav-menu"}
+                %i.fa.fa-angle-left.sidebar-nav-indicator
+                %i.icon-archive2.integr-icon
+                Account
+              %ul
+                %li
+                  %a{href:"javascript:void(0);"} Account Information
+                %li
+                  %a{href:"javascript:void(0);"} Practice Information
+                %li
+                  %a{href:"javascript:void(0);"} Intake Forms
+                %li
+                  %a{href:"javascript:void(0);"} Change Password
+
+            %li
+              %a{href:"#"}
+                %i.icon-wand.integr-icon
+                Technical Support
+            %li
+              %a{href:"#"}
+                %i.icon-dashboard2.integr-icon
+                Test your System
+            %li
+              %a{href:"#"}
+                %i.icon-in-alt.integr-icon
+                Log Out
+
+
+
+    %script{type: "text/javascript", src: "scripts/vendor/jquery-1.11.0.min.js"}
+    %script{type: "text/javascript", src: "scripts/vendor/bootstrap.min.js"}
+    %script{type: "text/javascript", src: "scripts/plugins.js"}
+    %script{type: "text/javascript", src: "scripts/app.js"}
+    %script{type: "text/javascript", src: "scripts/pages/compCalendar.js"}
+    %script
+      $(function(){ CompCalendar.init(); });
+
+
+
+    / define the appointment-booking-modal
+    #appointment-booking-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+            %modal-title Select a date and a time for your appointment with Arthur Belriver
+          .modal-body
+            %p Arthur's preferred appointment times are displayed in blue, but you can request any time that is not ready booked (grey color).
+
+
+            .block.block-alt-noborder.full
+              .row
+                .col-md-12
+                  #calendar.calendar-container
+
+            .text-right
+              Times are shown in local time (ET).
+            .text-left
+              %button.btn.btn-info.btn-large{type:"button", data-toggle:"modal", data-target:"#signup-modal"}
+                %span
+                  Request Appointment
+              %a.text-danger{href:"javascript:void(0)"} Cancel
+
+
+    / define the modal for showing video
+    #show-video-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+          .modal-body
+            %iframe{src:"http://www.youtube.com/embed/_ETbH13kqL8?rel=0&autoplay=1", frameborder:"0", allowfullscreen:"true", width:"100%", height:"100%"}
+
+    / login modal
+    #login-modal.login-register.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header.text-center
+            %h1 Log In
+
+          .modal-body
+            / Login Form
+            %form.form-horizontal.form-bordered.form-control-borderless{action:"", method:""}
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-envelope
+                    %input.form-control.input-lg{name: "login-email", placeholder: "Email", type: "text"}/
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-asterisk
+                    %input.form-control.input-lg{name: "login-password", placeholder: "Password", type: "password"}/
+              .form-group.form-actions
+                .col-xs-4
+                  %label.switch.switch-primary{data-toggle:"tooltip", title: "Remember Me"}
+                    %input{checked: "checked", name: "login-remember-me", type: "checkbox"}/
+                    %span
+                .col-xs-8.text-right
+                  %button.btn.btn-sm.btn-info{type: "button"}
+                    Log In
+              .form-group
+                .col-xs-12.text-center
+                  %a{href: "javascript:void(0)", data-toggle:"modal", data-target:"#reset-password-modal"}
+                    Forgot password?
+                  \-
+                  %span.notice Don't have an account?
+                  %a{href: "javascript:void(0)", data-toggle:"modal", data-target:"#signup-modal"}  Sign Up
+            / END Login Form
+
+    / sign up modal
+    #signup-modal.login-register.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header.text-center
+            %h1 Sign Up
+
+          .modal-body
+            / Sign up Form
+            %form.form-horizontal.form-bordered.form-control-borderless{action: "", method: ""}
+              .form-group.user-account-group
+                .col-xs-6.user-account
+                  %label.radio-inline
+                    %input{name: "", type: "radio"}/
+                    Sign up as a Therapist
+                .col-xs-6.user-account
+                  %label.radio-inline
+                    %input{name: "", type: "radio"}/
+                    Sign up as a Patient
+              / user first name and last name
+              .row.no-gutter
+                .form-inline.col-xs-6
+                  .form-group
+                    .input-group
+                      %span.input-group-addon
+                        %i.gi.gi-user
+                      %input.form-control.input-lg{name: "register-firstname", placeholder: "First Name", type: "text"}/
+                .form-inline.col-xs-6
+                  .form-group
+                    .input-group
+                      %input.form-control.input-lg{name: "register-lastname", placeholder: "Last Name", type: "text"}/
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-envelope
+                    %input.form-control.input-lg{name: "register-email", placeholder: "Email", type: "text"}/
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-asterisk
+                    %input.form-control.input-lg{name: "register-password", placeholder: "Password", type: "password"}/
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-asterisk
+                    %input.form-control.input-lg{name: "register-password-verify", placeholder: "Verify Password", type: "password"}/
+              .form-group.form-actions
+                .col-xs-6
+                  %a.register-terms{href:"javascript:void(0)"} Terms
+                  %label.switch.switch-primary{data-toggle:"tooltip", title: "Agree to the terms"}
+                    %input{name: "register-terms", type: "checkbox"}/
+                    %span
+                .col-xs-6.text-right
+                  %button.btn.btn-sm.btn-info{type: "button", href: "javascript:void(0)", data-toggle:"modal", data-target:"#sign-up-confirmation-modal"}
+                    Sign Up
+              .form-group
+                .col-xs-12.text-center
+                  %span.notice Have an account?
+                  %a{href: "javascript:void(0)", data-toggle:"modal", data-target:"#login-modal"} Log in
+            / END Sign up Form
+
+    #reset-password-modal.login-register.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header.text-center
+            %h1 Reset your Password
+
+          .modal-body
+            / Reminder Form
+            %p Enter the email address associated with your account, and we'll email you a link to reset your password.
+            %form.form-horizontal.form-bordered.form-control-borderless{action:"", method:""}
+              .form-group
+                .col-xs-12
+                  .input-group
+                    %span.input-group-addon
+                      %i.gi.gi-envelope
+                    %input.form-control.input-lg{name: "reminder-email", placeholder: "Email", type: "text"}/
+              .form-group.form-actions
+                .col-xs-12.text-right
+                  %button.btn.btn-sm.btn-info{type: "button"}
+                    Reset Password
+              .form-group
+                .col-xs-12.text-center
+                  %span.notice Did you remember your password?
+                  %a{href: "javascript:void(0)"} Log in
+            / END Reminder Form
+
+    / message me modal
+    #send-message-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+            %modal-title Send a message to Arthur Belriver
+          .modal-body
+            %form.form-horizontal{action:"", method:""}
+              / first name group
+              .form-group.form-group-md
+                %label{for:"", class:"control-label col-md-4"} First Name
+                .col-md-7
+                  .input-group
+                    %input{type:"text", class:"form-control input-md", placeholder:"e.g., Amanda"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-user7
+              / last name group
+              .form-group.form-group-md
+                %label{for:"", class:"control-label col-md-4"} Last Name
+                .col-md-7
+                  .input-group
+                    %input{type:"text", class:"form-control input-md", placeholder:"e.g., Robinson"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-user7
+              / email group
+              .form-group.form-group-md
+                %label{for:"", class:"control-label col-md-4"} Email Address
+                .col-md-7
+                  .input-group
+                    %input{type:"text", class:"form-control input-md", placeholder:"e.g., arobinson@mail.com"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.fa.fa-envelope
+              / phone group
+              .form-group.form-group-md
+                %label{for:"", class:"control-label col-md-4"} Phone Number
+                .col-md-7
+                  .input-group
+                    %input{type:"text", class:"form-control input-md", placeholder:"xxx-xxx-xxxx"}/
+                    %span.input-group-addon.group-addon-lg
+                      %i.icon-phone3
+              / message input group
+              .form-group
+                .message-title
+                  %strong Message
+                .col-md-12
+                  %textarea.form-control{name:"", class:"pgh-input"}
+              / action group
+              %button.btn.btn-info.btn-large{type:"button"} Send Message
+
+    / define the appointment-booking-modal-none-login
+    #sign-up-confirmation-modal.general-modal.modal{tabindex:"-1", role:"dialog", aria-hidden:"true"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{data-dismiss:"modal", aria-hidden:"true"} &times;
+            %modal-title Complete the Sign Up Process!
+          .modal-body
+            %p A confirmation email was sent to your email address. Please complete the sign up process by clicking on the link contained in the email.
+            %p.instruction After, please click on the Log in button.
+            .text-center
+              %button.btn.btn-info.btn-large.sign-in-btn{type:"button", data-toggle:"modal", data-target:"#login-modal"}
+                  %span
+                    Login

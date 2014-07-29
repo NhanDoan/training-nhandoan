@@ -1,0 +1,7 @@
+{
+  "name": "eustoma-eustoma",
+  "version": "0.0.0",
+  "dependencies": {
+    "icomoon": "~0.0.1"
+  }
+}

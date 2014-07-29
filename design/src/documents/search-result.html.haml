@@ -1,0 +1,196 @@
+---
+layout: "public-profile"
+---
+.search-result-container.full-width
+
+  .slogan
+    %h2.super-large-title Need to talk?
+    %h3.large-title Talk to a therapist online using live video.
+
+  / define the quick-search
+  .request-search
+    %ul.request-search-content.clearfix
+      %li
+        %select.select-chosen{data-placeholder:"Specialty"}
+      %li
+        %select.select-chosen{data-placeholder:"Provider Type"}
+      %li
+        %select.select-chosen{data-placeholder:"Payment Type"}
+      %li
+        %input.form-control{type:"text", placeholder:"Zipcode/State"}
+      %li
+        %input.form-control{type:"text", placeholder:"Find by Name"}
+  / define the profile-content group and pagination
+  .summary-profile-content
+
+    .basic-profile-info
+
+      %ul.overview-profile-content
+
+        %li
+          .index-profile-content.clearfix
+            .left-content.direction
+              .avatar-container
+                .photo
+                  %a.img-thumbnail{href:"javascript:void(0)"}
+                    %img{src:"http://placehold.it/170x170", alt:"avatar"}/
+
+            .right-content.direction
+              %hgroup
+                %h3.medium-title Arthur Belriver, MFT
+                .status Marriage and Family Therapist
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+
+              .sub-content.no-gutter
+                .basic-info.direction
+                  .large-title.top-info
+                    %i.fa.fa-dollar
+                    120
+                  .bottom-info 55 minutes
+                .insurance-info.direction
+                  .top-info Insurance Accepted
+                  .bottom-info Blue-cross, Aetna, Cigna...ss
+                .wrap-button.direction
+                  %button.btn.btn-info View Profile
+
+
+
+
+        %li
+          .index-profile-content.embed-video.clearfix
+            .left-content.direction
+              .avatar-container
+                .video-container
+                  %a.video-show{href:"javascript:void(0)", data-toggle:"modal", data-target:"#show-video-modal"}
+                  %iframe{src:"http://www.youtube.com/embed/_ETbH13kqL8", frameborder:"0", allowfullscreen:"true", width:"100%", height:"100%"}
+
+            .right-content.direction
+              %hgroup
+                %h3.medium-title Arthur Belriver, MFT
+                .status Marriage and Family Therapist
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+
+
+              .sub-content.no-gutter
+                .basic-info.direction
+                  .large-title.top-info
+                    %i.fa.fa-dollar
+                    120
+                  .bottom-info 55 minutes
+                .insurance-info.direction
+                  .top-info Insurance Accepted
+                  .bottom-info Blue-cross, Aetna, Cigna...ss
+                .wrap-button.direction
+                  %button.btn.btn-info View Profile
+
+
+
+
+        %li
+          .index-profile-content.clearfix
+            .left-content.direction
+              .avatar-container
+                .photo
+                  %a.img-thumbnail{href:"javascript:void(0)"}
+                    %img{src:"http://placehold.it/170x170", alt:"avatar"}/
+
+            .right-content.direction
+              %hgroup
+                %h3.medium-title Arthur Belriver, MFT
+                .status Marriage and Family Therapist
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+
+
+              .sub-content.col-md-12.no-gutter.clearfix
+                .basic-info.direction
+                  .large-title.top-info
+                    %i.fa.fa-dollar
+                    120
+                  .bottom-info 55 minutes
+                .insurance-info.direction
+                  .top-info Insurance Accepted
+                  .bottom-info Blue-cross, Aetna, Cigna...ss
+                .wrap-button.direction
+                  %button.btn.btn-info View Profile
+
+
+
+
+
+        %li
+          .index-profile-content.clearfix
+            .left-content.direction
+              .avatar-container
+                .photo
+                  %a.img-thumbnail{href:"javascript:void(0)"}
+                    %img{src:"http://placehold.it/170x170", alt:"avatar"}/
+
+            .right-content.direction
+              %hgroup
+                %h3.medium-title Arthur Belriver, MFT
+                .status Marriage and Family Therapist
+              %p
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+
+
+              .sub-content.no-gutter
+                .basic-info.direction
+                  .large-title.top-info
+                    %i.fa.fa-dollar
+                    120
+                  .bottom-info 55 minutes
+                .insurance-info.direction
+                  .top-info Insurance Accepted
+                  .bottom-info Blue-cross, Aetna, Cigna...ss
+                .wrap-button.direction
+                  %button.btn.btn-info View Profile
+
+
+    / define the pagination
+    .pagination-section.text-center
+      %ul.pagination
+        %li
+          %a.group-addon-lg{href:"javascript:void(0)"}
+            %i.icon-arrow-left9
+        %li.active
+          %a{href:"javascript:void(0)"}
+            1
+        %li
+          %a{href:"javascript:void(0)"}
+            2
+        %li
+          %a{href:"javascript:void(0)"}
+            3
+        %li
+          %a.group-addon-lg{href:"javascript:void(0)"}
+            %i.icon-arrow-right9
+
+    / notice when search without results
+    .notice
+      %p We couldn't find any results that matched your criteria, but tweaking your search may help. Here are some ideas:
+      / instruction guide element
+      %ul.inst-guide
+        %li
+          %span \- Remove some filters.
+        %li
+          %span \- Expand the area of your search.
+
+
+
+
+
