@@ -18,7 +18,7 @@
       ],
       "databases": [
         {
-          "name": "demodb",
+          "name": "rails_angularjs_development",
           "owner": "vagrant",
           "template": "template0",
           "encoding": "utf8",
