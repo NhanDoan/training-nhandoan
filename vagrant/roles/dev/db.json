@@ -1,0 +1,53 @@
+{
+  "name": "db",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "The role for DB servers",
+  "override_attributes": {
+    "postgresql": {
+      "version": "9.3",
+      "listen_addresses": "0.0.0.0",
+      "users": [
+        {
+          "username": "vagrant",
+          "password": "vagrant",
+          "superuser": true,
+          "createdb": true,
+          "login": true
+        }
+      ],
+      "databases": [
+        {
+          "name": "demodb",
+          "owner": "vagrant",
+          "template": "template0",
+          "encoding": "utf8",
+          "locale": "en_US.UTF8"
+        }
+      ],
+      "pg_hba": [
+        { "type": "local", "db": "all", "user": "postgres",   "addr": "",             "method": "ident" },
+        { "type": "local", "db": "all", "user": "postgres",   "addr": "",             "method": "peer" },
+        { "type": "local", "db": "all", "user": "all",        "addr": "",             "method": "trust" },
+        { "type": "host",  "db": "all", "user": "all",        "addr": "127.0.0.1/32", "method": "trust" },
+        { "type": "host",  "db": "all", "user": "all",        "addr": "::1/128",      "method": "trust" },
+        { "type": "host",  "db": "all", "user": "postgres",   "addr": "127.0.0.1/32", "method": "trust" },
+        { "type": "host",  "db": "all", "user": "vagrant",   "addr": "127.0.0.1/32", "method": "trust" }
+      ],
+      "apt_distribution": "precise",
+      "password": {
+        "postgres": "postgres"
+      }
+    }
+  },
+  "run_list": [
+    "recipe[postgresql::server]",
+    "recipe[postgresql::client]",
+    "recipe[postgresql::contrib]",
+    "recipe[postgresql::pg_user]",
+    "recipe[postgresql::configuration]",
+    "recipe[postgresql::pg_database]",
+    "recipe[postgresql::libpq]",
+    "recipe[postgresql::server_dev]"
+  ]
+}

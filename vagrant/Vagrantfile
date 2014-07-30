@@ -1,0 +1,95 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_version ">= 1.6.3"
+
+boxes = [
+  {
+    name: 'rails-angular',
+    roles: ['app'],
+    ip: '192.168.3.2',
+    vbox_config: [
+      { '--memory' => '2048' }
+    ],
+    forwarded_ports: [
+      { 80 => 8080 },
+      { 3000 => 3000 },
+      { 9001 => 9001 },
+      { 35741 => 35741 },
+      { 8003 => 8003 },
+      { 9393 => 9393 },
+      { 9200 => 9200 }
+    ],
+    synced_folders: [
+      { '../backend' => '/home/vagrant/backend' },
+      { '../frontend' => '/home/vagrant/frontend' },
+      { '../design' => '/home/vagrant/design' }
+    ]
+  }]
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Box config
+  config.vm.box = 'precise64'
+  config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
+
+  # Plugin config
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
+
+  boxes.each do |opts|
+    # mutiple machine define
+    config.vm.define opts[:name], :priviledge => false do |config|
+
+      # set hostname
+      config.vm.hostname = opts[:name]
+
+      #network config
+      config.vm.network :private_network, ip: opts[:ip]
+
+      # forward ports
+      opts[:forwarded_ports].each do |port|
+        port.each do |guest, host|
+          config.vm.network :forwarded_port, guest: guest, host: host
+        end
+      end
+
+      # sync folders
+      opts[:synced_folders].each do |folder|
+        folder.each do |folder1, folder2|
+          config.vm.synced_folder folder1, folder2
+        end
+      end if opts[:synced_folders]
+
+      # VirtualBox customizations
+      unless opts[:vbox_config].nil?
+        config.vm.provider :virtualbox do |vb|
+          # naming for vm box
+          vb.name = "vagrant_#{opts[:name]}"
+
+          # set the hw config
+          opts[:vbox_config].each do |hash|
+            hash.each do |key, value|
+              vb.customize ['modifyvm', :id, key, value]
+            end
+          end
+        end
+      end
+
+      # server notify
+      config.vm.provision :shell, inline: "echo 'Server: #{opts[:name]} - IP: #{opts[:ip]}'"
+
+      # config box with chef
+      config.vm.provision :chef_solo do |chef|
+        chef.roles_path = 'roles/dev'
+
+        opts[:roles].each do |role|
+          # add role
+          chef.add_role(role)
+        end if opts[:roles].kind_of?(Array)
+      end
+    end
+  end
+end
