@@ -6,7 +6,6 @@ metadata
 cookbook 'locale', git: 'https://github.com/hw-cookbooks/locale'
 cookbook "apt"
 cookbook 'build-essential'
-cookbook "git", git: 'https://github.com/fnichol/chef-git.git'
 cookbook 'vim'
 cookbook 'tmux'
 

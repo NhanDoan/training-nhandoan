@@ -1,6 +1,6 @@
 name             'vagrant'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'tungphan'
+maintainer_email 'tungphan@asnet.com.vn'
 license          'All rights reserved'
 description      'Installs/Configures vagrant'
 long_description 'Installs/Configures vagrant'

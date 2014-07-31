@@ -2,8 +2,10 @@
 
 ## Pre-requirements
     - Ruby installed with Ruby gems (1.9 or later)
+    - VirtualBox 4.3.16
+    - Vagrant 1.63
     - Git
-    - Install Berkshelf 3.1.3
+    - Berkshelf 3.1.4
       * Important notes for Windows OS, do not using: Ruby x64, Ruby Development Kit x64
 
 =======
@@ -21,17 +23,6 @@ Rail application
 4. Vagrant (/vagrant)
 Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
 
-<br/>
-
-## Getting Started
-
-1. [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads) version 4.3.14
-
-2. [Install Vagrant](http://www.vagrantup.com/downloads.html) Latest (tested with 1.6.3)
-
-3. [Install Berkshelf](http://berkshelf.com/) Latest (tested with 3.1.3)
-
-3. Clone the project and do `vagrant up`
 
 ## Step 1: Install softs
   * Issue the following commands
@@ -46,8 +37,10 @@ Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
   * Issue the following commands
   <pre>
     $ cd vagrant
+    For backend, frontend
     $ bundle exec vagrant up
-    $ bundle exec vagrant ssh rails-angular
+    For specify box: **railsangular-dev**, **railsangular-db boxes**
+    $ bundle exec vagrant ssh railsangular-dev
   </pre>
 
 

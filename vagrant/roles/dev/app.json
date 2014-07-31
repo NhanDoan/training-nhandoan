@@ -14,10 +14,8 @@
   "run_list": [
     "recipe[locale]",
     "recipe[basic]",
-    "recipe[vim]",
-    "recipe[git]",
     "role[rvm]",
-    "role[db]",
+    "recipe[postgresql::client]",
     "recipe[frontend]"
   ]
 }

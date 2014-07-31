@@ -18,7 +18,7 @@
       ],
       "databases": [
         {
-          "name": "rails_angularjs_development",
+          "name": "railsangularjsdb",
           "owner": "vagrant",
           "template": "template0",
           "encoding": "utf8",

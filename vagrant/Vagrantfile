@@ -8,7 +8,7 @@ Vagrant.require_version ">= 1.6.3"
 
 boxes = [
   {
-    name: 'rails-angular',
+    name: 'railsangular-dev',
     roles: ['app'],
     ip: '192.168.3.2',
     vbox_config: [
@@ -28,7 +28,19 @@ boxes = [
       { '../frontend' => '/home/vagrant/frontend' },
       { '../design' => '/home/vagrant/design' }
     ]
-  }]
+  },
+  {
+    name: 'railsangular-db',
+    roles: ['db'],
+    ip: '192.168.3.3',
+    vbox_config: [
+      { '--memory' => '512' }
+    ],
+    forwarded_ports: [
+      { 5432 => 5432 }
+    ]
+  }
+]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Box config
