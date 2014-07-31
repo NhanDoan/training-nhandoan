@@ -1,0 +1,194 @@
+div ui-view="header"
+.main-container
+  .content-container
+    div ui-view=""
+    .sub-header-wrap
+      .notice.themed-background-warning
+        button.close aria-hidden="true" data-dismiss="alert" type="button"  ×
+        span.system-notify
+          | Join upcoming session with
+          span.user-name John Patient
+        span.action-notify Action Submitted
+      .sub-header-section
+    .main-content
+      #th-intake-modal.general-modal.modal.fade aria-hidden="true" role="dialog" tabindex="-1"
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close aria-hidden="true" data-dismiss="modal"  ×
+              modal-title Practice Rules
+            .modal-body
+              p Copy and paste your Practice Rules, Consent to Treatment and Notice of Privacy Practices below. Patients will be asked to agree at the time of their first appointment.
+              form.form-horizontal enctype="multipart/form-data" method="post"
+                .form-group
+                  .col-md-12
+                    textarea.form-control.intake-input
+                .form-actions
+                  button.btn.btn-info.btn-large type="submit"  Save
+      .therapist-account
+        /! sub header
+        .content-header
+          .header-section
+            h1
+              | Account Settings
+              i.icon-archive2
+        .row
+          .aside-content.affix-menu-nav.col-md-3.affix-top data-offset-top="200" data-spy="affix"
+            .slave-nav
+              ul.list-group.nav
+                li.active
+                  a.list-group-item href="javascript:void(0)"
+                    h4.list-group-item-heading Account Information
+                li
+                  a.list-group-item href="javascript:void(0)"
+                    h4.list-group-item-heading Practice Details
+                li
+                  a.list-group-item href="javascript:void(0)"
+                    h4.list-group-item-heading Intake Forms
+                li
+                  a.list-group-item href="javascript:void(0)"
+                    h4.list-group-item-heading Change Password
+          .pri-content.col-md-9.account-content
+            .block.block-form
+              .block-title
+                h2 Account Information (required)
+              form.form-horizontal
+                .form-group
+                  label.control-label.col-md-4 Provider First Name
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., Amanda" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-user7
+                .form-group
+                  label.control-label.col-md-4 Provider Last Name
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., Robison" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-user7
+                .form-group
+                  label.control-label.col-md-4 Email Address
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., arobinson@mail.com" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.fa.fa-envelope
+                .form-group.form-action
+                  .col-md-4.col-md-offset-4
+                    button.btn.btn-info.btn-large type="submit"  Save Account Infomation
+            .block.block-form
+              .block-title
+                h2 Practice Details (required)
+              form.form-horizontal
+                .form-group
+                  label.control-label.col-md-4 Street Address
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., 123 Main St." type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-pin
+                .form-group
+                  label.control-label.col-md-4 City
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., New York" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-pin
+                .form-group
+                  label.control-label.col-md-4 State
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., NY" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-pin
+                .form-group.has-error
+                  label.control-label.col-md-4 Zip Code
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="e.g., 10018" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-pin
+                .form-group
+                  label.control-label.col-md-4 Country
+                  .col-md-5
+                    select.form-control.select-chosen.input-md data-placeholder=("Chosse a Country") style=("display: none;")
+                      option selected="selected" value="10"  USA
+                    .chosen-container.chosen-container-single style=("width: 100%;") title=""
+                      a.chosen-single tabindex="-1"
+                        span USA
+                        div
+                          b
+                      .chosen-drop
+                        .chosen-search
+                          input autocomplete="off" type="text" /
+                        ul.chosen-results
+                .form-group
+                  label.control-label.col-md-4 Phone Number
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md placeholder="xxx-xxx-xxxx" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-phone3
+                .form-group
+                  label.control-label.col-md-4 Timezone
+                  .col-md-5
+                    select.form-control.select-chosen.input-md data-placeholder=("Chosse a Timezone") style=("display: none;")
+                    .chosen-container.chosen-container-single.chosen-container-single-nosearch style=("width: 100%;") title=""
+                      a.chosen-single.chosen-default tabindex="-1"
+                        span Chosse a Timezone
+                        div
+                          b
+                      .chosen-drop
+                        .chosen-search
+                          input autocomplete="off" readonly="" type="text" /
+                        ul.chosen-results
+                .form-group.has-error
+                  label.control-label.col-md-4 National Provider Identifier (NPI)
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-vcard2
+                .form-group.has-error
+                  label.control-label.col-md-4 Social Security Number
+                  .include-popover.popover-group.col-md-5
+                    .input-group
+                      input#masked_ssn.form-control.input-md placeholder="xxx-xx-xxxx" type="text"
+                        span.input-group-addon.group-addon-lg
+                          i.icon-vcard2
+                    .popover.right.default-popover
+                      .arrow
+                      .pop-over-content Your social security number will be used only for taxpayer identification and payment processing.
+                .form-group.form-action
+                  .col-md-4.col-md-offset-4
+                    button.btn.btn-info.btn-large type="submit"  Save Practie Details
+            .block
+              .block-title
+                h2 Intake Forms
+              .form-group
+                span.control-label.standout-label Practice Rules, Consent to Treatment, Notice of Privacy Practices
+                button.btn.btn-info.btn-large data-target="#th-intake-modal" data-toggle="modal"  View/Edit
+            .block.block-form
+              .block-title
+                h2 Change Password
+              form.form-horizontal
+                .form-group
+                  label.control-label.col-md-4 New Password
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md type="password"
+                        span.input-group-addon.group-addon-lg
+                          i.fa.fa-asterisk
+                .form-group
+                  label.control-label.col-md-4 Confirm New Password
+                  .col-md-5
+                    .input-group
+                      input.form-control.input-md type="password"
+                        span.input-group-addon.group-addon-lg
+                          i.fa.fa-asterisk
+                .form-group.form-action
+                  .col-md-4.col-md-offset-4
+                    button.btn.btn-info.btn-large type="submit"  Save Password
+    div ui-view="footer"
+  div ui-view="sidebar"

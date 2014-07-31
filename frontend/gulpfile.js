@@ -29,20 +29,24 @@
 	//|
 	//'*/
 	var $ = gulpLoadPlugins({
+			wait: 450,
 			pattern: 'gulp-*',
 			lazy: true,
 			// scope: ['devDependencies']
 		}),
+		styleExternalPath = '../design/src/files/styles/**/*.{scss,css}',
 		_ = {
 			devServerPort: 9000,
 			app: 'app',
+
 			paths: {
-				scripts: ['app/js/app.js', 'app/js/**/*.{js}'], // # All .js and .coffee files, starting with app.coffee or app.js
-				styles: 'app/css/**/*.{scss,css}', // css and scss files
-				pages: 'app/pages/*.{html,slim}', // All html, jade,and markdown files that can be reached directly
+				scripts: ['app/js/app.js', 'app/js/routes.js', 'app/js/**/*.{js}'], // # All .js and .coffee files, starting with app.coffee or app.js
+				styles: styleExternalPath, // css and scss files
+				// styles: 'app/css/**/*.{scss,css}', // css and scss files
+				pages: 'app/pages/**/*.{html,slim}', // All html, jade,and markdown files that can be reached directly
 				templates: 'app/templates/**/*.{html,slim}', // All html, jade, and markdown files used as templates within the app
-				images: 'app/img/*.{png,jpg,jpeg,gif}', // All image files
-				'static': 'app/static/*.*' // Any other static content such as the favicon
+				images: 'app/images/**/*.{png,jpg,jpeg,gif}', // All image files
+				'static': 'app/static/**/*.*' // Any other static content such as the favicon
 			},
 			vendor: {
 				scripts: [
@@ -92,8 +96,8 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	var compileAppScripts = function() {
 		return gulp.src(_.paths.scripts)
-			// .pipe($.concat('app.js'))
-			.pipe($.ngmin());
+			.pipe($.ngAnnotate());
+			// .pipe($.ngmin());
 	};
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,17 +105,14 @@
 	// template caching system
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	var compileTemplates = function() {
-		var templates;
-		templates = gulp.src(_.paths.templates)
-			.pipe($.if(/[.]slim$/, $.slim()))
+		return gulp.src(_.paths.templates)
+			.pipe($.gulpif(/[.]slim$/, $.slim({pretty: true})))
 			.pipe($.htmlify())
 			.pipe($.templateCache({
 				root: '/templates/',
 				standalone: false,
 				module: 'starter-app'
 			}));
-
-		return templates;
 	};
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,7 +165,7 @@
 		return gulp.src(_.paths.images)
 			.pipe($.imagemin({
 				progressive: true,
-				optimizationLevel: 7, // 0,1,2,3,4,5,6,7 n = n*2
+				optimizationLevel: 3, // 0,8,16....7 n = n*2
 				interlaced: true,
 				svgoPlugins: [{
 					removeViewBox: false
@@ -174,7 +175,7 @@
 				})]
 			}));
 	};
-
+ 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// Images buiding
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +183,7 @@
 		if (buildPath === null || buildPath === undefined) {
 			buildPath = 'generated';
 		}
-		return compressImages().pipe(gulp.dest(buildPath + '/img/')).pipe($.connect.reload());
+		return compressImages().pipe(gulp.dest(buildPath + '/images/')).pipe($.connect.reload());
 	};
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,7 +234,8 @@
 			.pipe($.gulpif(/[.]slim$/, $.slim({
 				pretty: true
 			})))
-			.pipe($.htmlify());
+			.pipe($.htmlify())
+			.on('error', function(err) { $.gutil.log(err.message); });
 	};
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -300,13 +302,12 @@
 	});
 
 	gulp.task('fonts', function() {
-  return buildFonts();
+		return buildFonts();
 	});
 
 	gulp.task('deploy_fonts', function() {
-	  return buildFonts('deploy');
+		return buildFonts('deploy');
 	});
-
 
 	gulp.task('pages', function() {
 		return buildPages();
@@ -317,8 +318,7 @@
 	});
 
 	gulp.task('clean_deploy', function() {
-		gulp.src('./deploy/**', {read: false})
-		.pipe($.rimraf());
+		$.rimraf('deploy');
 	});
 
 	gulp.task('clean', function() {
@@ -354,16 +354,52 @@
 		});
 	});
 
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| TODO::
+	//| ✓ replace image path css file
+	//| /path/to/cssfile: file sau cung nhung trc khi min
+	//| chi dinh thay the ../ -> folder chua image
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('fix-paths', function() {
+		gulp.src('/path/to/cssfile').
+		pipe($.replace('../', '/path/to/final'))
+		.pipe(gulp.dest('public/css'));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ copy font
+	//| TODO:: just fonts from app nt form vendor folder
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('copy-fonts', function() {
+		gulp.src(['app/fonts/**/*.*'])
+      .pipe(gulp.dest('generated/css/fonts'));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ update assets for backend
+	//| TODO::
+	//| Step final to backend before release
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Compile
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	gulp.task('compile', ['clean'], function() {
 		return gulp.start('scripts', 'styles', 'pages', 'images', 'fonts', 'static');
 	});
 
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Deploy before to release
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	gulp.task('deploy', ['clean_deploy'], function() {
-		return gulp.start('deploy_scripts', 'deploy_styles', 'deploy_pages', 'deploy_images', 'deploy_fonts', 'deploy_static');
+		return gulp.start('deploy_scripts', 'deploy_styles', 'deploy_pages', 'deploy_images', 'deploy_fonts', 'deploy_static', 'copy-fonts');
 	});
 
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Default task: start server, watching modifier
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	gulp.task('default', ['clean'], function() {
-		return gulp.start('scripts', 'styles', 'pages', 'images', 'fonts', 'static', 'server', 'watch');
+		return gulp.start('scripts', 'styles', 'pages', 'images', 'fonts', 'static', 'copy-fonts', 'server', 'watch');
 	});
 
 }(require('gulp'), require('gulp-load-plugins')));
