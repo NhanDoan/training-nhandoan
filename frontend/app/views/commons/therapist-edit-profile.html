@@ -1,0 +1,849 @@
+<div ui-view='header'></div>
+<div class="main-container">
+
+  <div class="content-container">
+    <div ui-view></div>
+    <div class="sub-header-wrap">
+      <div class="notice themed-background-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><span class="system-notify">Join upcoming session with<span class="user-name">John Patient</span></span><span class="action-notify">Action Submitted</span></div>
+      <div class="sub-header-section"></div>
+    </div>
+    <div class="main-content">
+      <!--the therapist-edit-profile page-->
+      <div class="therapist-edit-profile">
+        <!--degine the content-header of the edit-profile page-->
+        <div class="content-header">
+          <div class="header-section">
+            <h1>Public Profile<i class="icon-user8"></i></h1>
+            <br><small>The information on this page will be visible to users searching for therapists or psychiatrists on the eTherapi website.</small>
+          </div>
+        </div>
+        <!--define the content of edit-profile page-->
+        <div class="row">
+          <div data-offset-top="200" data-spy="affix" class="edit-profile-nav slave-nav no-gutter aside-content affix-menu-nav col-md-3 affix-top">
+            <!--define the list-group-->
+            <ul class="list-group nav">
+              <li class="active">
+                <a href="javascript:void(0)" class="list-group-item">
+                  <h4 class="list-group-item-heading">Profile Picture and Video</h4>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="list-group-item">
+                  <h4 class="list-group-item-heading">About</h4>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="list-group-item">
+                  <h4 class="list-group-item-heading">Finances</h4>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="list-group-item">
+                  <h4 class="list-group-item-heading">Specialties and Expertise</h4>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="list-group-item">
+                  <h4 class="list-group-item-heading">Credentials</h4>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="pri-content edit-profile-content listview-content col-md-9">
+            <div class="profile-button-group"><button type="button" class="btn btn-success">View Profile</button><button type="button" class="btn btn-info">Save Profile</button></div>
+            <div class="edit-profile-detail">
+              <!--define the picture-video block-->
+              <div class="picture-video block col-md-12">
+                <div class="block-title">
+                  <h2>Profile Picture and Video</h2>
+                </div>
+                <form method="post" class="form-horizontal form-bordered">
+                  <div class="avatar-container row no-gutter">
+                    <div class="col-md-6 no-gutter">
+                      <div class="user-avatar-section clearfix">
+                        <div class="user-avatar"><a href="javascript:void(0)" class="img-rounded"><img src="http://placehold.it/120x120" alt="avatar"></a></div>
+                        <div class="avatar-action">
+                          <div class="user-avatar-upload"><a data-toggle="modal" data-target="#profile-upload-modal" type="button" class="btn btn-info">Upload New Picture</a></div>
+                          <div class="user-avatar-delete"><a href="javascript:void(0)" class="text-danger">Delete picture</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <form method="post" class="introduction-video form-horizontal form-bordered">
+                  <div class="title">Introduction Video</div>
+                  <div class="record-video row no-gutter">
+                    <div class="col-md-12 no-gutter"><a href="https://youtube.com/my_webcam" target="_blank" class="btn btn-info record-btn">Record an introduction video using youtube</a></div>
+                    <div class="col-md-12 no-gutter">
+                      <label class="control-label">Enter the link to your introduction YouTube video.</label>
+                      <div class="input-group"><input type="text" placeholder="e.g.,http://youtu.be/fxyhfiCO_XQ" class="form-control medium-form-control"><span class="input-group-addon group-addon-lg"><i class="fa fa-youtube-play"></i></span></div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--define the about block-->
+              <div class="about block col-md-12">
+                <div class="block-title">
+                  <h2>About</h2>
+                </div>
+                <form method="post" class="form-horizontal form-bordered">
+                  <div class="title">Bio</div>
+                  <div class="form-group">
+                    <div class="editor-group col-xs-12">
+                      <ul class="wysihtml5-toolbar"></ul>
+                      <ul class="wysihtml5-toolbar">
+                        <li class="dropdown">
+                          <a class="btn btn-default dropdown-toggle " data-toggle="dropdown">
+                          <span class="fa fa-font"></span>
+                          <span class="current-font">Normal text</span>
+                          <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="p" tabindex="-1" href="javascript:;" unselectable="on">Normal text</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" tabindex="-1" href="javascript:;" unselectable="on">Heading 1</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" tabindex="-1" href="javascript:;" unselectable="on">Heading 2</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" tabindex="-1" href="javascript:;" unselectable="on">Heading 3</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4" tabindex="-1" href="javascript:;" unselectable="on">Heading 4</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5" tabindex="-1" href="javascript:;" unselectable="on">Heading 5</a></li>
+                            <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6" tabindex="-1" href="javascript:;" unselectable="on">Heading 6</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <div class="btn-group">
+                            <a class="btn  btn-default" data-wysihtml5-command="bold" title="CTRL+B" tabindex="-1" href="javascript:;" unselectable="on">Bold</a>
+                            <a class="btn  btn-default" data-wysihtml5-command="italic" title="CTRL+I" tabindex="-1" href="javascript:;" unselectable="on">Italic</a>
+                            <a class="btn  btn-default" data-wysihtml5-command="underline" title="CTRL+U" tabindex="-1" href="javascript:;" unselectable="on">Underline</a>
+                            <a class="btn  btn-default" data-wysihtml5-command="small" title="CTRL+S" tabindex="-1" href="javascript:;" unselectable="on">Small</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a class="btn  btn-default" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" data-wysihtml5-display-format-name="false" tabindex="-1" href="javascript:;" unselectable="on">
+                          <span class="fa fa-quote-left"></span>
+                          </a>
+                        </li>
+                        <li>
+                          <div class="btn-group">
+                            <a class="btn  btn-default" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1" href="javascript:;" unselectable="on"><span class="fa fa-list"></span></a>
+                            <a class="btn  btn-default" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1" href="javascript:;" unselectable="on"><span class="fa fa-th-list"></span></a>
+                            <a class="btn  btn-default" data-wysihtml5-command="Outdent" title="Outdent" tabindex="-1" href="javascript:;" unselectable="on"><span class="fa fa-indent"></span></a>
+                            <a class="btn  btn-default" data-wysihtml5-command="Indent" title="Indent" tabindex="-1" href="javascript:;" unselectable="on"><span class="fa fa-outdent"></span></a>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="bootstrap-wysihtml5-insert-link-modal modal fade">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <a class="close" data-dismiss="modal">×</a>
+                                  <h3>Insert link</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <input value="http://" class="bootstrap-wysihtml5-insert-link-url form-control">
+                                  <label class="checkbox"> <input type="checkbox" class="bootstrap-wysihtml5-insert-link-target" checked="">Open link in new window</label>
+                                </div>
+                                <div class="modal-footer">
+                                  <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                  <a href="#" class="btn btn-primary" data-dismiss="modal">Insert link</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="btn  btn-default" data-wysihtml5-command="createLink" title="Insert link" tabindex="-1" href="javascript:;" unselectable="on">
+                          <span class="fa fa-external-link"></span>
+                          </a>
+                        </li>
+                        <li>
+                          <div class="bootstrap-wysihtml5-insert-image-modal modal fade">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <a class="close" data-dismiss="modal">×</a>
+                                  <h3>Insert image</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <input value="http://" class="bootstrap-wysihtml5-insert-image-url form-control">
+                                </div>
+                                <div class="modal-footer">
+                                  <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                  <a class="btn btn-primary" data-dismiss="modal">Insert image</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="btn  btn-default" data-wysihtml5-command="insertImage" title="Insert image" tabindex="-1" href="javascript:;" unselectable="on">
+                          <span class="fa fa-picture-o"></span>
+                          </a>
+                        </li>
+                      </ul>
+                      <textarea rows="10" class="form-control textarea-editor" style="display: none;"></textarea>
+                      <input type="hidden" name="_wysihtml5_mode" value="1"><iframe class="wysihtml5-sandbox" security="restricted" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" style="border-collapse: separate; border: 1px solid rgb(219, 225, 232); clear: none; display: block; float: none; margin: 1px 0px; outline: rgb(57, 66, 99) none 0px; outline-offset: 0px; padding: 6px 8px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: baseline; text-align: start; box-sizing: border-box; -webkit-box-shadow: none; box-shadow: none; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-top-left-radius: 4px; width: 1146.265625px; height: 194px; background-color: rgb(255, 255, 255);"></iframe><input type="hidden" name="_wysihtml5_mode" value="1"><iframe security="restricted" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" class="wysihtml5-sandbox"></iframe>
+                    </div>
+                  </div>
+                  <div class="title language-title">Languages Spoken</div>
+                  <div class="form-group">
+                    <div class="include-popover language-spoken col-md-12">
+                      <div class="chosen-wrapper col-md-6 no-gutter">
+                        <div class="tagsinput col-md-9">
+                          <div class="hidden-container"></div>
+                          <span class="tag"><span class="tags-label-content">ICD10</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD20</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD40</span><a href="javascript:void(0)" title="Removing tag">x</a></span>
+                          <div class="add-tag"><input placeholder="Add code"></div>
+                          <div class="tags_clear"></div>
+                        </div>
+                        <div class="popover right">
+                          <div class="arrow"></div>
+                          <div class="pop-over-content">Click to select among the options provided.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--define the price block-->
+              <div class="price block col-md-12">
+                <div class="block-title">
+                  <h2>Finances</h2>
+                </div>
+                <form method="post" class="form-horizontal form-bordered">
+                  <div class="title">Pricing</div>
+                  <!--form-group include select cash and time-->
+                  <div class="pricing form-group has-error">
+                    <div class="col-md-7 col-xs-7">
+                      <div class="cash col-md-5 col-xs-5">
+                        <div class="input-group">
+                          <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                          <input type="text" class="form-control medium-form-control valid">
+                        </div>
+                        <div class="help-block animation-slideDown">Please enter a number!</div>
+                      </div>
+                      <div class="solid-text col-md-2 col-xs-2">for up to</div>
+                      <div class="time col-md-5 col-xs-5">
+                        <select class="select-chosen form-control" style="display: none;">
+                          <option value="0">30 minutes</option>
+                          <option value="1">35 minutes</option>
+                          <option value="2">40 minutes</option>
+                          <option value="3">45 minutes</option>
+                          <option value="4">50 minutes</option>
+                          <option value="5">55 minutes</option>
+                          <option value="6">60 minutes</option>
+                          <option value="7">65 minutes</option>
+                          <option value="8">70 minutes</option>
+                          <option value="9">75 minutes</option>
+                          <option value="10" selected="selected">80 minutes</option>
+                          <option value="11">85 minutes</option>
+                          <option value="12">90 minutes</option>
+                        </select>
+                        <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                          <a class="chosen-single" tabindex="-1">
+                            <span>80 minutes</span>
+                            <div><b></b></div>
+                          </a>
+                          <div class="chosen-drop">
+                            <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                            <ul class="chosen-results"></ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pricing-offer col-md-7 col-xs-7">
+                      <div class="checkbox"><label><input type="checkbox"><span>I offer a sliding scale - Let patients contact me for details</span></label></div>
+                    </div>
+                  </div>
+                  <!--subtitle for block-->
+                  <div class="title cancellation-title">Cancellation</div>
+                  <!--form-group include checkbox and popover-->
+                  <div class="cancellation include-popover form-group">
+                    <div class="col-md-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span>Charge a cancellation fee if a client cancels with less than 24 hours notice</span>
+                          <div class="popover right">
+                            <div class="arrow"></div>
+                            <div class="pop-over-content">You will be given the option to charge the client up to the session amount after the late cancellation occurs.</div>
+                          </div>
+                          <div class="popover top">
+                            <div class="arrow"></div>
+                            <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="title">Insurance Plans Accepted</div>
+                  <div class="insurance-plan form-group">
+                    <div class="include-popover col-md-12">
+                      <!--define the select-chosen-multiple-->
+                      <div class="chosen-wrapper col-md-6 no-gutter">
+                        <div class="tagsinput col-md-9">
+                          <div class="hidden-container"></div>
+                          <span class="tag"><span class="tags-label-content">ICD10</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD20</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD40</span><a href="javascript:void(0)" title="Removing tag">x</a></span>
+                          <div class="add-tag"><input placeholder="Add code"></div>
+                          <div class="tags_clear"></div>
+                        </div>
+                        <div class="popover right">
+                          <div class="arrow"></div>
+                          <div class="pop-over-content">Click to select among the options provided.</div>
+                        </div>
+                        <div class="popover top">
+                          <div class="arrow"></div>
+                          <div class="pop-over-content">Click to select among the options provided.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--define the Expertise and Specialties block-->
+              <div class="expertise block col-md-12">
+                <div class="block-title">
+                  <h2>Specialties and Expertise</h2>
+                </div>
+                <form method="post" class="specialties-form form-horizontal form-bordered">
+                  <div class="form-group">
+                    <div class="row no-gutter">
+                      <div class="col-md-6">
+                        <div class="title">Specialties (up to 3)</div>
+                        <div class="specialties form-group">
+                          <div class="include-popover col-md-12 no-gutter">
+                            <!--define the select-chosen-multiple-->
+                            <div class="chosen-wrapper col-md-5 no-gutter">
+                              <div class="tagsinput col-md-9">
+                                <div class="hidden-container"></div>
+                                <span class="tag"><span class="tags-label-content">ICD10</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD20</span><a href="javascript:void(0)" title="Removing tag">x</a></span><span class="tag"><span class="tags-label-content">ICD40</span><a href="javascript:void(0)" title="Removing tag">x</a></span>
+                                <div class="add-tag"><input placeholder="Add code"></div>
+                                <div class="tags_clear"></div>
+                              </div>
+                            </div>
+                            <div class="popover right">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                            <div class="popover top">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="title">Additional Expertise</div>
+                        <div class="additional-expertise form-group">
+                          <div class="include-popover col-md-12 no-gutter">
+                            <!--define the select-chosen-multiple-->
+                            <div class="chosen-wrapper col-md-5 no-gutter">
+                              <select multiple="multiple" data-placeholder="Select or Type" class="select-chosen" style="display: none;">
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Vietnamese">Vietnamese</option>
+                              </select>
+                              <div class="chosen-container chosen-container-multi" style="width: 100%;" title="">
+                                <ul class="chosen-choices">
+                                  <li class="search-field"><input type="text" value="Select or Type" class="default" autocomplete="off" style="width: 108px;"></li>
+                                </ul>
+                                <div class="chosen-drop">
+                                  <ul class="chosen-results"></ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="popover right">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                            <div class="popover top">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="treatment form-group">
+                    <div class="row no-gutter">
+                      <div class="col-md-6">
+                        <div class="title">Treatment Approach</div>
+                        <div class="treatment-approach form-group">
+                          <div class="include-popover col-md-12 no-gutter">
+                            <!--define the select-chosen-multiple-->
+                            <div class="chosen-wrapper col-md-5 no-gutter">
+                              <select multiple="multiple" data-placeholder="Select or Type" class="select-chosen" style="display: none;">
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Vietnamese">Vietnamese</option>
+                              </select>
+                              <div class="chosen-container chosen-container-multi" style="width: 100%;" title="">
+                                <ul class="chosen-choices">
+                                  <li class="search-field"><input type="text" value="Select or Type" class="default" autocomplete="off" style="width: 108px;"></li>
+                                </ul>
+                                <div class="chosen-drop">
+                                  <ul class="chosen-results"></ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="popover right">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                            <div class="popover top">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="title">Demographics Served</div>
+                        <div class="demographic-served form-group">
+                          <div class="include-popover col-md-12 no-gutter">
+                            <!--define the select-chosen-multiple-->
+                            <div class="chosen-wrapper col-md-5 no-gutter">
+                              <select multiple="multiple" data-placeholder="Select or Type" class="select-chosen" style="display: none;">
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Vietnamese">Vietnamese</option>
+                              </select>
+                              <div class="chosen-container chosen-container-multi" style="width: 100%;" title="">
+                                <ul class="chosen-choices">
+                                  <li class="search-field"><input type="text" value="Select or Type" class="default" autocomplete="off" style="width: 108px;"></li>
+                                </ul>
+                                <div class="chosen-drop">
+                                  <ul class="chosen-results"></ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="popover right">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                            <div class="popover top">
+                              <div class="arrow"></div>
+                              <div class="pop-over-content">Click to select among the options provided or enter additional ones.</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--define the Credentials block-->
+              <div class="credential block col-md-12">
+                <div class="block-title">
+                  <h2>Credentials</h2>
+                </div>
+                <form method="post" class="form-horizontal form-bordered">
+                  <!--define the data table of license-->
+                  <div class="title">License(s)</div>
+                  <div class="license-group form-group">
+                    <div class="total-block-data">
+                      <!--define the header columns of table-->
+                      <header class="header-striped-row clearfix">
+                        <div class="state general-column">
+                          <div class="cell-wrapper">
+                            <div class="cell"><span>State</span></div>
+                          </div>
+                        </div>
+                        <div class="license-type general-column">
+                          <div class="cell-wrapper">
+                            <div class="cell"><span>License Type</span></div>
+                          </div>
+                        </div>
+                        <div class="license general-column">
+                          <div class="cell-wrapper">
+                            <div class="cell"><span>License #</span></div>
+                          </div>
+                        </div>
+                        <div class="expiration general-column">
+                          <div class="cell-wrapper">
+                            <div class="cell"><span>Expiration</span></div>
+                          </div>
+                        </div>
+                      </header>
+                      <!--data content-->
+                      <div class="data-group">
+                        <!--data row-->
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="state general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder=" " class="select-chosen form-control" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">CA</option>
+                                  <option value="1">CA</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span> </span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License Type header-->
+                          <div class="license-type general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder="Choose a License Type" class="select-chosen" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">Marriage and Family Therapist</option>
+                                  <option value="1">Marriage and Family Therapist</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span>Choose a License Type</span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License header-->
+                          <div class="license general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of expiration header-->
+                          <div class="expiration general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" placeholder="dd/mm/yy" date-date-format="dd/mm/yy" class="medium-form-control form-control input-datepicker"><span class="input-group-addon group-addon-lg"><i class="icon-calendar6"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                        <!--data row-->
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="state general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder=" " class="select-chosen form-control" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">CA</option>
+                                  <option value="1">CA</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span> </span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License Type header-->
+                          <div class="license-type general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder="Choose a License Type" class="select-chosen" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">Marriage and Family Therapist</option>
+                                  <option value="1">Marriage and Family Therapist</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span>Choose a License Type</span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License header-->
+                          <div class="license general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of expiration header-->
+                          <div class="expiration general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" placeholder="dd/mm/yy" date-date-format="dd/mm/yy" class="medium-form-control form-control input-datepicker"><span class="input-group-addon group-addon-lg"><i class="icon-calendar6"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                        <!--data row-->
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="state general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder=" " class="select-chosen form-control" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">CA</option>
+                                  <option value="1">CA</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span> </span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License Type header-->
+                          <div class="license-type general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <select data-placeholder="Choose a License Type" class="select-chosen" style="display: none;">
+                                  <option selected="selected"></option>
+                                  <option value="0">Marriage and Family Therapist</option>
+                                  <option value="1">Marriage and Family Therapist</option>
+                                </select>
+                                <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                                  <a class="chosen-single chosen-default" tabindex="-1">
+                                    <span>Choose a License Type</span>
+                                    <div><b></b></div>
+                                  </a>
+                                  <div class="chosen-drop">
+                                    <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                                    <ul class="chosen-results"></ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of License header-->
+                          <div class="license general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the data of expiration header-->
+                          <div class="expiration general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" placeholder="dd/mm/yy" date-date-format="dd/mm/yy" class="medium-form-control form-control input-datepicker"><span class="input-group-addon group-addon-lg"><i class="icon-calendar6"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="javascript:void(0)" class="add-more">+ Add another license</a>
+                    </div>
+                  </div>
+                  <div class="title">Years in Practice</div>
+                  <div class="practice form-group">
+                    <div class="col-md-3">
+                      <select data-placeholder="Select a Number" class="select-chosen" style="display: none;">
+                        <option selected="selected"></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                        <option value="45">45</option>
+                        <option value="46">46</option>
+                        <option value="47">47</option>
+                        <option value="48">48</option>
+                        <option value="49">49</option>
+                        <option value="50">50</option>
+                        <option value="51">51</option>
+                        <option value="52">52</option>
+                        <option value="53">53</option>
+                        <option value="54">54</option>
+                        <option value="55">55</option>
+                        <option value="56">56</option>
+                        <option value="57">57</option>
+                        <option value="58">58</option>
+                        <option value="59">59</option>
+                        <option value="60">60</option>
+                        <option value="61">61</option>
+                        <option value="62">62</option>
+                        <option value="63">63</option>
+                        <option value="64">64</option>
+                        <option value="65">65</option>
+                        <option value="66">66</option>
+                        <option value="67">67</option>
+                        <option value="68">68</option>
+                        <option value="69">69</option>
+                        <option value="70">70</option>
+                      </select>
+                      <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
+                        <a class="chosen-single chosen-default" tabindex="-1">
+                          <span>Select a Number</span>
+                          <div><b></b></div>
+                        </a>
+                        <div class="chosen-drop">
+                          <div class="chosen-search"><input type="text" autocomplete="off"></div>
+                          <ul class="chosen-results"></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--define the data table of schools block-->
+                  <div class="school-block-title title">Schools and Degrees</div>
+                  <div class="include-popover school-degree form-group">
+                    <div class="total-block-data">
+                      <!--data content-->
+                      <div class="data-group">
+                        <!--data row-->
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="text-filling general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" value="University of Chicago: PSY.D - 2001" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="icon-graduation"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="text-filling general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" placeholder="University of Chicago: PSY.D - 2001" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="icon-graduation"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="javascript:void(0)" class="add-more">+ Add School and Degree</a>
+                    </div>
+                    <div class="popover right">
+                      <div class="arrow"></div>
+                      <div class="pop-over-content">It's best if you use this format: School Name: Degree - Degree year</div>
+                    </div>
+                  </div>
+                  <!--defiine the Professional Association block-->
+                  <div class="association-block-title title">Professional Associations</div>
+                  <div class="association form-group">
+                    <div class="total-block-data">
+                      <!--data content-->
+                      <div class="data-group">
+                        <!--data row-->
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="text-filling general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" value="California Psychology Association" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="gi gi-group"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                        <div class="striped-row">
+                          <!--the data of state header-->
+                          <div class="text-filling general-column">
+                            <div class="cell-wrapper">
+                              <div class="cell">
+                                <div class="input-group"><input type="text" placeholder="California Psychology Association" class="medium-form-control form-control"><span class="input-group-addon group-addon-lg"><i class="gi gi-group"></i></span></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--the end of row-->
+                          <div class="end-row general-column">
+                            <div class="cell-wrapper"><a href="javascript:void(0)"><i class="icon-cancel"></i></a></div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="javascript:void(0)" class="add-more">+ Add Professional Association</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="profile-button-group"><button type="button" class="btn btn-success">View Profile</button><button type="button" class="btn btn-info">Save Profile</button></div>
+          </div>
+        </div>
+      </div>
+</div>
+    <div ui-view='footer'></div>
+  </div>
+  <div ui-view='sidebar'></div>
+</div>
