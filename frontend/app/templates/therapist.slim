@@ -1,0 +1,327 @@
+div ui-view="header"
+.main-container
+  .content-container
+    div ui-view="appointment"
+      .sub-header-wrap
+        .notice.themed-background-warning
+          button.close aria-hidden="true" data-dismiss="alert" type="button"  ×
+          span.system-notify
+            | Join upcoming session with
+            span.user-name John Patient
+          span.action-notify Action Submitted
+        .sub-header-section
+      .main-content
+        .appointment-listview
+          /! Modals for Appointment cancel
+          #pt-cancel.general-modal.modal.fade aria-hidden="true" role="dialog" tabindex="-1"
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close aria-hidden="true" data-dismiss="modal"  &times;
+                  modal-title Are you sure?
+                .modal-body
+                  h3 Are you sure you want to cancel your appointment with Arthur Belriver? Cancellation charges may apply.
+                  form.form-horizontal enctype="multipart/form-data" method="post"
+                    .form-group
+                      .message-title
+                        strong Message
+                        | (optional)
+                      .col-md-12
+                        textarea.form-control
+                    .form-actions
+                      button.btn.btn-info type="submit"  Yes, Cancel Appointment
+                      a.text-danger.link-confirm href="#"  No, go back
+          /! Modal for successfully cancels an appointment
+          #pt-cancel-success.general-modal.modal.fade aria-hidden="true" role="dialog" tabindex="-1"
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close aria-hidden="true" data-dismiss="modal"  &times;
+                  modal-title Appointment canceled
+                .modal-body.larger-bottom
+                  h3 The appointment with [THERAPIST FIRST AND LAST NAME] was canceled
+          .tab-content
+            /! %article.main-content
+            .content-header
+              .header-section
+                h1
+                  | Appointments
+                  i.icon-calendar6
+            /! list view tab
+            .list-view.row
+              /! The list view navigation
+              .aside-content.affix-menu-nav.col-md-3 data-offset-top="200" data-spy="affix"
+                .slave-nav
+                  ul.list-group.nav
+                    li.active
+                      a.list-group-item href="javascript:void(0)"
+                        h4.list-group-item-heading Upcoming
+                    li
+                      a.list-group-item href="javascript:void(0)"
+                        h4.list-group-item-heading Pending Requests
+                    li
+                      a.list-group-item href="javascript:void(0)"
+                        h4.list-group-item-heading Past or Canceled
+              /! The list view content
+              .pri-content.listview-content.patient-appointment.col-md-9
+                .btn-container
+                  a.btn.btn-info.btn-large href="javascript:void(0)"  Schedule New Appointment
+                .block.upcoming-appt
+                  .block-title
+                    h2 Upcoming Appointments
+                  .appointment-content-wrap.clearfix
+                    .block-data-wrap
+                      header.block-data-header
+                        .status-col.col-style
+                          .cell-wrapper
+                            span.cell Status
+                        .user-col.col-style
+                          .cell-wrapper
+                            span.cell Therapist Name
+                        .date-col.col-style
+                          .cell-wrapper
+                            span.cell Date
+                        .time-col.col-style
+                          .cell-wrapper
+                            span.cell Time
+                        .options-col.col-style
+                          .cell-wrapper
+                            span.cell Options
+                      .block-data
+                        .data-row
+                          .status-col.col-style.text-success
+                            .cell-wrapper
+                              span.cell Confirmed
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-info.btn-action type="button"  Go to Session
+                                a.btn.btn-info.btn-action type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                        .data-row
+                          .status-col.col-style.text-success
+                            .cell-wrapper
+                              span.cell Confirmed
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-info.btn-action type="button"  Go to Session
+                                a.btn.btn-info.btn-action type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                        .data-row
+                          .status-col.col-style.text-success
+                            .cell-wrapper
+                              span.cell Confirmed
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-info.btn-action type="button"  Go to Session
+                                a.btn.btn-info.btn-action type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                /! Appointment requests
+                .block.request-appt
+                  .block-title
+                    h2 Pending Appointment Requests
+                  .appointment-content-wrap.clearfix
+                    .block-data-wrap
+                      header.block-data-header
+                        .status-col.col-style
+                          .cell-wrapper
+                            span.cell Status
+                        .user-col.col-style
+                          .cell-wrapper
+                            span.cell Therapist Name
+                        .date-col.col-style
+                          .cell-wrapper
+                            span.cell Date
+                        .time-col.col-style
+                          .cell-wrapper
+                            span.cell Time
+                        .options-col.col-style
+                          .cell-wrapper
+                            span.cell Options
+                      .block-data
+                        .data-row
+                          .status-col.col-style.text-warning
+                            .cell-wrapper
+                              span.cell Pending
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-action.btn-info data-target="#confirm-modal" data-toggle="modal" type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                        .data-row
+                          .status-col.col-style.text-warning
+                            .cell-wrapper
+                              span.cell Pending
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Pending
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-action.btn-info data-target="#confirm-modal" data-toggle="modal" type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                        .data-row
+                          .status-col.col-style.text-warning
+                            .cell-wrapper
+                              span.cell Pending
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-action.btn-info data-target="#confirm-modal" data-toggle="modal" type="button"  View Details
+                                .option-link-wrap
+                                  a.text-danger data-target="#pt-cancel" data-toggle="modal" href="#"  Cancel
+                /! Past and canceled appointments
+                .block
+                  .block-title
+                    h2 Past or Canceled Appointments
+                  .appointment-content-wrap.clearfix
+                    .block-data-wrap
+                      header.block-data-header
+                        .status-col.col-style
+                          .cell-wrapper
+                            span.cell Status
+                        .user-col.col-style
+                          .cell-wrapper
+                            span.cell Therapist Name
+                        .date-col.col-style
+                          .cell-wrapper
+                            span.cell Date
+                        .time-col.col-style
+                          .cell-wrapper
+                            span.cell Time
+                      .block-data
+                        .data-row
+                          .status-col.col-style
+                            .cell-wrapper
+                              span.text-success.cell Confirmed
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-info.btn-action type="button"  View Receipt
+                        .data-row
+                          .status-col.col-style
+                            .cell-wrapper
+                              span.text-danger.cell Canceled
+                          .user-col.col-style
+                            .user-infor
+                              .sidebar-user-avatar
+                                a href="#"
+                                  img alt=("user avatar") src="http://placehold.it/32x32" /
+                              .avatar-name.cell-wrapper
+                                span.cell
+                                  a href="javascript:void(0)"  Winter Decol
+                          .date-col.col-style
+                            .cell-wrapper
+                              span.cell Today
+                          .time-col.col-style
+                            .cell-wrapper
+                              span.cell 5 PM
+                          .options-col.col-style
+                            .cell-wrapper
+                              .cell
+                                button.btn.btn-info.btn-action type="button"  View  Receipt
+    div ui-view="appointment.therapist"
+    div ui-view="footer"
+  div ui-view="sidebar"

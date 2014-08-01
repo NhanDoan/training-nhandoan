@@ -2,7 +2,7 @@
 
 ## Pre-requirements
     - Ruby installed with Ruby gems (1.9 or later)
-    - VirtualBox 4.3.16
+    - VirtualBox 4.3.14
     - Vagrant 1.63
     - Git
     - Berkshelf 3.1.4
@@ -49,12 +49,13 @@ Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
   1. There is one boxe in the Vagrant configuration: rails-angular, please issue the following command:
     <pre>
       $ cd /home/vagrant/backend
+      $ bundle install
   </pre>
 
 
   2. Do migrate the db schema
       <pre>
-        $ bundle exec rake db:migrate RAILS_ENV=development
+        $ bundle exec rake db:create db:migrate RAILS_ENV=development
       </pre>
 
   3. Start Rails server
@@ -63,7 +64,7 @@ Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
     </pre>
 
 ## Start Frontend
-1. Start frontend server (http://localhost:9000)
+1. Start frontend server (http://localhost:9001)
 2.     <pre>
       $ cd /home/vagrant/fronent
       $ npm install
