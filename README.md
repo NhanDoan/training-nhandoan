@@ -2,7 +2,7 @@
 
 ## Pre-requirements
     - Ruby installed with Ruby gems (1.9 or later)
-    - VirtualBox 4.3.16
+    - VirtualBox 4.3.14
     - Vagrant 1.63
     - Git
     - Berkshelf 3.1.4

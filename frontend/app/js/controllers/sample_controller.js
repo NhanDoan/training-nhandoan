@@ -1,7 +1,8 @@
+'use strict';
 angular.module('starter-app').controller('SampleController', function($scope) {
-  'use strict';
 
   var enforceIntegers, isCorrect, setEquationLabel;
+  $scope.name = 'xxxxxxxxx';
   $scope.equation = {
     a: 1,
     b: 2,

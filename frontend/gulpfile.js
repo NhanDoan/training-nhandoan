@@ -40,7 +40,7 @@
 			app: 'app',
 
 			paths: {
-				scripts: ['app/js/app.js', 'app/js/routes.js', 'app/js/**/*.{js}'], // # All .js and .coffee files, starting with app.coffee or app.js
+				scripts: ['app/js/app.{coffee,js}', 'app/js/routes.js', 'app/js/**/*.{coffee,js}'], // # All .js and .coffee files, starting with app.coffee or app.js
 				styles: styleExternalPath, // css and scss files
 				// styles: 'app/css/**/*.{scss,css}', // css and scss files
 				pages: 'app/pages/**/*.{html,slim}', // All html, jade,and markdown files that can be reached directly

@@ -1,5 +1,5 @@
+'use strict';
 angular.module('starter-app.github').factory('GithubAPI', function($http, $cacheFactory, $q) {
-  'use strict';
   var repoCache;
   repoCache = $cacheFactory('github-repositories');
   return {

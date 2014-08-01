@@ -1,8 +1,12 @@
 div ui-view="header"
 .main-container
   .content-container
+  p
+    | {{name}}
     div ui-view=""
-    .main-content
+    .main-content ng-controller="SampleController"
+      p
+      | ng-model='{{name}}'
       .top-banner
       .search-result-container.full-width
         /! define the quick-search

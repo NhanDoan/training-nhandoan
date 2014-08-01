@@ -32,7 +32,8 @@
         { "type": "host",  "db": "all", "user": "all",        "addr": "127.0.0.1/32", "method": "trust" },
         { "type": "host",  "db": "all", "user": "all",        "addr": "::1/128",      "method": "trust" },
         { "type": "host",  "db": "all", "user": "postgres",   "addr": "127.0.0.1/32", "method": "trust" },
-        { "type": "host",  "db": "all", "user": "vagrant",   "addr": "127.0.0.1/32", "method": "trust" }
+        { "type": "host",  "db": "all", "user": "vagrant",   "addr": "127.0.0.1/32", "method": "trust" },
+        { "type": "host",  "db": "all", "user": "vagrant",   "addr": "192.168.3.2/32", "method": "trust" }
       ],
       "apt_distribution": "precise",
       "password": {
@@ -43,7 +44,6 @@
   "run_list": [
     "recipe[postgresql::server]",
     "recipe[postgresql::client]",
-    "recipe[postgresql::contrib]",
     "recipe[postgresql::pg_user]",
     "recipe[postgresql::configuration]",
     "recipe[postgresql::pg_database]",
