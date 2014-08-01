@@ -1,0 +1,172 @@
+<div id='signup-modal'>
+	<div class="modal-header text-center">
+		<h1>Sign Up</h1>
+	</div>
+	<div class="modal-body">
+		<!-- Sign up Form -->
+		<form class="form-horizontal form-bordered form-control-borderless" novalidate name="signUpForm">
+			<div class="form-group user-account-group">
+				<div class="col-xs-6 user-account">
+					<label class="radio-inline">
+						<input type='radio' ng-modal='!userSignUp.isPatient' name='typeOfUser'/>Sign up as a Therapist
+					</label>
+				</div>
+				<div class="col-xs-6 user-account">
+					<label class="radio-inline">
+						<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'/>Sign up as a Patient
+					</label>
+				</div>
+			</div>
+			<!-- user first name and last name -->
+			<div class="row no-gutter">
+				<div class="form-inline col-xs-6">
+					<div 	class="form-group"
+								ng-class="{'has-error': signUpForm.firstName.$invalid && signUpForm.firstName.$dirty}"
+							>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="gi gi-user"></i>
+							</span>
+							<input class="form-control input-lg" type='text' placeholder="First Name"
+										 ng-maxlength='30'
+										 ng-model='userSignUp.firstName'
+										 required
+										 name='firstName'
+										 />
+						</div>
+						<span 	class='help-block'
+										ng-show='signUpForm.firstName.$error.required'
+										>
+											Required!
+						</span>
+						<span 	class='help-block'
+										ng-show='signUpForm.firstName.$error.maxlength'
+										>
+											Must be less than 30 chars!
+						</span>
+					</div>
+				</div>
+				<div class="form-inline col-xs-6">
+					<div 	class="form-group"
+								ng-class="{'has-error': signUpForm.lastName.$invalid && signUpForm.lastName.$dirty}"
+							>
+						<div class="input-group">
+							<input 	class="form-control input-lg" placeholder="Last Name" type='text'
+											ng-maxlength='30'
+											ng-model='userSignUp.lastName'
+										 	required
+										 	name='lastName'
+										 />
+						</div>
+						<span 	class='help-block'
+										ng-show='signUpForm.lastName.$error.required'
+										>
+											Required!
+						</span>
+						<span 	class='help-block'
+										ng-show='signUpForm.lastName.$error.maxlength'
+										>
+											Must be less than 30 chars!
+						</span>
+					</div>
+				</div>
+			</div>
+			<div 	class="form-group"
+						ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}"
+						>
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-envelope"></i>
+						</span>
+						<input 	class="form-control input-lg" type='email' placeholder="Email"
+										ng-maxlength='30'
+										ng-model='userSignUp.email'
+										name='email'
+										required
+									/>
+					</div>
+					<span class='help-block'
+								ng-show='signUpForm.email.$invalid'
+								>
+									Email is invalid!
+					</span>
+				</div>
+			</div>
+			<div class="form-group"
+					 ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}"
+					 >
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-asterisk"></i>
+						</span>
+						<input 	class="form-control input-lg" type='password' placeholder="Password"
+										ng-minlength='6'
+										ng-model='userSignUp.password'
+										required
+										name='password'
+									/>
+					</div>
+					<span 	class='help-block'
+										ng-show='signUpForm.password.$error.required'
+										>
+											Required!
+					</span>
+					<span 	class='help-block'
+									ng-show='signUpForm.password.$error.minlength'
+									>
+										Must be great than 6 chars!
+					</span>
+				</div>
+			</div>
+			<div class="form-group"
+					 ng-class="{'has-error': signUpForm.password.$valid
+					 							&& signUpForm.cfPassword.$dirty
+					 							&& userSignUp.cfPassword != userSignUp.password 
+					 					}"
+					 >
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-asterisk"></i>
+						</span>
+						<input 	class="form-control input-lg" type='password' placeholder='Verify Password'
+										ng-model='userSignUp.cfPassword'
+										name='cfPassword'
+									/>
+					</div>
+					<span 	class='help-block'
+									ng-show="signUpForm.password.$valid
+							 							&& signUpForm.cfPassword.$dirty
+							 							&& userSignUp.cfPassword != userSignUp.password
+					 								"
+									>
+										Password is not match!
+					</span>
+				</div>
+			</div>
+			<div class="form-group form-actions">
+				<div class="col-xs-6">
+					<a class="register-terms"> Terms</a>
+					<label class="switch switch-primary" title="Agree to the terms">
+						<input type='checkbox' name='terms' ng-model='terms'/><span></span>
+					</label>
+				</div>
+				<div class="col-xs-6 text-right">
+					<button class="btn btn-sm btn-info" type='button'
+									ng-disabled='signUpForm.$invalid || !terms '
+									>
+						Sign Up
+					</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 text-center">
+					<span class="notice">Have an account?</span>
+					<a>Log in</a>
+				</div>
+			</div>
+		</form><!-- END Sign up Form -->
+	</div>
+</div>

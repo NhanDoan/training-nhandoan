@@ -2,7 +2,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import
   "bootstrap-sass-official/assets/stylesheets/bootstrap.scss",
-  "module/bootstrap",
+  // "module/bootstrap",
   "theme/default",
   "module/proUI-plugins",
   "module/proUI",
@@ -12,3 +12,4 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   "module/module",
   "theme/theme";
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

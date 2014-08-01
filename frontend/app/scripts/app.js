@@ -10,7 +10,8 @@
  */
 angular
   .module('frontEndApp', [
-    'ui.router'
+    'ui.router',
+    'auth'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
