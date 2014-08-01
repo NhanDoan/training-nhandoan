@@ -36,7 +36,7 @@
 		}),
 		styleExternalPath = '../design/src/files/styles/**/*.{scss,css}',
 		_ = {
-			devServerPort: 9000,
+			devServerPort: 9001,
 			app: 'app',
 
 			paths: {
@@ -333,6 +333,18 @@
 		gulp.watch([_.vendor.fonts], ['fonts']);
 		return gulp.watch([_.paths['static']], ['static']);
 	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ environ
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	// gulp.task('localhost', function() {
+	// 	$.shelljs = require('shelljs');
+	// 	$.shelljs.exec('open http://localhost:9001');
+	// });
+
+	// gulp.task('server', ['connect'], function() {
+	// 	return gulp.start('localhost');
+	// });
 
 	gulp.task('server', function() {
 		return $.connect.server({
