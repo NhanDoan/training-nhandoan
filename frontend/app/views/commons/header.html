@@ -34,11 +34,11 @@
       <li>
          <a>Search Therapists</a>
       </li>
-      <li>
-         <a>Log in</a>
+      <li ng-controller="auth.loginCtrl">
+         <button class="btn btn-info" type="button" ng-click="open()">Log in</button>
       </li>
       <li ng-controller="auth.signUpCtrl">
-         <button class="btn btn-info" type="button" ng-click="open()"> Sign up</button>
+         <button class="btn btn-info" type="button" ng-click="open()">Sign up</button>
       </li>
    </ul>
 </header>
