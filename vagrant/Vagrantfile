@@ -19,6 +19,7 @@ boxes = [
       { 3000 => 3000 },
       { 9001 => 9001 },
       { 35741 => 35741 },
+      { 35729 => 35729 },
       { 8003 => 8003 },
       { 9393 => 9393 },
       { 9200 => 9200 }
@@ -46,6 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Box config
   config.vm.box = 'precise64'
   config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
+  config.ssh.forward_agent = true
 
   # Plugin config
   config.omnibus.chef_version = :latest
