@@ -24,7 +24,7 @@
       <li><a ui-sref="messages"><i class="icon-envelope4 integr-icon"></i>Messages</a></li>
       <li class="user-menu"><a ui-sref="profile">John Doe<i class="fa fa-bars fa-fw integr-rev-icon"></i></a></li>
    </ul>
-   <ul class="public-nav nav navbar-nav pull-right" ng-show="!isLogin" ng-controller="auth.signUpCtrl">
+   <ul class="public-nav nav navbar-nav pull-right nav-pills" ng-show="!isLogin" ng-controller="auth.signUpCtrl">
       <li>
          <a>Contact us</a>
       </li>
@@ -35,10 +35,10 @@
          <a>Search Therapists</a>
       </li>
       <li>
-         <button class="btn btn-info" type="button" ng-click="open(false)">Log in</button>
+         <a ng-click="open(false)">Log in</a>
       </li>
       <li>
-         <button class="btn btn-info" type="button" ng-click="open(true)">Sign up</button>
+         <a ng-click="open(true)">Sign up</a>
       </li>
    </ul>
 </header>
