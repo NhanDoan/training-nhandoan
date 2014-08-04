@@ -27,24 +27,42 @@ angular
 			'$scope',
 			'$timeout',
 			'restAngular',
-		 	function ($scope, $timeout, restAngular) {
-		 		var auth = restAngular.all('users/login');
+			'$modalInstance',
+		 	function ($scope, $timeout, restAngular, $modalInstance) {
 
 		 		$scope.userLogin = {};
+		 		$scope.userSignUp = {};
 				$scope.isSignUp = _isSignUp;
 
 				$scope.toggleForm = function (isShow) {
 					$timeout(function() {
 						$scope.isSignUp = isShow;
 					}, 100);
-				}
+				};
 
 				$scope.doLogin = function () {
-					console.log($scope.userLogin);
-					auth.post()
+					var restLogin = restAngular.one('users/login');
+
+					restLogin.post($scope.userLogin)
 						.then(function (results) {
+							// success
+							$modalInstance.dismiss();
 							$cookieStore.put('eTherapiToken', $scope.userLogin);
+
 						});
+				};
+
+				$scope.onChooseTypeOfuser = function (type) {
+					$scope.userSignUp.user_type = type;
+				};
+
+				$scope.doSignUp = function () {
+					var signUpPromise = restAngular.one('users/sign_up').post($scope.userSignUp);
+
+					signUpPromise.then(function (data) {
+						
+
+					});
 				}
 			}
 		];

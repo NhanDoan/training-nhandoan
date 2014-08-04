@@ -1,32 +1,5 @@
 'use strict';
 
-///////////////////////////////////////////////////////////////////////////////////////
-// API
-///////////////////////////////////////////////////////////////////////////////////////
-
-angular
-  .module('wildFireAPI',['ngMockE2E'])
-  .run(function ($httpBackend) {
-    $httpBackend.whenGET(/\.html$/).passThrough();
-
-////////////////////////////////////////////////////////////////////////////////////////
-// PRODUCT API
-////////////////////////////////////////////////////////////////////////////////////////
-
-  $httpBackend.whenPOST(new RegExp('htt*')).respond(function (method, url, data, header) {
-    var nodes = [],
-        key,
-        node,
-        params = url.split("/");
-
-    console.log('header', header, url);
-    // console.log(data);
-
-    return [200, []];
-  });
-
-});
-
 /**
  * @ngdoc overview
  * @name frontEndApp
@@ -40,8 +13,7 @@ angular
     'ngCookies',
     'ui.router',
     'ui.bootstrap',
-    'common',
-    'wildFireAPI'
+    'common'
   ])
   .config([
     '$stateProvider',

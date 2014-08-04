@@ -11,12 +11,16 @@
 			<div class="form-group user-account-group">
 				<div class="col-xs-6 user-account">
 					<label class="radio-inline">
-						<input type='radio' ng-modal='!userSignUp.isPatient' name='typeOfUser'/>Sign up as a Therapist
+						<input type='radio' ng-model='isPatient' name='typeOfUser'
+									 ng-click='onChooseTypeOfuser(0)'
+									/>Sign up as a Therapist
 					</label>
 				</div>
 				<div class="col-xs-6 user-account">
 					<label class="radio-inline">
-						<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'/>Sign up as a Patient
+						<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'
+										ng-click='onChooseTypeOfuser(1)'
+									/>Sign up as a Patient
 					</label>
 				</div>
 			</div>
@@ -126,7 +130,7 @@
 			<div class="form-group"
 					 ng-class="{'has-error': signUpForm.password.$valid
 					 							&& signUpForm.cfPassword.$dirty
-					 							&& userSignUp.cfPassword != userSignUp.password
+					 							&& cfPassword != userSignUp.password
 					 					}"
 					 >
 				<div class="col-xs-12">
@@ -135,14 +139,14 @@
 							<i class="gi gi-asterisk"></i>
 						</span>
 						<input 	class="form-control input-lg" type='password' placeholder='Verify Password'
-										ng-model='userSignUp.cfPassword'
+										ng-model='cfPassword'
 										name='cfPassword'
 									/>
 					</div>
 					<span 	class='help-block'
 									ng-show="signUpForm.password.$valid
 							 							&& signUpForm.cfPassword.$dirty
-							 							&& userSignUp.cfPassword != userSignUp.password
+							 							&& cfPassword != userSignUp.password
 					 								"
 									>
 										Password is not match!
@@ -152,13 +156,14 @@
 			<div class="form-group form-actions">
 				<div class="col-xs-6">
 					<a class="register-terms"> Terms</a>
-					<label class="switch switch-primary" tooltip-html-unsafe="Agree to the terms">
+					<label class="switch switch-primary">
 						<input type='checkbox' name='terms' ng-model='terms'/><span></span>
 					</label>
 				</div>
 				<div class="col-xs-6 text-right">
 					<button class="btn btn-sm btn-info" type='button'
-									ng-disabled='signUpForm.$invalid || !terms '
+									ng-disabled='signUpForm.$invalid || !terms || cfPassword != userSignUp.password'
+									ng-click='doSignUp()'
 									>
 						Sign Up
 					</button>
