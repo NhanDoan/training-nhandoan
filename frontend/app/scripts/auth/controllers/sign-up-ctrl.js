@@ -25,12 +25,11 @@ angular
 
 	var signUpModalInstanceCtrl = [
 			'$scope',
-			'$modalInstance',
 			'$timeout',
 			'restAngular',
-		 	function ($scope, $modalInstance, $timeout, restAngular) {
+		 	function ($scope, $timeout, restAngular) {
 		 		var auth = restAngular.all('users/login');
-		 		
+
 		 		$scope.userLogin = {};
 				$scope.isSignUp = _isSignUp;
 
