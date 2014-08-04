@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('auth')
+	.module('frontEndApp')
 	.controller('auth.signUpCtrl',[
 		'$scope',
 		'$modal',
@@ -27,7 +27,11 @@ angular
 			'$scope',
 			'$modalInstance',
 			'$timeout',
-		 	function ($scope, $modalInstance, $timeout) {
+			'restAngular',
+		 	function ($scope, $modalInstance, $timeout, restAngular) {
+		 		var auth = restAngular.all('users/login');
+		 		
+		 		$scope.userLogin = {};
 				$scope.isSignUp = _isSignUp;
 
 				$scope.toggleForm = function (isShow) {
@@ -37,8 +41,11 @@ angular
 				}
 
 				$scope.doLogin = function () {
-					$cookieStore.put('eTherapiToken', {email: 'trungtran@domain.com'});
-					console.log(12345);
+					console.log($scope.userLogin);
+					auth.post()
+						.then(function (results) {
+							$cookieStore.put('eTherapiToken', $scope.userLogin);
+						});
 				}
 			}
 		];

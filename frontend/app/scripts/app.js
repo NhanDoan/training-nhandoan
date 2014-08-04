@@ -13,13 +13,14 @@ angular
 // PRODUCT API
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  $httpBackend.whenGET(new RegExp('htt*')).respond(function (method, url, data, header) {
+  $httpBackend.whenPOST(new RegExp('htt*')).respond(function (method, url, data, header) {
     var nodes = [],
         key,
         node,
         params = url.split("/");
 
     console.log('header', header, url);
+    // console.log(data);
 
     return [200, []];
   });
@@ -38,8 +39,8 @@ angular
   .module('frontEndApp', [
     'ngCookies',
     'ui.router',
+    'ui.bootstrap',
     'common',
-    'auth',
     'wildFireAPI'
   ])
   .config([
@@ -149,6 +150,6 @@ angular
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
 
-      restAngular.all('acb').getList();
+      //restAngular.all('acb').getList();
     }
   ]);
