@@ -1,0 +1,157 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_version ">= 1.6.3"
+
+Vagrant.require_plugin "vagrant-vbguest"
+Vagrant.require_plugin "vagrant-omnibus"
+Vagrant.require_plugin "vagrant-cachier"
+Vagrant.require_plugin "librarian-chef"
+
+boxes = [
+  {
+    name: 'railsangular-dev',
+    roles: ['app'],
+    ip: '192.168.3.2',
+    vbox_config: [
+      { '--memory' => '2048' }
+    ],
+    forwarded_ports: [
+      { 80 => 8080 },
+      { 3000 => 3000 },
+      { 9001 => 9001 },
+      { 35741 => 35741 },
+      { 35729 => 35729 },
+      { 8003 => 8003 },
+      { 9393 => 9393 },
+      { 9200 => 9200 }
+    ],
+    synced_folders: [
+      { '../backend' => '/home/vagrant/backend' },
+      { '../frontend' => '/home/vagrant/frontend' },
+      { '../design' => '/home/vagrant/design' }
+    ]
+  },
+  {
+    name: 'railsangular-db',
+    roles: ['db'],
+    ip: '192.168.3.3',
+    vbox_config: [
+      { '--memory' => '1024' }
+    ],
+    forwarded_ports: [
+      { 5432 => 1234 }
+    ]
+  }
+]
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Box config
+  config.vm.box = 'precise64'
+  config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
+  config.ssh.forward_agent = true
+  config.ssh.pty = true
+
+  # Plugin config
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
+
+  boxes.each do |opts|
+    # mutiple machine define
+    config.vm.define opts[:name], :priviledge => false do |config|
+
+      # set hostname
+      config.vm.hostname = opts[:name]
+
+      #network config
+      config.vm.network :private_network, ip: opts[:ip]
+
+      # forward ports
+      opts[:forwarded_ports].each do |port|
+        port.each do |guest, host|
+          config.vm.network :forwarded_port, guest: guest, host: host
+        end
+      end
+
+      # sync folders
+      opts[:synced_folders].each do |folder|
+        folder.each do |folder1, folder2|
+          config.vm.synced_folder folder1, folder2
+        end
+      end if opts[:synced_folders]
+
+      # VirtualBox customizations
+      unless opts[:vbox_config].nil?
+        config.vm.provider :virtualbox do |vb|
+          # naming for vm box
+          vb.name = "vagrant_#{opts[:name]}"
+
+          # set the hw config
+          opts[:vbox_config].each do |hash|
+            hash.each do |key, value|
+              vb.customize ['modifyvm', :id, key, value]
+            end
+          end
+        end
+      end
+
+      # server notify
+      config.vm.provision :shell, inline: "echo 'Server: #{opts[:name]} - IP: #{opts[:ip]}'"
+
+      # custom commands
+      opts[:commands].each do |cmd|
+        config.vm.provision :shell, inline: cmd
+      end if opts[:commands]
+
+      # config box with chef
+      config.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
+        chef.roles_path = 'roles/dev'
+        # chef.data_bags_path = 'data_bags'
+        # chef.nfs = true
+        chef.add_recipe 'ckbk'
+
+        opts[:roles].each do |role|
+          # add role
+          chef.add_role(role)
+        end if opts[:roles].kind_of?(Array)
+
+        # run recipes
+        # chef.run_list = [
+        #   'recipe[apt]',
+        #   'recipe[git]',
+        #   'recipe[rvm]',
+        #   'recipe[rvm::vagrant]',
+        #   'recipe[rvm::system]',
+        #   'recipe[build-essential]',
+        #   'recipe[ruby_build]',
+        #   'recipe[rbenv::vagrant]',
+        #   'recipe[rbenv::user]'
+        # ]
+
+        # configure recipes
+        # chef.json = {
+        #   'rbenv' => {
+        #     'user_installs' => [
+        #       {
+        #         'user'    => 'vagrant',
+        #         'rubies'  => ['2.1.2p95'],
+        #         'global'  => '2.1.2p95',
+        #         'gems'    => {
+        #           '2.1.2p95' => [
+        #             { 'name'    => 'bundler' },
+        #             { 'name'    => 'rails' },
+        #             { 'name'    => 'rake' }
+        #           ]
+        #         }
+        #       }
+        #     ]
+        #   }
+        # }
+      end
+    end
+  end
+end
