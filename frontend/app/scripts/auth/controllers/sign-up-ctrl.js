@@ -5,7 +5,8 @@ angular
 	.controller('auth.signUpCtrl',[
 		'$scope',
 		'$modal',
-		function ($scope, $modal) {
+		'$cookieStore',
+		function ($scope, $modal, $cookieStore) {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 	var _isSignUp = false,
@@ -35,6 +36,10 @@ angular
 					}, 100);
 				}
 
+				$scope.doLogin = function () {
+					$cookieStore.put('eTherapiToken', {email: 'trungtran@domain.com'});
+					console.log(12345);
+				}
 			}
 		];
 

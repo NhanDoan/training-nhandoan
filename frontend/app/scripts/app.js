@@ -1,5 +1,31 @@
 'use strict';
 
+///////////////////////////////////////////////////////////////////////////////////////
+// API
+///////////////////////////////////////////////////////////////////////////////////////
+
+angular
+  .module('wildFireAPI',['ngMockE2E'])
+  .run(function ($httpBackend) {
+    $httpBackend.whenGET(/\.html$/).passThrough();
+
+////////////////////////////////////////////////////////////////////////////////////////
+// PRODUCT API
+////////////////////////////////////////////////////////////////////////////////////////
+
+  $httpBackend.whenGET(new RegExp('htt*')).respond(function (method, url, data, header) {
+    var nodes = [],
+        key,
+        node,
+        params = url.split("/");
+
+    console.log('header', header, url);
+
+    return [200, []];
+  });
+
+});
+
 /**
  * @ngdoc overview
  * @name frontEndApp
@@ -10,15 +36,21 @@
  */
 angular
   .module('frontEndApp', [
+    'ngCookies',
     'ui.router',
-    'auth'
+    'common',
+    'auth',
+    'wildFireAPI'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-    $stateProvider
+  .config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
+      $stateProvider
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// home page
+// home page+
 ///////////////////////////////////////////////////////////////////////////////////////
 
     .state('home', {
@@ -106,14 +138,17 @@ angular
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-  })
+  }])
 
   .run([
     '$rootScope',
     '$state',
     '$stateParams',
-    function ($rootScope, $state, $stateParams) {
+    'restAngular',
+    function ($rootScope, $state, $stateParams, restAngular) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
+
+      restAngular.all('acb').getList();
     }
   ]);

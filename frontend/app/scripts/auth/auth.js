@@ -3,5 +3,5 @@
 angular
 	.module('auth', [
 		'ui.bootstrap',
-		'restangular'
+		'common'
 	])
