@@ -69,7 +69,7 @@ Procfile
 
 # Berkshelf #
 #############
-cookbooks/*
+#cookbooks/*
 tmp
 
 # Cookbooks #
