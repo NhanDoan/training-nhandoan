@@ -77,7 +77,9 @@ backend/dump.rdb
 .vagrant
 
 /vagrant/.vagrant
-/vagrant/cookbooks
+
+
+
 /vagrant/tmp
 /vagrant/vendor
 /vagrant/.bundle
