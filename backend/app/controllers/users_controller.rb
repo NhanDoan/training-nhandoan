@@ -29,19 +29,28 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = find_by_email(user_params.email)
 
-    if user = @user.save
-      @result = {
-        ok: '0',
-        user: @user
-      }
-    else
+    if @user
       @result = {
         ok: '1',
-        # message: @user.errors + '-' + :unprocessable_entity
-        message: @user.errors
+        message: "An user already exists with this email address."
       }
+    else
+      @user = User.new(user_params)
+
+      if @user.save
+        @result = {
+          ok: '0',
+          user: @user
+        }
+      else
+        @result = {
+          ok: '1',
+          # message: @user.errors + '-' + :unprocessable_entity
+          message: @user.errors
+        }
+      end
     end
 
     render json: @result
