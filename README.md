@@ -69,7 +69,7 @@ Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
       $ cd /home/vagrant/fronent
       $ npm install
       $ bower install
-      $ grunt serve [build,..]
+      $ gulp [compile, watch]
   </pre>
 
 ## Start Design
