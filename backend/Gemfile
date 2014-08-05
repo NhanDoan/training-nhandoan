@@ -47,7 +47,7 @@ group :development do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'meta_request'
-  gem 'better_errors', '~>0.5.0'
+  # gem 'better_errors', '~>0.5.0'
   gem 'binding_of_caller'
 end
 
