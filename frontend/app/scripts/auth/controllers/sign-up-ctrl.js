@@ -6,7 +6,11 @@ angular
 		'$scope',
 		'$modal',
 		'$cookieStore',
-		function($scope, $modal, $cookieStore) {
+    'Restangular',
+		function($scope, $modal, $cookieStore, Restangular) {
+			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
+				RestangularConfigurer.setBaseUrl('http://localhost:3000');
+			});
 
 			///////////////////////////////////////////////////////////////////////////////////////
 			var _isSignUp = false,
@@ -42,15 +46,16 @@ angular
 					};
 
 					$scope.doLogin = function() {
-						var restLogin = restAngular.one('users/login');
+						var restLogin = overrideBaseURL.one('login').get($scope.userLogin);
 
-						restLogin.post($scope.userLogin)
-							.then(function(results) {
-								// success
-								$modalInstance.dismiss();
-								$cookieStore.put('eTherapiToken', $scope.userLogin);
+						restLogin.then(function(results) {
+							// success
+							console.log('DONE::', results);
 
-							});
+							$modalInstance.dismiss();
+							$cookieStore.put('eTherapiToken', $scope.userLogin);
+
+						});
 					};
 
 					$scope.onChooseTypeOfuser = function(type) {
@@ -58,7 +63,7 @@ angular
 					};
 
 					$scope.doSignUp = function() {
-						var signUpPromise = restAngular.one('sign_up').customPOST($scope.userSignUp);
+						var signUpPromise = overrideBaseURL.one('sign_up').customPOST($scope.userSignUp);
 
 						signUpPromise.then(function(data) {
 							console.log('DONE', data);

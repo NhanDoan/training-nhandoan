@@ -1,7 +1,7 @@
 angular.module('app').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('/assets/templates/commons/footer.html',
+  $templateCache.put('/commons/footer.html',
     "<footer class=\"sub-footer\">\n" +
     "   <div class=\"pull-right\"><i class=\"fa fa-heart text-danger\"></i> Lovingly made in NYC &amp; SF</div>\n" +
     "   <div class=\"pull-left\">2014 ©<a>eTherapi</a></div>\n" +
@@ -9,7 +9,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/commons/header.html',
+  $templateCache.put('/commons/header.html',
     "<header class=\"main-header navbar navbar-default navbar-fixed-top\">\n" +
     "   <div class=\"navbar-header logo-wrapper\">\n" +
     "      <h1><a href=\"index.html\" id=\"main-logo\">etherapi</a></h1>\n" +
@@ -30,17 +30,34 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "      </div>\n" +
     "      <button class=\"btn add-client\" type=\"submit\"><i class=\"hi hi-plus\"></i>  Add Patient</button>\n" +
     "   </form>\n" +
-    "   <ul class=\"nav navbar-nav pull-right\">\n" +
+    "   <ul class=\"nav navbar-nav pull-right\" ng-show='isLogin'>\n" +
     "      <li><a ui-sref=\"home\"><i class=\"icon-house integr-icon\"></i>Home</a></li>\n" +
     "      <li><a ui-sref=\"appointment\"><i class=\"icon-calendar6 integr-icon\"></i>Appointments</a></li>\n" +
     "      <li><a ui-sref=\"messages\"><i class=\"icon-envelope4 integr-icon\"></i>Messages</a></li>\n" +
     "      <li class=\"user-menu\"><a ui-sref=\"profile\">John Doe<i class=\"fa fa-bars fa-fw integr-rev-icon\"></i></a></li>\n" +
     "   </ul>\n" +
+    "   <ul class=\"public-nav nav navbar-nav pull-right nav-pills\" ng-show=\"!isLogin\" ng-controller=\"auth.signUpCtrl\">\n" +
+    "      <li>\n" +
+    "         <a>Contact us</a>\n" +
+    "      </li>\n" +
+    "      <li>\n" +
+    "         <a>For Therapists</a>\n" +
+    "      </li>\n" +
+    "      <li>\n" +
+    "         <a>Search Therapists</a>\n" +
+    "      </li>\n" +
+    "      <li>\n" +
+    "         <a ng-click=\"open('login')\">Log in</a>\n" +
+    "      </li>\n" +
+    "      <li>\n" +
+    "         <a ng-click=\"open('signUp')\">Sign up</a>\n" +
+    "      </li>\n" +
+    "   </ul>\n" +
     "</header>\n"
   );
 
 
-  $templateCache.put('/assets/templates/commons/profile.html',
+  $templateCache.put('/commons/profile.html',
     "<div ui-view='header'></div>\n" +
     "<div class=\"main-container\">\n" +
     "\n" +
@@ -258,7 +275,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/commons/sidebar.html',
+  $templateCache.put('/commons/sidebar.html',
     "<aside class=\"main-sidebar-user\">\n" +
     "   <div class=\"sidebar-section sidebar-user clearfix\">\n" +
     "      <div class=\"sidebar-user-avatar themed-background-snow\"><a href=\"#\"><img src=\"http://placehold.it/65x65\" alt=\"user avatar\"></a></div>\n" +
@@ -306,7 +323,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/commons/therapist-account.html',
+  $templateCache.put('/commons/therapist-account.html',
     "<div ui-view='header'></div>\n" +
     "<div class=\"main-container\">\n" +
     "\n" +
@@ -528,7 +545,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/commons/therapist-edit-profile.html',
+  $templateCache.put('/commons/therapist-edit-profile.html',
     "<div ui-view='header'></div>\n" +
     "<div class=\"main-container\">\n" +
     "\n" +
@@ -1381,7 +1398,305 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/home.html',
+  $templateCache.put('/directives/modals/sign-up.html',
+    "<!-- //////////////////////////////////////////////////// -->\n" +
+    "<!-- // SIGN UP FORM                                      -->\n" +
+    "<!-- //////////////////////////////////////////////////// -->\n" +
+    "<div id='signup-modal' ng-show=\"(isSignUp === 'signUp')\">\n" +
+    "\t<div class=\"modal-header text-center\">\n" +
+    "\t\t<h1>Sign Up</h1>\n" +
+    "\t</div>\n" +
+    "\t<div class=\"modal-body\">\n" +
+    "\t\t<!-- Sign up Form -->\n" +
+    "\t\t<form class=\"form-horizontal form-bordered form-control-borderless\" novalidate name=\"signUpForm\">\n" +
+    "\t\t\t<div class=\"form-group user-account-group\">\n" +
+    "\t\t\t\t<div class=\"col-xs-6 user-account\">\n" +
+    "\t\t\t\t\t<label class=\"radio-inline\">\n" +
+    "\t\t\t\t\t\t<input type='radio' ng-model='isPatient' name='typeOfUser'\n" +
+    "\t\t\t\t\t\t\t\t\t ng-click=\"onChooseTypeOfuser('therapist')\"\n" +
+    "\t\t\t\t\t\t\t\t\t/>Sign up as a Therapist\n" +
+    "\t\t\t\t\t</label>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<div class=\"col-xs-6 user-account\">\n" +
+    "\t\t\t\t\t<label class=\"radio-inline\">\n" +
+    "\t\t\t\t\t\t<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-click=\"onChooseTypeOfuser('patient')\"\n" +
+    "\t\t\t\t\t\t\t\t\t/>Sign up as a Patient\n" +
+    "\t\t\t\t\t</label>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<!-- user first name and last name -->\n" +
+    "\t\t\t<div class=\"row no-gutter\">\n" +
+    "\t\t\t\t<div class=\"form-inline col-xs-6\">\n" +
+    "\t\t\t\t\t<div \tclass=\"form-group\"\n" +
+    "\t\t\t\t\t\t\t\tng-class=\"{'has-error': signUpForm.firstName.$invalid && signUpForm.firstName.$dirty}\"\n" +
+    "\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t<div class=\"input-group\">\n" +
+    "\t\t\t\t\t\t\t<span class=\"input-group-addon\">\n" +
+    "\t\t\t\t\t\t\t\t<i class=\"gi gi-user\"></i>\n" +
+    "\t\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t\t<input class=\"form-control input-lg\" type='text' placeholder=\"First Name\"\n" +
+    "\t\t\t\t\t\t\t\t\t\t ng-maxlength='30'\n" +
+    "\t\t\t\t\t\t\t\t\t\t ng-model='userSignUp.first_name'\n" +
+    "\t\t\t\t\t\t\t\t\t\t required\n" +
+    "\t\t\t\t\t\t\t\t\t\t name='firstName'\n" +
+    "\t\t\t\t\t\t\t\t\t\t />\n" +
+    "\t\t\t\t\t\t</div>\n" +
+    "\t\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-show='signUpForm.firstName.$error.required'\n" +
+    "\t\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tThis field is required!\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-show='signUpForm.firstName.$error.maxlength'\n" +
+    "\t\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tMust be less than 30 chars!\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<div class=\"form-inline col-xs-6\">\n" +
+    "\t\t\t\t\t<div \tclass=\"form-group\"\n" +
+    "\t\t\t\t\t\t\t\tng-class=\"{'has-error': signUpForm.lastName.$invalid && signUpForm.lastName.$dirty}\"\n" +
+    "\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t<div class=\"input-group\">\n" +
+    "\t\t\t\t\t\t\t<input \tclass=\"form-control input-lg\" placeholder=\"Last Name\" type='text'\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tng-maxlength='30'\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tng-model='userSignUp.last_name'\n" +
+    "\t\t\t\t\t\t\t\t\t\t \trequired\n" +
+    "\t\t\t\t\t\t\t\t\t\t \tname='lastName'\n" +
+    "\t\t\t\t\t\t\t\t\t\t />\n" +
+    "\t\t\t\t\t\t</div>\n" +
+    "\t\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-show='signUpForm.lastName.$error.required'\n" +
+    "\t\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tThis field is required!\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-show='signUpForm.lastName.$error.maxlength'\n" +
+    "\t\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tMust be less than 30 chars!\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div \tclass=\"form-group\"\n" +
+    "\t\t\t\t\t\tng-class=\"{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}\"\n" +
+    "\t\t\t\t\t\t>\n" +
+    "\t\t\t\t<div class=\"col-xs-12\">\n" +
+    "\t\t\t\t\t<div class=\"input-group\">\n" +
+    "\t\t\t\t\t\t<span class=\"input-group-addon\">\n" +
+    "\t\t\t\t\t\t\t<i class=\"gi gi-envelope\"></i>\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t<input \tclass=\"form-control input-lg\" type='email' placeholder=\"Email\"\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-maxlength='30'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-model='userSignUp.email'\n" +
+    "\t\t\t\t\t\t\t\t\t\tname='email'\n" +
+    "\t\t\t\t\t\t\t\t\t\trequired\n" +
+    "\t\t\t\t\t\t\t\t\t/>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t\t<span class='help-block'\n" +
+    "\t\t\t\t\t\t\t\tng-show='signUpForm.email.$invalid'\n" +
+    "\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\tEmail is invalid!\n" +
+    "\t\t\t\t\t</span>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"form-group\"\n" +
+    "\t\t\t\t\t ng-class=\"{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}\"\n" +
+    "\t\t\t\t\t >\n" +
+    "\t\t\t\t<div class=\"col-xs-12\">\n" +
+    "\t\t\t\t\t<div class=\"input-group\">\n" +
+    "\t\t\t\t\t\t<span class=\"input-group-addon\">\n" +
+    "\t\t\t\t\t\t\t<i class=\"gi gi-asterisk\"></i>\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t<input \tclass=\"form-control input-lg\" type='password' placeholder=\"Password\"\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-minlength='6'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-model='userSignUp.hashed_password\n" +
+    "\t\t\t\t\t\t\t\t\t\trequired\n" +
+    "\t\t\t\t\t\t\t\t\t\tname='password'\n" +
+    "\t\t\t\t\t\t\t\t\t/>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-show='signUpForm.password.$error.required'\n" +
+    "\t\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\t\tThis field is required!!\n" +
+    "\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\tng-show='signUpForm.password.$error.minlength'\n" +
+    "\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\tMust be great than 6 chars!\n" +
+    "\t\t\t\t\t</span>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"form-group\"\n" +
+    "\t\t\t\t\t ng-class=\"{'has-error': signUpForm.password.$valid\n" +
+    "\t\t\t\t\t \t\t\t\t\t\t\t&& signUpForm.cfPassword.$dirty\n" +
+    "\t\t\t\t\t \t\t\t\t\t\t\t&& cfPassword != userSignUp.hashed_password\n" +
+    "\t\t\t\t\t \t\t\t\t\t}\"\n" +
+    "\t\t\t\t\t >\n" +
+    "\t\t\t\t<div class=\"col-xs-12\">\n" +
+    "\t\t\t\t\t<div class=\"input-group\">\n" +
+    "\t\t\t\t\t\t<span class=\"input-group-addon\">\n" +
+    "\t\t\t\t\t\t\t<i class=\"gi gi-asterisk\"></i>\n" +
+    "\t\t\t\t\t\t</span>\n" +
+    "\t\t\t\t\t\t<input \tclass=\"form-control input-lg\" type='password' placeholder='Verify Password'\n" +
+    "\t\t\t\t\t\t\t\t\t\tng-model='cfPassword'\n" +
+    "\t\t\t\t\t\t\t\t\t\tname='cfPassword'\n" +
+    "\t\t\t\t\t\t\t\t\t/>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t\t<span \tclass='help-block'\n" +
+    "\t\t\t\t\t\t\t\t\tng-show=\"signUpForm.password.$valid\n" +
+    "\t\t\t\t\t\t\t \t\t\t\t\t\t\t&& signUpForm.cfPassword.$dirty\n" +
+    "\t\t\t\t\t\t\t \t\t\t\t\t\t\t&& cfPassword != userSignUp.hashed_password\n" +
+    "\t\t\t\t\t \t\t\t\t\t\t\t\t\"\n" +
+    "\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\t\t\t\t\tPassword is not match!\n" +
+    "\t\t\t\t\t</span>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"form-group form-actions\">\n" +
+    "\t\t\t\t<div class=\"col-xs-6\">\n" +
+    "\t\t\t\t\t<a class=\"register-terms\"> Terms</a>\n" +
+    "\t\t\t\t\t<label class=\"switch switch-primary terms-switch\">\n" +
+    "\t\t\t\t\t\t<input type='checkbox' name='terms' ng-model='terms'/><span tooltip=\"Agree to the terms\"></span>\n" +
+    "\t\t\t\t\t</label>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<div class=\"col-xs-6 text-right\">\n" +
+    "\t\t\t\t\t<button class=\"btn btn-sm btn-info\" type='button'\n" +
+    "\t\t\t\t\t\t\t\t\tng-disabled='signUpForm.$invalid || !terms || cfPassword != userSignUp.hashed_password\n" +
+    "\t\t\t\t\t\t\t\t\tng-click='doSignUp()'\n" +
+    "\t\t\t\t\t\t\t\t\t>\n" +
+    "\t\t\t\t\t\tSign Up\n" +
+    "\t\t\t\t\t</button>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"form-group\">\n" +
+    "\t\t\t\t<div class=\"col-xs-12 text-center\">\n" +
+    "\t\t\t\t\t<span class=\"notice\">Have an account?</span>\n" +
+    "\t\t\t\t\t<a ng-click=\"toggleForm('login')\">Log in</a>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t</form><!-- END Sign up Form -->\n" +
+    "\t</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- ///////////////////////////////////// -->\n" +
+    "<!-- // LOGIN FORM                         -->\n" +
+    "<!-- ///////////////////////////////////// -->\n" +
+    "<div id=\"login-modal\" ng-show=\"(isSignUp === 'login')\">\n" +
+    "  <div class=\"modal-header text-center\">\n" +
+    "    <h1>Log In</h1>\n" +
+    "  </div>\n" +
+    "  <div class=\"modal-body\">\n" +
+    "    <!-- Login Form -->\n" +
+    "    <form class=\"form-horizontal form-bordered form-control-borderless\" name=\"loginForm\" novalidate>\n" +
+    "      <div class=\"form-group\" ng-class=\"{ 'has-error': loginForm.email.$invalid && loginForm.email.$dirty }\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "          <div class=\"input-group\">\n" +
+    "            <span class=\"input-group-addon\">\n" +
+    "              <i class=\"gi gi-envelope\"></i>\n" +
+    "            </span>\n" +
+    "            <input class=\"form-control input-lg\"\n" +
+    "                   name=\"email\"\n" +
+    "                   placeholder=\"Email\"\n" +
+    "                   type=\"email\"\n" +
+    "                   ng-model='userLogin.email'\n" +
+    "                   required\n" +
+    "                  />\n" +
+    "          </div>\n" +
+    "          <span class='help-block'\n" +
+    "                ng-show='loginForm.email.$invalid'>Email is invalid!</span>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"form-group\" ng-class=\"{ 'has-error': loginForm.password.$invalid && loginForm.password.$dirty}\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "          <div class=\"input-group\">\n" +
+    "            <span class=\"input-group-addon\">\n" +
+    "              <i class=\"gi gi-asterisk\"></i>\n" +
+    "            </span>\n" +
+    "            <input class=\"form-control input-lg\"\n" +
+    "                   name=\"password\"\n" +
+    "                   placeholder=\"Password\"\n" +
+    "                   type=\"password\"\n" +
+    "                   ng-model=\"userLogin.password\"\n" +
+    "                   required\n" +
+    "                  />\n" +
+    "          </div>\n" +
+    "          <span class='help-block'\n" +
+    "                ng-show='loginForm.password.$error.required'>This field is required!</span>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"form-group form-actions\">\n" +
+    "        <div class=\"col-xs-4\">\n" +
+    "          <label class=\"switch switch-primary\" tooltip-html-unsafe=\"Remember Me\">\n" +
+    "            <input name=\"rememberMe\" type=\"checkbox\" ng-model='userLogin.rememberMe'/>\n" +
+    "            <span></span>\n" +
+    "          </label>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-xs-8 text-right\">\n" +
+    "          <button class=\"btn btn-sm btn-info\" type=\"button\" ng-disabled=\"loginForm.$invalid\" ng-click='doLogin()'>Log In</button>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"form-group\">\n" +
+    "        <div class=\"col-xs-12 text-center\">\n" +
+    "          <a ng-click=\"toggleForm('resetPass')\">Forgot password?</a>\n" +
+    "          -\n" +
+    "          <span class=\"notice\">Don't have an account?</span>\n" +
+    "          <a ng-click=\"toggleForm('signUp')\">Sign Up</a>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </form><!-- End Login Form -->\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- /////////////////////////////////// -->\n" +
+    "<!-- // RESET PASSWORD FORM              -->\n" +
+    "<!-- /////////////////////////////////// -->\n" +
+    "<div id=\"reset-password-modal\" ng-show=\"(isSignUp === 'resetPass')\">\n" +
+    "  <div class=\"modal-header text-center\">\n" +
+    "    <h1>Reset your Password</h1>\n" +
+    "  </div>\n" +
+    "  <div class=\"modal-body\">\n" +
+    "    <!-- Reminder Form -->\n" +
+    "    <p>Enter the email address associated with your account, and we'll email you a link to reset your password.</p>\n" +
+    "    <form class=\"form-horizontal form-bordered form-control-borderless\" name=\"resetPassForm\">\n" +
+    "      <div class=\"form-group\" ng-class=\"{ 'has-error': resetPassForm.email.$invalid && resetPassForm.email.$dirty }\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "          <div class=\"input-group\">\n" +
+    "            <span class=\"input-group-addon\">\n" +
+    "              <i class=\"gi gi-envelope\"></i>\n" +
+    "            </span>\n" +
+    "            <input class=\"form-control input-lg\"\n" +
+    "                   name=\"email\"\n" +
+    "                   placeholder=\"Email\"\n" +
+    "                   type=\"email\"\n" +
+    "                   ng-model=\"resetPass.email\"\n" +
+    "                   required\n" +
+    "                  />\n" +
+    "          </div>\n" +
+    "          <span class='help-block' ng-show='resetPassForm.email.$invalid'>Email is invalid!</span>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"form-group form-actions\">\n" +
+    "        <div class=\"col-xs-12 text-right\">\n" +
+    "          <button class=\"btn btn-sm btn-info\" type=\"button\" ng-disabled=\"resetPassForm.$invalid\">Reset Password</button>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "      <div class=\"form-group\">\n" +
+    "        <div class=\"col-xs-12 text-center\">\n" +
+    "          <span class=\"notice\">Did you remember your password?</span>\n" +
+    "          <a ng-click=\"toggleForm('login')\">Log in</a>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
+    "    </form>\n" +
+    "  </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('/home.html',
     "<div ui-view='header'></div>\n" +
     "<div class=\"main-container\">\n" +
     "\n" +
@@ -1445,12 +1760,12 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('/assets/templates/patien.html',
+  $templateCache.put('/patien.html',
     "<p>This is the about view.</p>\n"
   );
 
 
-  $templateCache.put('/assets/templates/therapist.html',
+  $templateCache.put('/therapist.html',
     "<div ui-view='header'></div>\n" +
     "<div class=\"main-container\">\n" +
     "\n" +
