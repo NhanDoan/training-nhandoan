@@ -6,11 +6,6 @@ metadata
 cookbook 'locale', git: 'https://github.com/hw-cookbooks/locale'
 cookbook "apt"
 cookbook 'build-essential'
-cookbook 'vim'
-cookbook 'tmux'
-
-# Web and App server cookbooks
-cookbook 'nginx'
 
 # App server cookbooks
 cookbook 'rvm', :git => 'https://github.com/fnichol/chef-rvm'
@@ -19,8 +14,6 @@ cookbook 'postgresql', github: "phlipper/chef-postgresql"
 # Frontend
 cookbook 'nodejs', github: "mdxp/nodejs-cookbook"
 cookbook 'npm', git: "https://github.com/balbeko/chef-npm.git"
-
-
 
 # on local path
 cookbook 'basic', path: 'cookbooks/basic'
