@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   resources :users
   resources :session
 
+  # APIS
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :posts
+    end
+  end
+
   root :to => 'wellcome#index'
   # root :to => 'users#index'
 

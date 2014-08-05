@@ -613,11 +613,13 @@ module.exports = function(grunt) {
 	]);
 
   // final build before send to backend
-  grunt.registerTask('deploy', []);
+  grunt.registerTask('deploy', [
+    'build'
+  ]);
 
 	grunt.registerTask('default', [
-		// 'newer:jshint',
-		// 'test',
+		'newer:jshint',
+		'test',
 		'build'
 	]);
 };
