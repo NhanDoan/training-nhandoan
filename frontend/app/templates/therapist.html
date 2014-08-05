@@ -1,0 +1,368 @@
+<div ui-view='header'></div>
+<div class="main-container">
+
+  <div class="content-container">
+    <div ui-view="appointment">
+      <div class="sub-header-wrap">
+        <div class="notice themed-background-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><span class="system-notify">Join upcoming session with<span class="user-name">John Patient</span></span><span class="action-notify">Action Submitted</span></div>
+        <div class="sub-header-section"></div>
+     </div>
+     <div class="main-content">
+        <div class="appointment-listview">
+           <!--Modals for Appointment cancel-->
+           <div tabindex="-1" role="dialog" aria-hidden="true" class="general-modal modal fade" id="pt-cancel">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                       <button data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                       <modal-title>Are you sure?</modal-title>
+                    </div>
+                    <div class="modal-body">
+                       <h3>Are you sure you want to cancel your appointment with Arthur Belriver? Cancellation charges may apply.</h3>
+                       <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                          <div class="form-group">
+                             <div class="message-title"><strong>Message</strong> (optional)</div>
+                             <div class="col-md-12"><textarea class="form-control"></textarea></div>
+                          </div>
+                          <div class="form-actions"><button type="submit" class="btn btn-info">Yes, Cancel Appointment</button><a href="#" class="text-danger link-confirm">No, go back</a></div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <!--Modal for successfully cancels an appointment-->
+           <div tabindex="-1" role="dialog" aria-hidden="true" class="general-modal modal fade" id="pt-cancel-success">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                       <button data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                       <modal-title>Appointment canceled</modal-title>
+                    </div>
+                    <div class="modal-body larger-bottom">
+                       <h3>The appointment with [THERAPIST FIRST AND LAST NAME] was canceled</h3>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div class="tab-content">
+              <!--%article.main-content-->
+              <div class="content-header">
+                 <div class="header-section">
+                    <h1>Appointments<i class="icon-calendar6"></i></h1>
+                 </div>
+              </div>
+              <!--list view tab-->
+              <div class="list-view row">
+                 <!--The list view navigation-->
+                 <div data-offset-top="200" data-spy="affix" class="aside-content affix-menu-nav col-md-3">
+                    <div class="slave-nav">
+                       <ul class="list-group nav">
+                          <li class="active">
+                             <a href="javascript:void(0)" class="list-group-item">
+                                <h4 class="list-group-item-heading">Upcoming</h4>
+                             </a>
+                          </li>
+                          <li>
+                             <a href="javascript:void(0)" class="list-group-item">
+                                <h4 class="list-group-item-heading">Pending Requests</h4>
+                             </a>
+                          </li>
+                          <li>
+                             <a href="javascript:void(0)" class="list-group-item">
+                                <h4 class="list-group-item-heading">Past or Canceled</h4>
+                             </a>
+                          </li>
+                       </ul>
+                    </div>
+                 </div>
+                 <!--The list view content-->
+                 <div class="pri-content listview-content patient-appointment col-md-9">
+                    <div class="btn-container"><a href="javascript:void(0)" class="btn btn-info btn-large">Schedule New Appointment</a></div>
+                    <div class="block upcoming-appt">
+                       <div class="block-title">
+                          <h2>Upcoming Appointments</h2>
+                       </div>
+                       <div class="appointment-content-wrap clearfix">
+                          <div class="block-data-wrap">
+                             <header class="block-data-header">
+                                <div class="status-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Status</span></div>
+                                </div>
+                                <div class="user-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Therapist Name</span></div>
+                                </div>
+                                <div class="date-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Date</span></div>
+                                </div>
+                                <div class="time-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Time</span></div>
+                                </div>
+                                <div class="options-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Options</span></div>
+                                </div>
+                             </header>
+                             <div class="block-data">
+                                <div class="data-row">
+                                   <div class="status-col col-style text-success">
+                                      <div class="cell-wrapper"><span class="cell">Confirmed</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button type="button" class="btn btn-info btn-action">Go to Session</button><a type="button" class="btn btn-info btn-action">View Details</a>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="data-row">
+                                   <div class="status-col col-style text-success">
+                                      <div class="cell-wrapper"><span class="cell">Confirmed</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button type="button" class="btn btn-info btn-action">Go to Session</button><a type="button" class="btn btn-info btn-action">View Details</a>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="data-row">
+                                   <div class="status-col col-style text-success">
+                                      <div class="cell-wrapper"><span class="cell">Confirmed</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button type="button" class="btn btn-info btn-action">Go to Session</button><a type="button" class="btn btn-info btn-action">View Details</a>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <!--Appointment requests-->
+                    <div class="block request-appt">
+                       <div class="block-title">
+                          <h2>Pending Appointment Requests</h2>
+                       </div>
+                       <div class="appointment-content-wrap clearfix">
+                          <div class="block-data-wrap">
+                             <header class="block-data-header">
+                                <div class="status-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Status</span></div>
+                                </div>
+                                <div class="user-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Therapist Name</span></div>
+                                </div>
+                                <div class="date-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Date</span></div>
+                                </div>
+                                <div class="time-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Time</span></div>
+                                </div>
+                                <div class="options-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Options</span></div>
+                                </div>
+                             </header>
+                             <div class="block-data">
+                                <div class="data-row">
+                                   <div class="status-col col-style text-warning">
+                                      <div class="cell-wrapper"><span class="cell">Pending</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn btn-action btn-info">View Details</button>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="data-row">
+                                   <div class="status-col col-style text-warning">
+                                      <div class="cell-wrapper"><span class="cell">Pending</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Pending</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn btn-action btn-info">View Details</button>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="data-row">
+                                   <div class="status-col col-style text-warning">
+                                      <div class="cell-wrapper"><span class="cell">Pending</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell">
+                                            <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn btn-action btn-info">View Details</button>
+                                            <div class="option-link-wrap"><a data-toggle="modal" data-target="#pt-cancel" href="#" class="text-danger">Cancel</a></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <!--Past and canceled appointments-->
+                    <div class="block">
+                       <div class="block-title">
+                          <h2>Past or Canceled Appointments</h2>
+                       </div>
+                       <div class="appointment-content-wrap clearfix">
+                          <div class="block-data-wrap">
+                             <header class="block-data-header">
+                                <div class="status-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Status</span></div>
+                                </div>
+                                <div class="user-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Therapist Name</span></div>
+                                </div>
+                                <div class="date-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Date</span></div>
+                                </div>
+                                <div class="time-col col-style">
+                                   <div class="cell-wrapper"><span class="cell">Time</span></div>
+                                </div>
+                             </header>
+                             <div class="block-data">
+                                <div class="data-row">
+                                   <div class="status-col col-style">
+                                      <div class="cell-wrapper"><span class="text-success cell">Confirmed</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell"><button type="button" class="btn btn-info btn-action">View Receipt</button></div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="data-row">
+                                   <div class="status-col col-style">
+                                      <div class="cell-wrapper"><span class="text-danger cell">Canceled</span></div>
+                                   </div>
+                                   <div class="user-col col-style">
+                                      <div class="user-infor">
+                                         <div class="sidebar-user-avatar"><a href="#"><img src="http://placehold.it/32x32" alt="user avatar" /></a></div>
+                                         <div class="avatar-name cell-wrapper"><span class="cell"><a href="javascript:void(0)">Winter Decol</a></span></div>
+                                      </div>
+                                   </div>
+                                   <div class="date-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">Today</span></div>
+                                   </div>
+                                   <div class="time-col col-style">
+                                      <div class="cell-wrapper"><span class="cell">5 PM</span></div>
+                                   </div>
+                                   <div class="options-col col-style">
+                                      <div class="cell-wrapper">
+                                         <div class="cell"><button type="button" class="btn btn-info btn-action">View  Receipt</button></div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+    </div>
+    <div ui-view="appointment.therapist"></div>
+    <div ui-view='footer'></div>
+  </div>
+  <div ui-view='sidebar'></div>
+</div>

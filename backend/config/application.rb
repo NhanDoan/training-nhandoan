@@ -19,5 +19,11 @@ module Backend
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    Rails.application.assets.register_mime_type 'text/html', '.html'
+    Rails.application.assets.register_engine '.slim', Slim::Template
+    config.assets.paths << Rails.root.join('templates')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets')
+    config.assets.paths << Rails.root.join('app', 'assets', 'javascripts')
   end
 end

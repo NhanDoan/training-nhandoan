@@ -1,20 +1,17 @@
 {
-  "name": "rails-angular",
-  "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
+  "name": "front-end",
+  "version": "0.0.0",
   "dependencies": {
-    "jquery": "~1.9.0",
-    "lodash": "~2.4.1",
-    "angular": "~1.2.16",
-    "twbs-bootstrap-sass": "~3.1.1",
-    "font-awesome": "~4.0.3",
-    "angular-ui-router": "~0.2.10",
-    "angular-bootstrap": "~0.11.0"
+    "angular": "1.2.16",
+    "json3": "~3.3.1",
+    "es5-shim": "~3.1.0",
+    "bootstrap-sass-official": "~3.2.0",
+    "angular-animate": "1.2.16",
+    "angular-ui-router": "~0.2.10"
   },
   "devDependencies": {
-    "jasmine": "~2.0.0",
-    "angular-mocks": "~1.2.16",
+    "angular-mocks": "1.2.16",
     "angular-scenario": "1.2.16"
-  }
+  },
+  "appPath": "app"
 }

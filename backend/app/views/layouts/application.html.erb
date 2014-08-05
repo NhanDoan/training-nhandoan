@@ -2,13 +2,18 @@
 <html>
 <head>
   <title>Backend</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag "vendor" %>
+
   <%= csrf_meta_tags %>
 </head>
-<body>
+ <body ng-app="app">
+ 	<div class="page-container l-user" ui-view></div>
 
-<%= yield %>
+	<%= yield %>
+
+ 	<!--[if lt IE 9]><script src="scripts/oldieshim.js"></script><![endif]-->
+	<%= javascript_include_tag "application" %>
 
 </body>
 </html>
