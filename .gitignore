@@ -50,11 +50,6 @@ backend/db/*.sqlite3-journal
 # Ignore all logfiles and tempfiles.
 backend/log/*.log
 backend/tmp
-backend/config/database.yml
-backend/config/environments/development.rb
-backend/config/deploy.rb
-backend/.env.development
-backend/.env
 
 # Ignore Mac OSX folder setting
 .DS_Store
