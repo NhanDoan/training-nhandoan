@@ -33,7 +33,7 @@ angular
 					$scope.userLogin = {};
 					$scope.userSignUp = {};
 					$scope.isSignUp = _isSignUp;
-					$scope.userSignUp.user_type = 1;
+					$scope.userSignUp.user_type = "patient";
 
 					$scope.toggleForm = function(isShow) {
 						$timeout(function() {
