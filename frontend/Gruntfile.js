@@ -486,7 +486,7 @@ module.exports = function(grunt) {
 						'*.{ico,png,txt}',
 						'.htaccess',
 						'*.html',
-						'templates/{,*/}*.html',
+						// 'templates/{,*/}*.html',
 						'images/{,*/}*.{webp}',
 						'fonts/*'
 					]
@@ -508,19 +508,8 @@ module.exports = function(grunt) {
 				cwd: '<%= yeoman.app %>/styles',
 				dest: '.tmp/styles/',
 				src: '{,*/}*.css'
-			},
-
-			backend: {
-				files: [{
-					expand: true,
-					dot: true,
-					cwd: '<%= yeoman.dist %>' + '/images',
-					dest: '<%= yeoman.assetsBackendPath %>' + '/images',
-					src: [
-						'images/{,*/}*.{webp}'
-					]
-				}]
 			}
+
 		},
 
 		// Run some tasks in parallel to speed up the build process
@@ -548,20 +537,27 @@ module.exports = function(grunt) {
 
 		ngtemplates: {
 			app: {
-        src: 'app/templates/**/*.html',
-        dest: ['dist/scripts/template.js'],
+        cwd: 'app/templates',
+        src: '**/*.html',
+        dest: 'app/scripts/template.js',
         options: {
           prefix: '/',
           url: function(url) {
             return url.replace('app/', 'assets/');
           }
         }
-      },
-      copy: {
-				src: 'dist/scripts/template.js',
-				dest: ['scripts/template.js']
-			}
+      }
+   //    ,
+   //    copy: {
+			// 	src: 'dist/scripts/template.js',
+			// 	dest: ['scripts/template.js']
+			// }
 		}
+    // copy images to assets/images
+    // copy fonts to assets/fonts
+    // copy & rename main.csss -> main.css.scss.erb to assets/stylesheets
+    //
+
 	});
 
 	grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
@@ -598,24 +594,21 @@ module.exports = function(grunt) {
 		'useminPrepare',
 		'concurrent:dist',
 		'autoprefixer',
+    'ngtemplates',
 		'concat',
 		'ngmin',
 		'copy:dist',
-		'cdnify',
+		// 'cdnify',
 		'cssmin',
 		'uglify',
 		// 'filerev',
-		'usemin',
+    'usemin',
 		'htmlmin',
-		'ngtemplates',
-		'replace',
-		'copy:backend'
+		'replace'
 	]);
 
   // final build before send to backend
-  grunt.registerTask('deploy', [
-    'build'
-  ]);
+  grunt.registerTask('deploy', ['ngtemplates']);
 
 	grunt.registerTask('default', [
 		'newer:jshint',

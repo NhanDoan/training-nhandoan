@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
 
 	def create
-		if user = User.authenticate(params[:email], params[:password])
+		user = User.authenticate(params[:email], params[:password])
+
+		if user
 			session[:user_id] = user.id
 			# redirect_to root_path, :notice => "Logged in successfully"
 			@result = { user: user, message: "Logged in successfully" }
@@ -16,7 +18,7 @@ class SessionsController < ApplicationController
 		reset_session
 		# redirect_to root_path, :notice => "You successfully logged out"
 		@result = { ok: '0', message: "You successfully logged out" }
-		
+
 		render json: @result
 	end
 end

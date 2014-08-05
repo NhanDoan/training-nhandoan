@@ -27,7 +27,7 @@ users = [
 		first_name: 'Tung',
 		last_name: 'Phan',
 		email: 'tungphan@asnet.com.vn',
-		password: 'guessit',
+		password: '123456',
 		user_type: 'therapist'
 	}
 ]
