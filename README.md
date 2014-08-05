@@ -39,7 +39,7 @@ Contains scripts & config file for [vagrant](http://www.vagrantup.com/)
     $ cd vagrant
     For backend, frontend
     $ bundle exec vagrant up
-    For specify box: **railsangular-dev**, **railsangular-db boxes**
+    For specify box: **railsangular-dev**, **railsangular-db** boxes
     $ bundle exec vagrant ssh railsangular-dev
   </pre>
 
