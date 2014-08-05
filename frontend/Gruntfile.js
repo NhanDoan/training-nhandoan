@@ -8,23 +8,23 @@
 // 'test/spec/**/*.js'
 
 var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest,
-    SPECIAL_CHAR = '\%',
-    modRewrite = require('connect-modrewrite'),
-    mountFolder = function (connect, dir) {
-        return connect.static(require('path').resolve(dir));
-    };
+	SPECIAL_CHAR = '\%',
+	modRewrite = require('connect-modrewrite'),
+	mountFolder = function(connect, dir) {
+		return connect.static(require('path').resolve(dir));
+	};
 
-var pushStateHook = function (url) {
-  var path = require('path');
-  var request = require('request'); // Need to be added into package.json
-  return function (req, res, next) {
-    var ext = path.extname(req.url);
-    if ((ext == "" || ext === ".html") && req.url != "/") {
-      req.pipe(request(url)).pipe(res);
-    } else {
-      next();
-    }
-  };
+var pushStateHook = function(url) {
+	var path = require('path');
+	var request = require('request'); // Need to be added into package.json
+	return function(req, res, next) {
+		var ext = path.extname(req.url);
+		if ((ext == "" || ext === ".html") && req.url != "/") {
+			req.pipe(request(url)).pipe(res);
+		} else {
+			next();
+		}
+	};
 };
 
 module.exports = function(grunt) {
@@ -91,16 +91,16 @@ module.exports = function(grunt) {
 				hostname: '0.0.0.0',
 				livereload: 35741
 			},
-      proxies: [{
-        context: '/api',
-        host: 'localhost',
-        port: 3000,
-        https: false,
-        changeOrigin: false,
-        rewrite: {
-          '^/api': '/api'
-        }
-      }],
+			proxies: [{
+				context: '/api',
+				host: 'localhost',
+				port: 3000,
+				https: false,
+				changeOrigin: false,
+				rewrite: {
+					'^/api': '/api'
+				}
+			}],
 			livereload: {
 				options: {
 					open: true,
@@ -377,102 +377,102 @@ module.exports = function(grunt) {
 					to: '/assets/'
 				}]
 			},
-      assetsCSS: {
-        src: ['<%= yeoman.dist %>/{,*/}*.css'],
-        overwrite: true,
-        replacements: [{
-          from: /\.?\.?\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_halflingsregular)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+			assetsCSS: {
+				src: ['<%= yeoman.dist %>/{,*/}*.css'],
+				overwrite: true,
+				replacements: [
+          {
+            from: /\.?\.?\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_halflingsregular)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
-          }
-        },
-        {
-          from: /fonts\/icomoon\/fonts\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\?#icomoon)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+          }, {
+            from: /fonts\/icomoon\/fonts\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\?#icomoon)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
-          }
-        }
-        ,
-        {
-          from: /fonts\/fontawesome\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix&v=[\w.]+|\?v=[\w.]+\#fontawesomeregular|\?v=[\w.]+)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push(regexMatches[2]);
+          }, {
+            from: /fonts\/fontawesome\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix&v=[\w.]+|\?v=[\w.]+\#fontawesomeregular|\?v=[\w.]+)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push(regexMatches[2]);
+              }
+              return '"' + result.join('') + '"';
             }
-            return '"' + result.join('') + '"';
-          }
-        }, {
-          from: /fonts\/glyphicons\.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphiconsregular)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+          }, {
+            from: /fonts\/glyphicons\.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphiconsregular)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
-          }
-        }, {
-          from: /fonts\/glyphicons\.halflings\.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_halflingsregular)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+          }, {
+            from: /fonts\/glyphicons\.halflings\.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_halflingsregular)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
-          }
-        }, {
-          from: /fonts\/glyphicons.social.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_socialregular)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+          }, {
+            from: /fonts\/glyphicons.social.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_socialregular)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
-          }
-        }, {
-          from: /fonts\/glyphicons.filetypes.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_filetypesregular)?/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-            if (regexMatches[2]) {
-              result.push("+ '" + regexMatches[2] + "'");
+          }, {
+            from: /fonts\/glyphicons.filetypes.pro\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#glyphicons_filetypesregular)?/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+              if (regexMatches[2]) {
+                result.push("+ '" + regexMatches[2] + "'");
+              }
+              return '"' + result.join(' ') + '"';
             }
-            return '"' + result.join(' ') + '"';
+          },
+          // {
+          //   from: /\/fonts\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#icomoon)?/g,
+          //   to: function(matchedWord, index, fullText, regexMatches) {
+          //     var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
+          //     if (regexMatches[2]) {
+          //       result.push("+ '" + regexMatches[2] + "'");
+          //     }
+          //     return result.join(' ');
+          //   }
+          // },
+          {
+            from: /\.?\.?\/images\/([\w-\d\/]+\.(png|jpg|gif))/g,
+            to: function(matchedWord, index, fullText, regexMatches) {
+              return "<= asset_path '" + regexMatches[0] + "' " + '\%' + ">";
+            }
           }
-        },
-        // {
-        //   from: /\/fonts\/([\w-]+\.(eot|woff|ttf|svg))(\?\#iefix|\#icomoon)?/g,
-        //   to: function(matchedWord, index, fullText, regexMatches) {
-        //     var result = ['<= asset_path', "'" + regexMatches[0] + "'", '\%' + '>'];
-        //     if (regexMatches[2]) {
-        //       result.push("+ '" + regexMatches[2] + "'");
-        //     }
-        //     return result.join(' ');
-        //   }
-        // },
-        {
-          from: /\.?\.?\/images\/([\w-\d\/]+\.(png|jpg|gif))/g,
-          to: function(matchedWord, index, fullText, regexMatches) {
-            return "<= asset_path '" + regexMatches[0] + "' " + '\%' + ">"
-          }
-        }]
-      },
-      fixAssetsCSS: {
-        src: ['<%= yeoman.dist %>/{,*/}*.css'],
-        overwrite: true,
-        replacements: [{
-          from: '<=',
-          to: '<%='
-        }]
-      }
-    },
+        ]
+			}
+		},
+
+		fixAssetsCSS: {
+			src: ['<%= yeoman.dist %>/{,*/}*.css'],
+			overwrite: true,
+			replacements: [{
+				from: '<=',
+				to: '<%='
+			}]
+		},
 
 		// Copies remaining files to places other tasks can use
 		copy: {
@@ -497,7 +497,7 @@ module.exports = function(grunt) {
 					src: ['generated/*']
 				}, {
 					expand: true,
-          flatten: true,
+					flatten: true,
 					cwd: '.',
 					src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
 					dest: '<%= yeoman.dist %>/fonts'
@@ -537,27 +537,26 @@ module.exports = function(grunt) {
 
 		ngtemplates: {
 			app: {
-        cwd: 'app/templates',
-        src: '**/*.html',
-        dest: 'app/scripts/template.js',
-        options: {
-          prefix: '/',
-          url: function(url) {
-            return url.replace('app/', 'assets/');
-          }
-        }
-      }
-   //    ,
-   //    copy: {
-			// 	src: 'dist/scripts/template.js',
-			// 	dest: ['scripts/template.js']
-			// }
-		}
-    // copy images to assets/images
-    // copy fonts to assets/fonts
-    // copy & rename main.csss -> main.css.scss.erb to assets/stylesheets
-    //
+				cwd: 'app/templates',
+				src: '**/*.html',
+				dest: 'app/scripts/template.js',
+				options: {
+					prefix: '/',
+					url: function(url) {
+						return url.replace('app/', 'assets/');
+					}
+				}
+			}
+		},
+		// copy images to assets/images
+		// copy fonts to assets/fonts
+		// copy & rename main.csss -> main.css.scss.erb to assets/stylesheets
+		//
+		updateAssets: {
+			copy: {
 
+			}
+		}
 	});
 
 	grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
@@ -594,7 +593,7 @@ module.exports = function(grunt) {
 		'useminPrepare',
 		'concurrent:dist',
 		'autoprefixer',
-    'ngtemplates',
+		'ngtemplates',
 		'concat',
 		'ngmin',
 		'copy:dist',
@@ -602,13 +601,13 @@ module.exports = function(grunt) {
 		'cssmin',
 		'uglify',
 		// 'filerev',
-    'usemin',
+		'usemin',
 		'htmlmin',
 		'replace'
 	]);
 
-  // final build before send to backend
-  grunt.registerTask('deploy', ['ngtemplates']);
+	// final build before send to backend
+	grunt.registerTask('deploy', ['build', 'updateAssets']);
 
 	grunt.registerTask('default', [
 		'newer:jshint',

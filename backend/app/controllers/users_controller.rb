@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = find_by_email(user_params.email)
+    @user = User.find_by_email(params[:email])
 
     if @user
       @result = {
