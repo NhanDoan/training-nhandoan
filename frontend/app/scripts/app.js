@@ -23,15 +23,15 @@ angular
     .state('home', {
       url: '/',
       views: {
-        '': { templateUrl: '/assets/templates/home.html'},
+        '': { templateUrl: 'templates/home.html'},
         'header@home': {
-          templateUrl: '/assets/templates/commons/header.html'
+          templateUrl: 'templates/commons/header.html'
         },
         'sidebar@home': {
-          templateUrl: '/assets/templates/commons/sidebar.html'
+          templateUrl: 'templates/commons/sidebar.html'
         },
         'footer@home': {
-          templateUrl: '/assets/templates/commons/footer.html'
+          templateUrl: 'templates/commons/footer.html'
         }
       }
     })
@@ -39,16 +39,16 @@ angular
       url:'/appointment',
       views: {
         '': {
-          templateUrl: '/assets/templates/therapist.html'
+          templateUrl: 'templates/therapist.html'
         },
         'header@appointment': {
-          templateUrl: '/assets/templates/commons/header.html'
+          templateUrl: 'templates/commons/header.html'
         },
         'sidebar@appointment': {
-          templateUrl: '/assets/templates/commons/sidebar.html'
+          templateUrl: 'templates/commons/sidebar.html'
         },
         'footer@appointment': {
-          templateUrl: '/assets/templates/commons/footer.html'
+          templateUrl: 'templates/commons/footer.html'
         }
       }
     })
@@ -56,16 +56,16 @@ angular
       url:'/profile',
       views: {
         '': {
-          templateUrl: '/assets/templates/commons/profile.html'
+          templateUrl: 'templates/commons/profile.html'
         },
         'header@profile': {
-          templateUrl: '/assets/templates/commons/header.html'
+          templateUrl: 'templates/commons/header.html'
         },
         'sidebar@profile': {
-          templateUrl: '/assets/templates/commons/sidebar.html'
+          templateUrl: 'templates/commons/sidebar.html'
         },
         'footer@profile': {
-          templateUrl: '/assets/templates/commons/footer.html'
+          templateUrl: 'templates/commons/footer.html'
         }
       }
     })
@@ -73,16 +73,16 @@ angular
       url:'/therapist-account',
       views: {
         '': {
-          templateUrl: '/assets/templates/commons/therapist-account.html'
+          templateUrl: 'templates/commons/therapist-account.html'
         },
         'header@therapist-account': {
-          templateUrl: '/assets/templates/commons/header.html'
+          templateUrl: 'templates/commons/header.html'
         },
         'sidebar@therapist-account': {
-          templateUrl: '/assets/templates/commons/sidebar.html'
+          templateUrl: 'templates/commons/sidebar.html'
         },
         'footer@therapist-account': {
-          templateUrl: '/assets/templates/commons/footer.html'
+          templateUrl: 'templates/commons/footer.html'
         }
       }
     })
@@ -90,16 +90,16 @@ angular
       url:'/therapist-edit-profile',
       views: {
         '': {
-          templateUrl: '/assets/templates/commons/therapist-edit-profile.html'
+          templateUrl: 'templates/commons/therapist-edit-profile.html'
         },
         'header@therapist-edit-profile': {
-          templateUrl: '/assets/templates/commons/header.html'
+          templateUrl: 'templates/commons/header.html'
         },
         'sidebar@therapist-edit-profile': {
-          templateUrl: '/assets/templates/commons/sidebar.html'
+          templateUrl: 'templates/commons/sidebar.html'
         },
         'footer@therapist-edit-profile': {
-          templateUrl: '/assets/templates/commons/footer.html'
+          templateUrl: 'templates/commons/footer.html'
         }
       }
     });

@@ -86,10 +86,10 @@ module.exports = function(grunt) {
 		// The actual grunt server settings
 		connect: {
 			options: {
-				port: 9002,
+				port: 9001,
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '0.0.0.0',
-				livereload: 10025
+				livereload: 35741
 			},
       proxies: [{
         context: '/api',
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 			},
 			test: {
 				options: {
-					port: 9001,
+					port: 9003,
 					middleware: function(connect) {
 						return [
 							connect.static('.tmp'),
@@ -548,14 +548,18 @@ module.exports = function(grunt) {
 
 		ngtemplates: {
 			app: {
-				src: 'app/templates/**/*.html',
-				dest: 'dist/scripts/template.js',
-				options: {
-					prefix: '/',
-					url: function(url) {
-						return url.replace('app/', 'assets/');
-					}
-				},
+        src: 'app/templates/**/*.html',
+        dest: ['dist/scripts/template.js'],
+        options: {
+          prefix: '/',
+          url: function(url) {
+            return url.replace('app/', 'assets/');
+          }
+        }
+      },
+      copy: {
+				src: 'dist/scripts/template.js',
+				dest: ['scripts/template.js']
 			}
 		}
 	});
