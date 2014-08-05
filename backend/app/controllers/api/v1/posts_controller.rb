@@ -1,4 +1,4 @@
-class Api::PostsController < ApplicationController
+class Api::V1::PostsController < ApplicationController
 	respond_to :json
   def index
     @posts = Post.all
