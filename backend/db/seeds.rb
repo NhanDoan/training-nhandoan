@@ -14,3 +14,21 @@ posts = [
   {title: 'Emanuel', body: 'this is body test', published: true}
   ]
 Post.create(posts)
+
+users = [
+	{
+		first_name: 'Tuong',
+		last_name: 'Le',
+		email: 'tuong.le@asnet.com.vn',
+		password: 'guessit',
+		user_type: 'patient'
+	},
+	{
+		first_name: 'Tung',
+		last_name: 'Phan',
+		email: 'tungphan@asnet.com.vn',
+		password: 'guessit',
+		user_type: 'therapist'
+	}
+]
+User.create(users)

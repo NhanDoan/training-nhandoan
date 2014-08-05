@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  @result = nil
+
   # GET /users
   # GET /users.json
   def index
@@ -28,15 +30,28 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
+      @result = nil
+
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
         # format.json { render :show, status: :created, location: @user }
-        format.json { ok: '0', user: @user }
+        @result = {
+          ok: '0',
+          user: @user
+        }
+
+        # format.json { render json: result }
       else
         # format.html { render :new }
         # format.json { render json: @user.errors, status: :unprocessable_entity }
-        format.json { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
+        @result = {
+          ok: '1',
+          message: @user.errors + '-' + :unprocessable_entity
+        }
+        # format.json { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
       end
+
+      format.json { render json: @result }
     end
   end
 
@@ -48,12 +63,16 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         # format.html { redirect_to @user, notice: 'User was successfully updated.' }
         # format.json { render :show, status: :ok, location: @user }
-        format.json { ok: '0', user: @user }
+        @result = { ok: '0', user: @user }
+        # format.json { ok: '0', user: @user }
       else
         # format.html { render :edit }
         # format.json { render json: @user.errors, status: :unprocessable_entity }
-        format.json { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
+        @result = { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
+        # format.json { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
       end
+
+      format.json { render json: @result }
     end
   end
 
@@ -64,7 +83,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       # format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       # format.json { head :no_content }
-      format.json { ok: '0', message: 'User was successfully destroyed.' }
+      @result = { ok: '0', message: 'User was successfully destroyed.' }
+      # format.json { ok: '0', message: 'User was successfully destroyed.' }
+      format.json { render json: @result }
     end
   end
 
