@@ -31,21 +31,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        @result = {
-          ok: '0',
-          user: @user
-        }
-      else
-        @result = {
-          ok: '1',
-          message: @user.errors + '-' + :unprocessable_entity
-        }
-      end
-
-      render json: @result
+    if @user.save
+      @result = {
+        ok: '0',
+        user: @user
+      }
+    else
+      @result = {
+        ok: '1',
+        # message: @user.errors + '-' + :unprocessable_entity
+        message: @user.errors
+      }
     end
+
+    render json: @result
   end
 
   # PATCH/PUT /users/1
@@ -55,7 +54,11 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       @result = { ok: '0', user: @user }
     else
-      @result = { ok: '1', message: @user.errors + '-' + :unprocessable_entity }
+      @result = { 
+        ok: '1', 
+        # message: @user.errors + '-' + :unprocessable_entity
+        message: @user.errors
+      }
     end
 
     render json: @result
