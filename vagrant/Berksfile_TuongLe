@@ -1,0 +1,62 @@
+# BEGIN TungPhan configure
+# source "https://api.berkshelf.com"
+
+# metadata
+
+# Core server cookbooks
+# cookbook 'locale', git: 'https://github.com/hw-cookbooks/locale'
+# cookbook "apt"
+# cookbook 'build-essential'
+# cookbook 'vim'
+# cookbook 'tmux'
+
+# Web and App server cookbooks
+# cookbook 'nginx'
+
+# App server cookbooks
+# cookbook 'rvm', :git => 'https://github.com/fnichol/chef-rvm'
+# cookbook 'postgresql', github: "phlipper/chef-postgresql"
+
+# Frontend
+# cookbook 'nodejs', github: "mdxp/nodejs-cookbook"
+# cookbook 'npm', git: "https://github.com/balbeko/chef-npm.git"
+
+
+
+# on local path
+# cookbook 'basic', path: 'cookbooks/basic'
+# cookbook 'postgresql-locale-fix', path: 'cookbooks/postgresql-locale-fix'
+# cookbook 'frontend', path: 'cookbooks/frontend'
+
+# END TungPhan configure
+
+# BEGIN TuongLe configure
+site :opscode
+
+metadata
+
+cookbook 'apt'
+cookbook 'git',
+  git: 'https://github.com/fnichol/chef-git.git'
+cookbook 'sqlite'
+cookbook 'mysql'
+cookbook 'memcached'
+
+cookbook 'vim'
+cookbook 'tmux'
+
+cookbook 'nginx', :git => "https://github.com/miketheman/nginx"
+
+cookbook 'rvm', :git => 'https://github.com/fnichol/chef-rvm'
+# cookbook 'postgresql', github: "phlipper/chef-postgresql"
+cookbook 'postgresql', :git => "https://github.com/hw-cookbooks/postgresql"
+cookbook 'nodejs', github: "mdxp/nodejs-cookbook"
+cookbook 'npm', git: "https://github.com/balbeko/chef-npm.git"
+cookbook 'database', :git => "https://github.com/opscode-cookbooks/database", :ref => 'v2.2.0'
+cookbook 'rbenv', :git => 'git://github.com/fnichol/chef-rbenv.git', :ref => 'v0.7.2'
+cookbook 'ruby_build', :git => "https://github.com/fnichol/chef-ruby_build", :ref => 'v0.8.0'
+cookbook 'build-essential'
+
+cookbook 'ckbk', :git => "https://github.com/fnichol/chef-ckbk"
+
+# END TuongLe configure

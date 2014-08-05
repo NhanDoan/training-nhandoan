@@ -6,6 +6,11 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.6.3"
 
+Vagrant.require_plugin "vagrant-vbguest"
+Vagrant.require_plugin "vagrant-omnibus"
+Vagrant.require_plugin "vagrant-cachier"
+Vagrant.require_plugin "librarian-chef"
+
 boxes = [
   {
     name: 'railsangular-dev',
@@ -35,7 +40,7 @@ boxes = [
     roles: ['db'],
     ip: '192.168.3.3',
     vbox_config: [
-      { '--memory' => '512' }
+      { '--memory' => '1024' }
     ],
     forwarded_ports: [
       { 5432 => 1234 }
@@ -74,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # sync folders
       opts[:synced_folders].each do |folder|
         folder.each do |folder1, folder2|
-          config.vm.synced_folder folder1, folder2, disable: true
+          config.vm.synced_folder folder1, folder2
         end
       end if opts[:synced_folders]
 
@@ -96,16 +101,56 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # server notify
       config.vm.provision :shell, inline: "echo 'Server: #{opts[:name]} - IP: #{opts[:ip]}'"
 
+      # custom commands
+      opts[:commands].each do |cmd|
+        config.vm.provision :shell, inline: cmd
+      end if opts[:commands]
+
       # config box with chef
       config.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = ['cookbooks', 'site-cookbooks']
         chef.roles_path = 'roles/dev'
+        # chef.data_bags_path = 'data_bags'
+        # chef.nfs = true
+        chef.add_recipe 'ckbk'
 
         opts[:roles].each do |role|
           # add role
           chef.add_role(role)
         end if opts[:roles].kind_of?(Array)
 
-        chef.nfs = true
+        # run recipes
+        # chef.run_list = [
+        #   'recipe[apt]',
+        #   'recipe[git]',
+        #   'recipe[rvm]',
+        #   'recipe[rvm::vagrant]',
+        #   'recipe[rvm::system]',
+        #   'recipe[build-essential]',
+        #   'recipe[ruby_build]',
+        #   'recipe[rbenv::vagrant]',
+        #   'recipe[rbenv::user]'
+        # ]
+
+        # configure recipes
+        # chef.json = {
+        #   'rbenv' => {
+        #     'user_installs' => [
+        #       {
+        #         'user'    => 'vagrant',
+        #         'rubies'  => ['2.1.2p95'],
+        #         'global'  => '2.1.2p95',
+        #         'gems'    => {
+        #           '2.1.2p95' => [
+        #             { 'name'    => 'bundler' },
+        #             { 'name'    => 'rails' },
+        #             { 'name'    => 'rake' }
+        #           ]
+        #         }
+        #       }
+        #     ]
+        #   }
+        # }
       end
     end
   end
