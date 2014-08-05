@@ -38,7 +38,7 @@ boxes = [
       { '--memory' => '1024' }
     ],
     forwarded_ports: [
-      { 5432 => 5432 }
+      { 5432 => 1234 }
     ]
   }
 ]
@@ -48,6 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'precise64'
   config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
   config.ssh.forward_agent = true
+  config.ssh.pty = true
 
   # Plugin config
   config.omnibus.chef_version = :latest
@@ -73,7 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # sync folders
       opts[:synced_folders].each do |folder|
         folder.each do |folder1, folder2|
-          config.vm.synced_folder folder1, folder2
+          config.vm.synced_folder folder1, folder2, disable: true
         end
       end if opts[:synced_folders]
 
@@ -103,6 +104,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           # add role
           chef.add_role(role)
         end if opts[:roles].kind_of?(Array)
+
+        chef.nfs = true
       end
     end
   end
