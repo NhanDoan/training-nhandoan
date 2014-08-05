@@ -6,8 +6,6 @@ class SessionsController < ApplicationController
 			# redirect_to root_path, :notice => "Logged in successfully"
 			@result = { user: user, message: "Logged in successfully" }
 		else
-			# flash.now[:alert] = "Invalid login/password combination"
-			# render :action => 'new'
 			@result = { user: nil, message: "Invalid login/password combination" }
 		end
 
