@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :users
   resources :session
 
-  # root :to => 'wellcome#index'
-  root :to => 'users#index'
+  root :to => 'wellcome#index'
+  # root :to => 'users#index'
 
   get '/login' => 'sessions#new', :as => "login"
   get '/logout' => 'sessions#destroy', :as => "logout"
