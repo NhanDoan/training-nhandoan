@@ -12,14 +12,14 @@
 				<div class="col-xs-6 user-account">
 					<label class="radio-inline">
 						<input type='radio' ng-model='isPatient' name='typeOfUser'
-									 ng-click='onChooseTypeOfuser(0)'
+									 ng-click='onChooseTypeOfuser("therapist")'
 									/>Sign up as a Therapist
 					</label>
 				</div>
 				<div class="col-xs-6 user-account">
 					<label class="radio-inline">
 						<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'
-										ng-click='onChooseTypeOfuser(1)'
+										ng-click='onChooseTypeOfuser("patient")'
 									/>Sign up as a Patient
 					</label>
 				</div>
