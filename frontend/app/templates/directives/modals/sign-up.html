@@ -1,0 +1,294 @@
+<!-- //////////////////////////////////////////////////// -->
+<!-- // SIGN UP FORM                                      -->
+<!-- //////////////////////////////////////////////////// -->
+<div id='signup-modal' ng-show="(isSignUp === 'signUp')">
+	<div class="modal-header text-center">
+		<h1>Sign Up</h1>
+	</div>
+	<div class="modal-body">
+		<!-- Sign up Form -->
+		<form class="form-horizontal form-bordered form-control-borderless" novalidate name="signUpForm">
+			<div class="form-group user-account-group">
+				<div class="col-xs-6 user-account">
+					<label class="radio-inline">
+						<input type='radio' ng-model='isPatient' name='typeOfUser'
+									 ng-click='onChooseTypeOfuser(0)'
+									/>Sign up as a Therapist
+					</label>
+				</div>
+				<div class="col-xs-6 user-account">
+					<label class="radio-inline">
+						<input  type='radio' ng-checked='true' ng-modal='userSignUp.isPatient' name='typeOfUser'
+										ng-click='onChooseTypeOfuser(1)'
+									/>Sign up as a Patient
+					</label>
+				</div>
+			</div>
+			<!-- user first name and last name -->
+			<div class="row no-gutter">
+				<div class="form-inline col-xs-6">
+					<div 	class="form-group"
+								ng-class="{'has-error': signUpForm.firstName.$invalid && signUpForm.firstName.$dirty}"
+							>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="gi gi-user"></i>
+							</span>
+							<input class="form-control input-lg" type='text' placeholder="First Name"
+										 ng-maxlength='30'
+										 ng-model='userSignUp.first_name'
+										 required
+										 name='firstName'
+										 />
+						</div>
+						<span 	class='help-block'
+										ng-show='signUpForm.firstName.$error.required'
+										>
+											This field is required!
+						</span>
+						<span 	class='help-block'
+										ng-show='signUpForm.firstName.$error.maxlength'
+										>
+											Must be less than 30 chars!
+						</span>
+					</div>
+				</div>
+				<div class="form-inline col-xs-6">
+					<div 	class="form-group"
+								ng-class="{'has-error': signUpForm.lastName.$invalid && signUpForm.lastName.$dirty}"
+							>
+						<div class="input-group">
+							<input 	class="form-control input-lg" placeholder="Last Name" type='text'
+											ng-maxlength='30'
+											ng-model='userSignUp.last_name'
+										 	required
+										 	name='lastName'
+										 />
+						</div>
+						<span 	class='help-block'
+										ng-show='signUpForm.lastName.$error.required'
+										>
+											This field is required!
+						</span>
+						<span 	class='help-block'
+										ng-show='signUpForm.lastName.$error.maxlength'
+										>
+											Must be less than 30 chars!
+						</span>
+					</div>
+				</div>
+			</div>
+			<div 	class="form-group"
+						ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}"
+						>
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-envelope"></i>
+						</span>
+						<input 	class="form-control input-lg" type='email' placeholder="Email"
+										ng-maxlength='30'
+										ng-model='userSignUp.email'
+										name='email'
+										required
+									/>
+					</div>
+					<span class='help-block'
+								ng-show='signUpForm.email.$invalid'
+								>
+									Email is invalid!
+					</span>
+				</div>
+			</div>
+			<div class="form-group"
+					 ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$dirty}"
+					 >
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-asterisk"></i>
+						</span>
+						<input 	class="form-control input-lg" type='password' placeholder="Password"
+										ng-minlength='6'
+										ng-model='userSignUp.password'
+										required
+										name='password'
+									/>
+					</div>
+					<span 	class='help-block'
+										ng-show='signUpForm.password.$error.required'
+										>
+											This field is required!!
+					</span>
+					<span 	class='help-block'
+									ng-show='signUpForm.password.$error.minlength'
+									>
+										Must be great than 6 chars!
+					</span>
+				</div>
+			</div>
+			<div class="form-group"
+					 ng-class="{'has-error': signUpForm.password.$valid
+					 							&& signUpForm.cfPassword.$dirty
+					 							&& cfPassword != userSignUp.password
+					 					}"
+					 >
+				<div class="col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<i class="gi gi-asterisk"></i>
+						</span>
+						<input 	class="form-control input-lg" type='password' placeholder='Verify Password'
+										ng-model='cfPassword'
+										name='cfPassword'
+									/>
+					</div>
+					<span 	class='help-block'
+									ng-show="signUpForm.password.$valid
+							 							&& signUpForm.cfPassword.$dirty
+							 							&& cfPassword != userSignUp.password
+					 								"
+									>
+										Password is not match!
+					</span>
+				</div>
+			</div>
+			<div class="form-group form-actions">
+				<div class="col-xs-6">
+					<a class="register-terms"> Terms</a>
+					<label class="switch switch-primary terms-switch">
+						<input type='checkbox' name='terms' ng-model='terms'/><span tooltip="Agree to the terms"></span>
+					</label>
+				</div>
+				<div class="col-xs-6 text-right">
+					<button class="btn btn-sm btn-info" type='button'
+									ng-disabled='signUpForm.$invalid || !terms || cfPassword != userSignUp.password'
+									ng-click='doSignUp()'
+									>
+						Sign Up
+					</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 text-center">
+					<span class="notice">Have an account?</span>
+					<a ng-click="toggleForm('login')">Log in</a>
+				</div>
+			</div>
+		</form><!-- END Sign up Form -->
+	</div>
+</div>
+
+<!-- ///////////////////////////////////// -->
+<!-- // LOGIN FORM                         -->
+<!-- ///////////////////////////////////// -->
+<div id="login-modal" ng-show="(isSignUp === 'login')">
+  <div class="modal-header text-center">
+    <h1>Log In</h1>
+  </div>
+  <div class="modal-body">
+    <!-- Login Form -->
+    <form class="form-horizontal form-bordered form-control-borderless" name="loginForm" novalidate>
+      <div class="form-group" ng-class="{ 'has-error': loginForm.email.$invalid && loginForm.email.$dirty }">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="gi gi-envelope"></i>
+            </span>
+            <input class="form-control input-lg"
+                   name="email"
+                   placeholder="Email"
+                   type="email"
+                   ng-model='userLogin.email'
+                   required
+                  />
+          </div>
+          <span class='help-block'
+                ng-show='loginForm.email.$invalid'>Email is invalid!</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="gi gi-asterisk"></i>
+            </span>
+            <input class="form-control input-lg"
+                   name="password"
+                   placeholder="Password"
+                   type="password"
+                   ng-model="userLogin.password"
+                   required
+                  />
+          </div>
+          <span class='help-block'
+                ng-show='loginForm.password.$error.required'>This field is required!</span>
+        </div>
+      </div>
+
+      <div class="form-group form-actions">
+        <div class="col-xs-4">
+          <label class="switch switch-primary" tooltip-html-unsafe="Remember Me">
+            <input name="rememberMe" type="checkbox" ng-model='userLogin.rememberMe'/>
+            <span></span>
+          </label>
+        </div>
+        <div class="col-xs-8 text-right">
+          <button class="btn btn-sm btn-info" type="button" ng-disabled="loginForm.$invalid" ng-click='doLogin()'>Log In</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 text-center">
+          <a ng-click="toggleForm('resetPass')">Forgot password?</a>
+          -
+          <span class="notice">Don't have an account?</span>
+          <a ng-click="toggleForm('signUp')">Sign Up</a>
+        </div>
+      </div>
+    </form><!-- End Login Form -->
+  </div>
+</div>
+
+<!-- /////////////////////////////////// -->
+<!-- // RESET PASSWORD FORM              -->
+<!-- /////////////////////////////////// -->
+<div id="reset-password-modal" ng-show="(isSignUp === 'resetPass')">
+  <div class="modal-header text-center">
+    <h1>Reset your Password</h1>
+  </div>
+  <div class="modal-body">
+    <!-- Reminder Form -->
+    <p>Enter the email address associated with your account, and we'll email you a link to reset your password.</p>
+    <form class="form-horizontal form-bordered form-control-borderless" name="resetPassForm">
+      <div class="form-group" ng-class="{ 'has-error': resetPassForm.email.$invalid && resetPassForm.email.$dirty }">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="gi gi-envelope"></i>
+            </span>
+            <input class="form-control input-lg"
+                   name="email"
+                   placeholder="Email"
+                   type="email"
+                   ng-model="resetPass.email"
+                   required
+                  />
+          </div>
+          <span class='help-block' ng-show='resetPassForm.email.$invalid'>Email is invalid!</span>
+        </div>
+      </div>
+      <div class="form-group form-actions">
+        <div class="col-xs-12 text-right">
+          <button class="btn btn-sm btn-info" type="button" ng-disabled="resetPassForm.$invalid">Reset Password</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 text-center">
+          <span class="notice">Did you remember your password?</span>
+          <a ng-click="toggleForm('login')">Log in</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

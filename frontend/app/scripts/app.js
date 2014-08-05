@@ -10,9 +10,15 @@
  */
 angular
   .module('app', [
-    'ui.router'
+    'ngCookies',
+    'ui.router',
+    'ui.bootstrap',
+    'common'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
 
@@ -105,7 +111,7 @@ angular
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-  })
+  }])
 
   .run([
     '$rootScope',

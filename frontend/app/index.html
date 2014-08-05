@@ -18,7 +18,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="page-container l-user" ui-view></div>
+    <div class="page-container l-user" ng-controller="MainCtrl" ui-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -57,10 +57,23 @@
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/common/common.js"></script>
+        <script src="scripts/common/constant.js"></script>
+        <script src="scripts/common/services/rest.js"></script>
+
         <script src="scripts/app.js"></script>
+        <!-- Main Ctrl -->
+        <script src="scripts/main-ctrl.js"></script>
+        <!-- authenication -->
+        <script src="scripts/auth/controllers/sign-up-ctrl.js"></script>
         <!-- endbuild -->
         <script src="scripts/template.js"></script>
 </body>
