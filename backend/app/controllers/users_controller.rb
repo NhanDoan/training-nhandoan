@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   # skip_before_filter :verify_authenticity_token, :only => [:index, :show]
