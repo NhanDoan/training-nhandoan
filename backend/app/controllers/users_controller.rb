@@ -29,7 +29,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.find_by_email(params[:email])
+    custom_params = user_params
+
+    @user = User.find_by_email(custom_params[:email])
 
     if @user
       @result = {
@@ -37,7 +39,7 @@ class UsersController < ApplicationController
         message: "An user already exists with this email address."
       }
     else
-      @user = User.new(user_params)
+      @user = User.new(custom_params)
 
       if @user.save
         @result = {
