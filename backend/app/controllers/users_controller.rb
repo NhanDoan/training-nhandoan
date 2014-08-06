@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     if @user
       @result = {
-        ok: '1',
+        ok: 1,
         message: "An user already exists with this email address."
       }
     else
@@ -43,12 +43,12 @@ class UsersController < ApplicationController
 
       if @user.save
         @result = {
-          ok: '0',
+          ok: 0,
           message: "Signed up successfully."
         }
       else
         @result = {
-          ok: '1',
+          ok: 1,
           message: @user.errors
         }
       end
@@ -63,10 +63,10 @@ class UsersController < ApplicationController
     @user = current_user
     
     if @user.update(user_params)
-      @result = { ok: '0', user: @user }
+      @result = { ok: 0, user: @user }
     else
       @result = {
-        ok: '1',
+        ok: 1,
         # message: @user.errors + '-' + :unprocessable_entity
         message: @user.errors
       }
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    @result = { ok: '0', message: 'User was successfully destroyed.' }
+    @result = { ok: 0, message: 'User was successfully destroyed.' }
 
     render json: @result
   end
