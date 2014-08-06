@@ -63,7 +63,7 @@ angular
 					};
 
 					$scope.doSignUp = function() {
-						var signUpPromise = overrideBaseURL.one('sign_up').customPOST($scope.userSignUp);
+						var signUpPromise = overrideBaseURL.one('sign_up').customPOST({ user: $scope.userSignUp });
 
 						signUpPromise.then(function(data) {
 							console.log('DONE', data);

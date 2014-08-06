@@ -42,12 +42,11 @@ class UsersController < ApplicationController
       if @user.save
         @result = {
           ok: '0',
-          user: @user
+          message: "Signed up successfully."
         }
       else
         @result = {
           ok: '1',
-          # message: @user.errors + '-' + :unprocessable_entity
           message: @user.errors
         }
       end
@@ -60,6 +59,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user = current_user
+    
     if @user.update(user_params)
       @result = { ok: '0', user: @user }
     else
