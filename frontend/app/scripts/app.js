@@ -22,7 +22,8 @@ angular
 		'$urlRouterProvider',
 		'$locationProvider',
 		'$httpProvider',
-		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    'ENV',
+		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, ENV) {
 			// fix cross domain Ajax call
 			$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 			// $urlRouterProvider.otherwise('/');
@@ -118,8 +119,10 @@ angular
 					}
 				});
 
-			// enable pushState
-			$locationProvider.html5Mode(true);
+        if(ENV.name !== 'development') {
+			    // enable pushState
+			    $locationProvider.html5Mode(true);
+        }
 			//////////////////////////////////////////////////////////////////////////
 		}
 	])
