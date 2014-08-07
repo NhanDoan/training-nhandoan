@@ -6,11 +6,11 @@ angular
 		'$rootScope',
 		'Restangular',
 		'$cookieStore',
-		'appSettings',
-		function($rootScope, Restangular, $cookieStore, appSettings) {
+		'ENV',
+		function($rootScope, Restangular, $cookieStore, ENV) {
 			return Restangular.withConfig(function(RestangularConfigurer) {
 				// base url
-				RestangularConfigurer.setBaseUrl(appSettings.apiUrl);
+				RestangularConfigurer.setBaseUrl(ENV.apiEndpoint);
 
 				// add token
 				// RestangularConfigurer.setDefaultHeaders({

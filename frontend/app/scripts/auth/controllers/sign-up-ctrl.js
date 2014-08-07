@@ -7,9 +7,10 @@ angular
 		'$modal',
 		'$cookieStore',
     'Restangular',
-		function($scope, $modal, $cookieStore, Restangular) {
+    'ENV',
+		function($scope, $modal, $cookieStore, Restangular, ENV) {
 			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
-				RestangularConfigurer.setBaseUrl('http://localhost:3000');
+				RestangularConfigurer.setBaseUrl(ENV.apiEndpoint);
 			});
 
 			///////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +38,7 @@ angular
 					$scope.userLogin = {};
 					$scope.userSignUp = {};
 					$scope.isSignUp = _isSignUp;
-					$scope.userSignUp.user_type = "patient";
+					$scope.userSignUp.user_type = 'patient';
 
 					$scope.toggleForm = function(isShow) {
 						$timeout(function() {

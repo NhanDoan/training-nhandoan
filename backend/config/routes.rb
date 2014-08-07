@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # DEBUG mode
+ if ENV['DEBUG_ENABLE'] == 'yes'
+    get 'debug/show'
+    get "debug/auto_sign_in"
+  end
+
   resources :users
   resources :session
 

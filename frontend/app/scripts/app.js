@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name frontEndApp
+ * @name app
  * @description
- * # frontEndApp
+ * # app
  *
  * Main module of the application.
  */
@@ -13,19 +13,24 @@ angular
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
+    'config',
 		'common',
 		'restangular'
 	])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
-		function($stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise('/');
+		'$locationProvider',
+		'$httpProvider',
+		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+			// fix cross domain Ajax call
+			$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+			// $urlRouterProvider.otherwise('/');
 			$stateProvider
 
-			///////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////
 			// home page
-			///////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////
 
 			.state('home', {
 				url: '/',
@@ -113,12 +118,13 @@ angular
 					}
 				});
 
-			/////////////////////////////////////////////////////////////////////////////////////////////////
+			// enable pushState
+			$locationProvider.html5Mode(true);
+			//////////////////////////////////////////////////////////////////////////
 		}
 	])
 
-.run([
-	'$rootScope',
+.run(['$rootScope',
 	'$state',
 	'$stateParams',
 	function($rootScope, $state, $stateParams) {

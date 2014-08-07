@@ -5,18 +5,17 @@ angular
 	.controller('MainCtrl', [
 		'$scope',
 		'restAngular',
-		function($scope, restAngular) {
+    'ENV',
+		function($scope, restAngular, ENV) {
 			restAngular.all('posts').getList().then(function(data) {
-				console.log('data:', data);
+				console.log('data:', data, ENV);
 			});
 
-			///////////////////////////////////////////////////////////////////////////////////////
 			// TODO:: handle event errors
 			$scope.$on('errorGlobal.handle', function(data) {
 				// code here
 				console.log(data);
 			});
 
-			///////////////////////////////////////////////////////////////////////////////////////
 		}
 	]);
