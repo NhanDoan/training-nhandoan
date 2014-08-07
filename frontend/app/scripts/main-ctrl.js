@@ -8,7 +8,12 @@ angular
 		'restAngular',
 		'$cookieStore',
 		'$timeout',
-		function($rootScope, $scope, restAngular, $cookieStore, $timeout) {
+		'Restangular',
+		function($rootScope, $scope, restAngular, $cookieStore, $timeout, Restangular) {
+			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
+					RestangularConfigurer.setBaseUrl('http://localhost:3000');
+				});
+
 			///////////////////////////////////////////////////////////////////////////////////////
 			// TODO:: handle event message
 			$scope.$on('handle:message', function (event, data) {
@@ -17,13 +22,23 @@ angular
 			});
 			///////////////////////////////////////////////////////////////////////////////////////
 
-			// handle logout
+			// handle logout (It's remove later)
 			$scope.logout = function () {
-				var token = $cookieStore.get('eTherapiToken');
-				if (token) {
-					$cookieStore.remove('eTherapiToken');
-					$rootScope.isLogin = false;	
-				} 
+				var logoutPromise = overrideBaseURL.one('logout').get();
+				logoutPromise.then(function (resp) {
+					if (resp.ok === 0) {
+						$cookieStore.remove('eTherapiToken');
+						$rootScope.isLogin = false;
+						$rootScope.msgLogout = resp.message;
+					} else {
+						$rootScope.isLogin = true;
+						$rootScope.msgLogout = resp.message;
+					}
+				}, function (error) {
+					// TODO:: handle error
+					console.log('An error occurred ', error.statusText);
+				});
+
 			}
 		}
 	]);

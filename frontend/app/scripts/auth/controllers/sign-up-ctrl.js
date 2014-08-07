@@ -6,8 +6,8 @@ angular
 		'$scope',
 		'$modal',
 		'$cookieStore',
-    	'Restangular',
-		function($scope, $modal, $cookieStore, Restangular) {
+    'Restangular',
+		function ($scope, $modal, $cookieStore, Restangular) {
 			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
 				RestangularConfigurer.setBaseUrl('http://localhost:3000');
 			});
@@ -22,7 +22,7 @@ angular
 					});
 				};
 
-			$scope.open = function(isShow) {
+			$scope.open = function (isShow) {
 				_isSignUp = isShow;
 				modalSignUp();
 			};
@@ -41,14 +41,14 @@ angular
 					$scope.userSignUp.user_type = "patient";
 
 					// toggle form sign up / login / reset password
-					$scope.toggleForm = function(isShow) {
+					$scope.toggleForm = function (isShow) {
 						$timeout(function() {
 							$scope.isSignUp = isShow;
 						}, 100);
 					};
 
 					// choose user type account
-					$scope.onChooseTypeOfuser = function(type) {
+					$scope.onChooseTypeOfuser = function (type) {
 						$scope.userSignUp.user_type = type;
 					};
 
@@ -58,9 +58,10 @@ angular
 
 						restLogin.then(function (data) {
 							if (data.user) { // login success
+								console.log('Data user login: ', data.user);
 								$rootScope.isLogin = true;
 								$rootScope.user = data.user;
-								$cookieStore.put('eTherapiToken', data.user);	
+								$cookieStore.put('eTherapiToken', data.user);
 								$modalInstance.dismiss(); // close modal form when login success
 							} else { // error
 								$rootScope.isLogin = false;
@@ -68,11 +69,11 @@ angular
 							}
 						}, function (error) {
 							// handle error server response
-							console.log('error form server: ', error);
+							console.log('An error occurred ', error.statusText);
 						});
 					};
 
-					// handle sign up formS	
+					// handle sign up formS
 					$scope.doSignUp = function() {
 						var signUpPromise = overrideBaseURL.one('sign_up').customPOST({ user: $scope.userSignUp });
 
@@ -82,12 +83,11 @@ angular
 								$modalInstance.dismiss(); // close modal form when sign up success
 							} else { // error
 								$scope.errMessage = data.message
-								console.log('message error: ', data.message);
 								$scope.status = data.ok;
 							}
 						}, function (error) {
 							// TODO:: handle error server response
-							console.log('error from server: ', error);
+							console.log('An error occurred ', error.statusText);
 						});
 					};
 				}
