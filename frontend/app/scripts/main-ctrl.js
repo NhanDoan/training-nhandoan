@@ -9,6 +9,7 @@ angular
 		'$cookieStore',
 		'$timeout',
 		'Restangular',
+    'ENV',
 		function($rootScope, $scope, restAngular, $cookieStore, $timeout, Restangular, ENV) {
 			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
 					RestangularConfigurer.setBaseUrl(ENV.apiEndpoint);
