@@ -1,0 +1,43 @@
+<div id="profile-upload-modal" ng-show="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close">×</button>
+      <modal-title>Upload Image</modal-title>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="original-size col-md-6 no-gutter">
+          <div class="original-upload-photo">
+            <div class="cropMain">
+              <div class="crop-container">
+                <div class="crop-overlay"></div>
+                <img src="/images/user-avatar/Avatar-Male120x120.png" class="crop-img">
+              </div>
+            </div>
+            <div class="cropSlider noUi-target col-md-12 no-gutter">
+              <div class="small-illustration"><span><i class="fa fa-picture-o"></i></span></div>
+              <div class="noUi-base noUi-background noUi-horizontal slider-wrapper">
+                <div class="noUi-origin noUi-origin-lower">
+                  <div class="noUi-handle noUi-handle-lower"></div>
+                </div>
+              </div>
+              <div class="large-illustration"><span><i class="fa fa-picture-o fa-2x"></i></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="crop-size col-md-6 no-gutter">
+          <div class="crop-photo">
+            <p><span>Preview</span></p>
+            <div class="photo-wrapper-crop"><img src="http://placehold.it/220x220" alt="user avatar" class="img-rounded"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="wrap-send-btn">
+        <div class="file-upload btn btn-success"><span>Upload Picture</span><input type="file" class="upload"></div>
+        <button type="button" class="save-btn btn btn-info" ng-click="savePicture()"><span>Save</span></button>
+      </div>
+    </div>
+  </div>
+</div>
