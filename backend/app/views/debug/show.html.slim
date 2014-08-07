@@ -1,0 +1,25 @@
+div
+  h3 Me
+  p
+    a[href="/logout"] LOG OUT
+div
+	h3 Users
+	table.table
+		thead
+			tr
+				th
+					| #
+				th
+					| full name
+				th
+					| login
+		tbody
+			- for user in @users do
+				tr
+					td
+						| #{user.id}
+					td
+						| #{user.first_name} - #{user.last_name}
+
+					td
+						a[target="_blank" href="/debug/auto_sign_in?email=#{user.email}"] auto sign in

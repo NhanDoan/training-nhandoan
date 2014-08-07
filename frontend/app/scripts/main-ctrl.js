@@ -9,9 +9,9 @@ angular
 		'$cookieStore',
 		'$timeout',
 		'Restangular',
-		function($rootScope, $scope, restAngular, $cookieStore, $timeout, Restangular) {
+		function($rootScope, $scope, restAngular, $cookieStore, $timeout, Restangular, ENV) {
 			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
-					RestangularConfigurer.setBaseUrl('http://localhost:3000');
+					RestangularConfigurer.setBaseUrl(ENV.apiEndpoint);
 				});
 
 			///////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +39,6 @@ angular
 					console.log('An error occurred ', error.statusText);
 				});
 
-			}
+			};
 		}
 	]);

@@ -7,9 +7,10 @@ angular
 		'$modal',
 		'$cookieStore',
     'Restangular',
-		function ($scope, $modal, $cookieStore, Restangular) {
+    'ENV',
+		function ($scope, $modal, $cookieStore, Restangular, ENV) {
 			var overrideBaseURL = Restangular.withConfig(function(RestangularConfigurer) {
-				RestangularConfigurer.setBaseUrl('http://localhost:3000');
+				RestangularConfigurer.setBaseUrl(ENV.apiEndpoint);
 			});
 
 			///////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +39,7 @@ angular
 					$scope.userLogin = {};
 					$scope.userSignUp = {};
 					$scope.isSignUp = _isSignUp;
-					$scope.userSignUp.user_type = "patient";
+					$scope.userSignUp.user_type = 'patient';
 
 					// toggle form sign up / login / reset password
 					$scope.toggleForm = function (isShow) {
@@ -82,7 +83,7 @@ angular
 								$rootScope.$broadcast('handle:message', data);
 								$modalInstance.dismiss(); // close modal form when sign up success
 							} else { // error
-								$scope.errMessage = data.message
+								$scope.errMessage = data.message;
 								$scope.status = data.ok;
 							}
 						}, function (error) {
@@ -92,7 +93,5 @@ angular
 					};
 				}
 			];
-
-			///////////////////////////////////////////////////////////////////////////////////////
 		}
 	]);
