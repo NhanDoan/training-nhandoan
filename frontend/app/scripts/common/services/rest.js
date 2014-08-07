@@ -1,5 +1,5 @@
 'use strict';
-// Restangular service that uses Bing
+
 angular
 	.module('common')
 	.factory('restAngular', [
@@ -17,7 +17,6 @@ angular
 				// 	token: $cookieStore.get('eTherapiToken')
 				// });
 				// RestangularConfigurer.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-					// return data;
 					// $rootScope.$broadcast(
 					// 	'errorGlobal.handle',
 					// 	{

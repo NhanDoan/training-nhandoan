@@ -121,8 +121,18 @@ angular
 	'$rootScope',
 	'$state',
 	'$stateParams',
-	function($rootScope, $state, $stateParams) {
+	'$cookieStore',
+	function($rootScope, $state, $stateParams, $cookieStore) {
 		$rootScope.$state = $state;
 		$rootScope.$stateParams = $stateParams;
+		$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+			var token = $cookieStore.get('eTherapiToken');
+			if (token) {
+				$rootScope.isLogin = true;
+				$rootScope.user = token;
+			} else {
+				$rootScope.isLogin = false;
+			}
+		});
 	}
 ]);
