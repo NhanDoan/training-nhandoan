@@ -98,6 +98,7 @@
 								>
 									Email is invalid!
 					</span>
+					<span class="message-error" ng-show="status == 1">{{errMessage}}</span>
 				</div>
 			</div>
 			<div class="form-group"
@@ -238,7 +239,9 @@
           <button class="btn btn-sm btn-info" type="button" ng-disabled="loginForm.$invalid" ng-click='doLogin()'>Log In</button>
         </div>
       </div>
+
       <div class="form-group">
+      	<span class="message-error" ng-show="!status">{{message}}</span>
         <div class="col-xs-12 text-center">
           <a ng-click="toggleForm('resetPass')">Forgot password?</a>
           -

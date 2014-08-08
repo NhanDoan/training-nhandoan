@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "connect-modrewrite": "~0.6.4-pre"
-    },
+  },
   "devDependencies": {
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
@@ -31,7 +31,8 @@
     "time-grunt": "^0.3.1",
     "grunt-text-replace": "0.3.6",
     "grunt-angular-templates": "~0.5.7",
-    "grunt-connect-proxy": "~0.1.5"
+    "grunt-connect-proxy": "~0.1.5",
+    "grunt-ng-constant": "~1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name frontEndApp
+ * @name app
  * @description
- * # frontEndApp
+ * # app
  *
  * Main module of the application.
  */
@@ -13,19 +13,25 @@ angular
 		'ngCookies',
 		'ui.router',
 		'ui.bootstrap',
+    'config',
 		'common',
 		'restangular'
 	])
 	.config([
 		'$stateProvider',
 		'$urlRouterProvider',
-		function($stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise('/');
+		'$locationProvider',
+		'$httpProvider',
+    'ENV',
+		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, ENV) {
+			// fix cross domain Ajax call
+			$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+			// $urlRouterProvider.otherwise('/');
 			$stateProvider
 
-			///////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////
 			// home page
-			///////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////
 
 			.state('home', {
 				url: '/',
@@ -113,16 +119,29 @@ angular
 					}
 				});
 
-			/////////////////////////////////////////////////////////////////////////////////////////////////
+        if(ENV.name !== 'development') {
+			    // enable pushState
+			    $locationProvider.html5Mode(true);
+        }
+			//////////////////////////////////////////////////////////////////////////
 		}
 	])
 
-.run([
-	'$rootScope',
+.run(['$rootScope',
 	'$state',
 	'$stateParams',
-	function($rootScope, $state, $stateParams) {
+	'$cookieStore',
+	function($rootScope, $state, $stateParams, $cookieStore) {
 		$rootScope.$state = $state;
 		$rootScope.$stateParams = $stateParams;
+		$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+			var token = $cookieStore.get('eTherapiToken');
+			if (token) {
+				$rootScope.isLogin = true;
+				$rootScope.user = token;
+			} else {
+				$rootScope.isLogin = false;
+			}
+		});
 	}
 ]);

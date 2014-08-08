@@ -29,25 +29,26 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.find_by_email(params[:email])
+    custom_params = user_params
+
+    @user = User.find_by_email(custom_params[:email])
 
     if @user
       @result = {
-        ok: '1',
+        ok: 1,
         message: "An user already exists with this email address."
       }
     else
-      @user = User.new(user_params)
+      @user = User.new(custom_params)
 
       if @user.save
         @result = {
-          ok: '0',
-          user: @user
+          ok: 0,
+          message: "Signed up successfully."
         }
       else
         @result = {
-          ok: '1',
-          # message: @user.errors + '-' + :unprocessable_entity
+          ok: 1,
           message: @user.errors
         }
       end
@@ -60,11 +61,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user = current_user
+    
     if @user.update(user_params)
-      @result = { ok: '0', user: @user }
+      attribures = @user.attribures
+      reject = attribures.reject {|k,v| k === "hashed_password"}
+      
+      @result = { ok: 0, user: reject }
     else
       @result = {
-        ok: '1',
+        ok: 1,
         # message: @user.errors + '-' + :unprocessable_entity
         message: @user.errors
       }
@@ -77,7 +82,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    @result = { ok: '0', message: 'User was successfully destroyed.' }
+    @result = { ok: 0, message: 'User was successfully destroyed.' }
 
     render json: @result
   end

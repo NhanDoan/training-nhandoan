@@ -18,11 +18,12 @@
       </div>
       <button class="btn add-client" type="submit"><i class="hi hi-plus"></i>  Add Patient</button>
    </form>
-   <ul class="nav navbar-nav pull-right" ng-show='isLogin'>
+   <ul class="nav navbar-nav pull-right nav-pills" ng-show="isLogin">
       <li><a ui-sref="home"><i class="icon-house integr-icon"></i>Home</a></li>
       <li><a ui-sref="appointment"><i class="icon-calendar6 integr-icon"></i>Appointments</a></li>
       <li><a ui-sref="messages"><i class="icon-envelope4 integr-icon"></i>Messages</a></li>
-      <li class="user-menu"><a ui-sref="profile">John Doe<i class="fa fa-bars fa-fw integr-rev-icon"></i></a></li>
+      <li><a ng-click="logout()">Log out</a></li>
+      <li class="user-menu"><a ui-sref="profile">{{user.first_name}}&nbsp;{{user.last_name}}<i class="fa fa-bars fa-fw integr-rev-icon"></i></a></li>
    </ul>
    <ul class="public-nav nav navbar-nav pull-right nav-pills" ng-show="!isLogin" ng-controller="auth.signUpCtrl">
       <li>
