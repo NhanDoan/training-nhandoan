@@ -63,7 +63,10 @@ class UsersController < ApplicationController
     @user = current_user
     
     if @user.update(user_params)
-      @result = { ok: 0, user: @user }
+      attribures = @user.attribures
+      reject = attribures.reject {|k,v| k === "hashed_password"}
+      
+      @result = { ok: 0, user: reject }
     else
       @result = {
         ok: 1,
