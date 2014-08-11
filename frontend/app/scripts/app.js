@@ -15,7 +15,10 @@ angular
 		'ui.bootstrap',
     'config',
 		'common',
-		'restangular'
+		'restangular',
+    'ngMockE2E',
+    'angular-data.DSCacheFactory',
+    'ui.select2'
 	])
 	.config([
 		'$stateProvider',
@@ -23,9 +26,10 @@ angular
 		'$locationProvider',
 		'$httpProvider',
     'ENV',
-		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, ENV) {
+    '$provide',
+		function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, ENV, $provide) {
 			// fix cross domain Ajax call
-			$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+			$httpProvider.defaults.headers.common['X-CSRF-Token'] = angular.element('meta[name=csrf-token]').attr('content');
 			// $urlRouterProvider.otherwise('/');
 			$stateProvider
 
@@ -101,6 +105,23 @@ angular
 						}
 					}
 				})
+        .state('patient-edit-profile', {
+          url: '/patient-edit-profile',
+          views: {
+            '': {
+              templateUrl: 'templates/commons/patient-edit-profile.html'
+            },
+            'header@patient-edit-profile': {
+              templateUrl: 'templates/commons/header.html'
+            },
+            'sidebar@patitent-edit-profile': {
+              templateUrl: 'templates/commons/sidebar.html'
+            },
+            'footer@patitent-edit-profile': {
+              templateUrl: 'templates/commons/footer.html'
+            }
+          }
+        })
 				.state('therapist-edit-profile', {
 					url: '/therapist-edit-profile',
 					views: {
@@ -131,7 +152,8 @@ angular
 	'$state',
 	'$stateParams',
 	'$cookieStore',
-	function($rootScope, $state, $stateParams, $cookieStore) {
+  '$httpBackend',
+	function($rootScope, $state, $stateParams, $cookieStore, $httpBackend) {
 		$rootScope.$state = $state;
 		$rootScope.$stateParams = $stateParams;
 		$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -143,5 +165,19 @@ angular
 				$rootScope.isLogin = false;
 			}
 		});
+
+    var phones = [{name: 'phone1', data: 'Nhan Doan'}, {name: 'phone2', data: 'Ngoc Nhan'}];
+
+    $httpBackend.whenGET('/patient-edit-profile').respond(function() {
+      console.log("Getting phones");
+      return [200, phones, {}];
+    });
+    $httpBackend.whenPOST('/patient-edit-profile').respond(function(method, url, data, headers){
+      console.log(method, url, data, headers);
+      phones.push(angular.fromJson(data));
+      return [200, {}, {}];
+    });
+    $httpBackend.whenGET(/^\w+.*/).passThrough();
+    $httpBackend.whenPOST(/^\w+.*/).passThrough();
 	}
 ]);

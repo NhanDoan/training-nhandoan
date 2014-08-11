@@ -1,0 +1,115 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button ng-click='closeAdd()' class="close">×</button>
+    <modal-title>Insurance Plan Information</modal-title>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" name="formAddInsurance" ng-submit="submitInsurance()">
+      <div class="form-group">
+        <label class="control-label col-md-5">Health Insurance Name</label>
+        <div class="col-md-6 set-width">
+          <select ui-select2 ng-model="insurance.name" data-placeholder=" " class="select-chosen input-md" style="width: 100%;">
+            <option></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" ng-class=" {'has-error' : formAddInsurance.memberID.$invalid && !formAddInsurance.memberID.$pristine}" >
+        <label class="control-label col-md-5">Insurance Member ID #</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group">
+            <input type="text" name="memberID" ng-model="insurance.memberID" ng-pattern="/^[0-9]$/" class="form-control input-md" required>
+            <span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span>
+          </div>
+          <p ng-show="formAddInsurance.memberID.$error.pattern" class="help-block">ID must be is a number!</p>
+          <p ng-show="formAddInsurance.memberID.$error.required" class="help-block">ID must be required </p>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error' : formAddInsurance.planName.$invalid && !formAddInsurance.planName.$pristine }">
+        <label class="control-label col-md-5">Insurance Plan Name</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group">
+            <input type="text" name="planName" ng-minlength="5" ng-model="insurance.planName" class="form-control input-md" required>
+            <span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span>
+          </div>
+          <p ng-show="formAddInsurance.planName.$error.minlength" class="help-block">Plan Name too short!</p>
+          <p ng-show="formAddInsurance.planName.$error.required" class="help-block">Plan Name must be required!</p>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">SSN #</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group">
+            <input type="text" class="form-control input-md">
+            <span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5 align-label">Relationship to the Primary Policyholder</label>
+        <div class="col-md-6 set-width">
+          <select data-placeholder=" " ui-select2 ng-model="insurance.primary" class="select-chosen" style="width: 100%;">
+            <option selected="selected">Self</option>
+            <option>Spouse</option>
+            <option>Dependent</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder First Name</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group"><input type="text" class="form-control input-md"><span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder Last Name</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group"><input type="text" class="form-control input-md"><span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder Birth Date</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group">
+             <input type="text" class="form-control input-md" datepicker-popup="MM/dd/yyyy" datepicker-options="dateOptions" ng-model="insurance.birthdate" is-open="opened" ng-required="true" ng-click="openDate($event)"/>
+            <span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder Street Address</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group"><input type="text" class="form-control input-md"><span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder's City</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group"><input type="text" class="form-control input-md"><span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Policyholder's State</label>
+        <div class="col-md-6 set-width">
+          <select data-placeholder=" " ui-select2 ng-model="insurance.state" class="select-chosen" style="width: 100%;">
+            <option></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error' : formAddInsurance.zipcode.$invalid && !formAddInsurance.zipcode.$pristine}">
+        <label class="control-label col-md-5">Policyholder's Zip Code</label>
+        <div class="col-md-6 set-width">
+          <div class="input-group">
+            <input type="text" name="zipcode" ng-model="insurance.zipcode" ng-pattern="/^[0-9]$/" class="form-control input-md">
+            <span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span>
+          </div>
+          <p class="help-block" ng-show="formAddInsurance.zipcode.$error.pattern">Please enter only digits!</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-5 set-width"><button type="button" class="save-btn btn btn-info"><span>Save Insurance</span></button></div>
+      </div>
+    </form>
+  </div>
+</div>

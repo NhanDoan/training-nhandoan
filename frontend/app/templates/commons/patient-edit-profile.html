@@ -1,6 +1,12 @@
 <div ui-view='header'></div>
 <div class="main-container">
-
+  <div ng-controller="getOption">
+      <button ng-click="addPhone()">Add a phone via POST</button><br />
+        Watch the console for errors.
+      <ul>
+        <li ng-repeat="phone in phones">{{phone.name}} <a>{{phone.data}}</a></li>
+      </ul>
+  </div>
   <div class="content-container">
     <div ui-view></div>
     <div class="main-content">
@@ -14,7 +20,7 @@
         </div>
         <!--define the content of patient-profile page-->
         <div class="row no-gutter">
-          <div data-offset-top="200" data-spy="affix" class="edit-profile-nav slave-nav no-gutter aside-content affix-menu-nav col-md-3 affix-top">
+          <div class="edit-profile-nav slave-nav no-gutter aside-content col-md-3">
             <!--define the list-group-->
             <ul class="list-group nav">
               <li >
@@ -41,21 +47,21 @@
           </div>
           <div class="pri-content edit-profile-content listview-content col-md-9">
             <!--From update profile -->
-            <form class="form-horizontal form-bordered form-control-borderless" novalidate name="updateProfile">
-              <div class="profile-button-group"><button type="submit" class="btn btn-info" ng-click="doSaveProfile()">Save Profile</button></div>
+            <form class="form-horizontal form-bordered form-control-borderless" ng-submit="" novalidate name="updateProfile">
+              <div class="profile-button-group"><button type="submit" class="btn btn-info" ng-click="doSaveProfile()" ng-disabled="updateProfile.$invalid">Save Profile</button></div>
               <div class="edit-profile-detail">
                 <!--define the picture-video block-->
                 <div id="section-1"class="picture-video block col-md-12">
                   <div class="block-title">
                     <h2>Profile Picture and Video</h2>
                   </div>
-                  <form method="post" class="form-bordered">
+                  <!-- <form method="post" class="form-bordered"> -->
                     <div class="avatar-container row no-gutter">
                       <div class="col-md-6 no-gutter">
                         <div class="user-avatar-section clearfix">
                           <div class="user-avatar"><a href="javascript:void(0)" class="img-rounded"><img src="http://placehold.it/120x120" alt="avatar"></a></div>
                           <div class="avatar-action">
-                            <div class="user-avatar-upload"><a data-toggle="modal" data-target="#profile-upload-modal" ng-click="uploadPicture()" type="button" class="btn btn-info">Upload New Picture</a></div>
+                            <div class="user-avatar-upload"><a ng-click="uploadPicture()" type="button" class="btn btn-info">Upload New Picture</a></div>
                             <div class="user-avatar-delete"><a href="javascript:void(0)" class="text-danger" ng-click="deletePicture()">Delete picture</a></div>
                           </div>
                         </div>
@@ -67,60 +73,69 @@
                   <div class="block-title">
                     <h2>Contact Information</h2>
                   </div>
-                  <form class="form-horizontal">
-                    <div class="form-group" ng-class="{'has-error': updateProfile.firstName.$invalid && updateProfile.firstName.$dirty}">
-                      <label class="control-label col-md-4">First Name</label>
-                      <div class="col-md-5">
-                        <div class="input-group">
-                          <input type="text" placeholder="e.g., Amanda" class="form-control input-md" ng-model="updateProfile.firstName">
-                          <span class="input-group-addon group-addon-lg">
-                            <i class="icon-user7"></i>
-                          </span>
-                        </div>
+
+                  <!-- <form class="form-horizontal"> -->
+                  <div class="form-group" ng-class="{ 'has-error' : updateProfile.firstName.$invalid && !updateProfile.firstName.$pristine }">
+                    <label class="control-label col-md-4">First Name</label>
+                    <div class="col-md-5">
+                      <div class="input-group">
+                        <input name="firstName" type="text" placeholder="e.g., Amanda" class="form-control input-md" ng-model="name.firstName" ng-minlength="3" ng-maxlength="8" required>
+                        <span class="input-group-addon group-addon-lg">
+                          <i class="icon-user7"></i>
+                        </span>
                       </div>
+                      <p ng-show="updateProfile.firstName.$error.minlength" class="help-block">Username is too short.</p>
                     </div>
-                    <div class="form-group">
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': updateProfile.lastName.$invalid && !updateProfile.lastName.$pristine}">
                       <label class="control-label col-md-4">Last Name</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="e.g., Robison" class="form-control input-md" ng-model="updateProfile.last_name"><span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span></div>
+                        <div class="input-group">
+                          <input name="lastName" type="text" placeholder="e.g., Robison" class="form-control input-md" ng-model="name.lastName" ng-minlength="3">
+                          <span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.lastName.$error.minlength" class="help-block">Username is too short.</p>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-4">I am</label>
                       <div class="col-md-5">
-                        <select data-placeholder="Male" class="select-chosen" style="display: none;">
+                        <select ui-select2 ng-model="insurance.gender" data-placeholder="Male" style="width: 100%;">
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </select>
-                        <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
-                          <a class="chosen-single chosen-default" tabindex="-1">
-                            <span>Male</span>
-                            <div><b></b></div>
-                          </a>
-                          <div class="chosen-drop">
-                            <div class="chosen-search"><input type="text" autocomplete="off"></div>
-                            <ul class="chosen-results"></ul>
-                          </div>
-                        </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-4">Date of Birth</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="mm/dd/yyyy" date-date-format="mm/dd/yyyy" class="form-control input-datepicker input-md"><span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span></div>
+                        <div class="input-group">
+                          <input type="text" datepicker-popup="MM/dd/yyyy" placeholder="mm/dd/yyyy" ng-model="user.birthdate" is-open="opened" datepicker-options="dateOptions" ng-click="open($event)" show-button-bar="false" class="form-control input-md input-datepicker" datepicker-append-to-body="true">
+                          <span class="input-group-addon group-addon-lg"><i class="icon-vcard2"></i></span>
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <div class="form-group has-error">
+                    <div class="form-group" ng-class="{'has-error' : updateProfile.email.$invalid && !updateProfile.email.$pristine}">
                       <label class="control-label col-md-4">Email Address</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="e.g., arobinson@mail.com" class="form-control input-md" ng-model="updateProfile.email"><span class="input-group-addon group-addon-lg"><i class="icon-envelope4"></i></span></div>
-                        <div class="help-block animation-slideDown">Please enter a valid email address!</div>
+                        <div class="input-group">
+                          <input type="email" name="email" placeholder="e.g., arobinson@mail.com" class="form-control input-md" ng-model="user.email">
+                          <span class="input-group-addon group-addon-lg"><i class="icon-envelope4"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.email.$error.email" class="help-block">Please enter a valid email address!</p>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error' : updateProfile.phone.$invalid && !updateProfile.phone.$pristine}">
                       <label class="control-label col-md-4">Phone Number</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="xxx-xxx-xxxx" class="form-control input-md" ng-model="updateProfile.phone"><span class="input-group-addon group-addon-lg"><i class="icon-phone7"></i></span></div>
+                        <div class="input-group">
+                          <input type="text" name="phone" placeholder="xxx-xxx-xxxx" class="form-control input-md" ng-pattern='/^[0-9]{1,10}$/' ng-model="user.phone" required>
+                          <span class="input-group-addon group-addon-lg"><i class="icon-phone7"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.phone.$error.pattern" class="help-block">Not a valid number!</p>
+                        <p ng-show="updateProfile.phone.$error.required" class="help-block">Input must be required!</p>
+
                       </div>
                     </div>
                     <div class="form-group">
@@ -141,66 +156,59 @@
                         <div class="input-group"><input type="text" placeholder="e.g., NY " class="form-control input-md" ng-model="updateProfile.state"><span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span></div>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error' : updateProfile.zipcode.$invalid && !updateProfile.zipcode.$pristine}">
                       <label class="control-label col-md-4">Zip Code</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="e.g., 10018 " class="form-control input-md" ng-model="updateProfile.zipcode"><span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span></div>
+                        <div class="input-group">
+                          <input type="text" name="zipcode" placeholder="e.g., 10018 " class="form-control input-md" ng-model="user.zipcode" ng-pattern="/^[0-9]{1,5}$/" ng-maxlength="5">
+                          <span class="input-group-addon group-addon-lg"><i class="icon-pin"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.zipcode.$error.pattern || updateProfile.zipcode.$error.maxlength " class="help-block">ZipCode invalid!</p>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-4">Country</label>
                       <div class="col-md-5">
-                        <select data-placeholder="USA" class="select-chosen" style="display: none;">
+                        <select ui-select2 ng-model="insurance.country" data-placeholder="USA" class="select-chosen" style="width: 100%;">
+                          <option value=""></option>
                           <option value="USA">USA</option>
                           <option value="Australia">Australia</option>
                           <option value="Australia">India</option>
                         </select>
-                        <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
-                          <a class="chosen-single chosen-default" tabindex="-1">
-                            <span>USA</span>
-                            <div><b></b></div>
-                          </a>
-                          <div class="chosen-drop">
-                            <div class="chosen-search"><input type="text" autocomplete="off"></div>
-                            <ul class="chosen-results"></ul>
-                          </div>
-                        </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-4">Timezone</label>
                       <div class="col-md-5">
-                        <select data-placeholder="Choose a Timezone" class="select-chosen" style="display: none;">
+                        <select ui-select2 ng-model="insurance.timezone" data-placeholder="Choose a Timezone" class="select-chosen" style="width: 100%;">
                           <option selected="selected"></option>
                           <option value="USA">USA</option>
                           <option value="Australia">Australia</option>
                           <option value="Australia">India</option>
                         </select>
-                        <div class="chosen-container chosen-container-single" style="width: 100%;" title="">
-                          <a class="chosen-single chosen-default" tabindex="-1">
-                            <span>Choose a Timezone</span>
-                            <div><b></b></div>
-                          </a>
-                          <div class="chosen-drop">
-                            <div class="chosen-search"><input type="text" autocomplete="off"></div>
-                            <ul class="chosen-results"></ul>
-                          </div>
-                        </div>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': updateProfile.fullName.$invalid && !updateProfile.fullName.$pristine}">
                       <label class="control-label col-md-4">Emergency Contact Full Name</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="e.g., Alan Rotlif" class="form-control input-md" ng-model="updateProfile.full_name"><span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span></div>
+                        <div class="input-group">
+                          <input type="text" name="fullName" placeholder="e.g., Alan Rotlif" class="form-control input-md" ng-model="user.fullName" ng-minlength="3">
+                          <span class="input-group-addon group-addon-lg"><i class="icon-user7"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.fullName.$error.minlength" class="help-block">Fullname is too short</p>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': updateProfile.contactPhone.$invalid && !updateProfile.contactPhone.$pristine}">
                       <label class="control-label col-md-4">Emergency Contact Phone Number</label>
                       <div class="col-md-5">
-                        <div class="input-group"><input type="text" placeholder="xxx-xxx-xxxx" class="form-control input-md" ng-model="updateProfile.phoneNumber"><span class="input-group-addon group-addon-lg"><i class="icon-phone7"></i></span></div>
+                        <div class="input-group">
+                          <input type="text" name="contactPhone" placeholder="xxx-xxx-xxxx" class="form-control input-md" ng-model="user.contactPhone" ng-pattern='/^[0-9]{1,10}$/'>
+                          <span class="input-group-addon group-addon-lg"><i class="icon-phone7"></i></span>
+                        </div>
+                        <p ng-show="updateProfile.contactPhone.$error.pattern" class="help-block">Not is a valid number phone</p>
                       </div>
                     </div>
-                  </form>
+                  <!-- </form> -->
                 </div>
                 <div id="section-3" class="insurance-status block col-md-12 clearfix">
                   <div class="block-title">
@@ -272,7 +280,7 @@
                           </div>
                         </div>
                       </div>
-                      <a data-toggle="modal" data-target="#profile-insurance-modal" href="javascript:void(0)" class="add-more">+ Add Insurance Plan Information</a>
+                      <a ng-click="addInsurance()" class="add-more">+ Add Insurance Plan Information</a>
                     </div>
                   </form>
                 </div>

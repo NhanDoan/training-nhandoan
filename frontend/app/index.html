@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -18,6 +19,8 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+
     <div class="page-container l-user" ng-controller="MainCtrl" ui-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -62,6 +65,10 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/purl/purl.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -77,7 +84,13 @@
         <script src="scripts/main-ctrl.js"></script>
         <!-- authenication -->
         <script src="scripts/auth/controllers/sign-up-ctrl.js"></script>
+        <!-- edit profile patient-->
+        <script src="scripts/patients/controllers/patient-profile-ctrl.js"></script>
+        <script src="scripts/patients/controllers/add-insurance-ctrl.js"></script>
+        <script src="scripts/patients/controllers/upload-img-ctrl.js"></script>
+
         <!-- endbuild -->
+
 
 </body>
 </html>
